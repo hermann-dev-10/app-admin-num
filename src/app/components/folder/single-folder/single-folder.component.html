@@ -1,0 +1,14 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Details folder : {{product.productName }}</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="page__content-data position-absolute text-center">
+            <div class="mt-100 text-center">
+                <p> {{product.description}}</p>
+                <p>Category {{product.category }}</p>
+                <p>Comment : {{product.comment }}</p>
+                <p>Price : {{ product.price}} CHF</p>
+                <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "productList": [
+    {
+      "productName": "Machine à laver",
+      "category": "Electronic",
+      "freshness": "Second Hand",
+      "price": 1000,
+      "comment": "Superbe Produit !",
+      "date": "2022-03-22T23:00:00.000Z",
+      "id": 1
+    },
+    {
+      "productName": "gffgfg",
+      "category": "Vegetables",
+      "freshness": "Brand New",
+      "price": 124,
+      "comment": "fdthfh",
+      "date": "2022-03-16T23:00:00.000Z",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
