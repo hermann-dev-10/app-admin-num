@@ -1,22 +1,36 @@
 {
-  "productList": [
+  "folderList": [
     {
-      "productName": "Machine à laver",
-      "category": "Electronic",
-      "freshness": "Second Hand",
-      "price": 1000,
-      "comment": "Superbe Produit !",
-      "date": "2022-03-22T23:00:00.000Z",
-      "id": 1
+      "nomClasseur": "Créancier",
+      "nomClient": "centre_espoir",
+      "etat": "Terminé",
+      "comment": "Halo",
+      "date": "2022-03-30T22:00:00.000Z",
+      "id": 2
     },
     {
-      "productName": "gffgfg",
-      "category": "Vegetables",
-      "freshness": "Brand New",
-      "price": 124,
-      "comment": "fdthfh",
-      "date": "2022-03-16T23:00:00.000Z",
-      "id": 2
+      "nomClasseur": "Fournisseur",
+      "nomClient": "idq",
+      "etat": "En cours",
+      "comment": "2 pages blanches",
+      "date": "2022-03-29T22:00:00.000Z",
+      "id": 3
+    },
+    {
+      "nomClasseur": "Comptabilité",
+      "nomClient": "idq",
+      "etat": "En cours",
+      "comment": "Erreurs noms des fichiers",
+      "date": "2022-03-29T22:00:00.000Z",
+      "id": 4
+    },
+    {
+      "nomClasseur": "rerer",
+      "nomClient": "idq",
+      "etat": "Pas commencé",
+      "comment": "reere",
+      "date": "2022-04-12T22:00:00.000Z",
+      "id": 5
     }
   ],
   "comments": [

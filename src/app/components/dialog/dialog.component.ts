@@ -11,9 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DialogComponent implements OnInit {
 
-  freshnessList = ["Brand New", "Second Hand", "Refurbished"];
-  productForm!: FormGroup;
-  actionBtn: string ="Save";
+  etats = ["Pas commencé", "En cours", "Terminé"];
+  folderForm!: FormGroup;
+  sheetForm!: FormGroup;
+  actionBtn: string ="Enregistrer";
+  titleModal: string ="Ajouter un classeur";
   durationInSeconds = 5;
 
   constructor(
@@ -26,61 +28,71 @@ export class DialogComponent implements OnInit {
   ) { }
 
    ngOnInit(): void {
-    this.productForm = this.formBuilder.group({
+    /*this.productForm = this.formBuilder.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
       freshness: ['', Validators.required],
       price: ['', Validators.required],
       comment: ['', Validators.required],
       date: ['', Validators.required],
+    });*/
+
+    this.sheetForm = this.formBuilder.group({
+      nomClasseur: ['', Validators.required],
+      nomClient: ['', Validators.required],
+      etat: ['', Validators.required],
+      //price: ['', Validators.required],
+      comment: ['', Validators.required],
+      date: ['', Validators.required],
     });
 
     if(this.editdata){
-        this.actionBtn = "Update";
-        this.productForm.controls['productName'].setValue(this.editdata.productName);
-        this.productForm.controls['category'].setValue(this.editdata.category);
-        this.productForm.controls['freshness'].setValue(this.editdata.freshness);
-        this.productForm.controls['price'].setValue(this.editdata.price);
-        this.productForm.controls['comment'].setValue(this.editdata.comment);
-        this.productForm.controls['date'].setValue(this.editdata.date);
+        this.actionBtn = "Modifier";
+        this.titleModal = "Modifier un classeur"
+        this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
+        this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
+        this.sheetForm.controls['etat'].setValue(this.editdata.etat);
+        //this.sheetForm.controls['price'].setValue(this.editdata.price);
+        this.sheetForm.controls['comment'].setValue(this.editdata.comment);
+        this.sheetForm.controls['date'].setValue(this.editdata.date);
     }
-  } addProduct(){
+  } addFolder(){
     if(!this.editdata){
-      if(this.productForm.valid){
-            this.api.postProduct(this.productForm.value)
+      if(this.sheetForm.valid){
+            this.api.postFolder(this.sheetForm.value)
             .subscribe({
               next:(res) => {
-                this._snackBar.open('Product added successfully', '', {
+                this._snackBar.open('Element ajouté avec succès', '', {
                 duration: 2000,
                 verticalPosition: 'top',
                 horizontalPosition: 'right',
                 panelClass: 'snackbar-position-custom'
                 });
-                this.productForm.reset();
+                this.sheetForm.reset();
                 this.dialogRef.close('save');
               },
               error:()=>{
-                alert("Error while adding the product");
+                alert("Error while adding the folder");
               }
             })
       }
     }else{
-          this.updateProduct();
+          this.updateFolder();
         }
   }
   
 
-  updateProduct(){
-    this.api.putProduct(this.productForm.value, this.editdata.id)
+  updateFolder(){
+    this.api.putFolder(this.sheetForm.value, this.editdata.id)
     .subscribe({
       next:(res)=>{
-         this._snackBar.open('Product updated succesfully', '', {
+         this._snackBar.open('Folder updated succesfully', '', {
          duration: 2000,
          verticalPosition: 'top',
                 horizontalPosition: 'right',
             
          });
-        this.productForm.reset();
+        this.sheetForm.reset();
         this.dialogRef.close('update');
       },
       error:()=> {
@@ -91,7 +103,5 @@ export class DialogComponent implements OnInit {
 
    openSnackBar() {
     this._snackBar.open('');
-
-   
   }
 }

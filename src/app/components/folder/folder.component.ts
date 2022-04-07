@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class FolderComponent implements OnInit {
 
-  displayedColumns: string[] = ['productName', 'category', 'date', 'freshness', 'price', 'comment', 'action'];
+    displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
+  //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,19 +30,19 @@ export class FolderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-        this.getAllProducts();
+        this.getAllFolders();
   }
 
   openDialog() {
     this.dialog.open(DialogComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{
-      this.getAllProducts();
+      this.getAllFolders();
     });
   }
 
-   getAllProducts(){
-    this.api.getProduct()
+   getAllFolders(){
+    this.api.getFolder()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -49,40 +50,40 @@ export class FolderComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(err)=> {
-        alert("Error While fetching the records");
+        alert("Erreur pendant la collection des éléments!!");
       }
     })
   }
 
-  viewProduct(row:any){
+  viewFolder(row:any){
     this.router.navigate([`/folder-single/${row}`]);
     console.log('View sheet-single:', row);
   }
 
-  editProduct(row:any){
+  editFolder(row:any){
     this.dialog.open(DialogComponent,{
       width:'30%',
       data:row
     }).afterClosed().subscribe(val =>{
       if(val==='update'){
-        this.getAllProducts();
+        this.getAllFolders();
       }
     })
   }
 
-  deleteProduct(id:number){
-    this.api.deleteProduct(id)
+  deleteFolder(id:number){
+    this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Product deleted succesfully', '', {
+        this._snackBar.open('Element supprimé avec succès', '', {
                 duration: 2000,
                 
         });
       
-        this.getAllProducts();
+        this.getAllFolders();
       },
       error:()=>{
-        alert("Error while deleting the product!!");
+        alert("Erreur pendant la suppression!!");
       }
     })
   }

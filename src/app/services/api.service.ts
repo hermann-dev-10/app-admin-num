@@ -8,21 +8,21 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  postProduct(data: any){
-    return this.http.post<any>("http://localhost:3001/productList/", data);
+  postFolder(data: any){
+    return this.http.post<any>("http://localhost:3001/folderList/", data);
   }
 
-  getProduct(){
-    return this.http.get<any>("http://localhost:3001/productList/");
+  getFolder(){
+    return this.http.get<any>("http://localhost:3001/folderList/");
   }
-   getProductById(id: number){
-    return this.http.get<any>("http://localhost:3001/productList/"+id);
+   getFolderById(id: number){
+    return this.http.get<any>("http://localhost:3001/folderList/"+id);
   }
 
-  putProduct(data:any, id:number){
-    return this.http.put<any>("http://localhost:3001/productList/"+id, data);
+  putFolder(data:any, id:number){
+    return this.http.put<any>("http://localhost:3001/folderList/"+id, data);
   }
-  deleteProduct(id:number){
-    return this.http.delete<any>("http://localhost:3001/productList/"+id);
+  deleteFolder(id:number){
+    return this.http.delete<any>("http://localhost:3001/folderList/"+id);
   }
 }

@@ -1,13 +1,101 @@
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Details folder : {{product.productName }}</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="page__content-data position-absolute text-center">
+<div class="container">
+
+    <h2 class="text-center mb-5">Fiche de suivi numérisation</h2>
+
+    <div class="box">
+        <p>Client : <strong>{{folder.nomClient | uppercase }}</strong></p>
+        <p>Année : {{ folder.date | date: 'yyyy'}}</p>
+    </div>
+
+
+    <p class="mb-5">Nom du classeur : <strong>{{ folder.nomClasseur }}</strong></p>
+
+    <h5 class="text-center mt-5">Données à utiliser pour la création du dossier scanné :</h5>
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>Nom du(des) dossiers(s) :</mat-grid-tile>
+        <mat-grid-tile>Nom du(des) fichier(s) PDF :</mat-grid-tile>
+    </mat-grid-list>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Folder Column -->
+        <ng-container matColumnDef="name_folder">
+            <th mat-header-cell *matHeaderCellDef> Nom du(des) dossier(s) </th>
+            <td mat-cell *matCellDef="let element"> {{element.name_folder}} </td>
+        </ng-container>
+
+        <!-- Name Folder Column -->
+        <ng-container matColumnDef="name_file">
+            <th mat-header-cell *matHeaderCellDef> Nom du(des) fichier(s) PDF :</th>
+            <td mat-cell *matCellDef="let element"> {{element.name_file}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-grid-list cols="6" rowHeight="2:1">
+
+        <mat-grid-tile>À remplir par le stagiaire</mat-grid-tile>
+        <mat-grid-tile>Date</mat-grid-tile>
+        <mat-grid-tile>Numériseur</mat-grid-tile>
+        <mat-grid-tile>Partie</mat-grid-tile>
+        <mat-grid-tile>État</mat-grid-tile>
+        <mat-grid-tile>Visa</mat-grid-tile>
+
+    </mat-grid-list>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="numeriseur">
+            <th mat-header-cell *matHeaderCellDef> Numériseur </th>
+            <td mat-cell *matCellDef="let element"> {{element.numeriseur}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="partie">
+            <th mat-header-cell *matHeaderCellDef> Partie </th>
+            <td mat-cell *matCellDef="let element"> {{element.partie}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="etat">
+            <th mat-header-cell *matHeaderCellDef> État</th>
+            <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="visa">
+            <th mat-header-cell *matHeaderCellDef> Visa</th>
+            <td mat-cell *matCellDef="let element"> {{element.visa}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="p-3">
+        <div class="text-center">
             <div class="mt-100 text-center">
-                <p> {{product.description}}</p>
-                <p>Category {{product.category }}</p>
-                <p>Comment : {{product.comment }}</p>
-                <p>Price : {{ product.price}} CHF</p>
+                <p> {{folder.nomClient | uppercase }}</p>
+                <p>État : {{folder.etat }}</p>
+                <p>Comment : {{folder.comment }}</p>
+
                 <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+                <button class="btn btn-primary" type="button">Exporter en PDF</button>
             </div>
         </div>
     </div>

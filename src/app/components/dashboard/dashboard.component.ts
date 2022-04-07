@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['productName', 'category', 'date', 'freshness', 'price', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,19 +31,19 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllFolders();
   }
 
   openDialog() {
     this.dialog.open(DialogComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{
-      this.getAllProducts();
+      this.getAllFolders();
     });
   }
 
-   getAllProducts(){
-    this.api.getProduct()
+   getAllFolders(){
+    this.api.getFolder()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -56,38 +56,38 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  viewProduct(row:any){
+  viewFolder(row:any){
   //viewProduct(){
     //this.router.navigateByUrl(`products/${this.productId}`);
 
-    this.router.navigate([`/products/${row}`]);
-    console.log('View Product:', row);
+    this.router.navigate([`/folders/${row}`]);
+    console.log('View Folder:', row);
   }
 
-  editProduct(row:any){
+  editFolder(row:any){
     this.dialog.open(DialogComponent,{
       width:'30%',
       data:row
     }).afterClosed().subscribe(val =>{
       if(val==='update'){
-        this.getAllProducts();
+        this.getAllFolders();
       }
     })
   }
 
-  deleteProduct(id:number){
-    this.api.deleteProduct(id)
+  deleteFolder(id:number){
+    this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Product deleted succesfully', '', {
+        this._snackBar.open('Folder deleted succesfully', '', {
                 duration: 2000,
                 
         });
       
-        this.getAllProducts();
+        this.getAllFolders();
       },
       error:()=>{
-        alert("Error while deleting the product!!");
+        alert("Error while deleting the Folder!!");
       }
     })
   }

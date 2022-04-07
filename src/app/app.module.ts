@@ -24,6 +24,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatGridListModule } from '@angular/material/grid-list'; 
 
 //Components
 import { AppComponent } from './app.component';
@@ -35,11 +36,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FolderComponent } from './components/folder/folder.component';
-import { MonitoringSheetComponent } from './components/monitoring-sheet/monitoring-sheet.component';
 import { BillingComponent } from './components/billing/billing.component';
-import { SingleSheetComponent } from './components/monitoring-sheet/single-sheet/single-sheet.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
-import { NumeriseurComponent } from './components/numeriseur/numeriseur.component';
 //import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
@@ -53,11 +51,8 @@ import { NumeriseurComponent } from './components/numeriseur/numeriseur.componen
     AboutComponent,
     ContactComponent,
     FolderComponent,
-    MonitoringSheetComponent,
     BillingComponent,
-    SingleSheetComponent,
     SingleFolderComponent,
-    NumeriseurComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +77,7 @@ import { NumeriseurComponent } from './components/numeriseur/numeriseur.componen
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    MatGridListModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,

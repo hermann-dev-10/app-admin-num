@@ -12,41 +12,41 @@
 
             <mat-form-field appearance="standard" style="width:100%">
                 <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
             </mat-form-field>
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort style="width:100%">
 
                     <!-- ID Column -->
-                    <ng-container matColumnDef="productName">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
-                        <td mat-cell *matCellDef="let row"> {{row.productName}} </td>
+                    <ng-container matColumnDef="nomClasseur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Classeur </th>
+                        <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
                     </ng-container>
 
                     <!-- Progress Column -->
-                    <ng-container matColumnDef="category">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-                        <td mat-cell *matCellDef="let row"> {{row.category}}% </td>
+                    <ng-container matColumnDef="nomClient">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Client </th>
+                        <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
                     </ng-container>
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="date">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                        <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
+                        <td mat-cell *matCellDef="let row"> {{row.date | date: 'yyyy'}} </td>
                     </ng-container>
 
                     <!-- Fruit Column -->
-                    <ng-container matColumnDef="freshness">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Freshness </th>
-                        <td mat-cell *matCellDef="let row"> {{row.freshness}} </td>
+                    <ng-container matColumnDef="etat">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+                        <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
                     </ng-container>
 
                     <!-- Fruit Column -->
-                    <ng-container matColumnDef="price">
+                    <!--<ng-container matColumnDef="price">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
                         <td mat-cell *matCellDef="let row"> {{row.price | currency}} </td>
-                    </ng-container>
+                    </ng-container>-->
 
                     <!-- Fruit Column -->
                     <ng-container matColumnDef="comment">
@@ -59,14 +59,14 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
                         <td mat-cell *matCellDef="let row">
 
-                            <button mat-icon-button color="primary" (click)="viewProduct(row.id)">
+                            <button mat-icon-button color="primary" (click)="viewFolder(row.id)">
                         <mat-icon>find_in_page</mat-icon>
                     </button>
 
-                            <button mat-icon-button color="primary" (click)="editProduct(row)">
+                            <button mat-icon-button color="primary" (click)="editFolder(row)">
                          <mat-icon>edit</mat-icon>
                     </button>
-                            <button mat-icon-button color="warn" (click)="deleteProduct(row.id)">
+                            <button mat-icon-button color="warn" (click)="deleteFolder(row.id)">
                         <mat-icon>delete</mat-icon>
                      </button>
                         </td>
