@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 //Components
 import { AppComponent } from './app.component';
@@ -78,6 +80,8 @@ import { SingleFolderComponent } from './components/folder/single-folder/single-
     MatSortModule,
     MatSnackBarModule,
     MatGridListModule,
+    MatCheckboxModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,

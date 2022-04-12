@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dialog',
@@ -17,6 +18,11 @@ export class DialogComponent implements OnInit {
   actionBtn: string ="Enregistrer";
   titleModal: string ="Ajouter un classeur";
   durationInSeconds = 5;
+  lettre = "";
+ isLetterNomenclatureChecked = false;
+ isMonthNomenclatureChecked = false;
+  isAbcChecked = true;
+
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -104,4 +110,17 @@ export class DialogComponent implements OnInit {
    openSnackBar() {
     this._snackBar.open('');
   }
+
+  onChange(ob: MatCheckboxChange) {
+    console.log("PQR checked: " + ob.checked);
+  } 
+
+  toggleLetterNomenclature() {
+    this.isLetterNomenclatureChecked = (this.isLetterNomenclatureChecked)? false : true;
+  }  
+
+  toggleMonthNomenclature() {
+    this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked)? false : true;
+  }  
+
 }

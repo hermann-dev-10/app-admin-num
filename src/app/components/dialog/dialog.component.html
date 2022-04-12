@@ -17,13 +17,69 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+            <mat-label>Répertoire de base</mat-label>
+            <textarea formControlName="" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
             <mat-label>Choississez une date</mat-label>
             <input formControlName="date" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Spécificité</mat-label>
+            <input formControlName="specificité" matInput>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nomemclature</mat-label>
+            <input formControlName="Nomemclature" matInput placeholder="Name">
+            <mat-checkbox (click)="toggleLetterNomenclature()"> Lettres </mat-checkbox> <br/>
+
+            <mat-checkbox (click)="toggleMonthNomenclature()" class="example-margin">Mois</mat-checkbox>
+        </mat-form-field>
+
+
+        <!--<mat-checkbox (change)="onChange($event)"> PQR </mat-checkbox>-->
+
+
+
+
+
+        <!--<mat-checkbox [checked]="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
+
+        <!--<mat-checkbox *ngIf="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
+
+
+        <div *ngIf="isLetterNomenclatureChecked">
+            <mat-checkbox> A </mat-checkbox>
+            <mat-checkbox> B </mat-checkbox>
+            <mat-checkbox> C </mat-checkbox>
+            <mat-checkbox> D </mat-checkbox>
+            <mat-checkbox> E </mat-checkbox>
+            <mat-checkbox> F </mat-checkbox>
+            <mat-checkbox> G </mat-checkbox>
+            <mat-checkbox> H </mat-checkbox>
+            <mat-checkbox> I </mat-checkbox>
+            <mat-checkbox> J </mat-checkbox>
+            <mat-checkbox> k </mat-checkbox>
+            <mat-checkbox> F </mat-checkbox>
+        </div>
+
+        <div *ngIf="isMonthNomenclatureChecked">
+            <mat-checkbox> Janvier </mat-checkbox>
+            <mat-checkbox> Février </mat-checkbox>
+            <mat-checkbox> Mars </mat-checkbox>
+            <mat-checkbox> Avril </mat-checkbox>
+            <mat-checkbox> Mai </mat-checkbox>
+            <mat-checkbox> Juin </mat-checkbox>
+        </div>
+
+
+
         <mat-label>
-            <h2>État</h2>
+            <h5>État</h5>
         </mat-label>
         <mat-radio-group formControlName="etat" class="example-radio-group">
             <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-radio-button">
