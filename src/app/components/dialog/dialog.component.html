@@ -4,10 +4,6 @@
         <!--<form [formGroup]="productForm">-->
 
         <mat-form-field appearance="outline">
-            <mat-label>Nom classeur</mat-label>
-            <input formControlName="nomClasseur" matInput placeholder="Name">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
             <mat-label>Nom du client</mat-label>
             <mat-select formControlName="nomClient" placeholder="Nom du client">
                 <mat-option value="foj">FOJ</mat-option>
@@ -17,8 +13,14 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+            <mat-label>Nom classeur</mat-label>
+            <input formControlName="nomClasseur" matInput placeholder="Nom du classeur">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
             <mat-label>Répertoire de base</mat-label>
-            <textarea formControlName="" matInput></textarea>
+            <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -27,31 +29,23 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Spécificité</mat-label>
-            <input formControlName="specificité" matInput>
-
+            <input formControlName="specificite" matInput>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Nomemclature</mat-label>
-            <input formControlName="Nomemclature" matInput placeholder="Name">
+            <input formControlName="Nomemclature" matInput placeholder="Nomemclature">
             <mat-checkbox (click)="toggleLetterNomenclature()"> Lettres </mat-checkbox> <br/>
-
             <mat-checkbox (click)="toggleMonthNomenclature()" class="example-margin">Mois</mat-checkbox>
         </mat-form-field>
 
 
         <!--<mat-checkbox (change)="onChange($event)"> PQR </mat-checkbox>-->
-
-
-
-
-
         <!--<mat-checkbox [checked]="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
-
         <!--<mat-checkbox *ngIf="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
-
-
         <div *ngIf="isLetterNomenclatureChecked">
             <mat-checkbox> A </mat-checkbox>
             <mat-checkbox> B </mat-checkbox>
@@ -63,8 +57,22 @@
             <mat-checkbox> H </mat-checkbox>
             <mat-checkbox> I </mat-checkbox>
             <mat-checkbox> J </mat-checkbox>
-            <mat-checkbox> k </mat-checkbox>
-            <mat-checkbox> F </mat-checkbox>
+            <mat-checkbox> K </mat-checkbox>
+            <mat-checkbox> L </mat-checkbox>
+            <mat-checkbox> M </mat-checkbox>
+            <mat-checkbox> N </mat-checkbox>
+            <mat-checkbox> O </mat-checkbox>
+            <mat-checkbox> P </mat-checkbox>
+            <mat-checkbox> Q </mat-checkbox>
+            <mat-checkbox> R </mat-checkbox>
+            <mat-checkbox> S </mat-checkbox>
+            <mat-checkbox> T </mat-checkbox>
+            <mat-checkbox> U </mat-checkbox>
+            <mat-checkbox> V </mat-checkbox>
+            <mat-checkbox> W </mat-checkbox>
+            <mat-checkbox> X </mat-checkbox>
+            <mat-checkbox> Y </mat-checkbox>
+            <mat-checkbox> Z </mat-checkbox>
         </div>
 
         <div *ngIf="isMonthNomenclatureChecked">
@@ -74,25 +82,30 @@
             <mat-checkbox> Avril </mat-checkbox>
             <mat-checkbox> Mai </mat-checkbox>
             <mat-checkbox> Juin </mat-checkbox>
+            <mat-checkbox>Juillet</mat-checkbox>
+            <mat-checkbox>Août</mat-checkbox>
+            <mat-checkbox>Septembre</mat-checkbox>
+            <mat-checkbox>Octobre</mat-checkbox>
+            <mat-checkbox>Novembre</mat-checkbox>
+            <mat-checkbox>Décembre</mat-checkbox>
         </div>
 
 
-
-        <mat-label>
-            <h5>État</h5>
-        </mat-label>
         <mat-radio-group formControlName="etat" class="example-radio-group">
+            <mat-label>État</mat-label>
             <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-radio-button">
                 {{etat}}
             </mat-radio-button>
         </mat-radio-group>
+
         <!--<mat-form-field appearance="outline">
             <mat-label>Price</mat-label>
             <input formControlName="price" matInput type="number" placeholder="Name">
         </mat-form-field>-->
+
         <mat-form-field appearance="outline">
             <mat-label>Commentaire</mat-label>
-            <textarea formControlName="comment" matInput></textarea>
+            <textarea formControlName="comment" matInput placeholder="Commentaire"></textarea>
         </mat-form-field>
     </form>
 </div>

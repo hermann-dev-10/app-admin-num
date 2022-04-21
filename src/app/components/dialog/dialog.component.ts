@@ -19,8 +19,8 @@ export class DialogComponent implements OnInit {
   titleModal: string ="Ajouter un classeur";
   durationInSeconds = 5;
   lettre = "";
- isLetterNomenclatureChecked = false;
- isMonthNomenclatureChecked = false;
+  isLetterNomenclatureChecked = false;
+  isMonthNomenclatureChecked = false;
   isAbcChecked = true;
 
 
@@ -34,33 +34,29 @@ export class DialogComponent implements OnInit {
   ) { }
 
    ngOnInit(): void {
-    /*this.productForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      category: ['', Validators.required],
-      freshness: ['', Validators.required],
-      price: ['', Validators.required],
-      comment: ['', Validators.required],
-      date: ['', Validators.required],
-    });*/
 
     this.sheetForm = this.formBuilder.group({
-      nomClasseur: ['', Validators.required],
       nomClient: ['', Validators.required],
+      nomClasseur: ['', Validators.required],
+      directory: ['', Validators.required],
+      date: ['', Validators.required],
+      specificite: ['', Validators.required],
       etat: ['', Validators.required],
       //price: ['', Validators.required],
       comment: ['', Validators.required],
-      date: ['', Validators.required],
     });
 
     if(this.editdata){
         this.actionBtn = "Modifier";
         this.titleModal = "Modifier un classeur"
-        this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
         this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
+        this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
+        this.sheetForm.controls['directory'].setValue(this.editdata.directory);
+        this.sheetForm.controls['date'].setValue(this.editdata.date);
+        this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
         this.sheetForm.controls['etat'].setValue(this.editdata.etat);
         //this.sheetForm.controls['price'].setValue(this.editdata.price);
         this.sheetForm.controls['comment'].setValue(this.editdata.comment);
-        this.sheetForm.controls['date'].setValue(this.editdata.date);
     }
   } addFolder(){
     if(!this.editdata){
@@ -92,7 +88,7 @@ export class DialogComponent implements OnInit {
     this.api.putFolder(this.sheetForm.value, this.editdata.id)
     .subscribe({
       next:(res)=>{
-         this._snackBar.open('Folder updated succesfully', '', {
+         this._snackBar.open('Classeur mis à jour avec succès', '', {
          duration: 2000,
          verticalPosition: 'top',
                 horizontalPosition: 'right',
@@ -122,5 +118,4 @@ export class DialogComponent implements OnInit {
   toggleMonthNomenclature() {
     this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked)? false : true;
   }  
-
 }

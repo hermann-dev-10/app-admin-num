@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class FolderComponent implements OnInit {
 
-    displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
+    displayedColumns: string[] = ['nomClient', 'nomClasseur', 'date', 'specificite', 'etat', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
