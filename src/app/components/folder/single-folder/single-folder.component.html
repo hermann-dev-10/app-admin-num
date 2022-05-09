@@ -10,11 +10,13 @@
 
     <p class="mb-5">Nom du classeur : <strong>{{ folder.nomClasseur }}</strong></p>
 
-    <h5 class="text-center mt-5">Données à utiliser pour la création du dossier scanné :</h5>
-    <mat-grid-list cols="2" rowHeight="2:1">
+
+    <h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>
+    <!--<mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile>Nom du(des) dossiers(s) :</mat-grid-tile>
         <mat-grid-tile>Nom du(des) fichier(s) PDF :</mat-grid-tile>
-    </mat-grid-list>
+
+    </mat-grid-list>-->
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -23,21 +25,22 @@
 
         <!-- Name Folder Column -->
         <ng-container matColumnDef="name_folder">
-            <th mat-header-cell *matHeaderCellDef> Nom du(des) dossier(s) </th>
-            <td mat-cell *matCellDef="let element"> {{element.name_folder}} </td>
+            <th mat-header-cell *matHeaderCellDef> Nom du(des) dossier(s)</th>
+            <td mat-cell></td>
         </ng-container>
 
         <!-- Name Folder Column -->
         <ng-container matColumnDef="name_file">
             <th mat-header-cell *matHeaderCellDef> Nom du(des) fichier(s) PDF :</th>
-            <td mat-cell *matCellDef="let element"> {{element.name_file}} </td>
+            <td mat-cell *matCellDef="let element"> nom2 </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-grid-list cols="6" rowHeight="2:1">
+    <!--<mat-grid-list cols="6" rowHeight="2:1">
 
         <mat-grid-tile>À remplir par le stagiaire</mat-grid-tile>
         <mat-grid-tile>Date</mat-grid-tile>
@@ -46,7 +49,7 @@
         <mat-grid-tile>État</mat-grid-tile>
         <mat-grid-tile>Visa</mat-grid-tile>
 
-    </mat-grid-list>
+    </mat-grid-list>-->
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -90,11 +93,11 @@
     <div class="p-3">
         <div class="text-center">
             <div class="mt-100 text-center">
-                <p> {{folder.nomClient | uppercase }}</p>
+                <!--<p> {{folder.nomClient | uppercase }}</p>
                 <p>État : {{folder.etat }}</p>
-                <p>Comment : {{folder.comment }}</p>
+                <p>Comment : {{folder.comment }}</p>-->
 
-                <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+                <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
                 <button class="btn btn-primary" type="button">Exporter en PDF</button>
             </div>
         </div>

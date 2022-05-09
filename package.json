@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve json-server -p 3001 -w db.json",
+        "start": "ng serve && json-server -p 3001 -w db.json",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",

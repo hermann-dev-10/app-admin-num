@@ -1,36 +1,44 @@
 {
   "folderList": [
     {
-      "nomClasseur": "Créancier",
-      "nomClient": "centre_espoir",
-      "etat": "Terminé",
-      "comment": "Halo",
-      "date": "2022-03-30T22:00:00.000Z",
-      "id": 2
-    },
-    {
-      "nomClasseur": "Fournisseur",
       "nomClient": "idq",
-      "etat": "En cours",
-      "comment": "2 pages blanches",
+      "nomClasseur": "Fournisseur",
+      "directory": "Z://IDQ/path",
       "date": "2022-03-29T22:00:00.000Z",
+      "specificite": "**Nom_spécificité**",
+      "etat": "Terminé",
+      "comment": "2 pages blanches",
       "id": 3
     },
     {
-      "nomClasseur": "Comptabilité",
       "nomClient": "idq",
+      "nomClasseur": "Comptabilité",
+      "directory": "Z://IDQ/path",
+      "date": "2022-03-29T22:00:00.000Z",
+      "specificite": "**Nom_spécificité**",
       "etat": "En cours",
       "comment": "Erreurs noms des fichiers",
-      "date": "2022-03-29T22:00:00.000Z",
       "id": 4
     },
     {
-      "nomClasseur": "rerer",
       "nomClient": "idq",
-      "etat": "Pas commencé",
-      "comment": "reere",
+      "nomClasseur": "Invoices_01",
+      "directory": "Z://IDQ/path",
       "date": "2022-04-12T22:00:00.000Z",
+      "specificite": "**Nom_spécificité**",
+      "etat": "Pas commencé",
+      "comment": "Pages blanches",
       "id": 5
+    },
+    {
+      "nomClient": "foj",
+      "nomClasseur": "test1",
+      "directory": "Z://FOJ/path",
+      "date": "2022-04-21T22:00:00.000Z",
+      "specificite": "**Nom_spécificité**",
+      "etat": "En cours",
+      "comment": "Classeur ok",
+      "id": 6
     }
   ],
   "comments": [

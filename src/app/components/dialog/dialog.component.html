@@ -1,7 +1,6 @@
 <h1 mat-dialog-title>{{titleModal}}</h1>
 <div mat-dialog-content>
     <form [formGroup]="sheetForm">
-        <!--<form [formGroup]="productForm">-->
 
         <mat-form-field appearance="outline">
             <mat-label>Nom du client</mat-label>
@@ -35,18 +34,15 @@
             <input formControlName="specificite" matInput>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Nomemclature</mat-label>
-            <input formControlName="Nomemclature" matInput placeholder="Nomemclature">
-            <mat-checkbox (click)="toggleLetterNomenclature()"> Lettres </mat-checkbox> <br/>
-            <mat-checkbox (click)="toggleMonthNomenclature()" class="example-margin">Mois</mat-checkbox>
-        </mat-form-field>
+        <section class="example-section">
+            <mat-radio-group formControlName="Nomemclature">
+                <mat-label>Nomemclature :</mat-label>
+                <mat-checkbox (click)="toggleLetterNomenclature()" class="example-margin"> Lettres </mat-checkbox>
+                <mat-checkbox (click)="toggleMonthNomenclature()" class="example-margin">Mois</mat-checkbox>
+            </mat-radio-group>
+        </section>
 
-
-        <!--<mat-checkbox (change)="onChange($event)"> PQR </mat-checkbox>-->
-        <!--<mat-checkbox [checked]="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
-        <!--<mat-checkbox *ngIf="isXyzChecked"> XYZ </mat-checkbox> <br/>-->
-        <div *ngIf="isLetterNomenclatureChecked">
+        <div *ngIf="isLetterNomenclatureChecked" class="mr-20-cb">
             <mat-checkbox> A </mat-checkbox>
             <mat-checkbox> B </mat-checkbox>
             <mat-checkbox> C </mat-checkbox>
@@ -75,7 +71,7 @@
             <mat-checkbox> Z </mat-checkbox>
         </div>
 
-        <div *ngIf="isMonthNomenclatureChecked">
+        <div *ngIf="isMonthNomenclatureChecked" class="mr-20-cb">
             <mat-checkbox> Janvier </mat-checkbox>
             <mat-checkbox> Février </mat-checkbox>
             <mat-checkbox> Mars </mat-checkbox>
@@ -91,17 +87,14 @@
         </div>
 
 
-        <mat-radio-group formControlName="etat" class="example-radio-group">
-            <mat-label>État</mat-label>
-            <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-radio-button">
-                {{etat}}
-            </mat-radio-button>
-        </mat-radio-group>
-
-        <!--<mat-form-field appearance="outline">
-            <mat-label>Price</mat-label>
-            <input formControlName="price" matInput type="number" placeholder="Name">
-        </mat-form-field>-->
+        <section class="example-section">
+            <mat-radio-group formControlName="etat">
+                <mat-label>État :</mat-label>
+                <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-margin">
+                    {{etat}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
 
         <mat-form-field appearance="outline">
             <mat-label>Commentaire</mat-label>
@@ -111,5 +104,5 @@
 </div>
 <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
-    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="addFolder()">{{actionBtn}}</button>
+    <button class="ml-8" mat-raised-button color="primary" (click)="addFolder()">{{actionBtn}}</button>
 </div>

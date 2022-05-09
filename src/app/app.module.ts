@@ -40,6 +40,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FolderComponent } from './components/folder/folder.component';
 import { BillingComponent } from './components/billing/billing.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
+import { StatsComponent } from './components/stats/stats.component';
 //import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { SingleFolderComponent } from './components/folder/single-folder/single-
     FolderComponent,
     BillingComponent,
     SingleFolderComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,
