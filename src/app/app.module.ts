@@ -41,6 +41,7 @@ import { FolderComponent } from './components/folder/folder.component';
 import { BillingComponent } from './components/billing/billing.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
 import { StatsComponent } from './components/stats/stats.component';
+import { NgChartsModule } from 'ng2-charts';
 //import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
@@ -88,6 +89,7 @@ import { StatsComponent } from './components/stats/stats.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

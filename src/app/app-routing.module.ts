@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FolderComponent } from './components/folder/folder.component';
 import { HomeComponent } from './components/home/home.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'folder', component: FolderComponent },
   { path: 'folder-single/:id', component: SingleFolderComponent },
+  { path: 'stats', component: StatsComponent },
   { path: 'billing', component: BillingComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },

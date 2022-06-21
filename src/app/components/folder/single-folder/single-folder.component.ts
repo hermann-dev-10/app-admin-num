@@ -37,7 +37,7 @@ export class SingleFolderComponent implements OnInit {
   weight: number;
   symbol: string;
   //displayedColumns: string[] = ['date', 'numeriseur', 'partie', 'etat', 'visa', 'name_file', 'name_folder'];
-  displayedColumns: string[] = ['name_folder', 'name_file'];
+  displayedColumns: string[] = ['nameFolder', 'nameFile'];
   dataSource = ELEMENT_DATA;
 
   constructor(

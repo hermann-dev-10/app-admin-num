@@ -41,7 +41,7 @@ export class DialogComponent implements OnInit {
       directory: ['', Validators.required],
       date: ['', Validators.required],
       specificite: ['', Validators.required],
-      Nomemclature: ['', Validators.required],
+      nomemclature: [''],
       etat: ['', Validators.required],
       //price: ['', Validators.required],
       comment: ['', Validators.required],
@@ -55,11 +55,13 @@ export class DialogComponent implements OnInit {
         this.sheetForm.controls['directory'].setValue(this.editdata.directory);
         this.sheetForm.controls['date'].setValue(this.editdata.date);
         this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
-        this.sheetForm.controls['Nomemclature'].setValue(this.editdata.Nomemclature);
+        //this.sheetForm.controls['nomemclature'].setValue(this.editdata.nomemclature);
         this.sheetForm.controls['etat'].setValue(this.editdata.etat);
         //this.sheetForm.controls['price'].setValue(this.editdata.price);
         this.sheetForm.controls['comment'].setValue(this.editdata.comment);
     }
+
+
   } addFolder(){
     if(!this.editdata){
       if(this.sheetForm.valid){
@@ -115,9 +117,9 @@ export class DialogComponent implements OnInit {
 
   toggleLetterNomenclature() {
     this.isLetterNomenclatureChecked = (this.isLetterNomenclatureChecked)? false : true;
-  }  
+  } 
 
   toggleMonthNomenclature() {
     this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked)? false : true;
-  }  
+  }
 }
