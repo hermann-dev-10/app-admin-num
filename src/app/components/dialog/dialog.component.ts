@@ -40,9 +40,9 @@ export class DialogComponent implements OnInit {
       nomClasseur: ['', Validators.required],
       directory: ['', Validators.required],
       date: ['', Validators.required],
-      specificite: ['', Validators.required],
-      nomemclature: [''],
-      etat: ['', Validators.required],
+      //specificite: ['', Validators.required],
+      //nomemclature: [''],
+      //etat: ['', Validators.required],
       //price: ['', Validators.required],
       comment: ['', Validators.required],
     });
@@ -54,22 +54,23 @@ export class DialogComponent implements OnInit {
         this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
         this.sheetForm.controls['directory'].setValue(this.editdata.directory);
         this.sheetForm.controls['date'].setValue(this.editdata.date);
-        this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
+        //this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
         //this.sheetForm.controls['nomemclature'].setValue(this.editdata.nomemclature);
-        this.sheetForm.controls['etat'].setValue(this.editdata.etat);
+        //this.sheetForm.controls['etat'].setValue(this.editdata.etat);
         //this.sheetForm.controls['price'].setValue(this.editdata.price);
         this.sheetForm.controls['comment'].setValue(this.editdata.comment);
     }
-
-
-  } addFolder(){
+  }
+  
+  addFolder(){
     if(!this.editdata){
       if(this.sheetForm.valid){
         const result = this.apiService.createFolder(
           this.sheetForm.value.nomClasseur,
           this.sheetForm.value.directory,
           this.sheetForm.value.date,
-          this.sheetForm.value.comment
+          this.sheetForm.value.comment,
+          new Date(),
         )
             /*this.api.postFolder(this.sheetForm.value)
             .subscribe({
@@ -87,6 +88,8 @@ export class DialogComponent implements OnInit {
                 alert("Error while adding the folder");
               }
             })*/
+
+            console.log('Result: ', result);
       }
     }else{
           this.updateFolder();

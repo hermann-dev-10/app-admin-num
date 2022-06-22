@@ -18,10 +18,10 @@ export class ApiService {
     private afs:AngularFirestore
     ) { }
 
-  createFolder(nomClasseur:string, directory:string, date:string, comment:string){
+  createFolder(nomClasseur:string, directory:string, date:Date, comment:string, createdAt: Date){
     return this.afs
     .collection(`${this.collectionName}`)
-    .add({nomClasseur, directory, date, comment});
+    .add({nomClasseur, directory, date, comment, createdAt:new Date});
   }
 
   postFolder(data: any){

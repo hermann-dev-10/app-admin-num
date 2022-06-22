@@ -32,14 +32,14 @@
 
                      <!-- Directory Column -->
                      <ng-container matColumnDef="directory">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Directory </th>
                         <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
                       </ng-container>
 
                     <!-- Date Column -->
                     <ng-container matColumnDef="date">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
-                        <td mat-cell *matCellDef="let row"> {{row.date | date: 'yyyy'}} </td>
+                        <td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}} </td>
                     </ng-container>
 
                       <!-- comment Column -->
@@ -90,7 +90,7 @@
                     </tr>
                 </table>
 
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
             </div>
 
             <!--</div>-->

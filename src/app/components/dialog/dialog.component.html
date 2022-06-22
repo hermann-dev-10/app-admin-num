@@ -22,20 +22,21 @@
             <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+      
+       <mat-form-field appearance="outline">
             <mat-label>Choississez une date</mat-label>
             <input formControlName="date" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!--<mat-form-field appearance="outline">
             <mat-label>Spécificité</mat-label>
             <input formControlName="specificite" matInput>
-        </mat-form-field>
+        </mat-form-field>-->
 
 
-        <section class="example-section">
+        <!--<section class="example-section">
             <mat-radio-group formControlName="nomemclature">
                 <mat-label>Nomemclature :</mat-label>
                 <mat-checkbox (click)="toggleLetterNomenclature()" class="example-margin"> Lettres </mat-checkbox>
@@ -95,7 +96,7 @@
                     {{etat}}
                 </mat-radio-button>
             </mat-radio-group>
-        </section>
+        </section>-->
 
         <mat-form-field appearance="outline">
             <mat-label>Commentaire</mat-label>
