@@ -36,7 +36,7 @@ export class DialogComponent implements OnInit {
    ngOnInit(): void {
 
     this.sheetForm = this.formBuilder.group({
-      nomClient: ['', Validators.required],
+      //nomClient: ['', Validators.required],
       nomClasseur: ['', Validators.required],
       directory: ['', Validators.required],
       date: ['', Validators.required],
@@ -50,7 +50,7 @@ export class DialogComponent implements OnInit {
     if(this.editdata){
         this.actionBtn = "Modifier";
         this.titleModal = "Modifier un classeur"
-        this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
+        //this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
         this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
         this.sheetForm.controls['directory'].setValue(this.editdata.directory);
         this.sheetForm.controls['date'].setValue(this.editdata.date);
@@ -65,7 +65,13 @@ export class DialogComponent implements OnInit {
   } addFolder(){
     if(!this.editdata){
       if(this.sheetForm.valid){
-            this.api.postFolder(this.sheetForm.value)
+        const result = this.apiService.createFolder(
+          this.sheetForm.value.nomClasseur,
+          this.sheetForm.value.directory,
+          this.sheetForm.value.date,
+          this.sheetForm.value.comment
+        )
+            /*this.api.postFolder(this.sheetForm.value)
             .subscribe({
               next:(res) => {
                 this._snackBar.open('Element ajouté avec succès', '', {
@@ -80,7 +86,7 @@ export class DialogComponent implements OnInit {
               error:()=>{
                 alert("Error while adding the folder");
               }
-            })
+            })*/
       }
     }else{
           this.updateFolder();
@@ -89,7 +95,7 @@ export class DialogComponent implements OnInit {
   
 
   updateFolder(){
-    this.api.putFolder(this.sheetForm.value, this.editdata.id)
+    /*this.api.putFolder(this.sheetForm.value, this.editdata.id)
     .subscribe({
       next:(res)=>{
          this._snackBar.open('Classeur mis à jour avec succès', '', {
@@ -104,7 +110,7 @@ export class DialogComponent implements OnInit {
       error:()=> {
       alert('Error while updating the record')
     }
-    }) 
+    })*/ 
   }
 
    openSnackBar() {

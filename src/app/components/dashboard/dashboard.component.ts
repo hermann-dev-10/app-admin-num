@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
+  //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,19 +32,19 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllFolders();
+    //this.getAllFolders();
   }
 
   openDialog() {
     this.dialog.open(DialogComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{
-      this.getAllFolders();
+      //this.getAllFolders();
     });
   }
 
    getAllFolders(){
-    this.api.getFolder()
+    /*this.api.getFolder()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -51,9 +52,10 @@ export class DashboardComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(err)=> {
-        alert("Error While fetching the records");
+        //alert("Error While fetching the records");
+        console.log('Error While fetching the records');
       }
-    })
+    })*/
   }
 
   viewFolder(row:any){
@@ -77,7 +79,7 @@ export class DashboardComponent implements OnInit {
 
   deleteFolder(id:number){
     this.api.deleteFolder(id)
-    .subscribe({
+    /*.subscribe({
       next:(res)=>{
         this._snackBar.open('Folder deleted succesfully', '', {
                 duration: 2000,
@@ -89,7 +91,7 @@ export class DashboardComponent implements OnInit {
       error:()=>{
         alert("Error while deleting the Folder!!");
       }
-    })
+    })*/
   }
 
   applyFilter(event: Event) {

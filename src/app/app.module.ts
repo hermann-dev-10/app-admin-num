@@ -7,6 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// Firebase
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import  { AngularFireAuthGuard, hasCustomClaim }  from '@angular/fire/compat/auth-guard' ;
+
+import { environment } from '../environments/environment.prod';
+
+//Angular Material
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -61,7 +71,10 @@ import { NgChartsModule } from 'ng2-charts';
   ],
   imports: [
     BrowserModule,
-  
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     
     // * MATERIAL IMPORTS
     MatSidenavModule,

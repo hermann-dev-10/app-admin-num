@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-folder',
@@ -15,22 +16,29 @@ import { Router } from '@angular/router';
 })
 export class FolderComponent implements OnInit {
 
-    displayedColumns: string[] = ['nomClient', 'nomClasseur', 'date', 'specificite', 'etat', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  folders$!: Observable<any[]>;
+
 
   constructor(
     private dialog: MatDialog, 
     private api: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
+    console.log('Hallo');
+        this.folders$ = this.apiService.getFolders();
+        console.log('Folders: ', this.folders$);
         this.getAllFolders();
+        console.log('this.getAllFolders()', this.getAllFolders());
   }
 
   openDialog() {
@@ -42,7 +50,7 @@ export class FolderComponent implements OnInit {
   }
 
    getAllFolders(){
-    this.api.getFolder()
+    this.api.getFolders()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -50,7 +58,8 @@ export class FolderComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(err)=> {
-        alert("Erreur pendant la collection des éléments!!");
+        //alert("Erreur pendant la collection des éléments!!");
+        console.log('Error While fetching the records');
       }
     })
   }
@@ -72,7 +81,7 @@ export class FolderComponent implements OnInit {
   }
 
   deleteFolder(id:number){
-    this.api.deleteFolder(id)
+    /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
         this._snackBar.open('Element supprimé avec succès', '', {
@@ -85,7 +94,7 @@ export class FolderComponent implements OnInit {
       error:()=>{
         alert("Erreur pendant la suppression!!");
       }
-    })
+    })*/
   }
 
   applyFilter(event: Event) {

@@ -19,41 +19,49 @@
                 <table mat-table [dataSource]="dataSource" matSort style="width:100%">
 
                     <!-- Progress Column -->
-                    <ng-container matColumnDef="nomClient">
+                    <!--<ng-container matColumnDef="nomClient">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
                         <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
-                    </ng-container>
+                    </ng-container>-->
 
-                    <!-- ID Column -->
+                    <!-- nomClasseur Column -->
                     <ng-container matColumnDef="nomClasseur">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Classeur </th>
                         <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
                     </ng-container>
 
-                    <!-- Name Column -->
+                     <!-- Directory Column -->
+                     <ng-container matColumnDef="directory">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
+                        <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
+                      </ng-container>
+
+                    <!-- Date Column -->
                     <ng-container matColumnDef="date">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
                         <td mat-cell *matCellDef="let row"> {{row.date | date: 'yyyy'}} </td>
                     </ng-container>
 
-                    <!-- Fruit Column -->
-                    <ng-container matColumnDef="specificite">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spécificité </th>
-                        <td mat-cell *matCellDef="let row"> {{row.specificite}} </td>
-                    </ng-container>
-
-                    <!-- Fruit Column -->
-                    <ng-container matColumnDef="etat">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
-                        <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
-                    </ng-container>
-
-
-                    <!-- Fruit Column -->
+                      <!-- comment Column -->
                     <ng-container matColumnDef="comment">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Commentaire </th>
                         <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
                     </ng-container>
+
+                    <!-- Fruit Column -->
+                    <!--<ng-container matColumnDef="specificite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spécificité </th>
+                        <td mat-cell *matCellDef="let row"> {{row.specificite}} </td>
+                    </ng-container>-->
+
+                    <!-- Fruit Column -->
+                    <!--<ng-container matColumnDef="etat">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+                        <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
+                    </ng-container>-->
+
+
+                   
 
                     <!-- Fruit Column -->
                     <ng-container matColumnDef="action">
@@ -89,4 +97,3 @@
         </div>
     </div>
 </div>
-htmk

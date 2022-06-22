@@ -49,20 +49,17 @@ export class SingleFolderComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.params['id']; //get the id //string litteral access //paramettre de type string //type cast -> tranform chaine caracter on number
-    this.folder = this.apiService.getFolderById(id);
+    //this.folder = this.apiService.getFolderById(id);
     this.getFolderById();
   }
 
   getFolderById(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.apiService.getFolderById(id)
-    .subscribe(folder => this.folder = folder);
+    /*this.apiService.getFolderById(id)
+    .subscribe(folder => this.folder = folder);*/
   }
 
   goBack(): void {
     this.location.back();
   }
-
-  
-
 }

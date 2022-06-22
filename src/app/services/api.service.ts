@@ -1,28 +1,46 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  collectionName='table-folders';
+
+  constructor(
+    private http: HttpClient,
+    private db: AngularFireDatabase,
+    private storage: AngularFireStorage,
+    private afs:AngularFirestore
+    ) { }
+
+  createFolder(nomClasseur:string, directory:string, date:string, comment:string){
+    return this.afs
+    .collection(`${this.collectionName}`)
+    .add({nomClasseur, directory, date, comment});
+  }
 
   postFolder(data: any){
-    return this.http.post<any>("http://localhost:3001/folderList/", data);
+    //return this.http.post<any>("http://localhost:3001/folderList/", data);
   }
 
-  getFolder(){
-    return this.http.get<any>("http://localhost:3001/folderList/");
+  getFolders(){
+    //return this.http.get<any>("http://localhost:3001/folderList/");
+    return this.afs.collection(`${this.collectionName}`).valueChanges({ idField:'id'});
+
   }
-   getFolderById(id: number){
-    return this.http.get<any>("http://localhost:3001/folderList/"+id);
+  getFolderById(id: number){
+    //return this.http.get<any>("http://localhost:3001/folderList/"+id);
   }
 
   putFolder(data:any, id:number){
-    return this.http.put<any>("http://localhost:3001/folderList/"+id, data);
+    //return this.http.put<any>("http://localhost:3001/folderList/"+id, data);
   }
   deleteFolder(id:number){
-    return this.http.delete<any>("http://localhost:3001/folderList/"+id);
+    //return this.http.delete<any>("http://localhost:3001/folderList/"+id);
   }
 }
