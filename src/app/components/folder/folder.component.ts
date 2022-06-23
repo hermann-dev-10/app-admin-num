@@ -100,8 +100,8 @@ export class FolderComponent implements OnInit {
       }
     })*/
 
-    this._snackBar.open(`Folder  : ${id}} deleted succesfully`, '', {
-      duration: 2000, 
+    this._snackBar.open(`${id}} deleted succesfully`, '', {
+      duration: 3000, 
     });
   }
 

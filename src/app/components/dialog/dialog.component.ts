@@ -77,7 +77,7 @@ export class DialogComponent implements OnInit {
             .subscribe({
               next:(res) => {
                 this._snackBar.open('Element ajouté avec succès', '', {
-                duration: 2000,
+                duration: 3000,
                 verticalPosition: 'top',
                 horizontalPosition: 'right',
                 panelClass: 'snackbar-position-custom'
@@ -91,9 +91,8 @@ export class DialogComponent implements OnInit {
             })*/
 
             console.log('Result: ', result);
-
-            this._snackBar.open('Element ajouté avec succès', '', {
-              duration: 2000,
+            this._snackBar.open(`${this.sheetForm.value.nomClasseur} added succesfully`, '', {
+              duration: 3000,
               verticalPosition: 'top',
               horizontalPosition: 'right',
               panelClass: 'snackbar-position-custom'
@@ -112,7 +111,7 @@ export class DialogComponent implements OnInit {
     /*.subscribe({
       next:(res)=>{
          this._snackBar.open('Classeur mis à jour avec succès', '', {
-         duration: 2000,
+         duration: 3000,
          verticalPosition: 'top',
                 horizontalPosition: 'right',
             
@@ -124,9 +123,12 @@ export class DialogComponent implements OnInit {
       alert('Error while updating the record')
     }
     })*/ 
+//          this.sheetForm.value.nomClasseur,
 
-    this._snackBar.open('Classeur mis à jour avec succès', '', {
-      duration: 2000,
+this._snackBar.open(`${this.sheetForm.value.nomClasseur} updated succesfully`, '', {
+
+    //this._snackBar.open('Classeur  mis à jour avec succès', '', {
+      duration: 3000,
       verticalPosition: 'top',
              horizontalPosition: 'right',
       });
