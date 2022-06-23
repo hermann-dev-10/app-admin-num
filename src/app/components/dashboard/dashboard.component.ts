@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog, 
-    private api: ApiService,
+    private apiService: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
   ) { }
@@ -78,8 +78,10 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteFolder(id:number){
-    this.api.deleteFolder(id)
-    /*.subscribe({
+    this.apiService.deleteFolder(id);
+    console.log('Folder deleted : ', id)
+    /*this.api.deleteFolder(id)
+    .subscribe({
       next:(res)=>{
         this._snackBar.open('Folder deleted succesfully', '', {
                 duration: 2000,

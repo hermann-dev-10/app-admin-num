@@ -80,11 +80,15 @@ export class FolderComponent implements OnInit {
     })
   }
 
+
+
   deleteFolder(id:number){
+    this.apiService.deleteFolder(id);
+    console.log('Folder deleted : ', id)
     /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Element supprimé avec succès', '', {
+        this._snackBar.open('Folder deleted succesfully', '', {
                 duration: 2000,
                 
         });
@@ -92,9 +96,13 @@ export class FolderComponent implements OnInit {
         this.getAllFolders();
       },
       error:()=>{
-        alert("Erreur pendant la suppression!!");
+        alert("Error while deleting the Folder!!");
       }
     })*/
+
+    this._snackBar.open(`Folder  : ${id}} deleted succesfully`, '', {
+      duration: 2000, 
+    });
   }
 
   applyFilter(event: Event) {

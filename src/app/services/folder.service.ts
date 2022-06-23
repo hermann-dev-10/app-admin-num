@@ -29,12 +29,12 @@ export class FolderService {
     private apiService: ApiService,
      ) { }
 
+     //Utiliser ce folderService plutot que apiService
      ngOnInit(){
-      console.log('Hallo');
-      this.folders$ = this.apiService.getFolders();
+      //this.folders$ = this.apiService.getFolders();
      }
 
-    readPersonalFolders(): Observable<any[]> {
+    /*readPersonalFolders(): Observable<any[]> {
       return this.personalFolders;
     }
 
@@ -44,6 +44,6 @@ export class FolderService {
 
      dispatchFolders(){
       //this.foldersSubject.next(this.folders$);
-    }
+    }*/
 
 }

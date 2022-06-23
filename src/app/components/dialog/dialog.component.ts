@@ -72,6 +72,7 @@ export class DialogComponent implements OnInit {
           this.sheetForm.value.comment,
           new Date(),
         )
+
             /*this.api.postFolder(this.sheetForm.value)
             .subscribe({
               next:(res) => {
@@ -90,6 +91,15 @@ export class DialogComponent implements OnInit {
             })*/
 
             console.log('Result: ', result);
+
+            this._snackBar.open('Element ajouté avec succès', '', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+              panelClass: 'snackbar-position-custom'
+              });
+              this.sheetForm.reset();
+              this.dialogRef.close('save');
       }
     }else{
           this.updateFolder();
@@ -98,8 +108,8 @@ export class DialogComponent implements OnInit {
   
 
   updateFolder(){
-    /*this.api.putFolder(this.sheetForm.value, this.editdata.id)
-    .subscribe({
+    this.api.putFolder(this.sheetForm.value, this.editdata.id)
+    /*.subscribe({
       next:(res)=>{
          this._snackBar.open('Classeur mis à jour avec succès', '', {
          duration: 2000,
@@ -114,6 +124,14 @@ export class DialogComponent implements OnInit {
       alert('Error while updating the record')
     }
     })*/ 
+
+    this._snackBar.open('Classeur mis à jour avec succès', '', {
+      duration: 2000,
+      verticalPosition: 'top',
+             horizontalPosition: 'right',
+      });
+     this.sheetForm.reset();
+     this.dialogRef.close('update');
   }
 
    openSnackBar() {
