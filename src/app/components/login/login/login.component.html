@@ -1,0 +1,94 @@
+<div class="text-center container mt-5">
+    <div class="form-signin">
+        <div class="authBlock">
+            <img class="mb-4" src="https://sekoia.ch/wp-content/uploads/2017/11/sekoia-logo.svg" alt="" width="72" height="57">
+
+            <h3>Sign In</h3>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="Email" formControlName="email" minLength="6" required>
+                    <label for="floatingInput">Email</label>
+                </div>
+
+                <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="alert alert-danger">
+
+                    <div *ngIf="loginForm.get('email')?.errors?.['required']">
+                        L'email est requis.
+                    </div>
+
+                    <div *ngIf="loginForm.get('email')?.errors?.['pattern']">
+                        Veuillez fournir une adresse email valide.
+                    </div>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password" required>
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="alert alert-danger">
+
+                    <!-- <div *ngIf="email.errors?.required"> -->
+                    <!--L'email est requis.-->
+                    <!-- </div> -->
+
+                    <div *ngIf="loginForm.get('password')?.errors?.['required']">
+                        Le mot de passe est requis.
+                    </div>
+
+                    <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                        Le mot de passe doit avoir au moins 6 caractères.
+                    </div>
+
+                    <!--<div *ngIf="loginForm.get('password')?.invalid">
+              Le mot de passe doit avoir au moins 6 caractères.
+            </div>-->
+                </div>
+
+
+
+                <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" [disabled]="!loginForm.valid" (click)="onReset">Sign in</button>
+                <!--<input type="button" class="w-100 btn btn-lg btn-primary mt-2" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">-->
+
+            </form>
+
+
+
+            <div class="form-group mb-3">
+                <span class="or"><span class="orInner">Or</span></span>
+            </div>
+
+            <!-- Calling GoogleAuth Api from AuthService -->
+            <div class="form-group">
+        <!--<button type="button" class="w-100 btn btn-lg btn-primary mt-2" (click)="authService.GoogleAuth()">            
+          Log in with Google <i class="fab fa-google"></i>
+        </button>-->
+            </div>
+
+            <!--<div class="formGroup">
+                <button type="button" class="w-100 btn btn-lg btn-primary mt-2" (click)="authService.FacebookAuth()">
+          <i class="fab fa-facebook-g"></i>
+          Log in with Facebook
+        </button>
+            </div>-->
+            <!--   <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                     </label>
+                    </div>-->
+            <div class="mt-4 dropdown-divider text-center"></div>
+
+
+
+            <div class="redirectToLogin">
+
+                <a class="dropdown-item" routerLink="/register-user">Don't have an account ? Sign up</a>
+                <a class="dropdown-item" routerLink="/forgot-password">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -52,6 +52,7 @@ import { BillingComponent } from './components/billing/billing.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { NgChartsModule } from 'ng2-charts';
+import { LoginComponent } from './components/login/login/login.component';
 //import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { NgChartsModule } from 'ng2-charts';
     BillingComponent,
     SingleFolderComponent,
     StatsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
