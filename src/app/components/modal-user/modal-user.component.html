@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>{{titleModal}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="userForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input formControlName="userName" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email de l'utilisateur</mat-label>
+            <input formControlName="userEmail" matInput placeholder="Email of the user">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Mot de passe de l'utilisateur</mat-label>
+            <input formControlName="password" matInput>
+        </mat-form-field>
+
+        <!--<mat-form-field appearance="outline">
+            <mat-label>Confirmation du mot de passe de l'utilisateur</mat-label>
+            <input formControlName="password2" matInput>
+        </mat-form-field>-->
+
+        <mat-form-field appearance="outline">
+            <mat-label>L'entreprise</mat-label>
+            <input formControlName="company" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Type de compte</mat-label>
+            <mat-select formControlName="typeAccount">
+                <mat-option value="normal">Normal</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!--<mat-form-field appearance="outline">
+            <mat-label>Commentaire</mat-label>
+            <textarea formControlName="comment" matInput placeholder="Commentaire"></textarea>
+        </mat-form-field>-->
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+    <button class="ml-8" mat-raised-button color="primary" (click)="addUser()">{{actionBtn}}</button>
+</div>

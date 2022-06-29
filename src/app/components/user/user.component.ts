@@ -1,50 +1,54 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { ApiService } from '../../shared/services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class UserComponent implements OnInit {
 
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
-  //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
+  displayedColumns: string[] = ['userName', 'userEmail', 'company', 'createdAt', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  folders$!: Observable<any[]>;
 
   constructor(
     private dialog: MatDialog, 
-    private apiService: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    private userService: UserService
   ) { }
 
-
   ngOnInit(): void {
-    //this.getAllFolders();
+   /* console.log('Hallo');
+        this.users$ = this.userService.getUsers();
+        console.log('Users: ', this.folders$);
+        this.getAllFolders();
+        console.log('this.getAllUsers()', this.getAllUsers());*/
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(ModalUserComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{
-      //this.getAllFolders();
-    });
+      this.getAllUsers();
+    })
   }
 
-   getAllFolders(){
-    /*this.api.getFolder()
+   getAllUsers(){
+    /*this.userService.getUsers()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -52,48 +56,51 @@ export class DashboardComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(err)=> {
-        //alert("Error While fetching the records");
+        //alert("Erreur pendant la collection des éléments!!");
         console.log('Error While fetching the records');
       }
     })*/
   }
 
-  viewFolder(row:any){
-  //viewProduct(){
-    //this.router.navigateByUrl(`products/${this.productId}`);
+  /*viewFolder(row:any){
+    this.router.navigate([`/folder-single/${row}`]);
+    console.log('View sheet-single:', row);
+  }*/
 
-    this.router.navigate([`/folders/${row}`]);
-    console.log('View Folder:', row);
-  }
-
-  editFolder(row:any){
-    this.dialog.open(DialogComponent,{
+  editUser(row:any){
+    this.dialog.open(ModalUserComponent,{
       width:'30%',
       data:row
     }).afterClosed().subscribe(val =>{
       if(val==='update'){
-        this.getAllFolders();
+        this.getAllUsers();
       }
     })
   }
 
-  deleteFolder(id:number){
-    this.apiService.deleteFolder(id);
-    console.log('Folder deleted : ', id)
-    /*this.api.deleteFolder(id)
+
+
+  deleteUser(id:number){
+    //this.userService.deleteUser(id);
+    console.log('User deleted : ', id)
+    /*this.api.deleteUser(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Folder deleted succesfully', '', {
+        this._snackBar.open('User deleted succesfully', '', {
                 duration: 2000,
                 
         });
       
-        this.getAllFolders();
+        this.getAllUsers();
       },
       error:()=>{
         alert("Error while deleting the Folder!!");
       }
     })*/
+
+    this._snackBar.open(`${id}} deleted succesfully`, '', {
+      duration: 3000, 
+    });
   }
 
   applyFilter(event: Event) {

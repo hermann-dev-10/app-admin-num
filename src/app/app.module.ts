@@ -53,7 +53,8 @@ import { SingleFolderComponent } from './components/folder/single-folder/single-
 import { StatsComponent } from './components/stats/stats.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LoginComponent } from './components/login/login/login.component';
-//import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { UserComponent } from './components/user/user.component';
+import { ModalUserComponent } from './components/modal-user/modal-user.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,8 @@ import { LoginComponent } from './components/login/login/login.component';
     SingleFolderComponent,
     StatsComponent,
     LoginComponent,
+    UserComponent,
+    ModalUserComponent,
   ],
   imports: [
     BrowserModule,

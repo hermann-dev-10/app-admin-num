@@ -1,12 +1,60 @@
 <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Classeurs</div>
+    <div class="d-flex page__box p-3 mt-2">Utilisateurs</div>
     <div class="page__content shadow p-3 position-relative">
         <!--<div class="page__content-data position-absolute text-center">-->
         <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="icon-card mb-30">
+                        <div class="icon purple">
+                            <mat-icon>supervisor_account</mat-icon>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">Nombre d'utilisateurs</h6>
+                            <h3 class="text-bold mb-10">10</h3>
+                            <!--<p class="text-sm text-success">
+                                <i class="fas fa-address-book"></i> +2.00%
+                                <span class="text-gray">(30 days)</span>
+                            </p>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="icon-card mb-30">
+                        <div class="icon purple">
+                            <mat-icon>supervisor_account</mat-icon>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">Nombre d'administrateurs</h6>
+                            <h3 class="text-bold mb-10">3</h3>
+                            <!--<p class="text-sm text-success">
+                                <i class="lni lni-arrow-up"></i> +5.45%
+                                <span class="text-gray">Increased</span>
+                            </p>-->
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-4 col-md-6">
+                    <div class="icon-card mb-30">
+                        <div class="icon primary">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">Total Expense</h6>
+                            <h3 class="text-bold mb-10">$24,567</h3>
+                            <p class="text-sm text-danger">
+                                <i class="lni lni-arrow-down"></i> -2.00%
+                                <span class="text-gray">Expense</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>-->
+            
+            </div>
             <div class="text-right">
                 <button mat-raised-button color="warn" (click)="openDialog()">
                     <mat-icon inline=true>note_add</mat-icon>
-                    Ajouter un classeur
+                    Ajouter un utilisateur
                 </button>
             </div>
 
@@ -25,21 +73,28 @@
                     </ng-container>-->
 
                     <!-- nomClasseur Column -->
-                    <ng-container matColumnDef="nomClasseur">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Classeur </th>
-                        <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
+                    <ng-container matColumnDef="userName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+                        <td mat-cell *matCellDef="let row"> {{row.userName | uppercase }} </td>
                     </ng-container>
 
                      <!-- Directory Column -->
-                     <ng-container matColumnDef="directory">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Répertoire </th>
-                        <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
+                     <ng-container matColumnDef="userEmail">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let row"> {{row.userEmail}} </td>
                       </ng-container>
 
+                        <!-- comment Column -->
+                    <ng-container matColumnDef="company">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Entreprise </th>
+                        <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
+                    </ng-container>
+
                     <!-- Date Column -->
-                    <ng-container matColumnDef="date">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
-                        <td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}} </td>
+                    <ng-container matColumnDef="createdAt">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le</th>
+                        <!--<td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}} </td>-->
+                        <td mat-cell *matCellDef="let row"> {{row.date.toDate()}} </td>
                     </ng-container>
 
                       <!-- comment Column -->

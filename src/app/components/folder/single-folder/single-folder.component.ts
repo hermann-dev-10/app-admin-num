@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
+//import { ApiService } from 'src/app/shared/services/api.service';
+import { Location } from '@angular/common';
 
 export interface PeriodicElement {
   date: string;
@@ -17,9 +19,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {date: "1/3/2022", numeriseur: 'Elvina', partie: "3/3", etat: 'terminé', visa: 'E', name_file: 'Créanciers', name_folder: 'c'},
 ];
 
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
-import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -41,7 +41,7 @@ export class SingleFolderComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   constructor(
-    private apiService: ApiService, 
+    //private apiService: ApiService, 
     private route: ActivatedRoute,
     private router: Router,
     private location: Location
