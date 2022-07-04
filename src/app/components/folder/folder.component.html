@@ -15,6 +15,12 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
             </mat-form-field>
 
+           
+            
+            <div *ngIf="folders$ | async as folders">
+                <p>Nombre de classeurs : {{folders.length}}</p>
+            </div>
+
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort style="width:100%">
 

@@ -18,6 +18,13 @@ export class ApiService {
     private afs:AngularFirestore
     ) { }
 
+  
+  readPersonalFolderByUid(uid:string){
+    return this.afs
+      .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id'});
+  }
+
   createFolder(nomClasseur:string, directory:string, date:Date, comment:string, createdAt: Date, uid){
     return this.afs
     .collection(`${this.collectionName}`)

@@ -40,7 +40,7 @@ export class UserService {
     });
   }
 
-  createUser (user : { uid: any; /*firstname: any;*/ displayName: any; email: any; /*role: number;*/  createdAt: Date;  /*tel: any;*/ }) { //créer l'utilisateur dans une collection
+  createUser (user : { uid: any; /*firstname: any;*/ displayName: any; email: any; /*role: number;*/  createdAt: Date;  /*tel: any;*/ isAdmin: Boolean }) { //créer l'utilisateur dans une collection
     
     const  newUser = {
   
@@ -51,8 +51,8 @@ export class UserService {
      
       //role: 0, //on assigne par défaut à 0 un utilisateur qui n'est pas admin
       createdAt: new Date(),
+      isAdmin: 0,
       //tel: user.tel,
-      //isAdmin: boolean;
       //photoURL: string;
       //createdAt: Date;
     }

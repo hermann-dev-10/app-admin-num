@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'src/app/shared/services/user.service';
+import { FolderService } from 'src/app/shared/services/folder.service';
 
 @Component({
   selector: 'app-folder',
@@ -37,20 +38,25 @@ export class FolderComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private apiService: ApiService,
+    private folderService: FolderService,
     public auth: AngularFireAuth,
     private userService : UserService,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
         console.log('Hallo');
-        this.folders$ = this.apiService.getFolders();
-        console.log('Folders: ', this.folders$);
+       
         this.getAllFolders();
         console.log('this.getAllFolders()', this.getAllFolders());
 
         this.sub = this.auth.authState.subscribe((user:any) => {
           this.user = user;
           if (this.user){
+
+            this.folders$ = this.apiService.readPersonalFolderByUid(user.uid);
+            console.log('Folders: ', this.folders$);
+
             console.log(this.userService.readUserWithUid(user.uid));
 
             this.sub = this.userService.readUserWithUid(user.uid).subscribe(
@@ -74,18 +80,23 @@ export class FolderComponent implements OnInit {
   }
 
    getAllFolders(){
-    this.api.getFolders()
-    .subscribe({
-      next:(res)=> {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error:(err)=> {
-        //alert("Erreur pendant la collection des éléments!!");
-        console.log('Error While fetching the records');
-      }
-    })
+
+    this.sub = this.afAuth.authState.subscribe((user) => {
+
+      //this.api.getFolders()
+      this.folderService.readPersonalFolderByUid(user.uid)
+      .subscribe({
+        next:(res)=> {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error:(err)=> {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        }
+      });
+    });
   }
 
   viewFolder(row:any){
@@ -107,8 +118,10 @@ export class FolderComponent implements OnInit {
 
 
   deleteFolder(id:number){
-    this.apiService.deleteFolder(id);
+    this.apiService.deleteFolder(id)
+    
     console.log('Folder deleted : ', id)
+
     /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
