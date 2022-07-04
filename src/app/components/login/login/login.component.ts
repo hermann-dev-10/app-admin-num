@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from './../../../shared/services/auth.service';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   submitted! : boolean;
 
   constructor(
-        //public authService: AuthService,
+        public authService: AuthService,
         private fb: FormBuilder, 
         private router : Router
   ) { }
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
-    /*this.authService.SignIn(email, password)
+    this.authService.SignIn(email, password)
     .then(
       () => {
         this.router.navigate(['/dashboard']); //traiter également la partie connexion en tant que utilisateur normal
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = error;
         console.log(error);
       }
-    )*/
+    )
   }
 
     onReset() {

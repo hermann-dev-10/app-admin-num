@@ -1,0 +1,39 @@
+
+<div class="container">
+
+    <h1 class="display-4 pt-5 mb-0 text-center mt-5">Profil</h1>
+    <hr class="mt-0 mb-5 container">
+
+    <div class="content container">
+        <div class="row" *ngIf="authService.userData as user">
+            <div class="col-md-12">
+                <div class="media">
+
+                    <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://st3.depositphotos.com/1007566/13247/v/600/depositphotos_132471910-stock-illustration-head-human-profile-icon.jpg'}}" class="w-25" alt="{{user.displayName}}">
+                    <div class="media-body">
+                        <!--<h1>Hello: <strong>{{(user.displayName) ? user.displayName : user.email }}</strong></h1>-->
+                        <div *ngFor="let u of displayNameObs">
+                            <h3>Hello : {{u.displayName}}</h3>
+                        </div>
+                        <div *ngIf="user.displayName">
+                            <!-- Display the name from Google database -->
+                            <h3>Hello : {{user.displayName}}</h3>
+                        </div>
+
+                        <p>User ID: <strong>{{user.uid}}</strong></p>
+                        <div *ngFor="let u of displayNameObs">
+                            <p>Téléphone : {{u.phoneNumber}}</p>
+                        </div>
+                        <p>Email: <strong>{{user.email}}</strong></p>
+                        <!--<p>Email Verified: <strong>{{user.emailVerified}}</strong></p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <p *ngIf="this.user">Hallo : {{uniqueUser | async}}</p> -->
+
+
+    </div>
+
+</div>

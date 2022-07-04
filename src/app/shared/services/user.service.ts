@@ -46,11 +46,11 @@ export class UserService {
   
       uid: user.uid, //user.uid, //Je prends ici l'id de l'utilisateur
       //firstname: user.firstname,
-      email: user.email,
       displayName: user.displayName,
+      email: user.email,
      
       //role: 0, //on assigne par défaut à 0 un utilisateur qui n'est pas admin
-      createdAt: new Date,
+      createdAt: new Date(),
       //tel: user.tel,
       //isAdmin: boolean;
       //photoURL: string;
@@ -86,5 +86,11 @@ export class UserService {
   //readUser(): Observable<User[]> {
   readUser(): Observable<any[]> {
     return this.users;
+  }
+
+  readUserWithUid(uid:string){
+    return this.afs
+      .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id'});
   }
 }

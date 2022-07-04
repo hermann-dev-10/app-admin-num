@@ -41,7 +41,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 //Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -55,12 +54,12 @@ import { NgChartsModule } from 'ng2-charts';
 import { LoginComponent } from './components/login/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
     DashboardComponent,
     SidenavComponent,
     DialogComponent,
@@ -73,6 +72,7 @@ import { ModalUserComponent } from './components/modal-user/modal-user.component
     LoginComponent,
     UserComponent,
     ModalUserComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,

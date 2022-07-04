@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-folder',
@@ -23,22 +25,44 @@ export class FolderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   folders$!: Observable<any[]>;
-
+  currentUser! :any;
+  user = this.auth.currentUser;
+  sub:any;
+  uniqueUser: any;
+  users$: Observable<any>[] = [];
 
   constructor(
     private dialog: MatDialog, 
     private api: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public auth: AngularFireAuth,
+    private userService : UserService,
   ) { }
 
   ngOnInit(): void {
-    console.log('Hallo');
+        console.log('Hallo');
         this.folders$ = this.apiService.getFolders();
         console.log('Folders: ', this.folders$);
         this.getAllFolders();
         console.log('this.getAllFolders()', this.getAllFolders());
+
+        this.sub = this.auth.authState.subscribe((user:any) => {
+          this.user = user;
+          if (this.user){
+            console.log(this.userService.readUserWithUid(user.uid));
+
+            this.sub = this.userService.readUserWithUid(user.uid).subscribe(
+              (data) => {
+                console.log('Dossier: ngOnInit readUserWithUid / data', data);
+                this.uniqueUser = data;
+                console.log('user data : -> ', this.user);
+                console.log('mes users$ OBSERVABLE : -> ', this.users$);
+              }
+            )
+          }
+        })
   }
 
   openDialog() {

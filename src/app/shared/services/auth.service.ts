@@ -7,6 +7,7 @@ import 'firebase/compat/firestore';
 import { Router } from '@angular/router';
 //import * as firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
+import { rejects } from 'assert';
 
 
 @Injectable({
@@ -58,16 +59,20 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password)
+    return new Promise<void>((resolve, reject) => {
+      this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result: { user: any; }) => {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         });
         //this.SetUserData(result.user);
       }).catch((error: { message: any; }) => {
+        reject();
         window.alert(error.message)
         console.log(error.message);
       })
+    })
+
   }
 
   // Sign up with email/password
@@ -193,7 +198,7 @@ export class AuthService {
   return this.afAuth.signOut().then(() => {
     localStorage.removeItem('user'); //to test if it's useful
    
-    this.router.navigate(['sign-in']);
+    this.router.navigate(['login']);
    
     //I found that when I log out the side bar is present despite my condition to display it only when the user is connected. 
     //At the beginning it works well but when I disconnect it remains displayed. But if I refresh the page, the sidebar disappears.

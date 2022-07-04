@@ -24,21 +24,20 @@ export class AuthGuard implements CanActivate {
       firebase.auth().onAuthStateChanged((user: any) => {
        if (user) {
           console.log('user : ',user);
-          if(firebase.auth().currentUser && user.emailVerified){
+          if(firebase.auth().currentUser/* && user.emailVerified*/){
             console.log('firebase.auth().currentUser', firebase.auth().currentUser);
-            console.log('User Email Verified ?', user.emailVerified)
+            //console.log('User Email Verified ?', user.emailVerified)
             resolve(true);
           }
-          else{
+          /*else{
             //window.alert('The user has not verified his account by email.')
             console.log('The user has not verified his account by email.');
-            this.router.navigate(['/sign-in']);
+            this.router.navigate(['/login']);
             reject(false);
-          }
-         
+          }*/
         } else {
           console.log('User is not logged in');
-          this.router.navigate(['/sign-in']);
+          this.router.navigate(['/login']);
           reject(false);
         }
       });

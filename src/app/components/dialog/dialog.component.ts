@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-dialog',
@@ -22,9 +24,13 @@ export class DialogComponent implements OnInit {
   isLetterNomenclatureChecked = false;
   isMonthNomenclatureChecked = false;
   isAbcChecked = true;
+  userUid!: string;
+  sub!: Subscription;
+  user:any;
 
 
   constructor(
+    private afAuth: AngularFireAuth,
     private formBuilder: FormBuilder, 
     private api: ApiService, 
     @Inject(MAT_DIALOG_DATA) public editdata: any,
@@ -35,6 +41,13 @@ export class DialogComponent implements OnInit {
 
    ngOnInit(): void {
 
+    this.afAuth.authState.subscribe((user) => {
+      this.user = user;
+
+      if (this.user){
+
+      }
+    })
     this.sheetForm = this.formBuilder.group({
       //nomClient: ['', Validators.required],
       nomClasseur: ['', Validators.required],
@@ -46,6 +59,14 @@ export class DialogComponent implements OnInit {
       //price: ['', Validators.required],
       comment: ['', Validators.required],
     });
+
+    this.sub = this.afAuth.authState
+    .subscribe((user) =>{
+      this.user = user;
+      if(user){
+        console.log('FOLDER USER ID', user.uid);
+      }
+    })
 
     if(this.editdata){
         this.actionBtn = "Modifier";
@@ -63,6 +84,7 @@ export class DialogComponent implements OnInit {
   }
   
   addFolder(){
+    console.log('uid: ', this.user.uid);
     if(!this.editdata){
       if(this.sheetForm.valid){
         const result = this.apiService.createFolder(
@@ -71,6 +93,7 @@ export class DialogComponent implements OnInit {
           this.sheetForm.value.date,
           this.sheetForm.value.comment,
           new Date(),
+          this.user.uid,
         )
 
             /*this.api.postFolder(this.sheetForm.value)
