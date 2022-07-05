@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+//import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
@@ -37,6 +38,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+
 
 //Components
 import { AppComponent } from './app.component';
@@ -73,6 +76,7 @@ import { ProfilComponent } from './components/profil/profil.component';
     UserComponent,
     ModalUserComponent,
     ProfilComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,7 @@ import { ProfilComponent } from './components/profil/profil.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgChartsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

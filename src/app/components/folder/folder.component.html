@@ -1,102 +1,116 @@
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Classeurs</div>
-    <div class="page__content shadow p-3 position-relative">
-        <!--<div class="page__content-data position-absolute text-center">-->
-        <div class="container">
-            <div class="text-right">
-                <button mat-raised-button color="warn" (click)="openDialog()">
-                    <mat-icon inline=true>note_add</mat-icon>
-                    Ajouter un classeur
-                </button>
-            </div>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+  <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-            <mat-form-field appearance="standard" style="width:100%">
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
-            </mat-form-field>
-
-           
-            
-            <div *ngIf="folders$ | async as folders">
-                <p>Nombre de classeurs : {{folders.length}}</p>
-            </div>
-
-            <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort style="width:100%">
-
-                    <!-- Progress Column -->
-                    <!--<ng-container matColumnDef="nomClient">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
-                        <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
-                    </ng-container>-->
-
-                    <!-- nomClasseur Column -->
-                    <ng-container matColumnDef="nomClasseur">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Classeur </th>
-                        <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
-                    </ng-container>
-
-                     <!-- Directory Column -->
-                     <ng-container matColumnDef="directory">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Répertoire </th>
-                        <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
-                      </ng-container>
-
-                    <!-- Date Column -->
-                    <ng-container matColumnDef="date">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
-                        <td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}} </td>
-                    </ng-container>
-
-                      <!-- comment Column -->
-                    <ng-container matColumnDef="comment">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Commentaire </th>
-                        <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
-                    </ng-container>
-
-                    <!-- Fruit Column -->
-                    <!--<ng-container matColumnDef="specificite">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spécificité </th>
-                        <td mat-cell *matCellDef="let row"> {{row.specificite}} </td>
-                    </ng-container>-->
-
-                    <!-- Fruit Column -->
-                    <!--<ng-container matColumnDef="etat">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
-                        <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
-                    </ng-container>-->
-
-
-                    <!-- Fruit Column -->
-                    <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
-                        <td mat-cell *matCellDef="let row">
-
-                            <button mat-icon-button color="primary" (click)="viewFolder(row.id)">
-                        <mat-icon>find_in_page</mat-icon>
+    <div class="container-fluid page">
+        <div class="d-flex page__box p-3 mt-2">Classeurs</div>
+        <div class="page__content shadow p-3 position-relative">
+            <!--<div class="page__content-data position-absolute text-center">-->
+            <div class="container">
+                <div class="text-right">
+                    <button mat-raised-button color="warn" (click)="openDialog()">
+                        <mat-icon inline=true>note_add</mat-icon>
+                        Ajouter un classeur
                     </button>
-
-                            <button mat-icon-button color="primary" (click)="editFolder(row)">
-                         <mat-icon>edit</mat-icon>
-                    </button>
-                            <button mat-icon-button color="warn" (click)="deleteFolder(row.id)">
-                        <mat-icon>delete</mat-icon>
-                     </button>
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    <!-- Row shown when there is no matching data. -->
-                    <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                    </tr>
-                </table>
-
-                <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>
+    
+                <mat-form-field appearance="standard" style="width:100%">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
+                </mat-form-field>
+    
+               
+                
+                <div *ngIf="folders$ | async as folders">
+                    <p>Nombre de classeurs : {{folders.length}}</p>
+                </div>
+    
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+    
+                        <!-- Progress Column -->
+                        <!--<ng-container matColumnDef="nomClient">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
+                        </ng-container>-->
+    
+                        <!-- nomClasseur Column -->
+                        <ng-container matColumnDef="nomClasseur">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Classeur </th>
+                            <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
+                        </ng-container>
+    
+                         <!-- Directory Column -->
+                         <ng-container matColumnDef="directory">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Répertoire </th>
+                            <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
+                          </ng-container>
+    
+                        <!-- Date Column -->
+                        <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Année </th>
+                            <td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}} </td>
+                        </ng-container>
+    
+                          <!-- comment Column -->
+                        <ng-container matColumnDef="comment">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Commentaire </th>
+                            <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
+                        </ng-container>
+    
+                        <!-- Fruit Column -->
+                        <!--<ng-container matColumnDef="specificite">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Spécificité </th>
+                            <td mat-cell *matCellDef="let row"> {{row.specificite}} </td>
+                        </ng-container>-->
+    
+                        <!-- Fruit Column -->
+                        <!--<ng-container matColumnDef="etat">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+                            <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
+                        </ng-container>-->
+    
+    
+                        <!-- Fruit Column -->
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
+                            <td mat-cell *matCellDef="let row">
+    
+                                <button mat-icon-button color="primary" (click)="viewFolder(row.id)">
+                            <mat-icon>find_in_page</mat-icon>
+                        </button>
+    
+                                <button mat-icon-button color="primary" (click)="editFolder(row)">
+                             <mat-icon>edit</mat-icon>
+                        </button>
+                                <button mat-icon-button color="warn" (click)="deleteFolder(row.id)">
+                            <mat-icon>delete</mat-icon>
+                         </button>
+                            </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </table>
+    
+                    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>
+                <!--</div>-->
             </div>
-            <!--</div>-->
         </div>
     </div>
-</div>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+

@@ -197,7 +197,7 @@ export class AuthService {
  SignOut() {
   return this.afAuth.signOut().then(() => {
     localStorage.removeItem('user'); //to test if it's useful
-   
+    location.reload();  //test if it's the best way to do it ? Check with the obsersables
     this.router.navigate(['login']);
    
     //I found that when I log out the side bar is present despite my condition to display it only when the user is connected. 

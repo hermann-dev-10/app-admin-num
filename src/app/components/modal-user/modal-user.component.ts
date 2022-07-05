@@ -130,7 +130,7 @@ export class ModalUserComponent implements OnInit {
             })*/
 
             console.log('Result: ', this.result);
-            this._snackBar.open(`${this.userForm.value.nomClasseur} added succesfully`, '', {
+            this._snackBar.open(`${this.userForm.value.nomClasseur} ajouté avec succès.`, '', {
               duration: 3000,
               verticalPosition: 'top',
               horizontalPosition: 'right',
@@ -169,7 +169,7 @@ export class ModalUserComponent implements OnInit {
     })*/ 
 //          this.sheetForm.value.nomClasseur,
 
-this._snackBar.open(`${this.userForm.value.nomClasseur} updated succesfully`, '', {
+this._snackBar.open(`${this.userForm.value.nomClasseur} mis à jour avec succès.`, '', {
 
     //this._snackBar.open('Classeur  mis à jour avec succès', '', {
       duration: 3000,

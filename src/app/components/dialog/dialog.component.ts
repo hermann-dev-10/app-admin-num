@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,12 +7,51 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
+//import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment, Moment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY',
+  },
+  display: {
+    dateInput: 'YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthA11yLabel: 'YYYY',
+  },
+};
+
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+   // {
+      //provide: DateAdapter,
+      //useClass: MomentDateAdapter,
+      //deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    //},
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class DialogComponent implements OnInit {
+
+  date = new FormControl(moment());
+
 
   etats = ["Pas commencé", "En cours", "Terminé"];
   folderForm!: FormGroup;
@@ -83,6 +122,14 @@ export class DialogComponent implements OnInit {
     }
   }
   
+  chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.date.value;
+    ctrlValue.year(normalizedYear.year());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
+    console.log('coucou date');
+  }
+
   addFolder(){
     console.log('uid: ', this.user.uid);
     if(!this.editdata){
@@ -114,7 +161,7 @@ export class DialogComponent implements OnInit {
             })*/
 
             console.log('Result: ', result);
-            this._snackBar.open(`${this.sheetForm.value.nomClasseur} added succesfully`, '', {
+            this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès.`, '', {
               duration: 3000,
               verticalPosition: 'top',
               horizontalPosition: 'right',
@@ -148,7 +195,7 @@ export class DialogComponent implements OnInit {
     })*/ 
 //          this.sheetForm.value.nomClasseur,
 
-this._snackBar.open(`${this.sheetForm.value.nomClasseur} updated succesfully`, '', {
+this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succès.`, '', {
 
     //this._snackBar.open('Classeur  mis à jour avec succès', '', {
       duration: 3000,

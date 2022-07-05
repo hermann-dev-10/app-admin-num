@@ -17,6 +17,13 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted! : boolean;
 
+  title = 'admin-num';
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(
         public authService: AuthService,
         private fb: FormBuilder, 

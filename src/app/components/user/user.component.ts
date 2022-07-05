@@ -17,12 +17,19 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  displayedColumns: string[] = ['userName', 'userEmail', 'company', 'createdAt', 'comment', 'action'];
+  //displayedColumns: string[] = ['userName', 'userEmail', 'company', 'action'];
+  displayedColumns: string[] = ['userName', 'userEmail', 'company', 'isAdmin', 'createdAt', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  folders$!: Observable<any[]>;
+  users$!: Observable<any[]>;
+
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 
   constructor(
     private dialog: MatDialog, 
@@ -32,11 +39,11 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   /* console.log('Hallo');
+        console.log('Hallo');
         this.users$ = this.userService.getUsers();
-        console.log('Users: ', this.folders$);
-        this.getAllFolders();
-        console.log('this.getAllUsers()', this.getAllUsers());*/
+        console.log('Users: ', this.users$);
+        this.getAllUsers();
+        console.log('this.getAllUsers()', this.getAllUsers());
   }
 
   openDialog() {
@@ -48,7 +55,7 @@ export class UserComponent implements OnInit {
   }
 
    getAllUsers(){
-    /*this.userService.getUsers()
+    this.userService.getUsers()
     .subscribe({
       next:(res)=> {
         this.dataSource = new MatTableDataSource(res);
@@ -59,13 +66,13 @@ export class UserComponent implements OnInit {
         //alert("Erreur pendant la collection des éléments!!");
         console.log('Error While fetching the records');
       }
-    })*/
+    })
   }
 
-  /*viewFolder(row:any){
-    this.router.navigate([`/folder-single/${row}`]);
+  viewUser(row:any){
+    this.router.navigate([`/user-single/${row}`]);
     console.log('View sheet-single:', row);
-  }*/
+  }
 
   editUser(row:any){
     this.dialog.open(ModalUserComponent,{
@@ -86,7 +93,7 @@ export class UserComponent implements OnInit {
     /*this.api.deleteUser(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('User deleted succesfully', '', {
+        this._snackBar.open('Utilisateur supprimé avec succès.', '', {
                 duration: 2000,
                 
         });
@@ -98,7 +105,7 @@ export class UserComponent implements OnInit {
       }
     })*/
 
-    this._snackBar.open(`${id}} deleted succesfully`, '', {
+    this._snackBar.open(`${id}} supprimé avec succès.`, '', {
       duration: 3000, 
     });
   }

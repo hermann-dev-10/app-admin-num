@@ -18,6 +18,11 @@ export class ProfilComponent implements OnInit {
   uniqueUser:any;
   displayNameObs:any
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 
   constructor(
     public authService: AuthService,

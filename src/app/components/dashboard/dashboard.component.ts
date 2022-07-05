@@ -22,6 +22,11 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 
   constructor(
     private dialog: MatDialog, 
@@ -83,7 +88,7 @@ export class DashboardComponent implements OnInit {
     /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Folder deleted succesfully', '', {
+        this._snackBar.open('Dossier supprimé avec succès', '', {
                 duration: 2000,
                 
         });

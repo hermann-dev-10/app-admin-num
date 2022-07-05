@@ -32,6 +32,12 @@ export class FolderComponent implements OnInit {
   uniqueUser: any;
   users$: Observable<any>[] = [];
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(
     private dialog: MatDialog, 
     private api: ApiService,
@@ -125,7 +131,7 @@ export class FolderComponent implements OnInit {
     /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
-        this._snackBar.open('Folder deleted succesfully', '', {
+        this._snackBar.open('Dossier supprimé avec succès', '', {
                 duration: 2000,
                 
         });
@@ -137,7 +143,7 @@ export class FolderComponent implements OnInit {
       }
     })*/
 
-    this._snackBar.open(`${id}} deleted succesfully`, '', {
+    this._snackBar.open(`${id}} supprimé avec succès`, '', {
       duration: 3000, 
     });
   }

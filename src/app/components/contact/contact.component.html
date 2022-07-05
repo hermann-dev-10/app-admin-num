@@ -1,11 +1,22 @@
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Contact</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="page__content-data position-absolute text-center">
-            <p>Sekoia Services SA</p>            
-            <p>Chemin de l'Echo 3, 1213 Onex</p>
-            <p>022 545 36 00</p>
-            <p>info@sekoia.ch</p>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <div class="container-fluid page">
+        <div class="d-flex page__box p-3 mt-2">Contact</div>
+        <div class="page__content shadow p-3 position-relative">
+            <div class="page__content-data position-absolute text-center">
+                <p>Sekoia Services SA</p>            
+                <p>Chemin de l'Echo 3, 1213 Onex</p>
+                <p>022 545 36 00</p>
+                <p>info@sekoia.ch</p>
+            </div>
         </div>
     </div>
-</div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+

@@ -23,17 +23,25 @@
 
       
        <mat-form-field appearance="outline">
-            <mat-label>Choississez une date</mat-label>
-            <input formControlName="date" matInput [matDatepicker]="picker">
+            <mat-label>Choississez une année</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker" 
+                formControlName="date"
+            />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker 
+                #picker 
+                startView="multi-year"
+                (yearSelected)="chosenYearHandler($event, picker)"
+                panelClass="example-month-picker">
+            </mat-datepicker>
         </mat-form-field>
 
         <!--<mat-form-field appearance="outline">
             <mat-label>Spécificité</mat-label>
             <input formControlName="specificite" matInput>
         </mat-form-field>-->
-
 
         <!--<section class="example-section">
             <mat-radio-group formControlName="nomemclature">
