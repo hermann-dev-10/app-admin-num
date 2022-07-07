@@ -26,3 +26,195 @@
 .text-right {
     text-align: right;
 }
+
+/*Check ici */
+body {
+    background: #f1f5f9;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.page {
+    color: white;
+    padding: 0 1rem;
+    background: #f1f5f9;
+    &__box {
+        min-height: 120px;
+        background: #1e293b;
+        margin: 0 -1rem;
+        font-size: 36px;
+    }
+    &__content {
+        min-height: calc(100vh - 178px);
+        border-radius: 10px;
+        margin-top: -2rem;
+        background: white;
+        color: black;
+        //font-size: 2rem;
+        &-data {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.text-right {
+    text-align: right;
+}
+
+.icon-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 30px 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0px 10px 20px rgb(200 208 216 / 30%);
+    border-radius: 10px;
+}
+
+.icon-card .icon.purple {
+    background: rgba(155, 81, 224, 0.1);
+    color: #9b51e0;
+}
+
+.icon-card .icon {
+    max-width: 46px;
+    width: 100%;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 20px;
+    background: rgba(74, 108, 247, 0.1);
+    color: #4a6cf7;
+    font-weight: 700;
+}
+
+.card-style {
+    background: #fff;
+    box-sizing: border-box;
+    padding: 25px 30px;
+    position: relative;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0px 10px 20px rgb(200 208 216 / 30%);
+    border-radius: 10px;
+}
+
+
+/*.chartjs-size-monitor, .chartjs-size-monitor-expand, .chartjs-size-monitor-shrink {
+    position: absolute;
+    direction: ltr;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.chartjs-size-monitor, .chartjs-size-monitor-expand, .chartjs-size-monitor-shrink {
+    position: absolute;
+    direction: ltr;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.chartjs-size-monitor-shrink {
+    position: absolute;
+    direction: ltr;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: -1;
+}*/
+
+.status-btn.active-btn {
+    color: #4a6cf7;
+    background: rgba(74, 108, 247, 0.1);
+}
+
+.status-btn {
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.active-btn {
+    background: #4a6cf7;
+    color: #fff;
+}
+
+.status-btn.close-btn {
+    color: #d50100;
+    background: rgba(213, 1, 0, 0.1);
+}
+
+.status-btn {
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+i,
+span,
+a {
+    display: inline-block;
+}
+
+.status-btn.info-btn {
+    color: #97ca31;
+    background: rgba(151, 202, 49, 0.1);
+}
+
+.info-btn {
+    background: #97ca31;
+    color: #fff;
+}
+
+.table .action {
+    display: flex;
+    align-items: center;
+}
+
+.table .action button {
+    border: none;
+    background: transparent;
+    padding: 0px 6px;
+    font-size: 18px;
+}
+
+.success-btn {
+    background: #219653;
+    color: #fff;
+}
+
+.status-btn.success-btn {
+    color: #219653;
+    background: rgba(33, 150, 83, 0.1);
+}
+
+@media (min-width: 992px) {
+    .col-lg-7 {
+        flex: 0 0 auto;
+        width: 58.33333333%;
+    }
+}

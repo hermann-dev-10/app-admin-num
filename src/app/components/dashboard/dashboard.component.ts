@@ -7,6 +7,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  users$!: Observable<any[]>;
 
   displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'comment', 'action'];
@@ -33,11 +37,17 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    private userService: UserService,
+
   ) { }
 
 
   ngOnInit(): void {
     //this.getAllFolders();
+    this.users$ = this.userService.getUsers();
+    console.log('Users: ', this.users$);
+    //this.getAllUsers();
+    //console.log('this.getAllUsers()', this.getAllUsers());
   }
 
   openDialog() {

@@ -11,23 +11,55 @@
         <div class="page__content shadow p-3 position-relative">
             <!--<div class="page__content-data position-absolute text-center">-->
             <div class="container">
-                <div class="text-right">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon purple">
+                                <mat-icon>line_weight</mat-icon>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Nombre de classeurs</h6>
+                                <h3 *ngIf="folders$ | async as folders" class="text-bold mb-10">{{folders.length}}</h3>
+
+                                <!--<p class="text-sm text-success">
+                                    <i class="fas fa-address-book"></i> +2.00%
+                                    <span class="text-gray">(30 days)</span>
+                                </p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <!--<div class="icon-card mb-30">
+                            <div class="icon purple">
+                                <mat-icon>supervisor_account</mat-icon>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Nombre d'administrateurs</h6>
+                                <h3 class="text-bold mb-10">3</h3>
+                              
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-right">
+                        <button mat-raised-button color="warn" (click)="openDialog()">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Ajouter un classeur
+                        </button>
+                    </div>
+                
+                </div>
+                <!--<div class="text-right">
                     <button mat-raised-button color="warn" (click)="openDialog()">
                         <mat-icon inline=true>note_add</mat-icon>
                         Ajouter un classeur
                     </button>
-                </div>
+                </div>-->
     
                 <mat-form-field appearance="standard" style="width:100%">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
                 </mat-form-field>
     
-               
-                
-                <div *ngIf="folders$ | async as folders">
-                    <p>Nombre de classeurs : {{folders.length}}</p>
-                </div>
     
                 <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource" matSort style="width:100%">

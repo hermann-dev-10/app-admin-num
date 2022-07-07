@@ -16,6 +16,121 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="icon-card mb-30">
                                 <div class="icon purple">
+                                    <mat-icon>supervisor_account</mat-icon>
+                                </div>
+                                <div class="content">
+                                    <h6 class="mb-10">Nombre d'utilisateurs</h6>
+                                    <h3 *ngIf="users$ | async as folders" class="text-bold mb-10">{{folders.length}}</h3>
+                                    <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                           
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                           
+                        </div>
+                    </div>
+    
+                    <!--<div class="row">
+                        <div class="col-lg">
+                            <div class="card-style mb-30">
+                                <h6 class="mb-10">Utilisateurs</h6>
+                                <div class="table-wrapper table-responsive">
+                                    <table class="table clients-table">
+                                        <thead>
+                                            <tr>
+                                            
+                                                <th>
+                                                    <h6>Nom</h6>
+                                                </th>
+                                                <th>
+                                                    <h6>Email</h6>
+                                                </th>
+                                                <th>
+                                                    <h6>Entreprise</h6>
+                                                </th>
+                                                <th>
+                                                    <h6>Type de compte</h6>
+                                                </th>
+                                                <th>
+                                                    <h6>Ajouté le</h6>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="min-width">
+                                                    <p>Hermann Manuel</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p><a href="#0">h.manuel@sekoia.ch</a></p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Sekoia Services SA</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Administrateur</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>23 janvier 2022</p>
+                                                </td>
+    
+                                            </tr>
+                                            <tr>
+                                                <td class="min-width">
+                                                    <p>Esther Howard</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p><a href="#0">yourmail@gmail.com</a></p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Firme SA</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Normal</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>16 février 2022</p>
+                                                </td>
+    
+                                            </tr>
+                                            <tr>
+                                                <td class="min-width">
+                                                    <p>John Doe</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p><a href="#0">doe@gmail.com</a></p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Zerm SA</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>Normal</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>26 mars 2022</p>
+                                                </td>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="row mt-5">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="icon-card mb-30">
+                                <div class="icon purple">
                                     <mat-icon>subject</mat-icon>
                                 </div>
                                 <div class="content">
@@ -45,8 +160,8 @@
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="icon-card mb-30">
-                                <div class="icon primary">
-                                    <i class="fas fa-address-book"></i>
+                                <div class="icon success">
+                                    <mat-icon>subject</mat-icon>
                                 </div>
                                 <div class="content">
                                     <h6 class="mb-10">Classeurs en cours</h6>
@@ -60,8 +175,8 @@
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="icon-card mb-30">
-                                <div class="icon orange">
-                                    <i class="fas fa-address-book"></i>
+                                <div class="icon success">
+                                    <mat-icon>subject</mat-icon>
                                 </div>
                                 <div class="content">
                                     <h6 class="mb-10">Classeurs terminés</h6>
@@ -74,399 +189,75 @@
                             </div>
                         </div>
                     </div>
-    
-                    <div class="row">
-                        <div class="col-lg-7">
+
+                    <!--<div class="row">
+                        <div class="col-lg">
                             <div class="card-style mb-30">
-                                <h6 class="mb-10">Administrators</h6>
+                                <h6 class="mb-10">Classeurs</h6>
                                 <div class="table-wrapper table-responsive">
                                     <table class="table clients-table">
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <h6>#</h6>
+                                                    <h6>Entreprise</h6>
                                                 </th>
                                                 <th>
-                                                    <h6>Name</h6>
+                                                    <h6>Répertoire</h6>
                                                 </th>
                                                 <th>
-                                                    <h6>Email</h6>
+                                                    <h6>Classeur</h6>
                                                 </th>
                                                 <th>
-                                                    <h6>Phone</h6>
+                                                    <h6>Commentaire</h6>
                                                 </th>
                                                 <th>
-                                                    <h6>Position</h6>
-                                                </th>
-                                                <th>
-                                                    <h6>Start Date</h6>
-                                                </th>
-                                            </tr>
-                                            <!-- end table row-->
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-1.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Esther Howard</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-2.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>John Doe</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-3.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Anee Smith</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-4.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Jonathon</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-5.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>David Smith</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                            <tr>
-                                                <td>
-                                                    <div class="employee-image">
-                                                        <img src="https://demo.plainadmin.com/assets/images/lead/lead-6.png" alt="">
-                                                    </div>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Anna Smith</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>(405) 555-0128</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Project Manager</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16, Feb, 2020</p>
-                                                </td>
-    
-                                            </tr>
-                                            <!-- end table row -->
-                                        </tbody>
-                                    </table>
-                                    <!-- end table -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Col -->
-                        <div class="col-lg-5">
-                            <div class="card-style mb-30">
-                                <div class="
-                                        title
-                                        d-flex
-                                        flex-wrap
-                                        align-items-center
-                                        justify-content-between
-                                    ">
-                                    <div class="left">
-                                        <h6 class="text-medium mb-30">Sales History</h6>
-                                    </div>
-                                    <div class="right">
-                                        <div class="select-style-1">
-                                            <div class="select-position select-sm">
-                                                <select class="light-bg">
-                                            <option value="">Today</option>
-                                            <option value="">Yesterday</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        <!-- end select -->
-                                    </div>
-                                </div>
-                                <!-- End Title -->
-                                <div class="table-responsive">
-                                    <table class="table top-selling-table">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <h6 class="text-sm text-medium">Products</h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium">
-                                                        Category <i class="lni lni-arrows-vertical"></i>
-                                                    </h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium">
-                                                        Revenue <i class="lni lni-arrows-vertical"></i>
-                                                    </h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium">
-                                                        Status <i class="lni lni-arrows-vertical"></i>
-                                                    </h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="text-sm text-medium text-end">
-                                                        Actions <i class="lni lni-arrows-vertical"></i>
-                                                    </h6>
+                                                    <h6>Ajouté le</h6>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image">
-                                                            <!--<img src="assets/images/products/product-mini-1.jpg" alt="">-->
-                                                        </div>
-                                                        <p class="text-sm">Bedroom</p>
-                                                    </div>
+                                                <td class="min-width">
+                                                    <p>Sekoia Services SA</p>
                                                 </td>
-                                                <td>
-                                                    <p class="text-sm">Interior</p>
+                                                <td class="min-width">
+                                                    <p><a href="#0">Company\Fournisseur\2018</a></p>
                                                 </td>
-                                                <td>
-                                                    <p class="text-sm">$345</p>
+                                                <td class="min-width">
+                                                    <p>Traitement des salaires</p>
                                                 </td>
-                                                <td>
-                                                    <span class="status-btn info-btn">Pending</span>
+                                                <td class="min-width">
+                                                    <p>Classeur complet</p>
                                                 </td>
-                                                <td>
-                                                    <div class="action justify-content-end">
-                                                        <button class="edit">
-                                                <i class="lni lni-pencil"></i>
-                                                </button>
-                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="lni lni-more-alt"></i>
-                                                </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Remove</a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                <td class="min-width">
+                                                    <p>6 avril 2022</p>
                                                 </td>
+    
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image">
-                                                            <!--<img src="assets/images/products/product-mini-1.jpg" alt="">-->
-                                                        </div>
-                                                        <p class="text-sm">Arm Chair</p>
-                                                    </div>
+                                                <td class="min-width">
+                                                    <p>Sekoia Services SA</p>
                                                 </td>
-                                                <td>
-                                                    <p class="text-sm">Interior</p>
+                                                <td class="min-width">
+                                                    <p><a href="#0">Company\Fournisseur\2018</a></p>
                                                 </td>
-                                                <td>
-                                                    <p class="text-sm">$345</p>
+                                                <td class="min-width">
+                                                    <p>Commande Client</p>
                                                 </td>
-                                                <td>
-                                                    <span class="status-btn warning-btn">Refund</span>
+                                                <td class="min-width">
+                                                    <p>R.A.S</p>
                                                 </td>
-                                                <td>
-                                                    <div class="action justify-content-end">
-                                                        <button class="edit">
-                                                <i class="lni lni-pencil"></i>
-                                                </button>
-                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="lni lni-more-alt"></i>
-                                                </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Remove</a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                <td class="min-width">
+                                                    <p>26 mars 2022</p>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image">
-                                                            <!--<img src="assets/images/products/product-mini-1.jpg" alt="">-->
-                                                        </div>
-                                                        <p class="text-sm">Sofa</p>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Interior</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">$345</p>
-                                                </td>
-                                                <td>
-                                                    <span class="status-btn success-btn">Completed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-end">
-                                                        <button class="edit">
-                                                <i class="lni lni-pencil"></i>
-                                                </button>
-                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="lni lni-more-alt"></i>
-                                                </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Remove</a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image">
-                                                            <!--<img src="assets/images/products/product-mini-1.jpg" alt="">-->
-                                                        </div>
-                                                        <p class="text-sm">Kitchen</p>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Interior</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">$345</p>
-                                                </td>
-                                                <td>
-                                                    <span class="status-btn close-btn">Canceled</span>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-end">
-                                                        <button class="edit">
-                                                <i class="lni lni-pencil"></i>
-                                                </button>
-                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="lni lni-more-alt"></i>
-                                                </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Remove</a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#0" class="text-gray">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
+    
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- End Table -->
                                 </div>
                             </div>
                         </div>
-                        <!-- End Col -->
-                    </div>
+                    </div>-->
     
                     <!-- Show user data when logged in -->
                     <!--<div class="row" *ngIf="authService.userData as user">

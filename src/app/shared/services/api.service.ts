@@ -40,8 +40,15 @@ export class ApiService {
     return this.afs.collection(`${this.collectionName}`).valueChanges({ idField:'id'});
 
   }
-  getFolderById(id: number){
+  /*getFolderById(id: number){
     //return this.http.get<any>("http://localhost:3001/folderList/"+id);
+    return this.afs
+      .collection(this.collectionName)
+      .valueChanges({ idField: 'id'});
+  }*/
+
+  getFolderById(id: any) {
+    return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
   }
 
   putFolder(data:any, id:number){

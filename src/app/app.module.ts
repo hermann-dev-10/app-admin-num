@@ -58,6 +58,7 @@ import { LoginComponent } from './components/login/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ProfilComponent } from './components/profil/profil.component';
     UserComponent,
     ModalUserComponent,
     ProfilComponent,
+    MessagesComponent,
     
   ],
   imports: [

@@ -8,10 +8,11 @@
     <!--<a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
         <mat-icon>home</mat-icon> Accueil
     </a>-->
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+    <div *ngFor="let u of displayNameObs">
+       <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
         <mat-icon>dashboard</mat-icon> Tableau de bord
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/user">
+    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/user">
         <mat-icon>supervisor_account</mat-icon>
         Utilisateurs
     </a>
@@ -20,7 +21,9 @@
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/profil">
         <mat-icon>perm_identity</mat-icon> Profil
-    </a>
+    </a> 
+    </div>
+    
 
     <!--<a mat-list-item routerLinkActive="list-item-active" routerLink="/stats">
         <mat-icon>assessment icon</mat-icon> Statistiques

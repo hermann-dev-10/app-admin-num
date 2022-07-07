@@ -1,45 +1,63 @@
-<div class="container">
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+      <!-- <mat-drawer mode="side" opened="true"> -->
+      <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+      <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-    <h2 class="text-center mb-5">Fiche de suivi numérisation</h2>
+<div class="container-fluid page">
 
-    <div class="box">
-        <!--<p>Client : <strong>{{folder.nomClient | uppercase }}</strong></p>-->
-        <p>Année : <strong>{{ folder.date | date: 'yyyy'}}</strong></p>
+    <div class="d-flex page__box p-3 mt-2 text-white">Fiche de suivi numérisation</div>
+
+
+    <div class="page__content shadow p-3 position-relative">
+        <div class="page__content-data position-absolute">
+            <p class="mt-5 mb-5">Client : <strong>{{ singleFolder.nomClient }}</strong></p>
+            <p class="mb-5">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p>
+            <p class="mb-5">Année : <strong>{{ singleFolder.createdAt.toDate() | date: 'yyyy' }}</strong></p>
+            <p class="mt-5">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p>
+        </div>
     </div>
-
-
-    <p class="mb-5">Nom du classeur : <strong>{{ folder.nomClasseur }}</strong></p>
-
-    <p class="mt-5 mb-5">Répertoire de base : <strong>{{ folder.directory | uppercase }}</strong></p>
 
 
     <h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>
 
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="">
+        <ng-container matColumnDef="nomClasseur">
             <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element"> {{element.nameFolder}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.nomClasseur}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="nameFile">
-            <th mat-header-cell *matHeaderCellDef> nameFile </th>
-            <td mat-cell *matCellDef="let element"> {{element.nameFile}} </td>
+        <ng-container matColumnDef="directory">
+            <th mat-header-cell *matHeaderCellDef> Répertoire </th>
+            <td mat-cell *matCellDef="let element"> {{singleFolder.directory}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="etat">
+            <th mat-header-cell *matHeaderCellDef> Etat </th>
+            <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef> Commentaire </th>
+            <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-
     <!--<mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile>Nom du(des) dossiers(s) :</mat-grid-tile>
         <mat-grid-tile>Nom du(des) fichier(s) PDF :</mat-grid-tile>
-
     </mat-grid-list>-->
 
     <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -71,44 +89,41 @@
 
     </mat-grid-list>-->
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
 
         <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
+        <!-- 
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Date </th>
             <td mat-cell *matCellDef="let element"> {{element.date}} </td>
         </ng-container>
 
-        <!-- Name Column -->
         <ng-container matColumnDef="numeriseur">
             <th mat-header-cell *matHeaderCellDef> Numériseur </th>
             <td mat-cell *matCellDef="let element"> {{element.numeriseur}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
         <ng-container matColumnDef="partie">
             <th mat-header-cell *matHeaderCellDef> Partie </th>
             <td mat-cell *matCellDef="let element"> {{element.partie}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
         <ng-container matColumnDef="etat">
             <th mat-header-cell *matHeaderCellDef> État</th>
             <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
         <ng-container matColumnDef="visa">
             <th mat-header-cell *matHeaderCellDef> Visa</th>
             <td mat-cell *matCellDef="let element"> {{element.visa}} </td>
         </ng-container>
+     
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table>-->
 
     <div class="p-3">
         <div class="text-center">
@@ -123,3 +138,7 @@
         </div>
     </div>
 </div>
+
+
+</mat-drawer-content>
+</mat-drawer-container>
