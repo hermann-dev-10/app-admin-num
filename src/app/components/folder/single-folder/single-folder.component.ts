@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { Location } from '@angular/common';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export interface PeriodicElement {
   date: string;
@@ -26,6 +28,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class SingleFolderComponent implements OnInit {
 
+  @ViewChild('htmlData') htmlData!: ElementRef;
+  //@ViewChild('content', {static:false}) el!: ElementRef;
   //singleFolder!:any;
   singleFolder: any | undefined;
 
@@ -39,8 +43,8 @@ export class SingleFolderComponent implements OnInit {
   //displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
   displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'etat', 'comment'];
   dataSource = ELEMENT_DATA;
-
   sideBarOpen = true;
+
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -71,6 +75,29 @@ export class SingleFolderComponent implements OnInit {
     //this.apiService.getFolderById(id)
     //.subscribe(folder => this.folder = folder);
   }
+
+  public openPDF(): void {
+    console.log('bien');
+    let DATA: any = document.getElementById('content');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 200;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('Fiche_de_suivi.pdf');
+    });
+  }
+
+  /*makePdf(){
+    let pdf = new jsPDF()
+    pdf.html(this.el.nativeElement, {
+      callback: (pdf)=> {
+        pdf.save('sample.pdf')
+      }
+    })
+  }*/
 
   goBack(): void {
     this.location.back();

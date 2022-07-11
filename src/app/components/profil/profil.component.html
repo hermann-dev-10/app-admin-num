@@ -23,7 +23,7 @@
                                 <h4 *ngIf="u.isAdmin">Type de compte : <strong>Administrateur</strong></h4>
                                 <h4 *ngIf="!u.isAdmin">Type de compte : <strong>Normal</strong></h4>
                                 <h4>Entreprise : <strong>{{u.company}}</strong></h4>
-                                <h4>Créé le : <strong>{{u.createdAt.toDate() | date}}</strong></h4>
+                                <h4>Compte créé le : <strong>{{u.createdAt.toDate() | date}}</strong></h4>
                             </div>
 
                             <div *ngIf="user.displayName">
@@ -32,7 +32,7 @@
                             </div>
     
 
-                            <p style="font-size: 24px;">User ID: <strong>{{user.uid}}</strong></p>
+                            <!--<p style="font-size: 24px;">User ID: <strong>{{user.uid}}</strong></p>-->
                            
                             <!--<p>Email Verified: <strong>{{user.emailVerified}}</strong></p>-->
 
