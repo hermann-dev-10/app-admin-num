@@ -6,9 +6,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
-//import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { 
+  MomentDateAdapter, 
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS, 
+} from '@angular/material-moment-adapter';
+import { 
+  DateAdapter, 
+  MAT_DATE_FORMATS, 
+  MAT_DATE_LOCALE 
+} from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 
 import * as _moment from 'moment';
@@ -39,13 +45,13 @@ export const MY_FORMATS = {
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
     // our example generation script.
-   // {
-      //provide: DateAdapter,
-      //useClass: MomentDateAdapter,
-      //deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    //},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
 
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 export class DialogComponent implements OnInit {
@@ -61,7 +67,10 @@ export class DialogComponent implements OnInit {
   durationInSeconds = 5;
   lettre = "";
   isLetterNomenclatureChecked = false;
+  isLetterIndividualrNomenclatureChecked = false;
   isMonthNomenclatureChecked = false;
+  isMonthNomenclatureIndividualChecked = false;
+
   isAbcChecked = true;
   userUid!: string;
   sub!: Subscription;
@@ -218,7 +227,15 @@ this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succè
     this.isLetterNomenclatureChecked = (this.isLetterNomenclatureChecked)? false : true;
   } 
 
+  toggleLetterIndividualNomenclature() {
+    this.isLetterIndividualrNomenclatureChecked = (this.isLetterIndividualrNomenclatureChecked)? false : true;
+  } 
+
   toggleMonthNomenclature() {
     this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked)? false : true;
+  }
+
+  toggleMonthIndividualNomenclature() {
+    this.isMonthNomenclatureIndividualChecked = (this.isMonthNomenclatureIndividualChecked)? false : true;
   }
 }

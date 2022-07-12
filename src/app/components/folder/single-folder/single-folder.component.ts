@@ -86,7 +86,7 @@ export class SingleFolderComponent implements OnInit {
       let PDF = new jsPDF('p', 'mm', 'a4');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save(+ 'Fiche_de_suivi_' + `${this.singleFolder.nomClasseur}` +'.pdf');
+      PDF.save('Fiche de suivi ' + `${this.singleFolder.nomClasseur}` +'.pdf');
     });
   }
 

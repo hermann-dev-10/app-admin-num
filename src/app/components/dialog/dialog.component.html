@@ -26,14 +26,14 @@
             <mat-label>Choississez une année</mat-label>
             <input 
                 matInput 
-                [matDatepicker]="picker" 
+                [matDatepicker]="dp" 
                 formControlName="date"
             />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker 
-                #picker 
+                #dp 
                 startView="multi-year"
-                (yearSelected)="chosenYearHandler($event, picker)"
+                (yearSelected)="chosenYearHandler($event, dp)"
                 panelClass="example-month-picker">
             </mat-datepicker>
         </mat-form-field>
@@ -43,15 +43,21 @@
             <input formControlName="specificite" matInput>
         </mat-form-field>-->
 
-        <!--<section class="example-section">
+        <section class="example-section">
             <mat-radio-group formControlName="nomemclature">
                 <mat-label>Nomemclature :</mat-label>
+                <!-- Add radio button -->
                 <mat-checkbox (click)="toggleLetterNomenclature()" class="example-margin"> Lettres </mat-checkbox>
                 <mat-checkbox (click)="toggleMonthNomenclature()" class="example-margin">Mois</mat-checkbox>
             </mat-radio-group>
         </section>
 
         <div *ngIf="isLetterNomenclatureChecked" class="mr-20-cb">
+            <mat-checkbox>Toutes les lettres</mat-checkbox>
+            <mat-checkbox  (click)="toggleLetterIndividualNomenclature()">Différentes lettres</mat-checkbox>
+        </div>
+
+        <div *ngIf="isLetterIndividualrNomenclatureChecked" class="mr-20-cb">
             <mat-checkbox> A </mat-checkbox>
             <mat-checkbox> B </mat-checkbox>
             <mat-checkbox> C </mat-checkbox>
@@ -80,23 +86,29 @@
             <mat-checkbox> Z </mat-checkbox>
         </div>
 
-        <div *ngIf="isMonthNomenclatureChecked" class="mr-20-cb">
-            <mat-checkbox> Janvier </mat-checkbox>
-            <mat-checkbox> Février </mat-checkbox>
-            <mat-checkbox> Mars </mat-checkbox>
-            <mat-checkbox> Avril </mat-checkbox>
-            <mat-checkbox> Mai </mat-checkbox>
-            <mat-checkbox> Juin </mat-checkbox>
-            <mat-checkbox>Juillet</mat-checkbox>
-            <mat-checkbox>Août</mat-checkbox>
-            <mat-checkbox>Septembre</mat-checkbox>
-            <mat-checkbox>Octobre</mat-checkbox>
-            <mat-checkbox>Novembre</mat-checkbox>
-            <mat-checkbox>Décembre</mat-checkbox>
-        </div>
+            <div *ngIf="isMonthNomenclatureChecked" class="mr-20-cb">
+                <mat-checkbox>Année complète</mat-checkbox>
+                <mat-checkbox  (click)="toggleMonthIndividualNomenclature()">Différents mois</mat-checkbox>
+            </div>
+
+            <div *ngIf="isMonthNomenclatureIndividualChecked" class="mt-20-cb mr-20-cb">
+                <mat-checkbox> Janvier </mat-checkbox>
+                <mat-checkbox> Février </mat-checkbox>    
+                <mat-checkbox> Mars </mat-checkbox>
+                <mat-checkbox> Avril </mat-checkbox>
+                <mat-checkbox> Mai </mat-checkbox>
+                <mat-checkbox> Juin </mat-checkbox>
+                <mat-checkbox>Juillet</mat-checkbox>
+                <mat-checkbox>Août</mat-checkbox>
+                <mat-checkbox>Septembre</mat-checkbox>
+                <mat-checkbox>Octobre</mat-checkbox>
+                <mat-checkbox>Novembre</mat-checkbox>
+                <mat-checkbox>Décembre</mat-checkbox>
+            </div>
+        
 
 
-        <section class="example-section">
+        <!--<section class="example-section">
             <mat-radio-group formControlName="etat">
                 <mat-label>État :</mat-label>
                 <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-margin">
