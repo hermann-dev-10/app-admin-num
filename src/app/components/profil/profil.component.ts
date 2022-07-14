@@ -12,6 +12,16 @@ import { UserService } from './../../shared/services/user.service';
 })
 export class ProfilComponent implements OnInit {
 
+  test: any[];
+  arr = [
+  { id: 1, language: 'typescript' },
+  { id: 2, language: 'javascript' },
+  { id: 3, language: 'typescript' },
+];
+
+    items = { keyOne: 'value 1', keyTwo: 'value 2', keyThree: 'value 3' };
+
+  
   user:any;
   users$: Observable<any>[] = [] //user$: Observable<IUser>[] = [] 
   sub:any;
@@ -37,6 +47,7 @@ export class ProfilComponent implements OnInit {
     console.log('USER-UID', this.userService.readUserWithUid(user.uid));
     this.user = user;
 
+
     if (this.user) {
          console.log(this.userService.readUserWithUid(user.uid));
 
@@ -46,6 +57,10 @@ export class ProfilComponent implements OnInit {
             console.log('mes users$ OBSERVABLE : -> ', this.users$);
             this.displayNameObs = data;
             console.log('this.displayNameObs :', this.displayNameObs)
+
+            //const company = this.displayNameObs.find(x=>x).company;
+            //console.log('company - company: ', company);
+            //console.log('getCompanyData():', this.getCompanyData);
             /*if (!data || data.length === 0) {
               console.log(`Creating a new personal user for ${user.displayName}`);
               this.userService.createUser(this.uniqueUser);
@@ -58,4 +73,10 @@ export class ProfilComponent implements OnInit {
       }
     });
 }
+
+get getCompanyData(){
+  const company = this.displayNameObs.find(x=>x).company;
+  return company;
+}
+
 }

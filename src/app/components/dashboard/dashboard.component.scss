@@ -172,6 +172,15 @@ a {
     font-size: 18px;
 }
 
+td {
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+td.mat-cell {
+    padding-right: 15px;
+}
+
 .success-btn {
     background: #219653;
     color: #fff;

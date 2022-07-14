@@ -27,7 +27,9 @@
     text-align: right;
 }
 
+
 /*Check ici */
+
 body {
     background: #f1f5f9;
 }
@@ -200,6 +202,15 @@ a {
     background: transparent;
     padding: 0px 6px;
     font-size: 18px;
+}
+
+td {
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+td.mat-cell {
+    padding-right: 15px;
 }
 
 .success-btn {

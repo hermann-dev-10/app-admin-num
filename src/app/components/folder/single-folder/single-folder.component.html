@@ -1,68 +1,85 @@
 <mat-drawer-container>
     <mat-drawer mode="side" [opened]="sideBarOpen">
-      <!-- <mat-drawer mode="side" opened="true"> -->
-      <app-sidenav></app-sidenav>
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
     </mat-drawer>
     <mat-drawer-content>
-      <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
+        <div class="container-fluid page">
+            <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
 
-    <div id="content" #content class="page__content shadow p-3 position-relative">
-        <h3 class="text-center mb-5">Fiche de suivi</h3>
-        <!--<div class="page__content-data position-absolute">-->
-            <div class="row">
-                <div class="col-6 p-4"><p class="">Client : <strong>{{ singleFolder.nomClient }}</strong></p></div>
-                <div class="col-6 p-4"><p class="">Année : <strong>{{ singleFolder.createdAt.toDate() | date: 'yyyy' }}</strong></p></div>
-            </div>
-
-            <div class="row">
-                <div class="col-6 p-4"><p class="">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p></div>
-                <div class="col-6 p-4"><p class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p></div>
-            </div>
-
-            <div class="border">
-                <h5 class="mt-5 mb-5 text-center p-4">Données à utiliser pour la création du dossier scanné :</h5>
+            <div id="content" #content class="page__content shadow p-3 position-relative">
+                <h3 class="text-center mb-5">Fiche de suivi</h3>
+                <!--<div class="page__content-data position-absolute">-->
                 <div class="row">
-                    <div class="col-6 p-4"><p class="">Nom du (des) dossier(s) : <strong>{{ singleFolder.folders }}</strong></p></div>
-                    <div class="col-6 p-4"> <p class="">Nom du (des) fichiers(s) PDF : <strong>{{ singleFolder.filesPdf }}</strong></p></div>
-                </div> 
-    
-                <div class="row">
-                    <div class="col-6 p-4"><p class=""><strong>A{{ singleFolder.folders }}</strong></p></div>
-                    <div class="col-6 p-4"> <p class=""><strong>Invoices_2018 {{ singleFolder.filesPdf }}</strong></p></div>
-                </div> 
-            </div>
-           
-
-            <div class="row mt-5">
-                <div class="col-6 border p-4">
-                    <h4>A remplir par le contrôleur n°1</h4>
-                    <p class=""><strong>Nombre de fichiers : </strong></p>
-                    <p class=""><strong>Nombre de pages : </strong></p>
-                    <p class=""><strong>Contrôle 1 fait par : </strong></p>
-                    <p class=""><strong>Le : </strong></p>
-
-                    <p class=""><strong>Commentaires : </strong></p>
+                    <div class="col-6 p-4">
+                        <p class="">Client : <strong>{{ singleFolder.nomClient }}</strong></p>
+                    </div>
+                    <div class="col-6 p-4">
+                        <p class="">Mois et année : <strong>{{ singleFolder.month}} {{ singleFolder.year}}</strong></p>
+                    </div>
                 </div>
-                <div class="col-6 border p-4">
-                    <h4>A remplir par le contrôleur n°2</h4>
 
-                    <p class=""><strong>Nombre de fichiers : </strong></p>
-                    <p class=""><strong>Nombre de pages : </strong></p>
-                    <p class=""><strong>Contrôle 1 fait par : </strong></p>
-                    <p class=""><strong>Le : </strong></p>
+                <div class="row">
+                    <div class="col-6 p-4">
+                        <p class="">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p>
+                    </div>
+                    <div class="col-6 p-4">
+                        <p class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p>
+                    </div>
+                </div>
 
-                    <p class=""><strong>Commentaires : </strong></p>
-                </div>            </div> 
-    </div>
+                <div class="border">
+                    <h5 class="mt-5 mb-5 text-center p-4">Données à utiliser pour la création du dossier scanné :</h5>
+                    <div class="row">
+                        <div class="col-6 p-4">
+                            <p class="">Nom du (des) dossier(s) : <strong>{{ singleFolder.folders }}</strong></p>
+                        </div>
+                        <div class="col-6 p-4">
+                            <p class="">Nom du (des) fichiers(s) PDF : <strong>{{ singleFolder.filesPdf }}</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 p-4">
+                            <p class=""><strong>A{{ singleFolder.folders }}</strong></p>
+                        </div>
+                        <div class="col-6 p-4">
+                            <p class=""><strong>Invoices_2018 {{ singleFolder.filesPdf }}</strong></p>
+                        </div>
+                    </div>
+                </div>
 
 
-    <!--<h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>-->
+                <div class="row mt-5">
+                    <div class="col-6 border p-4">
+                        <h4>A remplir par le contrôleur n°1</h4>
+                        <p class=""><strong>Nombre de fichiers : </strong></p>
+                        <p class=""><strong>Nombre de pages : </strong></p>
+                        <p class=""><strong>Contrôle 1 fait par : </strong></p>
+                        <p class=""><strong>Le : </strong></p>
+
+                        <p class=""><strong>Commentaires : </strong></p>
+                    </div>
+                    <div class="col-6 border p-4">
+                        <h4>A remplir par le contrôleur n°2</h4>
+
+                        <p class=""><strong>Nombre de fichiers : </strong></p>
+                        <p class=""><strong>Nombre de pages : </strong></p>
+                        <p class=""><strong>Contrôle 1 fait par : </strong></p>
+                        <p class=""><strong>Le : </strong></p>
+
+                        <p class=""><strong>Commentaires : </strong></p>
+                    </div>
+                </div>
+            </div>
 
 
-    <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!--<h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>-->
+
+
+            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
         <ng-container matColumnDef="nomClasseur">
             <th mat-header-cell *matHeaderCellDef> </th>
@@ -93,12 +110,12 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>-->
 
-    <!--<mat-grid-list cols="2" rowHeight="2:1">
+            <!--<mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile>Nom du(des) dossiers(s) :</mat-grid-tile>
         <mat-grid-tile>Nom du(des) fichier(s) PDF :</mat-grid-tile>
     </mat-grid-list>-->
 
-    <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
         <ng-container matColumnDef="name_folder">
@@ -116,7 +133,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>-->
 
-    <!--<mat-grid-list cols="6" rowHeight="2:1">
+            <!--<mat-grid-list cols="6" rowHeight="2:1">
 
         <mat-grid-tile>À remplir par le stagiaire</mat-grid-tile>
         <mat-grid-tile>Date</mat-grid-tile>
@@ -127,12 +144,12 @@
 
     </mat-grid-list>-->
 
-    <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
+            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
 
-        <!--- Note that these columns can be defined in any order.
+            <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- 
+            <!-- 
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Date </th>
             <td mat-cell *matCellDef="let element"> {{element.date}} </td>
@@ -163,20 +180,20 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>-->
 
-    <div class="p-3">
-        <div class="text-center">
-            <div class="mt-100 text-center">
-                <!--<p> {{folder.nomClient | uppercase }}</p>
+            <div class="p-3">
+                <div class="text-center">
+                    <div class="mt-100 text-center">
+                        <!--<p> {{folder.nomClient | uppercase }}</p>
                 <p>État : {{folder.etat }}</p>
                 <p>Comment : {{folder.comment }}</p>-->
 
-                <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
-                <button class="btn btn-primary" type="button" (click)="openPDF()">Exporter en PDF</button>
+                        <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
+                        <button class="btn btn-primary" type="button" (click)="openPDF()">Exporter en PDF</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-</mat-drawer-content>
+    </mat-drawer-content>
 </mat-drawer-container>

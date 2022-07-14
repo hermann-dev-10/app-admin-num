@@ -19,15 +19,15 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 })
 export class FolderComponent implements OnInit {
 
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'directory', 'month-year', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  folders$!: Observable<any[]>;
+  foldersByUid$!: Observable<any[]>;
   currentUser! :any;
-  user = this.auth.currentUser;
+  user = this.afAuth.currentUser;
   sub:any;
   uniqueUser: any;
   users$: Observable<any>[] = [];
@@ -45,23 +45,21 @@ export class FolderComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private folderService: FolderService,
-    public auth: AngularFireAuth,
     private userService : UserService,
     private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
-        console.log('Hallo');
        
-        this.getAllFolders();
-        console.log('this.getAllFolders()', this.getAllFolders());
+        this.getAllFoldersByUid();
+        console.log('this.getAllFolders()', this.getAllFoldersByUid());
 
-        this.sub = this.auth.authState.subscribe((user:any) => {
+        this.sub = this.afAuth.authState.subscribe((user:any) => {
           this.user = user;
           if (this.user){
 
-            this.folders$ = this.apiService.readPersonalFolderByUid(user.uid);
-            console.log('Folders: ', this.folders$);
+            this.foldersByUid$ = this.apiService.readPersonalFolderByUid(user.uid);
+            console.log('FoldersByUid: ', this.foldersByUid$);
 
             console.log(this.userService.readUserWithUid(user.uid));
 
@@ -81,11 +79,11 @@ export class FolderComponent implements OnInit {
     this.dialog.open(DialogComponent, {
       width:'30%'
     }).afterClosed().subscribe(val=>{
-      this.getAllFolders();
+      this.getAllFoldersByUid();
     });
   }
 
-   getAllFolders(){
+   getAllFoldersByUid(){
 
     this.sub = this.afAuth.authState.subscribe((user) => {
 
@@ -116,12 +114,10 @@ export class FolderComponent implements OnInit {
       data:row
     }).afterClosed().subscribe(val =>{
       if(val==='update'){
-        this.getAllFolders();
+        this.getAllFoldersByUid();
       }
     })
   }
-
-
 
   deleteFolder(id:number){
     this.apiService.deleteFolder(id)
@@ -136,14 +132,15 @@ export class FolderComponent implements OnInit {
                 
         });
       
-        this.getAllFolders();
+        this.getAllFoldersByUid();
       },
       error:()=>{
         alert("Error while deleting the Folder!!");
       }
     })*/
 
-    this._snackBar.open(`${id}} supprimé avec succès`, '', {
+    //this._snackBar.open(`${id}} supprimé avec succès`, '', {
+      this._snackBar.open("Classeur supprimé avec succès", '', {
       duration: 3000, 
     });
   }

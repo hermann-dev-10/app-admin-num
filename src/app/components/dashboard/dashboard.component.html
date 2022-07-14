@@ -1,196 +1,71 @@
 <mat-drawer-container>
-  <mat-drawer mode="side" [opened]="sideBarOpen">
-    <!-- <mat-drawer mode="side" opened="true"> -->
-   <app-sidenav></app-sidenav>
-  </mat-drawer>
-  <mat-drawer-content>
-    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-    <div class="container-fluid page">
-        <div class="d-flex page__box p-3 mt-2">Tableau de bord</div>
-        <div class="page__content shadow p-3 position-relative">
-            <!--<div class="page__content-data position-absolute text-center">-->
-            <div class="container">
-                <div class="content container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon purple">
-                                    <mat-icon>supervisor_account</mat-icon>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Nombre d'utilisateurs</h6>
-                                    <h3 *ngIf="users$ | async as folders" class="text-bold mb-10">{{folders.length}}</h3>
-                                    <!--<p class="text-sm text-success">
+        <div class="container-fluid page">
+            <div class="d-flex page__box p-3 mt-2">Tableau de bord</div>
+            <div class="page__content shadow p-3 position-relative">
+                <!--<div class="page__content-data position-absolute text-center">-->
+                <div class="container">
+                    <div class="content container">
+
+                        <div class="row mt-5">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon purple">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Nombre de classeurs</h6>
+                                        <h3 *ngIf="this.folders" class="text-bold mb-10 ">{{ this.folders.length }}</h3>
+                                        <h3></h3>
+                                        <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
                                     </p>-->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                           
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                           
-                        </div>
-                    </div>
-    
-                    <!--<div class="row">
-                        <div class="col-lg">
-                            <div class="card-style mb-30">
-                                <h6 class="mb-10">Utilisateurs</h6>
-                                <div class="table-wrapper table-responsive">
-                                    <table class="table clients-table">
-                                        <thead>
-                                            <tr>
-                                            
-                                                <th>
-                                                    <h6>Nom</h6>
-                                                </th>
-                                                <th>
-                                                    <h6>Email</h6>
-                                                </th>
-                                                <th>
-                                                    <h6>Entreprise</h6>
-                                                </th>
-                                                <th>
-                                                    <h6>Type de compte</h6>
-                                                </th>
-                                                <th>
-                                                    <h6>Ajouté le</h6>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="min-width">
-                                                    <p>Hermann Manuel</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">h.manuel@sekoia.ch</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Sekoia Services SA</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Administrateur</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>23 janvier 2022</p>
-                                                </td>
-    
-                                            </tr>
-                                            <tr>
-                                                <td class="min-width">
-                                                    <p>Esther Howard</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">yourmail@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Firme SA</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Normal</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>16 février 2022</p>
-                                                </td>
-    
-                                            </tr>
-                                            <tr>
-                                                <td class="min-width">
-                                                    <p>John Doe</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p><a href="#0">doe@gmail.com</a></p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Zerm SA</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>Normal</p>
-                                                </td>
-                                                <td class="min-width">
-                                                    <p>26 mars 2022</p>
-                                                </td>
-    
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="col-lg-3 col-md-6">
+                                <!--<div class="icon-card mb-30">
+                                    <div class="icon success">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Classeurs non commencés</h6>
+                                        <h3 class="text-bold mb-10">?</h3>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <!--<div class="icon-card mb-30">
+                                    <div class="icon success">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Classeurs en cours</h6>
+                                        <h3 class="text-bold mb-10">1</h3>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <!--<div class="icon-card mb-30">
+                                    <div class="icon success">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Classeurs terminés</h6>
+                                        <h3 class="text-bold mb-10">1</h3>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
-                    </div>-->
 
-                    <div class="row mt-5">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon purple">
-                                    <mat-icon>subject</mat-icon>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Nombre de classeurs</h6>
-                                    <h3 class="text-bold mb-10">6</h3>
-                                    <!--<p class="text-sm text-success">
-                                        <i class="fas fa-address-book"></i> +2.00%
-                                        <span class="text-gray">(30 days)</span>
-                                    </p>-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon success">
-                                    <mat-icon>subject</mat-icon>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Classeurs non commencés</h6>
-                                    <h3 class="text-bold mb-10">2</h3>
-                                    <!--<p class="text-sm text-success">
-                                        <i class="lni lni-arrow-up"></i> +5.45%
-                                        <span class="text-gray">Increased</span>
-                                    </p>-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon success">
-                                    <mat-icon>subject</mat-icon>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Classeurs en cours</h6>
-                                    <h3 class="text-bold mb-10">1</h3>
-                                    <!--<p class="text-sm text-danger">
-                                        <i class="lni lni-arrow-down"></i> -2.00%
-                                        <span class="text-gray">Expense</span>
-                                    </p>-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon success">
-                                    <mat-icon>subject</mat-icon>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Classeurs terminés</h6>
-                                    <h3 class="text-bold mb-10">1</h3>
-                                    <!--<p class="text-sm text-danger">
-                                        <i class="lni lni-arrow-down"></i> -25.00%
-                                        <span class="text-gray"> Earning</span>
-                                    </p>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--<div class="row">
+                        <!--<div class="row">
                         <div class="col-lg">
                             <div class="card-style mb-30">
                                 <h6 class="mb-10">Classeurs</h6>
@@ -258,9 +133,9 @@
                             </div>
                         </div>
                     </div>-->
-    
-                    <!-- Show user data when logged in -->
-                    <!--<div class="row" *ngIf="authService.userData as user">
+
+                        <!-- Show user data when logged in -->
+                        <!--<div class="row" *ngIf="authService.userData as user">
                     <div class="col-md-12">
                         <div class="media">
                             <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
@@ -273,14 +148,124 @@
                         </div>
                     </div>
                 </div>-->
-    
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!--<div class="icon-card mb-30">
+                            <div class="icon purple">
+                                <mat-icon>supervisor_account</mat-icon>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Nombre d'administrateurs</h6>
+                                <h3 class="text-bold mb-10">3</h3>
+                              
+                            </div>
+                        </div>-->
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <!--<button mat-raised-button color="warn" (click)="openDialog()">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Ajouter un classeur
+                        </button>-->
+
+
+                        </div>
+
+                    </div>
+                    <!--<div class="text-right">
+                    <button mat-raised-button color="warn" (click)="openDialog()">
+                        <mat-icon inline=true>note_add</mat-icon>
+                        Ajouter un classeur
+                    </button>
+                </div>-->
+
+                    <mat-form-field appearance="standard" style="width:100%">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
+                    </mat-form-field>
+
+
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+
+
+                            <ng-container matColumnDef="nomClient">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                                <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="nomClasseur">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Classeur </th>
+                                <td mat-cell *matCellDef="let row"> {{row.nomClasseur | uppercase }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="directory">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Répertoire </th>
+                                <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="month-year">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mois et Année </th>
+                                <td mat-cell *matCellDef="let row"> {{row.month}} {{row.year}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="comment">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Commentaire </th>
+                                <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
+                            </ng-container>
+
+                            <!-- Fruit Column -->
+                            <!--<ng-container matColumnDef="specificite">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Spécificité </th>
+                            <td mat-cell *matCellDef="let row"> {{row.specificite}} </td>
+                            </ng-container>-->
+
+                            <!-- Fruit Column -->
+                            <!--<ng-container matColumnDef="etat">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+                            <td mat-cell *matCellDef="let row"> {{row.etat}} </td>
+                            </ng-container>-->
+
+
+                            <!-- Fruit Column -->
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
+                                <td mat-cell *matCellDef="let row">
+
+                                    <!--<button mat-icon-button color="primary" (click)="viewFolder(row.id)">
+                                <mat-icon>find_in_page</mat-icon>
+                        </button>-->
+
+                                    <button mat-icon-button color="primary" (click)="editFolder(row)">
+                             <mat-icon>edit</mat-icon>
+                        </button>
+                                    <button mat-icon-button color="warn" (click)="deleteFolder(row.id)">
+                            <mat-icon>delete</mat-icon>
+                         </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                    </div>
+                    <!--</div>-->
                 </div>
             </div>
         </div>
-    </div>
 
-  </mat-drawer-content>
+    </mat-drawer-content>
 </mat-drawer-container>
-
-
-

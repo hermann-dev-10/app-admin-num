@@ -13,7 +13,8 @@ import { ApiService } from './api.service';
 export class FolderService {
 
   private personalFolderCollection!: AngularFirestoreCollection<any>;
-  personalFolders!: Observable<any[]>;
+  private foldersCollection!: AngularFirestoreCollection<any>;
+  allFolders!: Observable<any[]>;//personalFolders!: Observable<any[]>;
   //folders$!: Observable<any[]>;
   collectionName = 'table-folders';
 
@@ -32,7 +33,13 @@ export class FolderService {
       this.getFoldersOn();
 
       //this.personalFolderCollection = afs.collection<any>(this.collectionName);
+
       //this.personalFolders = this.personalFolderCollection.valueChanges();
+
+            //this.folderCollection = afs.collection<any>(this.collectionName);
+            //this.allFolders = this.foldersCollection.valueChanges();
+
+
      }
 
      //Utiliser ce folderService plutot que apiService
@@ -51,9 +58,16 @@ export class FolderService {
      }
      
 
-    readPersonalFolders(): Observable<any[]> {
-      return this.personalFolders;
-    }
+    /*readFolders(): Observable<any[]> {
+      //return this.personalFolders;
+      return this.allFolders;
+    }*/
+
+    readAllFolders() {
+    return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
+      ref.orderBy('date', 'asc')
+    );
+  }
 
     readPersonalFolderByUid(uid:string){
       return this.afs

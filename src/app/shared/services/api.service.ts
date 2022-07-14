@@ -18,6 +18,12 @@ export class ApiService {
     private afs:AngularFirestore
     ) { }
 
+
+  readFolder() {
+    return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
+      ref.orderBy('date', 'asc')
+    );
+  }
   
   readPersonalFolderByUid(uid:string){
     return this.afs
@@ -25,10 +31,10 @@ export class ApiService {
       .valueChanges({ idField: 'id'});
   }
 
-  createFolder(nomClasseur:string, directory:string, date:Date, comment:string, createdAt: Date, uid){
+  createFolder(nomClient:string, nomClasseur:string, directory:string, year:string, month:string, comment:string, folder:string, createdAt: Date, uid){
     return this.afs
     .collection(`${this.collectionName}`)
-    .add({nomClasseur, directory, date, comment, createdAt:new Date, uid});
+    .add({nomClient, nomClasseur, directory, year, month, comment, folder, createdAt:new Date, uid});
   }
 
   postFolder(data: any){
