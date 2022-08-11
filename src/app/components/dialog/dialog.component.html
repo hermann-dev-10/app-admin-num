@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>{{titleModal}}</h1>
 <div mat-dialog-content>
     <form [formGroup]="sheetForm">
+
         <mat-form-field appearance="outline">
             <mat-label>Classeur</mat-label>
             <input formControlName="nomClasseur" matInput placeholder="Nom du classeur">
@@ -12,14 +13,6 @@
             <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
         </mat-form-field>
 
-
-        <!--<mat-form-field appearance="outline">
-            <mat-label>Choississez une année</mat-label>
-            <input matInput [matDatepicker]="dp" formControlName="date" />
-            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)" panelClass="example-month-picker">
-            </mat-datepicker>
-        </mat-form-field>-->
 
         <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -54,6 +47,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
             <div class="col-lg-4 col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Un mois</mat-label>
@@ -77,172 +71,17 @@
             </div>
         </div>
 
-        <!--<mat-form-field appearance="outline">
-            <mat-label>Spécificité</mat-label>
-            <input formControlName="specificite" matInput>
-        </mat-form-field>-->
-
-        <!--<mat-radio-group>
-            <mat-label>Nom du (des) dossier(s) :</mat-label>
-
-            <mat-radio-button [value]="0" class="example-margin" (change)="onChange($event)">
-                Mois</mat-radio-button>
-            <mat-radio-button [value]="1" class="example-margin" (change)="onChange($event)">
-                Lettres </mat-radio-button>
-        </mat-radio-group>
-
-        <div *ngIf="selectedValue === 0">
-            <mat-radio-group>
-                <mat-radio-button [value]="2" class="example-margin" (change)="onChange($event)">
-                    Année complète</mat-radio-button>
-                <mat-radio-button [value]="3" class="example-margin" (change)="onChange($event)">
-                    Mois individuel </mat-radio-button>
-            </mat-radio-group>
-        </div>
-
-        <div *ngIf="selectedValue === 2">
-        <div class="mt-3">
-            <p>Tous les mois ont été pris en compte pour la création des dossiers.</p>
-        </div>
-</div>
-
-<div *ngIf="selectedValue === 3" class="mt-20-cb mr-20-cb">
-        <mat-checkbox> Janvier </mat-checkbox>
-        <mat-checkbox> Février </mat-checkbox>
-        <mat-checkbox> Mars </mat-checkbox>
-        <mat-checkbox> Avril </mat-checkbox>
-        <mat-checkbox> Mai </mat-checkbox>
-        <mat-checkbox> Juin </mat-checkbox>
-        <mat-checkbox>Juillet</mat-checkbox>
-        <mat-checkbox>Août</mat-checkbox>
-        <mat-checkbox>Septembre</mat-checkbox>
-        <mat-checkbox>Octobre</mat-checkbox>
-        <mat-checkbox>Novembre</mat-checkbox>
-        <mat-checkbox>Décembre</mat-checkbox>
-</div>
-
-
-<div *ngIf="selectedValue === 1">
-
-    <mat-radio-group [value]="selectedValue">
-        <mat-radio-button [value]="4" class="example-margin" (change)="onChange($event)">
-            Toutes les lettres</mat-radio-button>
-        <mat-radio-button [value]="5" class="example-margin" (change)="onChange($event)">
-            Différentes lettres </mat-radio-button>
-    </mat-radio-group>-->
-
-
-        <!--<div *ngIf="isLetterNomenclatureChecked" class="mr-20-cb">
-             <mat-checkbox>Toutes les lettres</mat-checkbox>
-                    <mat-checkbox (click)="toggleLetterIndividualNomenclature()">Différentes lettres</mat-checkbox>
-                    </div>
-
-</div>-->
-
-        <!--
-
-        
-        <div *ngIf="selectedValue === 4">
-            <p>Toutes les lettres ont été pris en compte pour la création des dossiers.</p>
-        </div>
-
-        <div *ngIf="selectedValue === 5">
-            <div class="mr-20-cb">
-                <mat-checkbox> A </mat-checkbox>
-                <mat-checkbox> B </mat-checkbox>
-                <mat-checkbox> C </mat-checkbox>
-                <mat-checkbox> D </mat-checkbox>
-                <mat-checkbox> E </mat-checkbox>
-                <mat-checkbox> F </mat-checkbox>
-                <mat-checkbox> G </mat-checkbox>
-                <mat-checkbox> H </mat-checkbox>
-                <mat-checkbox> I </mat-checkbox>
-                <mat-checkbox> J </mat-checkbox>
-                <mat-checkbox> K </mat-checkbox>
-                <mat-checkbox> L </mat-checkbox>
-                <mat-checkbox> M </mat-checkbox>
-                <mat-checkbox> N </mat-checkbox>
-                <mat-checkbox> O </mat-checkbox>
-                <mat-checkbox> P </mat-checkbox>
-                <mat-checkbox> Q </mat-checkbox>
-                <mat-checkbox> R </mat-checkbox>
-                <mat-checkbox> S </mat-checkbox>
-                <mat-checkbox> T </mat-checkbox>
-                <mat-checkbox> U </mat-checkbox>
-                <mat-checkbox> V </mat-checkbox>
-                <mat-checkbox> W </mat-checkbox>
-                <mat-checkbox> X </mat-checkbox>
-                <mat-checkbox> Y </mat-checkbox>
-                <mat-checkbox> Z </mat-checkbox>
-            </div>
-        </div>
-        -->
-
-
-
-        <!--<div *ngIf="isLetterIndividualrNomenclatureChecked" class="mr-20-cb">
-            <mat-checkbox> A </mat-checkbox>
-            <mat-checkbox> B </mat-checkbox>
-            <mat-checkbox> C </mat-checkbox>
-            <mat-checkbox> D </mat-checkbox>
-            <mat-checkbox> E </mat-checkbox>
-            <mat-checkbox> F </mat-checkbox>
-            <mat-checkbox> G </mat-checkbox>
-            <mat-checkbox> H </mat-checkbox>
-            <mat-checkbox> I </mat-checkbox>
-            <mat-checkbox> J </mat-checkbox>
-            <mat-checkbox> K </mat-checkbox>
-            <mat-checkbox> L </mat-checkbox>
-            <mat-checkbox> M </mat-checkbox>
-            <mat-checkbox> N </mat-checkbox>
-            <mat-checkbox> O </mat-checkbox>
-            <mat-checkbox> P </mat-checkbox>
-            <mat-checkbox> Q </mat-checkbox>
-            <mat-checkbox> R </mat-checkbox>
-            <mat-checkbox> S </mat-checkbox>
-            <mat-checkbox> T </mat-checkbox>
-            <mat-checkbox> U </mat-checkbox>
-            <mat-checkbox> V </mat-checkbox>
-            <mat-checkbox> W </mat-checkbox>
-            <mat-checkbox> X </mat-checkbox>
-            <mat-checkbox> Y </mat-checkbox>
-            <mat-checkbox> Z </mat-checkbox>
-        </div>-->
-        <!--<section class="example-section">
-            <mat-radio-group formControlName="etat">
-                <mat-label>État :</mat-label>
-                <mat-radio-button *ngFor="let etat of etats" [value]="etat" class="example-margin">
-                    {{etat}}
-                </mat-radio-button>
-            </mat-radio-group>
-        </section>-->
-
-        <mat-form-field appearance="outline">
-            <mat-label>Commentaire</mat-label>
-            <textarea formControlName="comment" matInput placeholder="Commentaire"></textarea>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Nom du (des) dossier(s)</mat-label>
-            <textarea formControlName="folder" matInput placeholder="Nom du (des) dossier(s)"></textarea>
-        </mat-form-field>
-
-
-        <!--<mat-form-field appearance="outline">
-            <mat-label>Title:</mat-label>
-            <textarea formControlName="title" matInput placeholder="title"></textarea>
-        </mat-form-field>-->
-
-        <!--<div formArrayName="selling_folders">
+        <div formArrayName="selling_folders">
             <div *ngFor="let item of sellingFolders.controls; let folderIndex=index" [formGroupName]="folderIndex">
                 <mat-form-field appearance="outline">
                     <mat-label>Dossier:</mat-label>
-                    <textarea formControlName="dossier" matInput placeholder="Dossier"></textarea>
+                    <textarea formControlName="folder" matInput placeholder="Dossier"></textarea>
                 </mat-form-field>
                 <button class="mb-5" mat-raised-button color="warn" (click)="deleteSellingFolder(folderIndex)">X</button>
             </div>
             <button mat-raised-button color="primary" (click)="addSellingFolder()">Ajouter nouveau dossier</button>
-        </div>-->
+        </div>
+
 
     </form>
 </div>

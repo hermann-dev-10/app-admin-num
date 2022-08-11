@@ -31,7 +31,7 @@ export class ApiService {
       .valueChanges({ idField: 'id'});
   }
 
-  createFolder(nomClient:string, nomClasseur:string, directory:string, year:string, month:string, comment:string, folder:string, createdAt: Date, uid){
+  createFolder(nomClient:string, nomClasseur:string, directory:string, year:string, month:string, comment:string, folder:string, createdAt: Date, uid: string){
     return this.afs
     .collection(`${this.collectionName}`)
     .add({nomClient, nomClasseur, directory, year, month, comment, folder, createdAt:new Date, uid});

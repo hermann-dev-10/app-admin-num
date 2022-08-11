@@ -78,7 +78,8 @@ export class DialogComponent implements OnInit {
   displayNameObs:any
   selectedValue: number;
   selling_point: string;
-  selling_points: any[]
+  selling_points: any[];
+  folders:any[];
 
 
   constructor(
@@ -124,7 +125,6 @@ export class DialogComponent implements OnInit {
       //}
     //})
     this.sheetForm = this.formBuilder.group({
-      //nomClient: ['', Validators.required],
       nomClasseur: ['', Validators.required],
       directory: ['', Validators.required],
       //date: ['', Validators.required],
@@ -136,7 +136,9 @@ export class DialogComponent implements OnInit {
       //price: ['', Validators.required],
       comment: [''],
       folder: [''],
+      selling_folders: new FormArray([]),
       //selling_folders: this.formBuilder.array([this.formBuilder.group({dossier:''})]),
+      //courses: new FormArray([]),
     });
 
     this.sub = this.afAuth.authState
@@ -184,7 +186,11 @@ export class DialogComponent implements OnInit {
           this.sheetForm.value.year,
           this.sheetForm.value.month,
           this.sheetForm.value.comment,
-          this.sheetForm.value.folder,
+          this.sheetForm.value.selling_folders,
+          /*this.folders: [{
+            test1: 'this.document.title',
+            test2: 'this.document.language',
+          }],*/
           new Date(),
           this.user.uid,
         )
@@ -319,10 +325,30 @@ this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succè
 
    addSellingFolder() {
     this.sellingFolders.push(this.formBuilder.group({folder:''}));
+            console.log('Folders:', this.sellingFolders.value);
+
   }
 
   deleteSellingFolder(index) {
     this.sellingFolders.removeAt(index);
   }
+
+  //Example FormArray
+   /*form = new FormGroup({
+        courses: new FormArray([]),
+    });*/
+  
+    get courses(): FormArray {
+        return this.sheetForm.get('courses') as FormArray;
+    }
+  
+    addCourse() {
+        this.courses.push(new FormControl());
+    }
+  
+    onSubmit() {
+        console.log(this.courses.value);
+        console.log('Folders:', this.sellingFolders.value)
+    }
 
 }
