@@ -7,20 +7,20 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRadioChange } from '@angular/material/radio';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { 
-  MomentDateAdapter, 
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS, 
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
-import { 
-  DateAdapter, 
-  MAT_DATE_FORMATS, 
-  MAT_DATE_LOCALE 
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
 } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {default as _rollupMoment, Moment} from 'moment';
+import { default as _rollupMoment, Moment } from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
 
 const moment = _rollupMoment || _moment;
@@ -61,9 +61,9 @@ export class DialogComponent implements OnInit {
   date = new FormControl(moment());
   etats = ["Pas commencé", "En cours", "Terminé"];
   sheetForm!: FormGroup;
-  actionBtn: string ="Enregistrer et quitter";
-  addNextBtn: string="Enregistrer et suivant";
-  titleModal: string ="Ajouter un classeur";
+  actionBtn: string = "Enregistrer et quitter";
+  addNextBtn: string = "Enregistrer et suivant";
+  titleModal: string = "Ajouter un classeur";
   durationInSeconds = 5;
   lettre = "";
   isLetterNomenclatureChecked = false;
@@ -73,19 +73,19 @@ export class DialogComponent implements OnInit {
   isAbcChecked = true;
   userUid!: string;
   sub!: Subscription;
-  user:any;
+  user: any;
   users$: Observable<any>[] = [] //user$: Observable<IUser>[] = [] 
-  displayNameObs:any
+  displayNameObs: any
   selectedValue: number;
   selling_point: string;
   selling_points: any[];
-  folders:any[];
+  folders: any[];
 
 
   constructor(
     private afAuth: AngularFireAuth,
-    private formBuilder: FormBuilder, 
-    private api: ApiService, 
+    private formBuilder: FormBuilder,
+    private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public editdata: any,
     private dialogRef: MatDialogRef<DialogComponent>,
     private _snackBar: MatSnackBar,
@@ -93,14 +93,14 @@ export class DialogComponent implements OnInit {
     public userService: UserService,
   ) { }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
 
-    this.sub = this.afAuth.authState.subscribe((user:any) => {
-    console.log('USER-UID', this.userService.readUserWithUid(user.uid));
-    this.user = user;
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      console.log('USER-UID', this.userService.readUserWithUid(user.uid));
+      this.user = user;
 
-    if (this.user) {
-         console.log(this.userService.readUserWithUid(user.uid));
+      if (this.user) {
+        console.log(this.userService.readUserWithUid(user.uid));
 
         this.sub = this.userService.readUserWithUid(user.uid).subscribe( //Question : à propos de this.sub que j'ai écrit 2 fois
           (data) => {
@@ -120,9 +120,9 @@ export class DialogComponent implements OnInit {
       }
     });
     //this.afAuth.authState.subscribe((user) => {
-      //this.user = user;
-      //if (this.user){
-      //}
+    //this.user = user;
+    //if (this.user){
+    //}
     //})
     this.sheetForm = this.formBuilder.group({
       nomClasseur: ['', Validators.required],
@@ -135,40 +135,44 @@ export class DialogComponent implements OnInit {
       //etat: ['', Validators.required],
       //price: ['', Validators.required],
       comment: [''],
-      folder: [''],
+      //folderTest: [''],
       selling_folders: new FormArray([]),
       //selling_folders: this.formBuilder.array([this.formBuilder.group({dossier:''})]),
       //courses: new FormArray([]),
     });
 
     this.sub = this.afAuth.authState
-    .subscribe((user) =>{
-      this.user = user;
-      if(user){
-        console.log('FOLDER USER ID', user.uid);
-      }
-    })
+      .subscribe((user) => {
+        this.user = user;
+        if (user) {
+          console.log('FOLDER USER ID', user.uid);
+        }
+      })
 
-    if(this.editdata){
-        this.actionBtn = "Modifier";
-        this.titleModal = "Modifier un classeur";
-        this.addNextBtn = '';
-        //this.addNextBtn.
-        //this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
-        this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
-        this.sheetForm.controls['directory'].setValue(this.editdata.directory);
-        this.sheetForm.controls['year'].setValue(this.editdata.year);
-        this.sheetForm.controls['month'].setValue(this.editdata.month);
-        //this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
-        //this.sheetForm.controls['nomemclature'].setValue(this.editdata.nomemclature);
-        //this.sheetForm.controls['etat'].setValue(this.editdata.etat);
-        //this.sheetForm.controls['price'].setValue(this.editdata.price);
-        this.sheetForm.controls['comment'].setValue(this.editdata.comment);
-        this.sheetForm.controls['folder'].setValue(this.editdata.folder);
+    if (this.editdata) {
+      this.actionBtn = "Modifier";
+      this.titleModal = "Modifier un classeur";
+      this.addNextBtn = '';
+      this.folders = this.editdata.folder;
+      //this.addNextBtn.
+      //this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
+      this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
+      this.sheetForm.controls['directory'].setValue(this.editdata.directory);
+      this.sheetForm.controls['year'].setValue(this.editdata.year);
+      this.sheetForm.controls['month'].setValue(this.editdata.month);
+      //this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
+      //this.sheetForm.controls['nomemclature'].setValue(this.editdata.nomemclature);
+      //this.sheetForm.controls['etat'].setValue(this.editdata.etat);
+      //this.sheetForm.controls['price'].setValue(this.editdata.price);
+      this.sheetForm.controls['comment'].setValue(this.editdata.comment);
+      //this.sheetForm.controls['folderTest'].setValue(this.folders);
+      
+      //this.sheetForm.value.selling_folders,
 
+      console.log('Folders (this.editdata.folder) : ', this.editdata.folder);
     }
   }
-  
+
   chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
@@ -176,86 +180,65 @@ export class DialogComponent implements OnInit {
     datepicker.close();
   }
 
-  addFolder(){
-    if(!this.editdata){
-      if(this.sheetForm.valid){
+  addFolder() {
+    if (!this.editdata) {
+      if (this.sheetForm.valid) {
         const result = this.apiService.createFolder(
-          this.getCompanyData, 
+          this.getCompanyData,
           this.sheetForm.value.nomClasseur,
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
           this.sheetForm.value.comment,
           this.sheetForm.value.selling_folders,
-          /*this.folders: [{
-            test1: 'this.document.title',
-            test2: 'this.document.language',
-          }],*/
           new Date(),
           this.user.uid,
         )
 
-            /*this.api.postFolder(this.sheetForm.value)
-            .subscribe({
-              next:(res) => {
-                this._snackBar.open('Element ajouté avec succès', '', {
-                duration: 3000,
-                verticalPosition: 'top',
-                horizontalPosition: 'right',
-                panelClass: 'snackbar-position-custom'
-                });
-                this.sheetForm.reset();
-                this.dialogRef.close('save');
-              },
-              error:()=>{
-                alert("Error while adding the folder");
-              }
-            })*/
 
-            console.log('Result: ', result);
-            this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès.`, '', {
-              duration: 3000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right',
-              panelClass: 'snackbar-position-custom'
-              });
-              this.sheetForm.reset();
-              this.dialogRef.close('save');
+        this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès.`, '', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'snackbar-position-custom'
+        });
+        this.sheetForm.reset();
+        this.dialogRef.close('save');
       }
-    }else{
-          this.updateFolder();
-        }
+    } else {
+      this.updateFolder();
+    }
   }
 
-  addFolderNext(){
-    if(!this.editdata){
-      if(this.sheetForm.valid){
+  addFolderNext() {
+    if (!this.editdata) {
+      if (this.sheetForm.valid) {
         const result = this.apiService.createFolder(
-          this.getCompanyData, 
+          this.getCompanyData,
           this.sheetForm.value.nomClasseur,
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
           this.sheetForm.value.comment,
-          this.sheetForm.value.folder,
+          this.sheetForm.value.selling_folders,
           new Date(),
           this.user.uid,
         )
-            this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès. Vous pouvez désormais ajouter un autre classeur.`, '', {
-              duration: 5000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right',
-              panelClass: 'snackbar-position-custom'
-              });
-              //this.dialogRef.close('save');
+        this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès. Vous pouvez désormais ajouter un autre classeur.`, '', {
+          duration: 5000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'snackbar-position-custom'
+        });
+        //this.dialogRef.close('save');
       }
-    }else{
-          this.updateFolder();
-        }
+    } else {
+      this.updateFolder();
+    }
   }
-  
 
-  updateFolder(){
+
+  updateFolder() {
     this.api.putFolder(this.sheetForm.value, this.editdata.id)
     /*.subscribe({
       next:(res)=>{
@@ -271,21 +254,20 @@ export class DialogComponent implements OnInit {
       error:()=> {
       alert('Error while updating the record')
     }
-    })*/ 
-//          this.sheetForm.value.nomClasseur,
+    })*/
+    //          this.sheetForm.value.nomClasseur,
 
-this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succès.`, '', {
+    this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succès.`, '', {
 
-    //this._snackBar.open('Classeur  mis à jour avec succès', '', {
       duration: 3000,
       verticalPosition: 'top',
-             horizontalPosition: 'right',
-      });
-     this.sheetForm.reset();
-     this.dialogRef.close('update');
+      horizontalPosition: 'right',
+    });
+    this.sheetForm.reset();
+    this.dialogRef.close('update');
   }
 
-   openSnackBar() {
+  openSnackBar() {
     this._snackBar.open('');
   }
 
@@ -299,33 +281,33 @@ this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succè
   }*/
 
   toggleLetterNomenclature() {
-    this.isLetterNomenclatureChecked = (this.isLetterNomenclatureChecked)? false : true;
-  } 
+    this.isLetterNomenclatureChecked = (this.isLetterNomenclatureChecked) ? false : true;
+  }
 
   toggleLetterIndividualNomenclature() {
-    this.isLetterIndividualrNomenclatureChecked = (this.isLetterIndividualrNomenclatureChecked)? false : true;
-  } 
+    this.isLetterIndividualrNomenclatureChecked = (this.isLetterIndividualrNomenclatureChecked) ? false : true;
+  }
 
   toggleMonthNomenclature() {
-    this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked)? false : true;
+    this.isMonthNomenclatureChecked = (this.isMonthNomenclatureChecked) ? false : true;
   }
 
   toggleMonthIndividualNomenclature() {
-    this.isMonthNomenclatureIndividualChecked = (this.isMonthNomenclatureIndividualChecked)? false : true;
+    this.isMonthNomenclatureIndividualChecked = (this.isMonthNomenclatureIndividualChecked) ? false : true;
   }
 
-  get getCompanyData(){
-    const company = this.displayNameObs.find(x=>x).company;
-  return company;
-}
+  get getCompanyData() {
+    const company = this.displayNameObs.find(x => x).company;
+    return company;
+  }
 
- get sellingFolders() { //accessor
+  get sellingFolders() { //accessor
     return this.sheetForm.get('selling_folders') as FormArray;
   }
 
-   addSellingFolder() {
-    this.sellingFolders.push(this.formBuilder.group({folder:''}));
-            console.log('Folders:', this.sellingFolders.value);
+  addSellingFolder() {
+    this.sellingFolders.push(this.formBuilder.group({ folder: '' }));
+    console.log('Folders: (sellingFolders.value) :', this.sellingFolders.value);
 
   }
 
@@ -334,21 +316,21 @@ this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succè
   }
 
   //Example FormArray
-   /*form = new FormGroup({
-        courses: new FormArray([]),
-    });*/
-  
-    get courses(): FormArray {
-        return this.sheetForm.get('courses') as FormArray;
-    }
-  
-    addCourse() {
-        this.courses.push(new FormControl());
-    }
-  
-    onSubmit() {
-        console.log(this.courses.value);
-        console.log('Folders:', this.sellingFolders.value)
-    }
+  /*form = new FormGroup({
+       courses: new FormArray([]),
+   });*/
+
+  get courses(): FormArray {
+    return this.sheetForm.get('courses') as FormArray;
+  }
+
+  addCourse() {
+    this.courses.push(new FormControl());
+  }
+
+  onSubmit() {
+    console.log(this.courses.value);
+    console.log('Folders (this.sellingFolders.value):', this.sellingFolders.value)
+  }
 
 }

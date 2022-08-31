@@ -65,6 +65,11 @@
                                 <td mat-cell *matCellDef="let row"> {{row.directory}} </td>
                             </ng-container>
 
+                            <ng-container matColumnDef="folder">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de dossier </th>
+                                <td mat-cell *matCellDef="let row"> {{row.folder.length}} </td>
+                            </ng-container>
+
                             <ng-container matColumnDef="month-year">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Mois et année</th>
                                 <td mat-cell *matCellDef="let row">{{row.month}} {{row.year}} </td>

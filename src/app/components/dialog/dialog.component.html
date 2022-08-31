@@ -13,7 +13,6 @@
             <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
         </mat-form-field>
 
-
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <mat-form-field appearance="outline">
@@ -47,7 +46,6 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-
             <div class="col-lg-4 col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Un mois</mat-label>
@@ -59,7 +57,7 @@
                         <mat-option value="Avril">Avril</mat-option>
                         <mat-option value="Mai">Mai</mat-option>
                         <mat-option value="Juin">Juin</mat-option>
-                        <mat-option value="Juillet">Juilletr</mat-option>
+                        <mat-option value="Juillet">Juillet</mat-option>
                         <mat-option value="Août">Août</mat-option>
                         <mat-option value="Septembre">Septembre</mat-option>
                         <mat-option value="Octobre">Octobre</mat-option>
@@ -71,18 +69,57 @@
             </div>
         </div>
 
-        <div formArrayName="selling_folders">
+        <div class="row">
+            <div class="col-12">
+                <div formArrayName="selling_folders">
             <div *ngFor="let item of sellingFolders.controls; let folderIndex=index" [formGroupName]="folderIndex">
+        <!--<div *ngFor="let item of this.editdata.folder; let  folderIndex=index" [formGroupName]="folderIndex">-->
                 <mat-form-field appearance="outline">
+                   
                     <mat-label>Dossier:</mat-label>
                     <textarea formControlName="folder" matInput placeholder="Dossier"></textarea>
                 </mat-form-field>
                 <button class="mb-5" mat-raised-button color="warn" (click)="deleteSellingFolder(folderIndex)">X</button>
             </div>
             <button mat-raised-button color="primary" (click)="addSellingFolder()">Ajouter nouveau dossier</button>
+                </div>
+            </div>
+        </div>
+        
+        <!--<div class="row mt-3">
+            <div class="col-12">
+             <div *ngFor="let item of folders">
+                <mat-form-field appearance="outline">
+                    <mat-label>Dossier:</mat-label>
+                    <textarea formControlName="folder" matInput ></textarea>
+                </mat-form-field>
+             </div>
+              </div>
+        </div>-->
+
+        <div class="row mt-3">
+            <div class="col-12">
+             <div *ngFor="let item of folders">
+                <mat-form-field appearance="outline">
+                    <!--<span>Nombre de dossiers : {{folders.length}}</span>-->
+                    <mat-label>Dossier:</mat-label>
+                    <textarea matInput >{{ item.folder }}</textarea>
+                    <p></p>
+                </mat-form-field>
+             </div>
+
+              </div>
         </div>
 
-
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Commentaire:</mat-label>
+                    <textarea formControlName="comment" matInput ></textarea>
+                </mat-form-field>
+             </div>
+        </div>
+    
     </form>
 </div>
 <div mat-dialog-actions [align]="'end'">

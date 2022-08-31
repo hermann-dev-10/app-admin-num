@@ -19,16 +19,16 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 })
 export class FolderComponent implements OnInit {
 
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'month-year', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   foldersByUid$!: Observable<any[]>;
-  currentUser! :any;
+  currentUser!: any;
   user = this.afAuth.currentUser;
-  sub:any;
+  sub: any;
   uniqueUser: any;
   users$: Observable<any>[] = [];
 
@@ -39,89 +39,86 @@ export class FolderComponent implements OnInit {
   }
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private api: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
     private apiService: ApiService,
     private folderService: FolderService,
-    private userService : UserService,
+    private userService: UserService,
     private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
-       
-        this.getAllFoldersByUid();
-        console.log('this.getAllFolders()', this.getAllFoldersByUid());
 
-        this.sub = this.afAuth.authState.subscribe((user:any) => {
-          this.user = user;
-          if (this.user){
+    this.getAllFoldersByUid();
+    console.log('this.getAllFolders()', this.getAllFoldersByUid());
 
-            this.foldersByUid$ = this.apiService.readPersonalFolderByUid(user.uid);
-            console.log('FoldersByUid: ', this.foldersByUid$);
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+      if (this.user) {
 
-            console.log(this.userService.readUserWithUid(user.uid));
+        this.foldersByUid$ = this.apiService.readPersonalFolderByUid(user.uid);
+        console.log('FoldersByUid: ', this.foldersByUid$);
+        console.log(this.userService.readUserWithUid(user.uid));
 
-            this.sub = this.userService.readUserWithUid(user.uid).subscribe(
-              (data) => {
-                console.log('Dossier: ngOnInit readUserWithUid / data', data);
-                this.uniqueUser = data;
-                console.log('user data : -> ', this.user);
-                console.log('mes users$ OBSERVABLE : -> ', this.users$);
-              }
-            )
+        this.sub = this.userService.readUserWithUid(user.uid).subscribe(
+          (data) => {
+            console.log('Dossier: ngOnInit readUserWithUid / data', data);
+            this.uniqueUser = data;
+            console.log('user data : -> ', this.user);
+            console.log('mes users$ OBSERVABLE : -> ', this.users$);
           }
-        })
+        )
+      }
+    })
   }
 
   openDialog() {
     this.dialog.open(DialogComponent, {
-      width:'30%'
-    }).afterClosed().subscribe(val=>{
+      width: '30%'
+    }).afterClosed().subscribe(val => {
       this.getAllFoldersByUid();
     });
   }
 
-   getAllFoldersByUid(){
-
+  getAllFoldersByUid() {
     this.sub = this.afAuth.authState.subscribe((user) => {
-
       //this.api.getFolders()
       this.folderService.readPersonalFolderByUid(user.uid)
-      .subscribe({
-        next:(res)=> {
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-        error:(err)=> {
-          //alert("Erreur pendant la collection des éléments!!");
-          console.log('Error While fetching the records');
-        }
-      });
+        .subscribe({
+          next: (res) => {
+            this.dataSource = new MatTableDataSource(res);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },
+          error: (err) => {
+            //alert("Erreur pendant la collection des éléments!!");
+            console.log('Error While fetching the records');
+          }
+        });
     });
   }
 
-  viewFolder(row:any){
+  viewFolder(row: any) {
     this.router.navigate([`/folder-single/${row}`]);
     console.log('View sheet-single:', row);
   }
 
-  editFolder(row:any){
-    this.dialog.open(DialogComponent,{
-      width:'30%',
-      data:row
-    }).afterClosed().subscribe(val =>{
-      if(val==='update'){
+  editFolder(row: any) {
+    this.dialog.open(DialogComponent, {
+      width: '30%',
+      data: row
+    }).afterClosed().subscribe(val => {
+      if (val === 'update') {
         this.getAllFoldersByUid();
       }
     })
   }
 
-  deleteFolder(id:number){
+  deleteFolder(id: number) {
     this.apiService.deleteFolder(id)
-    
+
     console.log('Folder deleted : ', id)
 
     /*this.api.deleteFolder(id)
@@ -140,8 +137,8 @@ export class FolderComponent implements OnInit {
     })*/
 
     //this._snackBar.open(`${id}} supprimé avec succès`, '', {
-      this._snackBar.open("Classeur supprimé avec succès", '', {
-      duration: 3000, 
+    this._snackBar.open("Classeur supprimé avec succès", '', {
+      duration: 3000,
     });
   }
 
