@@ -50,3 +50,20 @@ mat-form-field {
 .ml-8 {
     margin-left: 8px
 }
+
+.list-style-none{
+    list-style: none;
+}
+
+ul,
+li {
+    display: inline;
+}
+
+.mr-10{
+    margin-right: 10px;
+}
+
+.list-style-none input {
+    margin-right: 10px!important;
+}

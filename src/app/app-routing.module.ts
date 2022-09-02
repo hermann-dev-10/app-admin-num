@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { ProfilComponent } from './components/profil/profil.component';
+import { TestFormArrayComponent } from './components/test-form-array/test-form-array.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'folder', component: FolderComponent, canActivate: [AuthGuard] },
   { path: 'folder-single/:id', component: SingleFolderComponent, canActivate: [AuthGuard] },
+  { path: 'test-form-array', component: TestFormArrayComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
   { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'billing', component: BillingComponent, canActivate: [AuthGuard] },

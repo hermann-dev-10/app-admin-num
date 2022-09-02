@@ -59,6 +59,7 @@ import { UserComponent } from './components/user/user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { TestFormArrayComponent } from './components/test-form-array/test-form-array.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     ModalUserComponent,
     ProfilComponent,
     MessagesComponent,
+    TestFormArrayComponent,
     
   ],
   imports: [

@@ -58,9 +58,11 @@ export const MY_FORMATS = {
 })
 export class DialogComponent implements OnInit {
 
+
   date = new FormControl(moment());
   etats = ["Pas commencé", "En cours", "Terminé"];
   sheetForm!: FormGroup;
+  //sheetForm!: FormArray;
   actionBtn: string = "Enregistrer et quitter";
   addNextBtn: string = "Enregistrer et suivant";
   titleModal: string = "Ajouter un classeur";
@@ -79,12 +81,254 @@ export class DialogComponent implements OnInit {
   selectedValue: number;
   selling_point: string;
   selling_points: any[];
-  folders: any[];
+  //folders: any[];
+  listMonth = [
+    {
+      id: 1,
+      value: 'Janvier',
+      type:'Month'
+    },
+    {
+      id: 2,
+      value: 'Février',
+      type: 'Month'
+    },
+    {
+      id: 3,
+      value: 'Mars',
+      type: 'Month'
+    },
+    {
+      id: 4,
+      value: 'Avril',
+      type: 'Month'
+    },
+    {
+      id: 5,
+      value: 'Mai',
+      type: 'Month'
+    },
+    {
+      id: 6,
+      value: 'Juin',
+      type: 'Month'
+    },
+    {
+      id: 7,
+      value: 'Juillet',
+      type: 'Month'
+    },
+    {
+      id: 8,
+      value: 'Août',
+      type: 'Month'
+    },
+    {
+      id: 9,
+      value: 'Septembre',
+      type: 'Month'
+    },
+    {
+      id: 10,
+      value: 'Octobre',
+      type: 'Month'
+    },
+    {
+      id: 11,
+      value: 'Novembre',
+      type: 'Month'
+    },
+    {
+      id: 12,
+      value: 'Décembre',
+      type: 'Month'
+    },
+    {
+      id: 13,
+      value: 'A',
+      type: 'Letter'
+    },
+    {
+      id: 14,
+      value: 'B',
+      type: 'Letter'
+    },
+    {
+      id: 15,
+      value: 'C',
+      type: 'Letter'
+    },
+    {
+      id: 16,
+      value: 'D',
+      type: 'Letter'
+    },
+    {
+      id: 17,
+      value: 'E',
+      type: 'Letter'
+    },
+    {
+      id: 18,
+      value: 'F',
+      type: 'Letter'
+    },
+    {
+      id: 19,
+      value: 'G',
+      type: 'Letter'
+    },
+    {
+      id: 20,
+      value: 'H',
+      type: 'Letter'
+    },
+    {
+      id: 21,
+      value: 'I',
+      type: 'Letter'
+    },
+    {
+      id: 22,
+      value: 'J',
+      type: 'Letter'
+    },
+    {
+      id: 23,
+      value: 'K',
+      type: 'Letter'
+    },
+    {
+      id: 24,
+      value: 'L',
+      type: 'Letter'
+    },
+    {
+      id: 25,
+      value: 'M',
+      type: 'Letter'
+    },
+    {
+      id: 14,
+      value: 'B',
+      type: 'Letter'
+    },
+  ]
+
+  listLetter = [
+    {
+      id: 1,
+      value: 'A',
+    },
+    {
+      id: 2,
+      value: 'B',
+    },
+    {
+      id: 3,
+      value: 'C',
+    },
+    {
+      id: 4,
+      value: 'D',
+    },
+    {
+      id: 5,
+      value: 'E',
+    },
+    {
+      id: 6,
+      value: 'F',
+    },
+    {
+      id: 7,
+      value: 'G',
+    },
+    {
+      id: 8,
+      value: 'H',
+    },
+    {
+      id: 9,
+      value: 'I',
+    },
+    {
+      id: 10,
+      value: 'J',
+    },
+    {
+      id: 11,
+      value: 'K',
+    },
+    {
+      id: 12,
+      value: 'L',
+    },
+    {
+      id: 13,
+      value: 'M',
+    },
+    {
+      id: 14,
+      value: 'N',
+    },
+    {
+      id: 15,
+      value: 'O',
+    },
+    {
+      id: 16,
+      value: 'P',
+    },
+    {
+      id: 17,
+      value: 'Q',
+    },
+    {
+      id: 18,
+      value: 'R',
+    },
+    {
+      id: 19,
+      value: 'S',
+    },
+    {
+      id: 20,
+      value: 'T',
+    },
+    {
+      id: 21,
+      value: 'U',
+    },
+    {
+      id: 22,
+      value: 'V',
+    },
+    {
+      id: 23,
+      value: 'W',
+    },
+    {
+      id: 24,
+      value: 'X',
+    },
+    {
+      id: 25,
+      value: 'Y',
+    },
+    {
+      id: 26,
+      value: 'Z',
+    },
+
+  ]
+  subscription: Subscription;
+  submittedValue: any;
 
 
   constructor(
     private afAuth: AngularFireAuth,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public editdata: any,
     private dialogRef: MatDialogRef<DialogComponent>,
@@ -94,6 +338,7 @@ export class DialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
 
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       console.log('USER-UID', this.userService.readUserWithUid(user.uid));
@@ -124,7 +369,7 @@ export class DialogComponent implements OnInit {
     //if (this.user){
     //}
     //})
-    this.sheetForm = this.formBuilder.group({
+    this.sheetForm = this.fb.group({
       nomClasseur: ['', Validators.required],
       directory: ['', Validators.required],
       //date: ['', Validators.required],
@@ -135,11 +380,34 @@ export class DialogComponent implements OnInit {
       //etat: ['', Validators.required],
       //price: ['', Validators.required],
       comment: [''],
-      //folderTest: [''],
-      selling_folders: new FormArray([]),
+      //folder: [''],
+      //title: this.fb.array([]),
+      //folder: this.fb.array(['']),
+      folders: this.fb.array([]),
+      //selling_folders: new FormArray([]),
+      //selling_folders: this.fb.array([]),
       //selling_folders: this.formBuilder.array([this.formBuilder.group({dossier:''})]),
       //courses: new FormArray([]),
+      listMonth: this.fb.array(this.listMonth.map(x => false)),
+      // Form Array to set default values
+      // checkboxes: this.fb.array(this.checkboxes.map(x => this.defaultValues.includes(x.value) ? x.value : null))
     });
+
+    const checkboxControlMonth = (this.sheetForm.controls.listMonth as FormArray);
+    this.subscription = checkboxControlMonth.valueChanges.subscribe(checkbox => {
+      checkboxControlMonth.setValue(
+        checkboxControlMonth.value.map((value, i) => value ? this.listMonth[i].value : false),
+        { emitEvent: false }
+      );
+    });
+
+    /*const checkboxControlLetter = (this.sheetForm.controls.listLetter as FormArray);
+    this.subscription = checkboxControlLetter.valueChanges.subscribe(checkbox => {
+      checkboxControlLetter.setValue(
+        checkboxControlLetter.value.map((value, i) => value ? this.listLetter[i].value : false),
+        { emitEvent: false }
+      );
+    });*/
 
     this.sub = this.afAuth.authState
       .subscribe((user) => {
@@ -153,23 +421,18 @@ export class DialogComponent implements OnInit {
       this.actionBtn = "Modifier";
       this.titleModal = "Modifier un classeur";
       this.addNextBtn = '';
-      this.folders = this.editdata.folder;
-      //this.addNextBtn.
-      //this.sheetForm.controls['nomClient'].setValue(this.editdata.nomClient);
+      //this.folders = this.editdata.folder;
       this.sheetForm.controls['nomClasseur'].setValue(this.editdata.nomClasseur);
       this.sheetForm.controls['directory'].setValue(this.editdata.directory);
       this.sheetForm.controls['year'].setValue(this.editdata.year);
       this.sheetForm.controls['month'].setValue(this.editdata.month);
-      //this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
-      //this.sheetForm.controls['nomemclature'].setValue(this.editdata.nomemclature);
-      //this.sheetForm.controls['etat'].setValue(this.editdata.etat);
-      //this.sheetForm.controls['price'].setValue(this.editdata.price);
-      this.sheetForm.controls['comment'].setValue(this.editdata.comment);
-      //this.sheetForm.controls['folderTest'].setValue(this.folders);
-      
+      this.sheetForm.controls['listMonth'].setValue(this.editdata.folder);
+      //this.sheetForm.controls['folder'].setValue(this.editdata.folder);
       //this.sheetForm.value.selling_folders,
-
+      this.sheetForm.controls['comment'].setValue(this.editdata.comment);
       console.log('Folders (this.editdata.folder) : ', this.editdata.folder);
+      console.log('this.editdata.title :', this.editdata.title);
+
     }
   }
 
@@ -183,18 +446,52 @@ export class DialogComponent implements OnInit {
   addFolder() {
     if (!this.editdata) {
       if (this.sheetForm.valid) {
+        if (this.selectedValue===0) { //Month
+          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonth : ', this.sheetForm.value.listMonth);
+          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+
+          console.log('checkboxControl: ', checkboxControl.value);
+          const formValue = {
+            ...this.sheetForm.value,
+            listMonth: checkboxControl.value.filter(value => !!value)
+          }
+          this.submittedValue = formValue;
+        }
+        else { //Letter
+
+          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+
+          console.log('checkboxControl: ', checkboxControl.value);
+          const formValue = {
+            ...this.sheetForm.value,
+            listMonth: checkboxControl.value.filter(value => !!value)
+          }
+          this.submittedValue = formValue;
+        }
+
+
+        console.log('this.submittedValue.value: ', this.submittedValue.value);
+        console.log('this.submittedValue.listMonth.value: ', this.submittedValue.listMonth.value);
+
+
+        const valueFolderCheckbox = this.submittedValue;
+
         const result = this.apiService.createFolder(
           this.getCompanyData,
           this.sheetForm.value.nomClasseur,
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
+          valueFolderCheckbox.listMonth, //value of the checkbox (Month & Letter)
           this.sheetForm.value.comment,
-          this.sheetForm.value.selling_folders,
+          //this.sheetForm.value.selling_folders,
           new Date(),
           this.user.uid,
         )
 
+        console.log('valueFolderCheckbox', valueFolderCheckbox);
+
+        console.log('result: ', result);
 
         this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès.`, '', {
           duration: 3000,
@@ -213,14 +510,42 @@ export class DialogComponent implements OnInit {
   addFolderNext() {
     if (!this.editdata) {
       if (this.sheetForm.valid) {
+        if (this.selectedValue === 0) { //Month
+          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonth : ', this.sheetForm.value.listMonth);
+          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+
+          console.log('checkboxControl: ', checkboxControl.value);
+          const formValue = {
+            ...this.sheetForm.value,
+            listMonth: checkboxControl.value.filter(value => !!value)
+          }
+          this.submittedValue = formValue;
+          console.log('formValue.listMonth.id', formValue.listMonth.id);
+        }
+        else { //Letter
+          console.log('ELSE -> PETIT CHECK this.sheetForm.value.listLetter : ', this.sheetForm.value.listMonth);
+
+          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+
+          console.log('checkboxControl: ', checkboxControl.value);
+          const formValue = {
+            ...this.sheetForm.value,
+            listMonth: checkboxControl.value.filter(value => !!value)
+          }
+          this.submittedValue = formValue;
+        }
+        const valueFolderCheckbox = this.submittedValue;
+        console.log('valueFolderCheckbox.listMonth', valueFolderCheckbox.listMonth);
+
         const result = this.apiService.createFolder(
           this.getCompanyData,
           this.sheetForm.value.nomClasseur,
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
+          valueFolderCheckbox.listMonth, //value of the checkbox (Month & Letter)
           this.sheetForm.value.comment,
-          this.sheetForm.value.selling_folders,
+          //this.sheetForm.value.selling_folders,
           new Date(),
           this.user.uid,
         )
@@ -306,31 +631,72 @@ export class DialogComponent implements OnInit {
   }
 
   addSellingFolder() {
-    this.sellingFolders.push(this.formBuilder.group({ folder: '' }));
-    console.log('Folders: (sellingFolders.value) :', this.sellingFolders.value);
+    const folderForm = this.fb.group({
+      title: ['', Validators.required],
+    });
+
+    this.title.push(this.fb.group({ folder: '' }));
+    console.log('Folders: (title.value) :', this.title.value);
 
   }
 
   deleteSellingFolder(index) {
-    this.sellingFolders.removeAt(index);
+    this.title.removeAt(index);
   }
 
-  //Example FormArray
-  /*form = new FormGroup({
-       courses: new FormArray([]),
-   });*/
 
-  get courses(): FormArray {
-    return this.sheetForm.get('courses') as FormArray;
-  }
+  /*get folders(): FormArray {
+    //return this.sheetForm.get('courses') as FormArray;
+    return this.formBuilder.control["folders"] as FormArray;
+  }*/
 
-  addCourse() {
-    this.courses.push(new FormControl());
+  get folders() {
+    //return this.sheetForm.get('courses') as FormArray;
+    return this.sheetForm.controls["folders"] as FormArray;
   }
 
   onSubmit() {
-    console.log(this.courses.value);
+    //console.log(this.courses.value);
     console.log('Folders (this.sellingFolders.value):', this.sellingFolders.value)
   }
 
+  get title() {
+    return this.sheetForm.controls["title"] as FormArray;
+  }
+
+  addFolder1() {
+    const folderForm = this.fb.group({
+      title: ['', Validators.required],
+    });
+    this.title.push(this.sheetForm);
+    console.log(this.sheetForm.value);
+    console.log('Title : ', this.title.value);
+  }
+
+  deleteTitle(titleIndex: number) {
+    this.title.removeAt(titleIndex);
+  }
+
+  /*get resultMonth() {
+    return this.listMonth.filter(item => item.checked);
+  }*/
+
+
+
+  /*submitCheckbox() {
+
+    console.log('MONTH this.sheetForm.value.listMonth .length?? ', this.sheetForm.value.listMonth.length);
+    console.log('Letter this.sheetForm.value.listMonth .length ', this.sheetForm.value.listLetter.length);
+
+    const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+    const formValue = {
+      ...this.sheetForm.value,
+      listMonth: checkboxControl.value.filter(value => !!value)
+    }
+
+    console.log('this.submittedValue ?? ', this.submittedValue);
+
+    return this.submittedValue = formValue;
+
+  }*/
 }
