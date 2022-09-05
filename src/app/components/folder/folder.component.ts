@@ -19,7 +19,7 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 })
 export class FolderComponent implements OnInit {
 
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'state', 'comment', 'action'];
   //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
