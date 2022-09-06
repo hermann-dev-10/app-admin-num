@@ -15,11 +15,11 @@ export interface PeriodicElement {
   name_folder: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+/*const ELEMENT_DATA: PeriodicElement[] = [
   {date: "1/3/2022", numeriseur: 'Stéphane', partie: "1", etat: 'en cours', visa: 'SV', name_file: 'Créanciers', name_folder: 'a'},
   {date: "1/3/2022", numeriseur: 'Hermann', partie: "2", etat: 'en cours', visa: 'HM', name_file: 'Créanciers', name_folder: 'b'},
   {date: "1/3/2022", numeriseur: 'Elvina', partie: "3/3", etat: 'terminé', visa: 'E', name_file: 'Créanciers', name_folder: 'c'},
-];
+];*/
 
 @Component({
   selector: 'app-single-folder',
@@ -39,10 +39,8 @@ export class SingleFolderComponent implements OnInit {
   position: number;
   weight: number;
   symbol: string;
-  //displayedColumns: string[] = ['date', 'numeriseur', 'partie', 'etat', 'visa', 'name_file', 'name_folder'];
-  //displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'comment', 'action'];
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'date', 'etat', 'comment'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['nomClient' ,'nomClasseur', 'directory', 'month', 'year', 'state', 'comment'];
+  //dataSource = ELEMENT_DATA;
   sideBarOpen = true;
 
 
@@ -77,10 +75,9 @@ export class SingleFolderComponent implements OnInit {
   }
 
   public openPDF(): void {
-    console.log('bien');
     let DATA: any = document.getElementById('content');
     html2canvas(DATA).then((canvas) => {
-      let fileWidth = 200;
+      let fileWidth = 230;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');

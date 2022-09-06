@@ -11,6 +11,11 @@ table {
     margin-right: 10px;
 }
 
+input[type=checkbox] {
+    margin-right: 10px;
+    transform: scale(1.5);
+}
+
 .page {
     
     padding: 0 1rem;
@@ -25,8 +30,8 @@ table {
         min-height: calc(150vh - 178px);
         border-radius: 10px;
         margin-top: -2rem;
-        background: white;
-        color: black;
+        background: #fff;
+        color: #000;
         /*font-size: 2rem;*/
         &-data {
             top: 50%;

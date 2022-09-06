@@ -9,68 +9,106 @@
         <div class="container-fluid page">
             <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
 
-            <div id="content" #content class="page__content shadow p-3 position-relative">
-                <h3 class="text-center mb-5">Fiche de suivi</h3>
+            <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
+            <div id="content" #content class="container page__content p-3 position-relative mt-5" style="font-size: 23px;">
+                <h2 class="mb-5 mt-5" style="font-size: 45px!important;">Fiche de suivi</h2>
                 <!--<div class="page__content-data position-absolute">-->
-                <div class="row">
+                <div class="row" style="margin-top: 150px;">
                     <div class="col-6 p-4">
-                        <p class="">Client : <strong>{{ singleFolder.nomClient }}</strong></p>
+                        <p *ngIf="singleFolder" class="">Client :  <strong>{{ singleFolder.nomClient }}</strong></p>
                     </div>
                     <div class="col-6 p-4">
-                        <p class="">Mois et année : <strong>{{ singleFolder.month}} {{ singleFolder.year}}</strong></p>
+                        <p *ngIf="singleFolder" class="">Mois et année : <strong>{{ singleFolder.month}} {{ singleFolder.year}}</strong></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-6 p-4">
-                        <p class="">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p>
+                        <p *ngIf="singleFolder" class="">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p>
                     </div>
                     <div class="col-6 p-4">
-                        <p class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p>
+                        <p *ngIf="singleFolder" class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p>
                     </div>
                 </div>
 
                 <div class="border">
-                    <h5 class="mt-5 mb-5 text-center p-4">Données à utiliser pour la création du dossier scanné :</h5>
+                    <h3 class="mt-5 mb-5 p-4">Données à utiliser pour la création du dossier scanné :</h3>
                     <div class="row">
                         <div class="col-6 p-4">
-                            <p class="">Nom du (des) dossier(s) : <strong>{{ singleFolder.folders }}</strong></p>
+                            <p class="">Nom du (des) dossier(s) :</p>
                         </div>
                         <div class="col-6 p-4">
-                            <p class="">Nom du (des) fichiers(s) PDF : <strong>{{ singleFolder.filesPdf }}</strong></p>
+                            <p class="">Nom du (des) fichiers(s) PDF : </p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6 p-4">
-                            <p class=""><strong>A{{ singleFolder.folders }}</strong></p>
+                        <div *ngIf="singleFolder" class="col-6 p-4">
+                            <strong><p *ngFor="let item of singleFolder.folder">
+                                \{{ item }}
+                            </p></strong>
                         </div>
                         <div class="col-6 p-4">
-                            <p class=""><strong>Invoices_2018 {{ singleFolder.filesPdf }}</strong></p>
+                            <p *ngIf="singleFolder" class=""><strong>{{singleFolder.nomClasseur}}.pdf</strong></p>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="row mt-5">
+                <div class="row mt-5" style="text-align: left!important;">
                     <div class="col-6 border p-4">
                         <h4>A remplir par le contrôleur n°1</h4>
+                        <div class="row">
+                            <div class="col-4">
+                            <input type="checkbox"> OCR
+                            </div>
+                            <div class="col-8">
+                               <input type="checkbox">  PDF/A-1b
+                            </div>
+                        </div>                     
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="checkbox"> Dossier
+                            </div>
+                            <div class="col-8">
+                                <input type="checkbox"> Fusion des parties
+                            </div>
+                        </div>
                         <p class=""><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
                         <p class=""><strong>Contrôle 1 fait par : </strong></p>
                         <p class=""><strong>Le : </strong></p>
-
                         <p class=""><strong>Commentaires : </strong></p>
+                        <p>_______________________________________</p>
+                        <p>_______________________________________</p>
+                        <p>_______________________________________</p>
                     </div>
                     <div class="col-6 border p-4">
                         <h4>A remplir par le contrôleur n°2</h4>
-
+                        <div class="row">
+                            <div class="col-4">
+                            <input type="checkbox"> OCR
+                            </div>
+                            <div class="col-8">
+                               <input type="checkbox">  PDF/A-1b
+                            </div>
+                        </div>                     
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="checkbox"> Dossier
+                            </div>
+                            <div class="col-8">
+                                <input type="checkbox"> Fusion des parties
+                            </div>
+                        </div>
                         <p class=""><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
                         <p class=""><strong>Contrôle 1 fait par : </strong></p>
                         <p class=""><strong>Le : </strong></p>
-
                         <p class=""><strong>Commentaires : </strong></p>
+                        <p>_______________________________________</p>
+                        <p>_______________________________________</p>
+                        <p>_______________________________________</p>
                     </div>
                 </div>
             </div>
