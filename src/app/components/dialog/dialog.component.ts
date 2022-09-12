@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -7,67 +7,29 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRadioChange } from '@angular/material/radio';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE
-} from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
-
-import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
-const moment = _rollupMoment || _moment;
 
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'YYYY',
-  },
-  display: {
-    dateInput: 'YYYY',
-    monthYearLabel: 'YYYY',
-    dateA11yLabel: 'LL',
-    monthA11yLabel: 'YYYY',
-  },
-};
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    },
 
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  ],
 })
 export class DialogComponent implements OnInit {
 
 
-  date = new FormControl(moment());
-  etats = ["Pas commencé", "En cours", "Terminé"];
+  etats = ["À numériser", "En cours de numérisation", "Contrôle 1", "Contrôle 2", "Terminé"];
   sheetForm!: FormGroup;
   //sheetForm!: FormArray;
   actionBtn: string = "Enregistrer et quitter";
   addNextBtn: string = "Enregistrer et suivant";
   titleModal: string = "Ajouter un classeur";
   durationInSeconds = 5;
-  lettre = "";
   isLetterNomenclatureChecked = false;
   isLetterIndividualrNomenclatureChecked = false;
   isMonthNomenclatureChecked = false;
@@ -76,13 +38,21 @@ export class DialogComponent implements OnInit {
   userUid!: string;
   sub!: Subscription;
   user: any;
-  users$: Observable<any>[] = [] //user$: Observable<IUser>[] = [] 
+  //users$: Observable<any>[] = [] //user$: Observable<IUser>[] = [] 
+  users$!: Observable<any[]>;
+
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  
   displayNameObs: any
   selectedValue: number;
+  selectedValueState: number;
   selling_point: string;
   selling_points: any[];
   //folders: any[];
-  listMonth = [
+  listMonthLetter = [
     {
       id: 1,
       value: 'Janvier',
@@ -209,122 +179,82 @@ export class DialogComponent implements OnInit {
       type: 'Letter'
     },
     {
-      id: 14,
-      value: 'B',
+      id: 26,
+      value: 'N',
+      type: 'Letter'
+    },
+    
+    {
+      id: 27,
+      value: 'O',
+      type: 'Letter'
+    },
+    
+    {
+      id: 28,
+      value: 'P',
+      type: 'Letter'
+    },
+    
+    {
+      id: 29,
+      value: 'Q',
+      type: 'Letter'
+    },
+    
+    {
+      id: 30,
+      value: 'R',
+      type: 'Letter'
+    },
+    
+    {
+      id: 31,
+      value: 'S',
+      type: 'Letter'
+    },
+    
+    {
+      id: 32,
+      value: 'T',
+      type: 'Letter'
+    },
+    {
+      id: 33,
+      value: 'U',
+      type: 'Letter'
+    },
+    {
+      id: 34,
+      value: 'V',
+      type: 'Letter'
+    },
+    {
+      id: 35,
+      value: 'W',
+      type: 'Letter'
+    },
+    
+    {
+      id: 36,
+      value: 'X',
+      type: 'Letter'
+    },
+    
+    {
+      id: 37,
+      value: 'Y',
+      type: 'Letter'
+    },
+    {
+      id: 38,
+      value: 'Z',
       type: 'Letter'
     },
   ]
 
-  listLetter = [
-    {
-      id: 1,
-      value: 'A',
-    },
-    {
-      id: 2,
-      value: 'B',
-    },
-    {
-      id: 3,
-      value: 'C',
-    },
-    {
-      id: 4,
-      value: 'D',
-    },
-    {
-      id: 5,
-      value: 'E',
-    },
-    {
-      id: 6,
-      value: 'F',
-    },
-    {
-      id: 7,
-      value: 'G',
-    },
-    {
-      id: 8,
-      value: 'H',
-    },
-    {
-      id: 9,
-      value: 'I',
-    },
-    {
-      id: 10,
-      value: 'J',
-    },
-    {
-      id: 11,
-      value: 'K',
-    },
-    {
-      id: 12,
-      value: 'L',
-    },
-    {
-      id: 13,
-      value: 'M',
-    },
-    {
-      id: 14,
-      value: 'N',
-    },
-    {
-      id: 15,
-      value: 'O',
-    },
-    {
-      id: 16,
-      value: 'P',
-    },
-    {
-      id: 17,
-      value: 'Q',
-    },
-    {
-      id: 18,
-      value: 'R',
-    },
-    {
-      id: 19,
-      value: 'S',
-    },
-    {
-      id: 20,
-      value: 'T',
-    },
-    {
-      id: 21,
-      value: 'U',
-    },
-    {
-      id: 22,
-      value: 'V',
-    },
-    {
-      id: 23,
-      value: 'W',
-    },
-    {
-      id: 24,
-      value: 'X',
-    },
-    {
-      id: 25,
-      value: 'Y',
-    },
-    {
-      id: 26,
-      value: 'Z',
-    },
-
-  ]
   subscription: Subscription;
   submittedValue: any;
-
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -339,6 +269,12 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    this.users$ = this.userService.getUsers();
+    console.log('Users: ', this.users$);
+    this.getAllUsers();
+    console.log('this.userService.getUsers()', this.userService.getUsers());
+  
 
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       console.log('USER-UID', this.userService.readUserWithUid(user.uid));
@@ -370,6 +306,7 @@ export class DialogComponent implements OnInit {
     //}
     //})
     this.sheetForm = this.fb.group({
+      nomClient: ['', Validators.required],
       nomClasseur: ['', Validators.required],
       directory: ['', Validators.required],
       //date: ['', Validators.required],
@@ -377,37 +314,32 @@ export class DialogComponent implements OnInit {
       month: ['', Validators.required],
       //specificite: ['', Validators.required],
       //nomemclature: [''],
-      //etat: ['', Validators.required],
+      state: ['', Validators.required],
       //price: ['', Validators.required],
       comment: [''],
       //folder: [''],
-      //title: this.fb.array([]),
+      title: this.fb.array([]),
       //folder: this.fb.array(['']),
       folders: this.fb.array([]),
       //selling_folders: new FormArray([]),
       //selling_folders: this.fb.array([]),
       //selling_folders: this.formBuilder.array([this.formBuilder.group({dossier:''})]),
       //courses: new FormArray([]),
-      listMonth: this.fb.array(this.listMonth.map(x => false)),
+      //listMonthLetter: this.fb.array([])
+      listMonthLetter: this.fb.array(this.listMonthLetter.map(x => false)),
+      //listMonthLetter: this.fb.array(this.listMonthLetter),
+
       // Form Array to set default values
       // checkboxes: this.fb.array(this.checkboxes.map(x => this.defaultValues.includes(x.value) ? x.value : null))
     });
 
-    const checkboxControlMonth = (this.sheetForm.controls.listMonth as FormArray);
-    this.subscription = checkboxControlMonth.valueChanges.subscribe(checkbox => {
-      checkboxControlMonth.setValue(
-        checkboxControlMonth.value.map((value, i) => value ? this.listMonth[i].value : false),
+    const checkboxControlMonthLetter = (this.sheetForm.controls.listMonthLetter as FormArray);
+    this.subscription = checkboxControlMonthLetter.valueChanges.subscribe(checkbox => {
+      checkboxControlMonthLetter.setValue(
+        checkboxControlMonthLetter.value.map((value, i) => value ? this.listMonthLetter[i].value : false),
         { emitEvent: false }
       );
     });
-
-    /*const checkboxControlLetter = (this.sheetForm.controls.listLetter as FormArray);
-    this.subscription = checkboxControlLetter.valueChanges.subscribe(checkbox => {
-      checkboxControlLetter.setValue(
-        checkboxControlLetter.value.map((value, i) => value ? this.listLetter[i].value : false),
-        { emitEvent: false }
-      );
-    });*/
 
     this.sub = this.afAuth.authState
       .subscribe((user) => {
@@ -426,55 +358,56 @@ export class DialogComponent implements OnInit {
       this.sheetForm.controls['directory'].setValue(this.editdata.directory);
       this.sheetForm.controls['year'].setValue(this.editdata.year);
       this.sheetForm.controls['month'].setValue(this.editdata.month);
-      this.sheetForm.controls['listMonth'].setValue(this.editdata.folder);
       //this.sheetForm.controls['folder'].setValue(this.editdata.folder);
       //this.sheetForm.value.selling_folders,
+      this.sheetForm.controls['state'].setValue(this.editdata.state);
       this.sheetForm.controls['comment'].setValue(this.editdata.comment);
-      console.log('Folders (this.editdata.folder) : ', this.editdata.folder);
-      console.log('this.editdata.title :', this.editdata.title);
+      this.sheetForm.controls['listMonthLetter'].patchValue(this.editdata.folder.map(x => Object.keys(this.editdata.folder)));
 
+      //this.sheetForm.controls['listMonthLetter'].patchValue(this.editdata.folder); //Bonne piste
+      //this.sheetForm.setControl('listMonthLetter', this.fb.array(this.editdata.folder));
+
+      console.log("Object.keys(this.editdata.folder.key)");
+      console.log(Object.keys(this.editdata.folder));
+      console.log('Folder (this.editdata.folder.key) : ', this.editdata.folder.key);
     }
-  }
-
-  chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());
-    this.date.setValue(ctrlValue);
-    datepicker.close();
   }
 
   addFolder() {
     if (!this.editdata) {
       if (this.sheetForm.valid) {
         if (this.selectedValue===0) { //Month
-          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonth : ', this.sheetForm.value.listMonth);
-          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
-
+          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonthLetter : ', this.sheetForm.value.listMonthLetter);
+          const checkboxControl = (this.sheetForm.controls.listMonthLetter as FormArray);
           console.log('checkboxControl: ', checkboxControl.value);
           const formValue = {
             ...this.sheetForm.value,
-            listMonth: checkboxControl.value.filter(value => !!value)
+            listMonthLetter: checkboxControl.value.filter(value => !!value)
+            
           }
+          console.log('formValue', formValue);
+          console.log('formValue.id', formValue.id);
+          console.log('Object.keys(formValue) :', Object.keys(formValue));
+
           this.submittedValue = formValue;
         }
         else { //Letter
 
-          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
-
+          console.log('ELSE');
+          const checkboxControl = (this.sheetForm.controls.listMonthLetter as FormArray);
           console.log('checkboxControl: ', checkboxControl.value);
           const formValue = {
             ...this.sheetForm.value,
-            listMonth: checkboxControl.value.filter(value => !!value)
+            listMonthLetter: checkboxControl.value.filter(value => !!value)
           }
           this.submittedValue = formValue;
         }
 
-
         console.log('this.submittedValue.value: ', this.submittedValue.value);
-        console.log('this.submittedValue.listMonth.value: ', this.submittedValue.listMonth.value);
-
+        console.log('this.submittedValue.listMonthLetter.value: ', this.submittedValue.listMonthLetter.value);
 
         const valueFolderCheckbox = this.submittedValue;
+        console.log('Object.keys(valueFolderCheckbox.listMonthLetter) :', Object.keys(valueFolderCheckbox.listMonthLetter));
 
         const result = this.apiService.createFolder(
           this.getCompanyData,
@@ -482,7 +415,8 @@ export class DialogComponent implements OnInit {
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
-          valueFolderCheckbox.listMonth, //value of the checkbox (Month & Letter)
+          valueFolderCheckbox.listMonthLetter, //value of the checkbox (Month & Letter)
+          this.sheetForm.value.state,
           this.sheetForm.value.comment,
           //this.sheetForm.value.selling_folders,
           new Date(),
@@ -490,7 +424,6 @@ export class DialogComponent implements OnInit {
         )
 
         console.log('valueFolderCheckbox', valueFolderCheckbox);
-
         console.log('result: ', result);
 
         this._snackBar.open(`${this.sheetForm.value.nomClasseur} ajouté avec avec succès.`, '', {
@@ -511,31 +444,40 @@ export class DialogComponent implements OnInit {
     if (!this.editdata) {
       if (this.sheetForm.valid) {
         if (this.selectedValue === 0) { //Month
-          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonth : ', this.sheetForm.value.listMonth);
-          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
-
+          console.log('IF -> PETIT CHECK this.sheetForm.value.listMonthLetter : ', this.sheetForm.value.listMonthLetter);
+          const checkboxControl = (this.sheetForm.controls.listMonthLetter as FormArray);
           console.log('checkboxControl: ', checkboxControl.value);
           const formValue = {
             ...this.sheetForm.value,
-            listMonth: checkboxControl.value.filter(value => !!value)
+            listMonthLetter: checkboxControl.value.filter(value => !!value)
           }
           this.submittedValue = formValue;
-          console.log('formValue.listMonth.id', formValue.listMonth.id);
+          console.log('formValue.listMonthLetter.id', formValue.listMonthLetter.id);
+
+          console.log('formValue', formValue);
+          console.log('formValue.id', formValue.id);
+          console.log('Object.keys(formValue) :', Object.keys(formValue));
         }
         else { //Letter
-          console.log('ELSE -> PETIT CHECK this.sheetForm.value.listLetter : ', this.sheetForm.value.listMonth);
-
-          const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
-
+          console.log('ELSE -> PETIT CHECK this.sheetForm.value.listLetter : ', this.sheetForm.value.listMonthLetter);
+          const checkboxControl = (this.sheetForm.controls.listMonthLetter as FormArray);
           console.log('checkboxControl: ', checkboxControl.value);
           const formValue = {
             ...this.sheetForm.value,
-            listMonth: checkboxControl.value.filter(value => !!value)
+            listMonthLetter: checkboxControl.value.filter(value => !!value)
           }
+          console.log('formValue', formValue);
+          console.log('formValue.id', formValue.id);
+          console.log('Object.keys(formValue) :', Object.keys(formValue));
+
           this.submittedValue = formValue;
         }
+
+        
+
         const valueFolderCheckbox = this.submittedValue;
-        console.log('valueFolderCheckbox.listMonth', valueFolderCheckbox.listMonth);
+        console.log('valueFolderCheckbox.listMonthLetter.id', valueFolderCheckbox.listMonthLetter.id);
+        console.log('Object.keys(valueFolderCheckbox.listMonthLetter) :', Object.keys(valueFolderCheckbox.listMonthLetter));
 
         const result = this.apiService.createFolder(
           this.getCompanyData,
@@ -543,7 +485,8 @@ export class DialogComponent implements OnInit {
           this.sheetForm.value.directory,
           this.sheetForm.value.year,
           this.sheetForm.value.month,
-          valueFolderCheckbox.listMonth, //value of the checkbox (Month & Letter)
+          valueFolderCheckbox.listMonthLetter, //value of the checkbox (Month & Letter)
+          this.sheetForm.value.state,
           this.sheetForm.value.comment,
           //this.sheetForm.value.selling_folders,
           new Date(),
@@ -561,7 +504,6 @@ export class DialogComponent implements OnInit {
       this.updateFolder();
     }
   }
-
 
   updateFolder() {
     this.api.putFolder(this.sheetForm.value, this.editdata.id)
@@ -598,6 +540,11 @@ export class DialogComponent implements OnInit {
 
   onChange(event: MatRadioChange) {
     this.selectedValue = event.value;
+    console.log('this.selectedValue', this.selectedValue);
+  }
+
+  onChangeState(event: MatRadioChange) {
+    this.selectedValueState = event.value;
     console.log('this.selectedValue', this.selectedValue);
   }
 
@@ -644,7 +591,6 @@ export class DialogComponent implements OnInit {
     this.title.removeAt(index);
   }
 
-
   /*get folders(): FormArray {
     //return this.sheetForm.get('courses') as FormArray;
     return this.formBuilder.control["folders"] as FormArray;
@@ -664,6 +610,12 @@ export class DialogComponent implements OnInit {
     return this.sheetForm.controls["title"] as FormArray;
   }
 
+  
+
+  /*get getListMonthLetter() {
+    return this.sheetForm.controls["listMonthLetter"] as FormArray;
+  }*/
+
   addFolder1() {
     const folderForm = this.fb.group({
       title: ['', Validators.required],
@@ -678,25 +630,35 @@ export class DialogComponent implements OnInit {
   }
 
   /*get resultMonth() {
-    return this.listMonth.filter(item => item.checked);
+    return this.listMonthLetter.filter(item => item.checked);
   }*/
 
 
 
   /*submitCheckbox() {
-
-    console.log('MONTH this.sheetForm.value.listMonth .length?? ', this.sheetForm.value.listMonth.length);
-    console.log('Letter this.sheetForm.value.listMonth .length ', this.sheetForm.value.listLetter.length);
-
-    const checkboxControl = (this.sheetForm.controls.listMonth as FormArray);
+    console.log('MONTH this.sheetForm.value.listMonthLetter .length?? ', this.sheetForm.value.listMonthLetter.length);
+    console.log('Letter this.sheetForm.value.listMonthLetter .length ', this.sheetForm.value.listLetter.length);
+    const checkboxControl = (this.sheetForm.controls.listMonthLetter as FormArray);
     const formValue = {
       ...this.sheetForm.value,
-      listMonth: checkboxControl.value.filter(value => !!value)
+      listMonthLetter: checkboxControl.value.filter(value => !!value)
     }
-
     console.log('this.submittedValue ?? ', this.submittedValue);
-
     return this.submittedValue = formValue;
-
   }*/
+
+  getAllUsers() {
+    this.userService.getUsers()
+      .subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (err) => {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        }
+      })
+  }
 }
