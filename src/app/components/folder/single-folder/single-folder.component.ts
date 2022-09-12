@@ -77,7 +77,7 @@ export class SingleFolderComponent implements OnInit {
   public openPDF(): void {
     let DATA: any = document.getElementById('content');
     html2canvas(DATA).then((canvas) => {
-      let fileWidth = 230;
+      let fileWidth = 210;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');
