@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="content">
                                         <h6 class="mb-10">Nombre de classeurs</h6>
-                                        <h3 *ngIf="this.folders" class="text-bold mb-10 ">{{ this.folders.length }}</h3>
+                                        <h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>
                                         <h3></h3>
                                         <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
@@ -31,40 +31,57 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <!--<div class="icon-card mb-30">
+                               
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                               
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <button mat-raised-button color="warn" (click)="openDialog()">
+                                <mat-icon inline=true>note_add</mat-icon>
+                                Ajouter un classeur
+                                </button>
+                            </div>
+                        </div>
+
+                            <div class="row mt-5">
+                            <div class="col-lg-3 col-md-6">
+                               
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
                                     <div class="icon success">
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Classeurs non commencés</h6>
+                                        <h6 class="mb-10">Classeurs à commencer</h6>
                                         <h3 class="text-bold mb-10">?</h3>
                                     </div>
-                                </div>-->
+                                </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <!--<div class="icon-card mb-30">
+                                <div class="icon-card mb-30">
                                     <div class="icon success">
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Classeurs en cours</h6>
-                                        <h3 class="text-bold mb-10">1</h3>
+                                        <h6 class="mb-10">Classeurs en cours de numérisation</h6>
+                                        <h3 class="text-bold mb-10">?</h3>
                                     </div>
-                                </div>-->
+                                </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <!--<div class="icon-card mb-30">
+                                <div class="icon-card mb-30">
                                     <div class="icon success">
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
                                         <h6 class="mb-10">Classeurs terminés</h6>
-                                        <h3 class="text-bold mb-10">1</h3>
+                                        <h3 class="text-bold mb-10">?</h3>
                                     </div>
-                                </div>-->
+                                </div>
                             </div>
                         </div>
-
                         <!--<div class="row">
                         <div class="col-lg">
                             <div class="card-style mb-30">

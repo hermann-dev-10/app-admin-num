@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ApiService } from '../../shared/services/api.service';
@@ -18,31 +18,34 @@ import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   users$!: Observable<any[]>;
-  displayedColumns: string[] = ['nomClient','nomClasseur', 'directory', 'month-year', 'comment', 'action'];
+  displayedColumns: string[] = ['nomClient', 'nomClasseur', 'directory', 'month-year', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   allFolders$!: Observable<any[]>;
-  currentUser! :any;
+  currentUser!: any;
   user = this.afAuth.currentUser;
-  sub:any;
+  sub: any;
   uniqueUser: any;
   sideBarOpen = true;
 
   private foldersCollection: AngularFirestoreCollection<any>;
   folders$: Observable<any[]>
   folders: any[] = [];
+  users: any[] = [];
+  private companyCollection: AngularFirestoreCollection<any>;
+
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private apiService: ApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
@@ -53,72 +56,99 @@ export class DashboardComponent implements OnInit {
 
 
   async ngOnInit() {
-    //this.getAllFolders();
-    console.log('this.getAllFolders(): ',this.getAllFolders());
-    this.users$ = this.userService.getUsers();
+
+
+    //this.usersCollection = await this.userService.getUsers();
+
+    this.userService.getUsers(); // on déclence la fonction getUsers
+    console.log('this.userService.getUsers() : ', this.userService.getUsers());
+
     console.log('Users: ', this.users$);
+
+    this.folders$ = this.folderService.getFolders();
+    this.getAllFolders();
+    console.log('this.folderService.readAllFolders(): ', this.folderService.readAllFolders());
+    //console.log('this.readAll(): ', this.folderServic);
+
+
     //this.getAllUsers();
     //console.log('this.getAllUsers()', this.getAllUsers());
     this.foldersCollection = await this.folderService.readAllFolders();
     this.sub = this.foldersCollection.valueChanges({
       idField: 'id',
-      
+
     }).subscribe(data => {
       this.folders = data;
-      console.log('this.folders :', this.folders);
-    }) 
+    })
 
-    console.log('this.foldersCollection', this.foldersCollection)
+
+    this.companyCollection = this.userService.readAllCompany();
+    this.sub = this.companyCollection.valueChanges({
+      idField: 'id',
+
+    }).subscribe(data => {
+      this.users = data;
+      console.log('this.company: ', this.users)
+    })
   }
+
+
+
 
   openDialog() {
     this.dialog.open(DialogComponent, {
-      width:'30%'
-    }).afterClosed().subscribe(val=>{
+      width: '30%'
+    }).afterClosed().subscribe(val => {
       //this.getAllFolders();
     });
   }
 
-   getAllFolders(){
+  getUsers(): void {
+    this.userService.getUsers()
+      .subscribe(users => this.users = users);
+    console.log('Users: this.userService.getUsers()');
+  }
 
-    //this.sub = this.afAuth.authState.subscribe((user) => {
+  getAllFolders() {
+
+    this.sub = this.afAuth.authState.subscribe((user) => {
 
       //this.api.getFolders()
       this.folderService.getFolders()
-      .subscribe({
-        next:(res)=> {
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-        error:(err)=> {
-          //alert("Erreur pendant la collection des éléments!!");
-          console.log('Error While fetching the records');
-        }
-      });
-    //});
+        .subscribe({
+          next: (res) => {
+            this.dataSource = new MatTableDataSource(res);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },
+          error: (err) => {
+            //alert("Erreur pendant la collection des éléments!!");
+            console.log('Error While fetching the records');
+          }
+        });
+    });
   }
 
-  viewFolder(row:any){
-  //viewProduct(){
+  viewFolder(row: any) {
+    //viewProduct(){
     //this.router.navigateByUrl(`products/${this.productId}`);
 
     this.router.navigate([`/folders/${row}`]);
     console.log('View Folder:', row);
   }
 
-  editFolder(row:any){
-    this.dialog.open(DialogComponent,{
-      width:'30%',
-      data:row
-    }).afterClosed().subscribe(val =>{
-      if(val==='update'){
+  editFolder(row: any) {
+    this.dialog.open(DialogComponent, {
+      width: '30%',
+      data: row
+    }).afterClosed().subscribe(val => {
+      if (val === 'update') {
         this.getAllFolders();
       }
     })
   }
 
-  deleteFolder(id:number){
+  deleteFolder(id: number) {
     this.apiService.deleteFolder(id);
     console.log('Folder deleted : ', id)
     /*this.api.deleteFolder(id)
@@ -144,6 +174,10 @@ export class DashboardComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }
