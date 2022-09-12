@@ -78,6 +78,21 @@ export class UserService {
     return this.afs.collection(`${this.collectionName}`).valueChanges({ idField: 'id'});
   }
 
+  //getUsers(): Observable<User[]> 
+  /*getUsers() {
+    return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
+      ref.orderBy('createdAt', 'asc')
+    );
+  }*/
+
+  readAllCompany() {
+    return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
+      ref.orderBy('createdAt', 'asc')
+      
+    );
+  }
+
+
 
   getUser(id: any) {
     return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
