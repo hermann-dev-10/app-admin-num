@@ -10,10 +10,10 @@
             <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
 
             <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
-            <div id="content" #content class="container page__content p-3 position-relative mt-5" style="font-size: 23px;">
-                <h2 class="mb-5 mt-5" style="font-size: 45px!important;">Fiche de suivi</h2>
+            <div id="content" #content class="page__content p-3 position-relative mt-5" style="font-size: 23px;">
+                <h2 class="mt-5 text-center" style="font-size: 45px!important;">Fiche de suivi</h2>
                 <!--<div class="page__content-data position-absolute">-->
-                <div class="row" style="margin-top: 150px;">
+                <div class="row" style="margin-top: 50px;">
                     <div class="col-6 p-4">
                         <p *ngIf="singleFolder" class="">Client :  <strong>{{ singleFolder.nomClient }}</strong></p>
                     </div>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="border">
-                    <h3 class="mt-5 mb-5 p-4">Données à utiliser pour la création du dossier scanné :</h3>
+                    <h3 class="mt-5 mb-5 p-4 text-center">Données à utiliser pour la création du dossier scanné :</h3>
                     <div class="row">
                         <div class="col-6 p-4">
                             <p class="">Nom du (des) dossier(s) :</p>
@@ -54,11 +54,58 @@
                     </div>
                 </div>
 
+                <div class="row">
+                                    <p class="text-center" style="text-decoration: underline;">À remplir par le stagiaire </p>
+
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Numériseur</th>
+                                    <th scope="col">Partie</th>
+                                    <th scope="col">État</th>
+                                    <th scope="col">Visa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                   <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div class="row mt-5" style="text-align: left!important;">
                     <div class="col-6 border p-4">
-                        <h4>A remplir par le contrôleur n°1</h4>
-                        <div class="row">
+                        <h4  style="text-decoration: underline;">À remplir par le contrôleur n°1</h4>
+                        <div class="row mt-3">
                             <div class="col-4">
                             <input type="checkbox"> OCR
                             </div>
@@ -74,9 +121,10 @@
                                 <input type="checkbox"> Fusion des parties
                             </div>
                         </div>
-                        <p class=""><strong>Nombre de fichiers : </strong></p>
+                        <p class="mt-3"><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
                         <p class=""><strong>Contrôle 1 fait par : </strong></p>
+                        <p class=""><strong>Visa :</strong></p>
                         <p class=""><strong>Le : </strong></p>
                         <p class=""><strong>Commentaires : </strong></p>
                         <p>_______________________________________</p>
@@ -84,8 +132,8 @@
                         <p>_______________________________________</p>
                     </div>
                     <div class="col-6 border p-4">
-                        <h4>A remplir par le contrôleur n°2</h4>
-                        <div class="row">
+                        <h4  style="text-decoration: underline;">À remplir par le contrôleur n°2</h4>
+                        <div class="row mt-3">
                             <div class="col-4">
                             <input type="checkbox"> OCR
                             </div>
@@ -101,9 +149,10 @@
                                 <input type="checkbox"> Fusion des parties
                             </div>
                         </div>
-                        <p class=""><strong>Nombre de fichiers : </strong></p>
+                        <p class="mt-3"><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
-                        <p class=""><strong>Contrôle 1 fait par : </strong></p>
+                        <p class=""><strong>Contrôle 2 fait par : </strong></p>
+                        <p class=""><strong>Visa :</strong></p>
                         <p class=""><strong>Le : </strong></p>
                         <p class=""><strong>Commentaires : </strong></p>
                         <p>_______________________________________</p>

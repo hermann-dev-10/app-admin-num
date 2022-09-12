@@ -44,3 +44,11 @@ input[type=checkbox] {
 .text-right {
     text-align: right;
 }
+
+th, td {
+    border: 1px solid #000;
+}
+
+td {
+    padding: 1.3rem 0.5rem;
+}
