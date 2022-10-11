@@ -10,7 +10,8 @@
             <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
 
             <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
-            <div id="content" #content class="page__content p-3 position-relative mt-5" style="font-size: 23px;">
+            <div id="content" #content class="page__content p-3 position-relative mt-5 ml-5" style="font-size: 23px;">
+                <img src="./../../../../assets/logo_sekoia.png" alt="Logo Sekoia Services SA">
                 <h2 class="mt-5 text-center" style="font-size: 45px!important;">Fiche de suivi</h2>
                 <!--<div class="page__content-data position-absolute">-->
                 <div class="row" style="margin-top: 50px;">
@@ -34,7 +35,7 @@
                 <div class="border">
                     <h3 class="mt-5 mb-5 p-4 text-center">Données à utiliser pour la création du dossier scanné :</h3>
                     <div class="row">
-                        <div class="col-6 p-4">
+                        <div *ngIf="singleFolder.length>0" class="col-6 p-4">
                             <p class="">Nom du (des) dossier(s) :</p>
                         </div>
                         <div class="col-6 p-4">
@@ -43,13 +44,20 @@
                     </div>
 
                     <div class="row">
-                        <div *ngIf="singleFolder" class="col-6 p-4">
-                            <strong><p *ngFor="let item of singleFolder.folder">
-                                \{{ item }}
-                            </p></strong>
+                        <div *ngIf="singleFolder.length>0" class="col-6 p-4">
+                            <div *ngIf="singleFolder">
+                                <strong><p *ngFor="let item of singleFolder.folder">
+                                    <span>\{{ item }}</span>
+                                </p></strong>
+                            </div>
+                            <div *ngIf="singleFolder">
+                                <strong><p *ngFor="let item of singleFolder.folderCustom">
+                                    <span>\{{ item.folderCustom }}</span>
+                                </p></strong>
+                            </div>
                         </div>
                         <div class="col-6 p-4">
-                            <p *ngIf="singleFolder" class=""><strong>{{singleFolder.nomClasseur}}.pdf</strong></p>
+                            <p *ngIf="singleFolder" class=""><strong>{{singleFolder.nomClasseur}}<span *ngIf="singleFolder.specificite" style="color: rgb(15, 148, 224);">_{{singleFolder.specificite}}</span>.pdf</strong></p>
                         </div>
                     </div>
                 </div>
@@ -123,13 +131,20 @@
                         </div>
                         <p class="mt-3"><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
-                        <p class=""><strong>Contrôle 1 fait par : </strong></p>
-                        <p class=""><strong>Visa :</strong></p>
+                        <div class="row">
+                            <div class="col-7">
+                                <p class=""><strong>Contrôle 1 fait par : </strong></p>
+                            </div>
+                            <div class="col-5">
+                                <p class=""><strong>Visa :</strong></p>
+                            </div>
+                        </div>
+                        <br><br>
                         <p class=""><strong>Le : </strong></p>
                         <p class=""><strong>Commentaires : </strong></p>
-                        <p>_______________________________________</p>
-                        <p>_______________________________________</p>
-                        <p>_______________________________________</p>
+                        <p>_____________________________________________________________</p>
+                        <p>_____________________________________________________________</p>
+                        <p>_____________________________________________________________</p>
                     </div>
                     <div class="col-6 border p-4">
                         <h4  style="text-decoration: underline;">À remplir par le contrôleur n°2</h4>
@@ -151,16 +166,26 @@
                         </div>
                         <p class="mt-3"><strong>Nombre de fichiers : </strong></p>
                         <p class=""><strong>Nombre de pages : </strong></p>
-                        <p class=""><strong>Contrôle 2 fait par : </strong></p>
-                        <p class=""><strong>Visa :</strong></p>
+                        <div class="row">
+                            <div class="col-7">
+                                <p class=""><strong>Contrôle 2 fait par : </strong></p>
+                            </div>
+                            <div class="col-5">
+                                <p class=""><strong>Visa :</strong></p>
+                            </div>
+                        </div>
+                        <br><br>
                         <p class=""><strong>Le : </strong></p>
                         <p class=""><strong>Commentaires : </strong></p>
-                        <p>_______________________________________</p>
-                        <p>_______________________________________</p>
-                        <p>_______________________________________</p>
+                        <p>_____________________________________________________________</p>
+                        <p>_____________________________________________________________</p>
+                        <p>_____________________________________________________________</p>
                     </div>
                 </div>
+                <p>Date de création du classeur : {{singleFolder.createdAt.toDate() | date}} </p>
+
             </div>
+
 
 
             <!--<h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>-->

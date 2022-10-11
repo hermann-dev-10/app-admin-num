@@ -77,16 +77,17 @@ export class SingleFolderComponent implements OnInit {
   public openPDF(): void {
     let DATA: any = document.getElementById('content');
     html2canvas(DATA).then((canvas) => {
-      let fileWidth = 210;
+      let fileWidth = 208;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('Fiche de suivi ' + `${this.singleFolder.nomClasseur}` +'.pdf');
+      PDF.save('Fiche_suivi_'+`${this.singleFolder.nomClasseur}`+'.pdf');
     });
   }
 
+  
   /*makePdf(){
     let pdf = new jsPDF()
     pdf.html(this.el.nativeElement, {
