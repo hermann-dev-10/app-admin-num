@@ -23,7 +23,7 @@
                                         <h4 *ngIf="u.isAdmin">Type de compte : <strong>Administrateur</strong></h4>
                                         <h4 *ngIf="!u.isAdmin">Type de compte : <strong>Normal</strong></h4>
                                         <h4>Entreprise : <strong>{{u.company}}</strong></h4>
-                                        <h4>Compte créé le : <strong>{{u.createdAt.toDate() | date}}</strong></h4>
+                                        <h4>Compte créé le : <strong>{{u.createdAt.toDate() | date: 'fullDate'}}</strong></h4>
                                     </div>
 
                                     <div *ngIf="user.displayName">
