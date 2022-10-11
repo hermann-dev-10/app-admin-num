@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import * as fr from '@angular/common/locales/fr';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
@@ -60,6 +62,8 @@ import { ModalUserComponent } from './components/modal-user/modal-user.component
 import { ProfilComponent } from './components/profil/profil.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { TestFormArrayComponent } from './components/test-form-array/test-form-array.component';
+import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.component';
+import { NewEntryComponent } from './components/new-entry/new-entry.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +84,8 @@ import { TestFormArrayComponent } from './components/test-form-array/test-form-a
     ProfilComponent,
     MessagesComponent,
     TestFormArrayComponent,
+    AdminDialogComponent,
+    NewEntryComponent,
     
   ],
   imports: [
@@ -118,7 +124,13 @@ import { TestFormArrayComponent } from './components/test-form-array/test-form-a
     NgChartsModule,
     
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(fr.default);
+  }
+}
