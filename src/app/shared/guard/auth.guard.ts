@@ -40,6 +40,27 @@ export class AuthGuard implements CanActivate {
           this.router.navigate(['/login']);
           reject(false);
         }
+
+        //Route guard in angular 13 | role based authentication implementation| angular 13 tutorial #19
+        //https://www.youtube.com/watch?v=qehzscbZyVY
+
+        //https://stackoverflow.com/questions/64614505/how-to-guard-route-by-user-role-angular
+        /*
+        checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+        if (this.authService.isLoggedIn()) {
+          const userRole = this.authService.getRole();
+          if (route.data.role && route.data.role.indexOf(userRole) === -1) {
+            this.router.navigate(['/home']);
+            return false;
+          }
+          return true;
+        }
+    
+        this.router.navigate(['/home']);
+        return false;
+      }
+        
+        */
       });
     });
   }

@@ -1,5 +1,5 @@
 {
-  "name": "app-admin-num",
+  "name": "app-sekoia",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -26,12 +26,15 @@
     "@angular/router": "~14.0.5",
     "chart.js": "^3.6.0",
     "firebase": "^9.8.3",
+    "html-to-pdfmake": "^2.4.8",
     "html2canvas": "^1.4.1",
     "json-server": "^0.17.0",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
     "moment": "^2.29.3",
     "ng-chartist": "^6.7.0",
     "ng2-charts": "^3.0.11",
+    "pdfmake": "^0.2.6",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.4"
   },

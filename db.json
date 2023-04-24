@@ -1,96 +1,172 @@
 {
-  "folderList": [
+  "invoiceList": [
     {
-      "nomClient": "centre_espoir",
-      "nomClasseur": "Fournisseur test",
-      "directory": "Z://IDQ/path",
-      "date": "2022-03-29T22:00:00.000Z",
-      "specificite": "(NOM FOURNISSEUR)",
-      "nomemclature": "",
-      "etat": "Pas commencé",
-      "comment": "5 pages blanches",
-      "id": 3
+      "customer_name": "testf",
+      "description": "test2023",
+      "status": "PAID",
+      "details": [
+        {
+          "description": "sdfsdfsf",
+          "amount": 12,
+          "quantity": 1
+        }
+      ],
+      "id": 17
     },
     {
-      "nomClient": "centre_espoir",
-      "nomClasseur": "Comptabilité",
-      "directory": "Z://IDQ/path",
-      "date": "2022-03-29T22:00:00.000Z",
-      "specificite": "**Nom_spécificité**",
-      "etat": "En cours",
-      "comment": "Erreurs noms des fichiers",
-      "id": 4
+      "customer_name": "2323",
+      "description": "test2023",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "2323",
+          "amount": 1212,
+          "quantity": 1212
+        }
+      ],
+      "id": 18
     },
     {
-      "nomClient": "centre_espoir",
-      "nomClasseur": "Invoices_01",
-      "directory": "Z://IDQ/path",
-      "date": "2022-04-12T22:00:00.000Z",
-      "specificite": "**Nom_spécificité**",
-      "etat": "Pas commencé",
-      "comment": "Pages blanches",
-      "id": 5
+      "customer_name": "Alpacino",
+      "description": "test16h37",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "test16h37 1 ",
+          "amount": 12,
+          "quantity": 12
+        },
+        {
+          "description": "test16h37 2",
+          "amount": 12,
+          "quantity": 12
+        },
+        {
+          "description": "test16h37 3",
+          "amount": 12,
+          "quantity": 12
+        }
+      ],
+      "id": 19
     },
     {
-      "nomClient": "centre_espoir",
-      "nomClasseur": "test1",
-      "directory": "Z://FOJ/path",
-      "date": "2022-04-21T22:00:00.000Z",
-      "specificite": "**Nom_spécificité**",
-      "etat": "En cours",
-      "comment": "Classeur ok",
-      "id": 6
+      "customer_name": "testf",
+      "description": "test2023",
+      "status": "PAID",
+      "details": [
+        {
+          "description": "test2025",
+          "amount": 12,
+          "quantity": 12
+        }
+      ],
+      "id": 20
     },
     {
-      "nomClient": "idq",
-      "nomClasseur": "fgfg",
-      "directory": "gfgfg",
-      "date": "2022-06-20T22:00:00.000Z",
-      "specificite": "fgfgf",
-      "etat": "Pas commencé",
-      "comment": "fgfgfg",
-      "id": 7
+      "customer_name": "testf",
+      "description": "test2023",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "sdfsdfsf",
+          "amount": 1,
+          "quantity": 12
+        }
+      ],
+      "id": 21
     },
     {
-      "nomClient": "idq",
-      "nomClasseur": "fgfg",
-      "directory": "fgfg",
-      "date": "2022-06-19T22:00:00.000Z",
-      "specificite": "fgf",
-      "etat": "Pas commencé",
-      "comment": "fgfg",
-      "id": 8
+      "customer_name": "test",
+      "description": "test17h01",
+      "status": "PAID",
+      "details": [
+        {
+          "description": "sdfsdfsf",
+          "amount": 12,
+          "quantity": 12
+        }
+      ],
+      "id": 22
     },
     {
-      "nomClient": "idq",
-      "nomClasseur": "hghgh",
-      "directory": "ghgh",
-      "date": "2022-06-29T22:00:00.000Z",
-      "specificite": "ghgh",
-      "etat": "Pas commencé",
-      "comment": "ghgh",
-      "id": 9
+      "customer_name": "testf",
+      "description": "test2023",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "test2023test2023",
+          "amount": 12,
+          "quantity": 12
+        }
+      ],
+      "id": 23
     },
     {
-      "nomClient": "idq",
-      "nomClasseur": "bvbv",
-      "directory": "bvbv",
-      "date": "2022-06-20T22:00:00.000Z",
-      "specificite": "vbvb",
-      "nomemclature": "",
-      "etat": "Pas commencé",
-      "comment": "vbvb",
-      "id": 10
+      "customer_name": "ghjgh",
+      "description": "1222222222222222222222222222222",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "ghjg",
+          "amount": 45,
+          "quantity": 45
+        }
+      ],
+      "id": 24
+    },
+    {
+      "customer_name": "OCE",
+      "description": "Accueil de 3 stagiares",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "Redit",
+          "amount": 100,
+          "quantity": 5
+        },
+        {
+          "description": "Hermann",
+          "amount": 50000,
+          "quantity": 1
+        }
+      ],
+      "id": 25
+    },
+    {
+      "customer_name": "OCE",
+      "description": "Accueil de 3 stagiares",
+      "status": "SENT",
+      "details": [
+        {
+          "description": "Redit",
+          "amount": 100,
+          "quantity": 5
+        },
+        {
+          "description": "Hermann",
+          "amount": 5,
+          "quantity": 1
+        }
+      ],
+      "id": 26
+    },
+    {
+      "customer_name": "OCE",
+      "description": "Accueil de 3 stagiares",
+      "status": "PAID",
+      "details": [
+        {
+          "description": "Redit",
+          "amount": 100,
+          "quantity": 5
+        },
+        {
+          "description": "Hermann",
+          "amount": 5,
+          "quantity": 1
+        }
+      ],
+      "id": 27
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

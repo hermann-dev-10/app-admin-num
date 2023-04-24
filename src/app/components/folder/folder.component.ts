@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from './../dialog/dialog.component';
 import { ApiService } from '../../shared/services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,14 +15,19 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.component.html',
-  styleUrls: ['./folder.component.scss']
+  styleUrls: ['./folder.component.scss'],
 })
 export class FolderComponent implements OnInit {
-
-  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'state', 'comment', 'action'];
-  //displayedColumns: string[] = ['nomClasseur', 'nomClient', 'date', 'etat', 'price', 'comment', 'action'];
+  displayedColumns: string[] = [
+    'nomClasseur',
+    'directory',
+    'month-year',
+    'state',
+    'createdAt',
+    'action',
+  ];
+  //  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'state', 'comment', 'createdAt', 'action'];
   dataSource!: MatTableDataSource<any>;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   foldersByUid$!: Observable<any[]>;
@@ -31,8 +36,11 @@ export class FolderComponent implements OnInit {
   sub: any;
   uniqueUser: any;
   users$: Observable<any>[] = [];
-
   sideBarOpen = true;
+
+  message: string = 'Are you sure?';
+  confirmButtonText = 'Yes';
+  cancelButtonText = 'Cancel';
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -47,56 +55,56 @@ export class FolderComponent implements OnInit {
     private folderService: FolderService,
     private userService: UserService,
     private afAuth: AngularFireAuth
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.getAllFoldersByUid();
     console.log('this.getAllFolders()', this.getAllFoldersByUid());
 
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       this.user = user;
       if (this.user) {
-
         this.foldersByUid$ = this.apiService.readPersonalFolderByUid(user.uid);
         console.log('FoldersByUid: ', this.foldersByUid$);
         console.log(this.userService.readUserWithUid(user.uid));
 
-        this.sub = this.userService.readUserWithUid(user.uid).subscribe(
-          (data) => {
+        this.sub = this.userService
+          .readUserWithUid(user.uid)
+          .subscribe((data) => {
             console.log('Dossier: ngOnInit readUserWithUid / data', data);
             this.uniqueUser = data;
             console.log('user data : -> ', this.user);
             console.log('mes users$ OBSERVABLE : -> ', this.users$);
-          }
-        )
+          });
       }
-    })
+    });
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
-      width: '30%'
-    }).afterClosed().subscribe(val => {
-      this.getAllFoldersByUid();
-    });
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        this.getAllFoldersByUid();
+      });
   }
 
   getAllFoldersByUid() {
     this.sub = this.afAuth.authState.subscribe((user) => {
       //this.api.getFolders()
-      this.folderService.readPersonalFolderByUid(user.uid)
-        .subscribe({
-          next: (res) => {
-            this.dataSource = new MatTableDataSource(res);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          },
-          error: (err) => {
-            //alert("Erreur pendant la collection des éléments!!");
-            console.log('Error While fetching the records');
-          }
-        });
+      this.folderService.readPersonalFolderByUid(user.uid).subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (err) => {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        },
+      });
     });
   }
 
@@ -106,20 +114,23 @@ export class FolderComponent implements OnInit {
   }
 
   editFolder(row: any) {
-    this.dialog.open(DialogComponent, {
-      width: '30%',
-      data: row
-    }).afterClosed().subscribe(val => {
-      if (val === 'update') {
-        this.getAllFoldersByUid();
-      }
-    })
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+        data: row,
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'update') {
+          this.getAllFoldersByUid();
+        }
+      });
   }
 
   deleteFolder(id: number) {
-    this.apiService.deleteFolder(id)
+    this.apiService.deleteFolder(id);
 
-    console.log('Folder deleted : ', id)
+    console.log('Folder deleted : ', id);
 
     /*this.api.deleteFolder(id)
     .subscribe({
@@ -137,7 +148,7 @@ export class FolderComponent implements OnInit {
     })*/
 
     //this._snackBar.open(`${id}} supprimé avec succès`, '', {
-    this._snackBar.open("Classeur supprimé avec succès", '', {
+    this._snackBar.open('Classeur supprimé avec succès', '', {
       duration: 3000,
     });
   }
@@ -151,4 +162,28 @@ export class FolderComponent implements OnInit {
     }
   }
 
-}
+  /*sortFoldersByDateDesc() {
+    this.foldersByUid$.pipe(
+      map((invoices) =>
+        invoices.sort(
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        )
+      )
+    );
+  }*/
+
+  /*sortInvoicesByDateAsc() {
+    this.invoices$.pipe(
+      map((invoices) =>
+        invoices.sort(
+          (a, b) =>
+            new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        )
+      )
+    );*/
+    /*ngAfterViewInit() {
+      this.dataSource.sort = this.sort;
+    }*/
+  }
+

@@ -5,7 +5,6 @@
   </mat-drawer>
   <mat-drawer-content>
     <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
-
     <div class="container-fluid page">
         <div class="d-flex page__box p-3 mt-2">Utilisateurs</div>
         <div class="page__content shadow p-3 position-relative">
@@ -53,7 +52,6 @@
                             </div>
                         </div>
                     </div>-->
-                
                 </div>
                 <!--<div class="text-right">
                     <button mat-raised-button color="warn" (click)="openDialog()">
@@ -61,39 +59,32 @@
                         Ajouter un utilisateur
                     </button>
                 </div>-->
-    
                 <mat-form-field appearance="standard" style="width:100%">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
                 </mat-form-field>
-    
                 <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource" matSort style="width:100%">
-    
                         <!-- Progress Column -->
                         <!--<ng-container matColumnDef="nomClient">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
                             <td mat-cell *matCellDef="let row"> {{row.nomClient | uppercase }} </td>
                         </ng-container>-->
-    
                         <!-- nomClasseur Column -->
                         <ng-container matColumnDef="userName">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'utilisateur </th>
                             <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
                         </ng-container>
-    
                          <!-- Directory Column -->
                          <ng-container matColumnDef="userEmail">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
                             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                           </ng-container>
-    
                         <!-- comment Column -->
                         <ng-container matColumnDef="company">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Entreprise </th>
                             <td mat-cell *matCellDef="let row"> {{row.company | uppercase}} </td>
                         </ng-container>
-    
                         <!-- comment Column -->
                         <ng-container matColumnDef="isAdmin">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Type de compte </th>
@@ -102,21 +93,17 @@
                                 <span *ngIf="!row.isAdmin">Normal</span>
                             </td>
                         </ng-container>
-    
                         <!-- Date Column -->
                         <ng-container matColumnDef="createdAt">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le</th>
                             <td mat-cell *matCellDef="let row"> {{row.createdAt.toDate() | date: 'd MMMM y'}} </td>
                             <!--<td mat-cell *matCellDef="let row"> {{row.date.toDate() | date: 'yyyy'}}} </td>-->
                         </ng-container>
-    
-    
                         <!-- Fruit Column -->
                         <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                             <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>-->
                             <td mat-cell *matCellDef="let row">
-    
                                 <!--<button mat-icon-button color="primary" (click)="editUser(row)">
                              <mat-icon>edit</mat-icon>
                         </button>
@@ -125,16 +112,13 @@
                          </button>-->
                             </td>
                         </ng-container>
-    
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
                         <!-- Row shown when there is no matching data. -->
                         <tr class="mat-row" *matNoDataRow>
                             <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                         </tr>
                     </table>
-    
                     <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
                 </div>
                 <!--</div>-->
@@ -143,7 +127,3 @@
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
-
-
-
-

@@ -5,10 +5,8 @@
     </mat-drawer>
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
-
         <div class="container-fluid page">
             <div class="d-flex page__box p-3 mt-2 text-white">Fiche numérisation</div>
-
             <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
             <div id="content" #content class="page__content p-3 position-relative mt-5 ml-5" style="font-size: 23px;">
                 <img src="./../../../../assets/logo_sekoia.png" alt="Logo Sekoia Services SA">
@@ -19,52 +17,58 @@
                         <p *ngIf="singleFolder" class="">Client :  <strong>{{ singleFolder.nomClient }}</strong></p>
                     </div>
                     <div class="col-6 p-4">
-                        <p *ngIf="singleFolder" class="">Mois et année : <strong>{{ singleFolder.month}} {{ singleFolder.year}}</strong></p>
+                        <p *ngIf="singleFolder" class=""><span *ngIf="singleFolder.month">Mois</span><span *ngIf="singleFolder.month && singleFolder.year"> et </span> <span singleFolder.year> Année : </span><strong><span *ngIf="singleFolder.month">{{ singleFolder.month}}</span></strong>  <span><strong> {{ singleFolder.year }}</strong></span></p>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-6 p-4">
                         <p *ngIf="singleFolder" class="">Nom du classeur : <strong>{{ singleFolder.nomClasseur }}</strong></p>
                     </div>
                     <div class="col-6 p-4">
-                        <p *ngIf="singleFolder" class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }}</strong></p>
+                        <p *ngIf="singleFolder" class="">Répertoire de base : <strong>{{ singleFolder.directory | uppercase }} </strong></p>
                     </div>
                 </div>
-
                 <div class="border">
                     <h3 class="mt-5 mb-5 p-4 text-center">Données à utiliser pour la création du dossier scanné :</h3>
                     <div class="row">
-                        <div *ngIf="singleFolder.length>0" class="col-6 p-4">
-                            <p class="">Nom du (des) dossier(s) :</p>
-                        </div>
+                        <!--<div *ngIf="singleFolder.folder" class="col-6 p-4">
+                            <p>Nom du (des) dossier(s) :</p>
+                        </div>-->
                         <div class="col-6 p-4">
-                            <p class="">Nom du (des) fichiers(s) PDF : </p>
+                            <p >Nom du (des) fichiers(s) PDF : </p>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div *ngIf="singleFolder.length>0" class="col-6 p-4">
-                            <div *ngIf="singleFolder">
-                                <strong><p *ngFor="let item of singleFolder.folder">
-                                    <span>\{{ item }}</span>
-                                </p></strong>
-                            </div>
-                            <div *ngIf="singleFolder">
-                                <strong><p *ngFor="let item of singleFolder.folderCustom">
-                                    <span>\{{ item.folderCustom }}</span>
-                                </p></strong>
-                            </div>
-                        </div>
                         <div class="col-6 p-4">
-                            <p *ngIf="singleFolder" class=""><strong>{{singleFolder.nomClasseur}}<span *ngIf="singleFolder.specificite" style="color: rgb(15, 148, 224);">_{{singleFolder.specificite}}</span>.pdf</strong></p>
+                            <div *ngIf="singleFolder">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <strong><span *ngFor="let item of singleFolder.folder">
+                                        <span>          \{{ item }}</span>
+                                        </span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="singleFolder">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <strong><span *ngFor="let item of singleFolder.folderCustom">
+                                        <span>{{ item.folderCustom }}.pdf</span><br>
+                                        </span></strong>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
                         </div>
+                   
+                        <!--<div class="col-6 p-4">
+                            <p *ngIf="singleFolder" class=""><strong>{{singleFolder.nomClasseur}}<span *ngIf="singleFolder.specificite" style="color: rgb(15, 148, 224);">_{{singleFolder.specificite}}</span>.pdf</strong></p>
+                        </div>-->
                     </div>
                 </div>
-
                 <div class="row">
-                                    <p class="text-center" style="text-decoration: underline;">À remplir par le stagiaire </p>
-
+                    <p class="text-center" style="text-decoration: underline;">À remplir par le stagiaire </p>
                     <div class="col-12">
                         <table class="table">
                             <thead>
@@ -109,7 +113,6 @@
                         </table>
                     </div>
                 </div>
-
                 <div class="row mt-5" style="text-align: left!important;">
                     <div class="col-6 border p-4">
                         <h4  style="text-decoration: underline;">À remplir par le contrôleur n°1</h4>
@@ -182,123 +185,18 @@
                         <p>_____________________________________________________________</p>
                     </div>
                 </div>
-                <p>Date de création du classeur : {{singleFolder.createdAt.toDate() | date}} </p>
-
+                <p>Date de création du classeur: {{singleFolder.createdAt.toDate() | date:'dd MMMM yyyy'}} </p>
+                <p>Créé par:   <span *ngFor="let u of displayNameObs"><strong>
+              {{u.displayName}}
+            </strong></span></p>
             </div>
-
-
-
-            <!--<h5 class="text-center mt-5 mb-5">Données à utiliser pour la création du dossier scanné :</h5>-->
-
-
-            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-
-        <ng-container matColumnDef="nomClasseur">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element"> {{element.nomClasseur}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="directory">
-            <th mat-header-cell *matHeaderCellDef> Répertoire </th>
-            <td mat-cell *matCellDef="let element"> {{singleFolder.directory}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef> Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="etat">
-            <th mat-header-cell *matHeaderCellDef> Etat </th>
-            <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="comment">
-            <th mat-header-cell *matHeaderCellDef> Commentaire </th>
-            <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>-->
-
-            <!--<mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>Nom du(des) dossiers(s) :</mat-grid-tile>
-        <mat-grid-tile>Nom du(des) fichier(s) PDF :</mat-grid-tile>
-    </mat-grid-list>-->
-
-            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-
-        <ng-container matColumnDef="name_folder">
-            <th mat-header-cell *matHeaderCellDef> Nom du(des) dossier(s)</th>
-            <td mat-cell></td>
-        </ng-container>
-
-        <ng-container matColumnDef="name_file">
-            <th mat-header-cell *matHeaderCellDef> Nom du(des) fichier(s) PDF :</th>
-            <td mat-cell *matCellDef="let element"> nom2 </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>-->
-
-            <!--<mat-grid-list cols="6" rowHeight="2:1">
-
-        <mat-grid-tile>À remplir par le stagiaire</mat-grid-tile>
-        <mat-grid-tile>Date</mat-grid-tile>
-        <mat-grid-tile>Numériseur</mat-grid-tile>
-        <mat-grid-tile>Partie</mat-grid-tile>
-        <mat-grid-tile>État</mat-grid-tile>
-        <mat-grid-tile>Visa</mat-grid-tile>
-
-    </mat-grid-list>-->
-
-            <!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
-
-            <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- 
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef> Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="numeriseur">
-            <th mat-header-cell *matHeaderCellDef> Numériseur </th>
-            <td mat-cell *matCellDef="let element"> {{element.numeriseur}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="partie">
-            <th mat-header-cell *matHeaderCellDef> Partie </th>
-            <td mat-cell *matCellDef="let element"> {{element.partie}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="etat">
-            <th mat-header-cell *matHeaderCellDef> État</th>
-            <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="visa">
-            <th mat-header-cell *matHeaderCellDef> Visa</th>
-            <td mat-cell *matCellDef="let element"> {{element.visa}} </td>
-        </ng-container>
-     
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>-->
-
             <div class="p-3">
                 <div class="text-center">
                     <div class="mt-100 text-center">
                         <!--<p> {{folder.nomClient | uppercase }}</p>
-                <p>État : {{folder.etat }}</p>
-                <p>Comment : {{folder.comment }}</p>-->
-
+                            <p>État : {{folder.etat }}</p>
+                            <p>Comment : {{folder.comment }}   
+                            </p>-->
                         <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
                         <button class="btn btn-primary" type="button" (click)="openPDF()">Exporter en PDF</button>
                     </div>

@@ -1,0 +1,63 @@
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+        <div class="container-fluid page">
+            <div class="d-flex page__box p-3 mt-2 text-white">Fiche de mesure</div>
+            <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
+            <div id="content" #content class="page__content p-3 position-relative mt-5 ml-5" style="font-size: 23px;">
+                <img src="./../../../../assets/logo_sekoia.png" alt="Logo Sekoia Services SA">
+                <h2 class="mt-5 text-center" style="font-size: 45px!important;"></h2>
+                <!--<div class="page__content-data position-absolute">-->
+                <div class="border">
+                    <h3 class="mt-5 mb-5 p-4 text-center">Données de la mesure :</h3>
+                    <div class="row">
+                        <div class="col-6"><p>Nom du candidat</p></div>
+                        <div class="col-6"><p>Prénom du candidat</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"> <p>Date d'entrée : 28 novembre 2022</p></div>
+                        <div class="col-6"> <p>Date de fin : 23 décembre 2022</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">Type de mesure : OCE</div>
+                        <div class="col-6">Etat du dossier : Entrée confirmée</div>
+                    </div>   
+                </div>
+                <div class="border">
+                <h3 class="mt-5 mb-5 p-4 text-center">Résultat aux tests :</h3>
+                    <div class="row">
+                        <div class="col-4"><p>WORD : Notion Avancé</p></div> 
+                        <div class="col-4"><p>Excel : Notion Avancé</p></div> 
+                        <div class="col-4"><p>Powerpoint : Notion Avancé</p></div>                             
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><p>Comptabilité : Notion Avancé</p></div> 
+                        <div class="col-4"><p>Français : Notion Avancé</p></div> 
+                        <div class="col-4"><p>Admin : Notion Avancé</p></div>                             
+                    </div>
+                    <button class="btn btn-primary" type="button">Exporter les résultats en PDF</button>
+                </div>
+             
+                <p class="mt-5">Date de création de la mesure : 28 novembre 2022 </p>
+            </div>
+            <div class="p-3">
+                <div class="text-center">
+                    <div class="mt-100 text-center">
+                        <!--<p> {{folder.nomClient | uppercase }}</p>
+                            <p>État : {{folder.etat }}</p>
+                            <p>Comment : {{folder.comment }}   
+                            </p>-->
+                        <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
+                        <button class="btn btn-primary" type="button">Fiche des accès IT en PDF</button>
+                        <button class="btn btn-primary" type="button" (click)="openPDF()">Exporter en PDF</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

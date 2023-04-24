@@ -1,0 +1,94 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <div class="container-fluid page">
+        <div class="d-flex page__box p-3 mt-2">Factures</div>
+        <div class="page__content shadow p-3 position-relative">
+            <div class=" text-center">
+                <div class="bg-light p-3 rounded">
+      <h1>Liste de vos factures</h1>
+
+      <div class="alert bg-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 text-right">
+                            <button mat-raised-button color="warn" routerLink="/invoices/create">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Créer une facture
+                        </button>
+                        </div>
+      </div>
+      <div class="row">
+   
+      <hr />
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id.</th>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Total HT</th>
+            <th>Statut</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices">
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.customer_name }}</td>
+            <td>{{ invoice.description }}</td>
+            <td>
+              {{ invoice.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }}
+            </td>
+            <td>{{ invoice.total | currency : 'CHF' }}</td>
+
+            <td *ngIf="invoice.status === 'SENT'">
+              <span class="badge bg-dark">Envoyé</span>
+            </td>
+
+            <td *ngIf="invoice.status === 'PAID'">
+              <span class="badge bg-success">Payé</span>
+            </td>
+
+            <td *ngIf="invoice.status === 'CANCELED'">
+              <span class="badge bg-danger">Annulé</span>
+            </td>
+
+            <td>
+              <a
+                routerLink="/invoices/detail/{{ invoice.id }}"
+                class="btn btn-sm btn-primary"
+              >
+                Voir
+              </a>
+              <a
+                routerLink="/invoices/{{ invoice.id }}"
+                class="btn btn-sm btn-primary"
+              >
+                Modifier
+              </a>
+              <button
+                type="button"
+                class="btn btn-sm ms-1 btn-danger"
+                (click)="deleteInvoice(invoice.id!)"
+              >
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

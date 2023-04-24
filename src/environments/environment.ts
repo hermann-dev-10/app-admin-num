@@ -10,15 +10,17 @@ import { getAnalytics } from "firebase/analytics";
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-firebaseConfig : {
-  apiKey: "AIzaSyDGW6qjcoEuSHLoI8DNe7j0Fw2hUVd-XJE",
-  authDomain: "atelier-num.firebaseapp.com",
-  projectId: "atelier-num",
-  storageBucket: "atelier-num.appspot.com",
-  messagingSenderId: "38303227782",
-  appId: "1:38303227782:web:9ebef995861349fdf75607",
-  measurementId: "G-KRH20VXBK9"
-}
+  firebaseConfig: {
+    apiKey: 'AIzaSyDGW6qjcoEuSHLoI8DNe7j0Fw2hUVd-XJE',
+    authDomain: 'atelier-num.firebaseapp.com',
+    projectId: 'atelier-num',
+    storageBucket: 'atelier-num.appspot.com',
+    messagingSenderId: '38303227782',
+    appId: '1:38303227782:web:9ebef995861349fdf75607',
+    measurementId: 'G-KRH20VXBK9',
+  },
+  API_URL: 'http://localhost:3000',
+  //API_URL: 'https://x8ki-letl-twmt.n7.xano.io/api:SYp5DbIo',
 };
 
 // Initialize Firebase

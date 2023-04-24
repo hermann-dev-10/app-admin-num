@@ -1,0 +1,189 @@
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="container-fluid page">
+            <div class="d-flex page__box p-3 mt-2">Département Social</div>
+                <div class="page__content shadow p-3 position-relative">
+                    <div class="content container">
+                        <div class="row mt-5">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon green">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers actifs</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>10</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon blue">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers en attente</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>7</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon red">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers non actifs</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>5</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <button mat-raised-button color="warn" (click)="openDialogSocialFolder()">
+                                <mat-icon inline=true>note_add</mat-icon>
+                                Ajouter un dossier
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                             <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Jean Dupont</mat-card-title>
+                                    <mat-card-subtitle>Module AI</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée confirmé le 28 novembre 2022</p>
+                                        <p>Dossier actif</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button (click)="viewSocialDetail()">DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                              <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Christelle Donia</mat-card-title>
+                                    <mat-card-subtitle>Module OCE</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 28 novembre 2022</p>
+                                        <p>Dossier en attente</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                              <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>David Monolo</mat-card-title>
+                                    <mat-card-subtitle>Module AI</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 28 novembre 2022</p>
+                                        <p>Dossier non actif</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                               <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>John Doe</mat-card-title>
+                                    <mat-card-subtitle>Module OCE</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 28 novembre 2022</p>
+                                        <p>Dossier en attente</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                        </div>
+                        <div class="row mt-5">
+                             <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Jérémy Clark</mat-card-title>
+                                    <mat-card-subtitle>Module AI</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée confirmé le 5 décembre 2022</p>
+                                        <p>Dossier actif</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                              <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Sonia Milessa</mat-card-title>
+                                    <mat-card-subtitle>Module OCE</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 5 décembre 2022</p>
+                                        <p>Dossier en attente</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                              <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Laura Maromi</mat-card-title>
+                                    <mat-card-subtitle>Module AI</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 12 décembre 2022</p>
+                                        <p>Dossier non actif</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                               <div class="col-lg-3 col-md-6">
+                                <mat-card class="example-card">
+                                    <mat-card-title>Chris Yolano</mat-card-title>
+                                    <mat-card-subtitle>Module OCE</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <p>Entrée prévue le 12 décembre 2022</p>
+                                        <p>Dossier en attente</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>DÉTAIL</button>
+                                        <button mat-button>ARCHIVER</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

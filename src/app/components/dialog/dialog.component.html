@@ -5,19 +5,16 @@
                     <mat-label>Client</mat-label>
                     <mat-select formControlName="nomClient">
                         <mat-option>Choississez un client</mat-option>
-                        <mat-option  *ngFor="let customer of this.getAllUsers(); let i = index" value=""></mat-option>
-                        
-                        <mat-option value="Année inconnu">Client non renseigné</mat-option>
+                        <!--<mat-option  *ngFor="let customer of this.getAllUsers(); let i = index" value=""></mat-option>-->
+                        <mat-option value="FOJ">FOJ</mat-option>
+                        <mat-option value="Centre Espoir">Centre Espoir</mat-option>
+                        <mat-option value="Sekoia Services SA">Sekoia Services SA</mat-option>
+                        <mat-option value="Client inconnu">Client non renseigné</mat-option>
                     </mat-select>
                 </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Classeur</mat-label>
             <input formControlName="nomClasseur" matInput placeholder="Nom du classeur">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Répertoire de base</mat-label>
-            <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
         </mat-form-field>
 
         <div class="row">
@@ -26,6 +23,7 @@
                     <mat-label>Une année</mat-label>
                     <mat-select formControlName="year">
                         <mat-option>Choississez une année</mat-option>
+                          <mat-option value="2023">2023</mat-option>
                         <mat-option value="2022">2022</mat-option>
                         <mat-option value="2021">2021</mat-option>
                         <mat-option value="2020">2020</mat-option>
@@ -59,7 +57,7 @@
                     <mat-select formControlName="month">
                         <mat-option>Choississez un mois</mat-option>
                         <mat-option value="Janvier">Janvier</mat-option>
-                        <mat-option value="Fevrier">Février</mat-option>
+                        <mat-option value="Février">Février</mat-option>
                         <mat-option value="Mars">Mars</mat-option>
                         <mat-option value="Avril">Avril</mat-option>
                         <mat-option value="Mai">Mai</mat-option>
@@ -70,30 +68,45 @@
                         <mat-option value="Octobre">Octobre</mat-option>
                         <mat-option value="Novembre">Novembre</mat-option>
                         <mat-option value="Décembre">Décembre</mat-option>
-                        <mat-option value="Mois inconnu">Mois non renseigné</mat-option>
+                        <mat-option value="Inconnu">Mois non renseigné</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <mat-form-field appearance="outline">
+            <mat-label>Répertoire de base</mat-label>
+            <!--<ngx-mat-file-input formControlName="directory"></ngx-mat-file-input>-->
+            <!--<input hidden (change)="onFileSelected()" formControlName="fileInput" #fileInput type="file" id="file">-->
+            <textarea formControlName="directory" matInput placeholder="Répertoire de base"></textarea>
+            <!--<input type="file" id="monChemin" formControlName="directory" matInput onchange="filePath()">
+        <input hidden (change)="selectFile($event)" formControlName="fileInput" #fileInput type="file">-->
+        <mat-error>Ce champ est requis</mat-error>
+        </mat-form-field>
+
+        <!--<mat-form-field appearance="outline">
+            <mat-label>Spécificité</mat-label>
+            <textarea formControlName="specificite" matInput placeholder="Spécificité"></textarea>
+        </mat-form-field>-->
+        <!--<div class="row mt-3" *ngIf="noVisibleFieldFolder===false">-->
+            <div>
             <div class="col-12">
-                <mat-radio-group class="mb-5">
-                    <mat-label>Nom du (des) dossier(s) :</mat-label><br>
-                    <mat-radio-button [value]="0" class="example-margin" (change)="onChange($event)" class="mb-4">
+                <!--<mat-radio-group class="mb-5">
+                    <mat-label>Nom du (des) dossier(s) :</mat-label><br>-->
+                    <!--<mat-radio-button [value]="0" class="example-margin" (change)="onChange($event)" class="mb-4">
                         Mois
                     </mat-radio-button>
                     <mat-radio-button [value]="1" class="example-margin" (change)="onChange($event)">
                         Lettres
-                    </mat-radio-button>
+                    </mat-radio-button>-->
                     <!--<mat-radio-button [value]="2" class="example-margin" (change)="onChange($event)">
                         Nom personnalisé
-                    </mat-radio-button>-->
-                </mat-radio-group>
-                <div *ngIf="selectedValue === 0"> <!--Month-->
+                    </mat-radio-button>
+                </mat-radio-group>-->
+                <!--<div *ngIf="selectedValue === 0">--> <!--Month-->
                    
                     <!--<mat-label>Les mois: </mat-label><br>-->
-                        <ul formArrayName="listMonthLetter">
+                        <!--<ul formArrayName="listMonthLetter">
                             <li *ngFor="let month of listMonthLetter; let i = index"  class="list-style-none mr-10">
                                 <span *ngIf="month.type==='Month'">
                                     <input type="checkbox" [formControlName]="i">{{month.value}}
@@ -101,66 +114,90 @@
                             </li>
                         </ul>
                 </div>
-                <div *ngIf="selectedValue === 1">  <!-- Letter-->
+                <div *ngIf="selectedValue === 1">  --><!-- Letter-->
                 
                     <!--<mat-label>Les lettres: </mat-label><br>-->
-                        <ul>
+                        <!--<ul>
                             <li *ngFor="let month of listMonthLetter; let i = index" formArrayName="listMonthLetter" class="list-style-none mr-10">
                                 <span *ngIf="month.type==='Letter'">
                                 <input type="checkbox" [formControlName]="i">{{month.value}}</span>
                             </li>
                         </ul>
-                </div> 
-                <div *ngIf="selectedValue === 2">  <!-- Custom name-->
+                </div> -->
+                <!--<div *ngIf="selectedValue === 2">-->  <!-- Custom name-->
+                <div>
+                <mat-label>Nom personalisé : </mat-label><br>
                 
-                    <!--<mat-label>Nom personalisé : </mat-label><br>-->
+                    <!--<div class="row mt-3">
+                        <div class="col-12">
+                        <div *ngFor="let item of folders">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dossier:</mat-label>
+                                <textarea formControlName="folder" matInput >{{item.folder}}</textarea>
+                            </mat-form-field>
+                        </div>
+                        </div>
+                    </div>-->
 
-        <div class="row">
-            <div class="col-12">
-                <div formArrayName="title">
-                    <div *ngFor="let item of title.controls; let folderIndex=index" [formGroupName]="folderIndex">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Nom du dossier:</mat-label>
-                            <textarea formControlName="folder" matInput placeholder="Dossier"></textarea>
-                        </mat-form-field>
-                        <button class="mb-3" mat-raised-button color="warn" (click)="deleteSellingFolder(folderIndex)">
-                            <span class="mat-button-wrapper">
-                                <mat-icon _ngcontent-bsp-c180="" role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">delete</mat-icon>
-                            </span>
-                        </button>
+                    <!--<div class="row mt-3">
+                        <div class="col-12">
+                        <div *ngFor="let item of folders">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dossier:</mat-label>
+                                <textarea formControlName="folder" matInput >{{item.folder}}</textarea>
+                            </mat-form-field>
+                        </div>
+
+                        </div>
+                    </div>-->
+                    <!--<div class="row">
+
+                        <div class="col-12">
+                            <div formArrayName="title">
+                                <div *ngFor="let item of title.controls; let folderIndex=index" [formGroupName]="folderIndex">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nom du dossier:</mat-label>
+                                        <textarea formControlName="folder" matInput placeholder="Dossier"></textarea>
+                                    </mat-form-field>
+                                    <button class="mb-3" mat-raised-button color="warn" (click)="deleteSellingFolder(folderIndex)">
+                                        <span class="mat-button-wrapper">
+                                            <mat-icon _ngcontent-bsp-c180="" role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">delete</mat-icon>
+                                        </span>
+                                    </button>
+                                </div>
+                        <button mat-raised-button color="primary" (click)="addSellingFolder()" class="mt-3">Ajouter nouveau dossier</button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div formArrayName="selling_folders">
+                            <div *ngFor="let item of sellingFolders.controls; let folderIndex=index" [formGroupName]="folderIndex">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Dossier:</mat-label>
+                                    <textarea formControlName="folderCustom" matInput placeholder="Dossier"></textarea>
+                                </mat-form-field>
+                                <button class="mb-5" mat-raised-button color="warn" (click)="deleteSellingFolder(folderIndex)">X</button>
+                            </div>
+                            <button mat-raised-button color="primary" (click)="addSellingFolder()">Ajouter nouveau dossier</button>
+                            </div>
+                        </div>
                     </div>
-            <button mat-raised-button color="primary" (click)="addSellingFolder()" class="mt-3">Ajouter nouveau dossier</button>
-                </div>
-            </div>
-        </div>
-        <!--<div class="row mt-3">
-            <div class="col-12">
-             <div *ngFor="let item of folders">
-                <mat-form-field appearance="outline">
-                    <mat-label>Dossier:</mat-label>
-                    <textarea matInput >{{item.folder}}</textarea>
-                </mat-form-field>
-             </div>
-              </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-12">
-             <div *ngFor="let item of folders">
-                <mat-form-field appearance="outline">
-                    <mat-label>Dossier:</mat-label>
-                    <textarea formControlName="folder" matInput ></textarea>
-                    <p></p>
-                </mat-form-field>
-             </div>
-
-              </div>
-        </div>-->
-                       
+                    <!--<div class="row mt-3">
+                        <div class="col-12">
+                            <div *ngFor="let item of folders">
+                                <mat-form-field appearance="outline">
+                                 <span>Nombre de dossiers : {{folders.length}}</span>
+                                    <mat-label>Dossier3:</mat-label>
+                                    <textarea matInput >{{ item.folderCustom }}</textarea>
+                                    <p></p>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>-->
                 </div> 
             </div>
         </div>
-
         <div class="row mt-3">
              <div class="col-12">
                 <mat-radio-group formControlName="state">

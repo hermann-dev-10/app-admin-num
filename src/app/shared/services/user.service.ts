@@ -85,10 +85,9 @@ export class UserService {
     );
   }*/
 
-  readAllCompany() {
+  readAllUser() {
     return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
       ref.orderBy('createdAt', 'asc')
-      
     );
   }
 

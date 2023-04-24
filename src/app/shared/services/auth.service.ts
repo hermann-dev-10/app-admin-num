@@ -6,14 +6,17 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { Router } from '@angular/router';
 //import * as firebase from 'firebase/compat';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { rejects } from 'assert';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  // Ce Subject est un Observable qu'on pourra suivre et écouter partout dans l'application
+  // Il permet d'être au courant de l'état de l'authentification
+  authStatus$ = new BehaviorSubject<boolean>(false);
 
   result: any;
   isAuth = false;
@@ -22,14 +25,14 @@ export class AuthService {
   angularFireAuth: any;
 
   constructor(
-    public afs: AngularFirestore,   // Inject Firestore service
+    public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,  
+    public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) { 
-        /* Saving user data in localstorage when 
+  ) {
+    /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -38,82 +41,86 @@ export class AuthService {
         localStorage.setItem('user', '');
         //JSON.parse(localStorage.getItem('user'));
       }
-    })
+    });
   }
 
-  async checkAuth(){
+  async checkAuth() {
     const userCurrent = await this.afAuth.currentUser;
 
-    console.log('checkAuth - currentUser : ' + userCurrent)
+    console.log('checkAuth - currentUser : ' + userCurrent);
     if (userCurrent) {
       this.isAuth = true;
     } else {
       this.isAuth = false;
     }
-   return userCurrent;
-   }
+    return userCurrent;
+  }
 
-   getCurrentUser(): Observable<any> {
+  getCurrentUser(): Observable<any> {
     return this.angularFireAuth.authState;
   }
 
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return new Promise<void>((resolve, reject) => {
-      this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((result: { user: any; }) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['folder']);
+      this.afAuth
+        .signInWithEmailAndPassword(email, password)
+        .then((result: { user: any }) => {
+          this.ngZone.run(() => {
+            this.router.navigate(['folder']);
+          });
+          //this.SetUserData(result.user);
+        })
+        .catch((error: { message: any }) => {
+          reject();
+          window.alert(error.message);
+          console.log(error.message);
         });
-        //this.SetUserData(result.user);
-      }).catch((error: { message: any; }) => {
-        reject();
-        window.alert(error.message)
-        console.log(error.message);
-      })
-    })
-
+    });
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string) { //ASYNC ?
-    console.log('In SignUp function')
-    return this.afAuth.createUserWithEmailAndPassword(email, password) // AWAIT ?
-      .then((result:any) => {
+  SignUp(email: string, password: string) {
+    //ASYNC ?
+    console.log('In SignUp function');
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password) // AWAIT ?
+      .then((result: any) => {
         console.log('before send verification');
-        //Call the SendVerificaitonMail() function when new user sign 
-        //up and returns promise 
+        //Call the SendVerificaitonMail() function when new user sign
+        //up and returns promise
         this.SendVerificationMail();
         console.log('ok send verification');
         //this.SetUserData(result.user);
-      }).catch((error) => {
-        window.alert(error.message)
       })
+      .catch((error) => {
+        window.alert(error.message);
+      });
   }
 
-   //reécriture avec async await
-   // Sign up with email/password
-  
-   async SignUpWork(email: string, password: string) {
+  //reécriture avec async await
+  // Sign up with email/password
 
+  async SignUpWork(email: string, password: string) {
     try {
       // code that we will 'try' to run
-      this.result = await this.afAuth.createUserWithEmailAndPassword(email, password) 
+      this.result = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
       console.log('this.result', this.result);
 
       console.log('before send verification');
-      //Call the SendVerificaitonMail() function when new user sign 
-      //up and returns promise 
+      //Call the SendVerificaitonMail() function when new user sign
+      //up and returns promise
       this.SendVerificationMail();
       console.log('ok send verification');
       //this.SetUserData(this.result.user);
-
-
-     } catch(error) {
+    } catch (error) {
       // code to run if there are any problems
       console.log('ERROR', error);
       this.errorMessage = 'Une erreur est survenue, veuillez recommencer';
-     }
+    }
 
     /*this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
 
@@ -143,68 +150,71 @@ export class AuthService {
     }*/
   }
 
-   // Send email verfificaiton when new user sign up
-   SendVerificationMail() {
+  // Send email verfificaiton when new user sign up
+  SendVerificationMail() {
     console.log('in SendVerificationMail()');
-    return this.afAuth.currentUser.then(u => u?.sendEmailVerification())
-    .then(() => {
-      console.log('this.afAuth.currentUser',this.afAuth.currentUser);
-      this.router.navigate(['verify-email']);
-    })
+    return this.afAuth.currentUser
+      .then((u) => u?.sendEmailVerification())
+      .then(() => {
+        console.log('this.afAuth.currentUser', this.afAuth.currentUser);
+        this.router.navigate(['verify-email']);
+      });
   }
 
-   // Reset Forggot password
-   ForgotPassword(passwordResetEmail:any) {
-    return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
-    .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
-    }).catch((error:any) => {
-      window.alert(error)
-    })
+  // Reset Forggot password
+  ForgotPassword(passwordResetEmail: any) {
+    return this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      })
+      .catch((error: any) => {
+        window.alert(error);
+      });
   }
 
   // Auth logic to run auth providers
-  AuthLogin(provider:any) {
-    return this.afAuth.signInWithPopup(provider)
-    .then((result:any) => {
-       this.ngZone.run(() => {
+  AuthLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result: any) => {
+        this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
-        })
-      //this.SetUserData(result.user);
-    }).catch((error) => {
-      window.alert(error)
-    })
+        });
+        //this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   }
 
   get isLoggedIn(): boolean {
-
-  const user = firebase.auth().currentUser;
-  firebase.auth().onAuthStateChanged(user => {
-    /*if(user?.emailVerified){
+    const user = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged((user) => {
+      /*if(user?.emailVerified){
       console.log('email is verified');
     }else{
       console.log('email not verified');
       //window.alert('Please validate your account in the email you receive');
     }*/
-  })   
-  //const user = JSON.parse(localStorage.getItem('user'));
-  //const user = localStorage.getItem('user');
-  return (user !== null && user.emailVerified !== false) ? true : false;
-   //return (user !== null) ? true : false;
-}
+    });
+    //const user = JSON.parse(localStorage.getItem('user'));
+    //const user = localStorage.getItem('user');
+    return user !== null && user.emailVerified !== false ? true : false;
+    //return (user !== null) ? true : false;
+  }
 
- // Sign out 
- SignOut() {
-  return this.afAuth.signOut().then(() => {
-    localStorage.removeItem('user'); //to test if it's useful
-    location.reload();  //test if it's the best way to do it ? Check with the obsersables
-    this.router.navigate(['login']);
-   
-    //I found that when I log out the side bar is present despite my condition to display it only when the user is connected. 
-    //At the beginning it works well but when I disconnect it remains displayed. But if I refresh the page, the sidebar disappears.
-    //https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
-    //location.reload(); //I added this piece of code to reload the page to make the side bar disappear
-  })
-}
+  // Sign out
+  SignOut() {
+    return this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user'); //to test if it's useful
+      location.reload(); //test if it's the best way to do it ? Check with the obsersables
+      this.router.navigate(['login']);
 
+      //I found that when I log out the side bar is present despite my condition to display it only when the user is connected.
+      //At the beginning it works well but when I disconnect it remains displayed. But if I refresh the page, the sidebar disappears.
+      //https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
+      //location.reload(); //I added this piece of code to reload the page to make the side bar disappear
+    });
+  }
 }

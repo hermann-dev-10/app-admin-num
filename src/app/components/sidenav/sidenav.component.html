@@ -9,16 +9,26 @@
         <mat-icon>home</mat-icon> Accueil
     </a>-->
     <div *ngFor="let u of displayNameObs">
-       <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
-        <mat-icon>dashboard</mat-icon> Tableau de bord
+    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>Dashboard
+    </a>
+     <a mat-list-item routerLinkActive="list-item-active" routerLink="/folder">
+        <mat-icon>folder</mat-icon> Atelier Numérisation
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/invoices">
+        <mat-icon>folder</mat-icon> Factures
+    </a>
+    <!--<a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/admin-folder">
+        <mat-icon>folder</mat-icon> Admin Atelier Numérisation
+    </a>-->
+    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/social">
+        <mat-icon>supervised_user_circle</mat-icon>Département Social
     </a>
     <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/user">
-        <mat-icon>supervisor_account</mat-icon>
+        <mat-icon>perm_identity</mat-icon>
         Utilisateurs
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/folder">
-        <mat-icon>folder</mat-icon> Classeurs
-    </a>
+   
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/profil">
         <mat-icon>perm_identity</mat-icon> Profil
     </a> 
@@ -28,7 +38,7 @@
     <!--<a mat-list-item routerLinkActive="list-item-active" routerLink="/stats">
         <mat-icon>assessment icon</mat-icon> Statistiques
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/billing">
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/invoices">
         <mat-icon>attach_money</mat-icon> Facturation
         </a> -->
 

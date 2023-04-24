@@ -12,7 +12,6 @@
                     <div class="row" *ngIf="authService.userData as user">
                         <div class="col-md-12">
                             <div class="media">
-
                                 <!--<img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://st3.depositphotos.com/1007566/13247/v/600/depositphotos_132471910-stock-illustration-head-human-profile-icon.jpg'}}" class="w-25" alt="{{user.displayName}}">-->
                                 <div class="media-body">
                                     <!--<h1>Hello: <strong>{{(user.displayName) ? user.displayName : user.email }}</strong></h1>-->
@@ -23,26 +22,18 @@
                                         <h4 *ngIf="u.isAdmin">Type de compte : <strong>Administrateur</strong></h4>
                                         <h4 *ngIf="!u.isAdmin">Type de compte : <strong>Normal</strong></h4>
                                         <h4>Entreprise : <strong>{{u.company}}</strong></h4>
-                                        <h4>Compte créé le : <strong>{{u.createdAt.toDate() | date: 'fullDate'}}</strong></h4>
+                                        <h4>Compte créé le : <strong>{{u.createdAt.toDate() | date: 'dd MMMM yyyy'}}</strong></h4>
                                     </div>
-
                                     <div *ngIf="user.displayName">
                                         <!-- Display the name from Google database -->
                                         <h3>Hello : {{user.displayName}}</h3>
                                     </div>
-
-
                                     <!--<p style="font-size: 24px;">User ID: <strong>{{user.uid}}</strong></p>-->
-
                                     <!--<p>Email Verified: <strong>{{user.emailVerified}}</strong></p>-->
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!-- <p *ngIf="this.user">Hallo : {{uniqueUser | async}}</p> -->
                 </div>
             </div>

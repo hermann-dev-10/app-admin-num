@@ -1,0 +1,186 @@
+<h1 mat-dialog-title>{{titleModal}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="folderForm">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nom</mat-label>
+                    <input formControlName="name" matInput placeholder="Nom du stagiaire">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Prénom</mat-label>
+                    <input formControlName="surname" matInput placeholder="Prénom du stagiaire">
+                </mat-form-field> 
+            </div> 
+        </div>
+        
+
+        <div class="row">
+            <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Type module</mat-label>
+                    <mat-select formControlName="typeModule">
+                         <mat-option>Choississez un module</mat-option>
+                          <mat-option value="Module OCE">Module OCE</mat-option>
+                          <mat-option value="Module AI">Module AI</mat-option>
+                          <mat-option value="Module SRP">Module SRP</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+             <div class="col-6">
+                 <mat-form-field appearance="outline">
+                    <mat-label>Conseillère</mat-label>
+                    <mat-select formControlName="nomConseillere">
+                        <mat-option>Choississez une conseillère</mat-option>
+                        <!--<mat-option  *ngFor="let customer of this.getAllUsers(); let i = index" value=""></mat-option>-->
+                        <mat-option value="Virginie Delachenal">Virginie Delachenal</mat-option>
+                        <mat-option value="Laurence Kohler">Laurence Kohler</mat-option>
+                        <mat-option value="Conseillère non renseigné">Conseillère non renseigné</mat-option>
+                    </mat-select>
+                </mat-form-field>
+             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Date d'entrée</mat-label>
+                    <input  formControlName="dateStart" matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+             </div>
+
+            <div class="col-6">
+                 <mat-form-field appearance="outline">
+                    <mat-label>Date de fin</mat-label>
+                    <input  formControlName="dateEnd" matInput [matDatepicker]="picker2">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+             </div>
+        </div>
+  
+        <div class="row mt-2">
+            <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Profil du stage</mat-label>
+                    <mat-select formControlName="stateFolder">
+                          <mat-option>Choississez un profil</mat-option>
+                          <mat-option value="Numérisation / Archivage">Numérisation / Archivage</mat-option>
+                          <mat-option value="Numérisation Média">Numérisation Média</mat-option>
+                          <mat-option value="Comptabilité">Comptabilité</mat-option>
+                          <mat-option value="Ressources Humaines">Ressources Humaines</mat-option>
+                          <mat-option value="Call Center / Guichet unique">Call Center / Guichet unique</mat-option>
+                          <mat-option value="Réception">Réception</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>État du dossier</mat-label>
+                    <mat-select formControlName="stateFolder">
+                         <mat-option>Choississez un état</mat-option>
+                          <mat-option value="Dossier en attente">Dossier en attente</mat-option>
+                          <mat-option value="Dossier actif">Dossier actif</mat-option>
+                          <mat-option value="Dossier non actif">Dossier non actif</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Poste de travail attribué</mat-label>
+                    <mat-select formControlName="poste">
+                          <mat-option>Choississez un poste de travail</mat-option>
+                          <mat-option value="NUM 1">NUM 1</mat-option>
+                          <mat-option value="NUM 2">NUM 2</mat-option>
+                          <mat-option value="NUM 3">NUM 3</mat-option>
+                          <mat-option value="NUM 4">NUM 4</mat-option>
+                          <mat-option value="NUM 5">NUM 5</mat-option>
+                          <mat-option value="NUM 6">NUM 6</mat-option>  
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+              <div class="row">
+                    <div class="col-6 border p-4">
+                        <h5>Tests bureautiques</h5>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                            <input type="checkbox"> Word
+                            </div>
+                            <div class="col-12">
+                               <input type="checkbox">  Excel
+                            </div>
+                               <div class="col-12">
+                                <input type="checkbox"> Powerpoint
+                            </div>
+                        </div>                     
+                    </div>
+                      <div class="col-6 border p-4">
+                        <h5>Tests linguistiques</h5>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                            <input type="checkbox">  Français
+                            </div>
+                            <div class="col-12">
+                               <input type="checkbox">  Anglais
+                            </div>
+                               <div class="col-12">
+                                <input type="checkbox">  Italien
+                            </div>
+                        </div>                     
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <mat-label>Commentaire:</mat-label>
+            <textarea formControlName="comment" matInput ></textarea>
+        </div>
+
+        <div class="row mt-2">
+             <!--<div class="col">
+                    <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+             </div>--> 
+
+             <div class="col">
+                <input type="file" class="file-input"
+                       (change)="onFileSelected($event)" #fileUpload>
+
+                <div class="file-upload">
+
+                {{fileName || "Aucun fichier n'a encore été téléchargé."}}
+
+                    <button mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+             </div>
+        </div>
+         <!--<div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>DE - COORDONNÉES</mat-label>
+                    <input
+                        type="file"
+                        class="absolute top-0 z-10 h-full w-full cursor-pointer opacity-0"
+                        accept=".jpeg,.jpg,.png,.pdf"
+                    />
+                </mat-form-field>
+            </div>
+        </div>-->
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <!--<button class="ml-8" mat-raised-button color="primary" (click)="addFolderNext()">{{addNextBtn}}</button>-->
+    <button class="ml-8" mat-raised-button color="primary" (click)="addFolder()">{{actionBtn}}</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+</div>
