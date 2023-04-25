@@ -66,6 +66,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DialogSocialComponent } from './components/social/dialog-social/dialog-social.component';
 import { SingleSocialComponent } from './components/social/single-social/single-social.component';
 import { AlertDialogComponent } from './components/dialog/alert-dialog/alert-dialog.component';
+
 import { InvoiceCreationComponent } from './components/invoice/invoice-creation/invoice-creation.component';
 import { InvoiceDetailComponent } from './components/invoice/invoice-detail/invoice-detail.component';
 import { InvoiceEditionComponent } from './components/invoice/invoice-edition/invoice-edition.component';
@@ -73,7 +74,19 @@ import { InvoiceFormComponent } from './components/invoice/invoice-form/invoice-
 import { InvoicesListComponent } from './components/invoice/invoice-list/invoices-list.component';
 import { InvoiceFormGeneralComponent } from './components/invoice/invoice-form/invoice-form-general.components';
 import { InvoiceFormDetailsComponent } from './components/invoice/invoice-form/invoice-form-details.component';
+import { InvoiceFormTotalsComponent } from './components/invoice/invoice-form/invoice-form-totals.component';
+
 import { InvoiceService } from './shared/services/invoice.service';
+
+import { ClasseurCreationComponent } from './components/classeur/classeur-creation/classeur-creation.component';
+import { ClasseurDetailComponent } from './components/classeur/classeur-detail/classeur-detail.component';
+import { ClasseurEditionComponent } from './components/classeur/classeur-edition/invoice-edition.component';
+import { ClasseurFormComponent } from './components/classeur/classeur-form/classeur-form.component';
+import { ClasseursListComponent } from './components/classeur/classeurs-list/classeurs-list.component';
+import { ClasseurFormGeneralComponent } from './components/classeur/classeur-form/classeur-form-general.components';
+import { ClasseurFormDetailsComponent } from './components/classeur/classeur-form/classeur-form-details.component';
+import { ClasseurService } from './shared/services/classeur.service';
+
 
 @NgModule({
   declarations: [
@@ -107,6 +120,14 @@ import { InvoiceService } from './shared/services/invoice.service';
     InvoicesListComponent,
     InvoiceFormGeneralComponent,
     InvoiceFormDetailsComponent,
+    InvoiceFormTotalsComponent,
+    ClasseurCreationComponent,
+    ClasseurDetailComponent,
+    ClasseurEditionComponent,
+    ClasseurFormComponent,
+    ClasseursListComponent,
+    ClasseurFormGeneralComponent,
+    ClasseurFormDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +165,7 @@ import { InvoiceService } from './shared/services/invoice.service';
     BrowserAnimationsModule,
     NgChartsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, InvoiceService],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, InvoiceService, ClasseurService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

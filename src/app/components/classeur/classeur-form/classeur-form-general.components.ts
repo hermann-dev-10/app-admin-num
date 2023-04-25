@@ -1,21 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { InvoiceFormType } from './invoice-form-type';
+import { ClasseurFormType } from './classeur-form-type';
 
 @Component({
-  selector: 'app-invoice-form-general',
+  selector: 'app-classeur-form-general',
   template: `
-  
     <div class="row" [formGroup]="parent" *ngIf="parent">
       <div class="col">
-        <label for="description">Description de la facture</label>
+        <label for="description">Description du classeur</label>
         <input
           formControlName="description"
           [class.is-invalid]="description?.touched && description?.invalid"
           type="text"
           id="description"
           name="description"
-          placeholder="Description de la facture"
+          placeholder="Description du classeur"
           class="form-control mb-3"
         />
         <p class="invalid-feedback">
@@ -34,7 +33,7 @@ import { InvoiceFormType } from './invoice-form-type';
           class="form-control mb-3"
         />
         <p class="invalid-feedback">
-          Le client est obligatoire et doit faire au moins 3 caractères !
+          Le nom du client est obligatoire et doit faire au moins 3 caractères !
         </p>
       </div>
       <div class="col">
@@ -45,18 +44,19 @@ import { InvoiceFormType } from './invoice-form-type';
           id="status"
           class="form-control mb-3"
         >
-          <option value="SENT">Envoyée</option>
-          <option value="PAID">Payée</option>
-          <option value="CANCELED">Annulée</option>
+          <option value="NOT_STARTED">Pas commencé</option>
+          <option value="STARTED">Commencé</option>
+          <option value="PROGRESSING">En cours</option>
+          <option value="DONE">Terminé</option>
         </select>
       </div>
     </div>
   `,
   styles: [],
 })
-export class InvoiceFormGeneralComponent {
+export class ClasseurFormGeneralComponent {
   @Input()
-  parent?: InvoiceFormType;
+  parent?: ClasseurFormType;
 
   get customerName() {
     return this.parent?.controls.customer_name;

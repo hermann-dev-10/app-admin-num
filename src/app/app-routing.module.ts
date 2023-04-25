@@ -19,6 +19,10 @@ import { InvoicesListComponent } from './components/invoice/invoice-list/invoice
 import { InvoiceCreationComponent } from './components/invoice/invoice-creation/invoice-creation.component';
 import { InvoiceDetailComponent } from './components/invoice/invoice-detail/invoice-detail.component';
 import { InvoiceEditionComponent } from './components/invoice/invoice-edition/invoice-edition.component';
+import { ClasseursListComponent } from './components/classeur/classeurs-list/classeurs-list.component';
+import { ClasseurCreationComponent } from './components/classeur/classeur-creation/classeur-creation.component';
+import { ClasseurDetailComponent } from './components/classeur/classeur-detail/classeur-detail.component';
+import { ClasseurEditionComponent } from './components/classeur/classeur-edition/invoice-edition.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -52,6 +56,15 @@ const routes: Routes = [
   { path: 'invoices/create', component: InvoiceCreationComponent },
   { path: 'invoices/detail/:id', component: InvoiceDetailComponent },
   { path: 'invoices/:id', component: InvoiceEditionComponent },
+
+  {
+    path: 'classeurs',
+    component: ClasseursListComponent,
+    /*canActivate: [AuthGuard],*/
+  },
+  { path: 'classeurs/create', component: ClasseurCreationComponent },
+  { path: 'classeurs/detail/:id', component: ClasseurDetailComponent },
+  { path: 'classeurs/:id', component: ClasseurEditionComponent },
 
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },

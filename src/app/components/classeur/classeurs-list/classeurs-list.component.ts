@@ -6,8 +6,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 import { takeUntil, map } from 'rxjs/operators';
-import { Invoice } from '../invoice';
-import { InvoiceService } from '../../../shared/services/invoice.service';
+import { Classeur } from '../classeur';
+import { ClasseurService } from '../../../shared/services/classeur.service';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,16 +17,15 @@ import { MatSort } from '@angular/material/sort';
 import { FolderService } from 'src/app/shared/services/folder.service';
 
 @Component({
-  selector: 'app-invoices-list',
-  templateUrl: './invoices-list.component.html',
-  styleUrls: ['./invoices-list.component.scss'],
+  selector: 'app-classeurs-list',
+  templateUrl: './classeurs-list.component.html',
+  styleUrls: ['./classeurs-list.component.scss'],
 })
-export class InvoicesListComponent implements OnInit {
+export class ClasseursListComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'customer_name',
     'description',
-    'total',
     'status',
     'created_at',
     'action',
@@ -48,8 +47,8 @@ export class InvoicesListComponent implements OnInit {
   cancelButtonText = 'Cancel';
 
   errorMessage = '';
-  invoices$!: Observable<Invoice[]>;
-  invoices: Invoice[] = [];
+  classeurs$!: Observable<Classeur[]>;
+  classeurs: Classeur[] = [];
   destroy$ = new Subject();
   deleteSub?: Subscription;
   findAllSub?: Subscription;
@@ -59,7 +58,7 @@ export class InvoicesListComponent implements OnInit {
   result: any;
 
   constructor(
-    private invoiceService: InvoiceService,
+    private classeurService: ClasseurService,
     private afs: AngularFireStorage,
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -68,23 +67,18 @@ export class InvoicesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //this.classeurs$ = this.classeurService.findAll();
 
+    this.getAllClasseurs();
+    console.log('Nombre: ', this.classeurs.length);
 
-
-    //this.invoices$ = this.invoiceService.findAll();
-
- 
-
-    this.getAllInvoices();
-
-    //this.sortInvoicesByDateDesc();
-
+    //this.sortClasseursByDateDesc();
   }
 
-  /*sortInvoicesByDateDesc() {
-    this.invoices$.pipe(
-      map((invoices) =>
-        invoices.sort(
+  /*sortClasseursByDateDesc() {
+    this.classeurs$.pipe(
+      map((classeurs) =>
+        classeurs.sort(
           (a, b) =>
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         )
@@ -92,10 +86,10 @@ export class InvoicesListComponent implements OnInit {
     );
   }*/
 
-  /*sortInvoicesByDateAsc() {
-    this.invoices$.pipe(
-      map((invoices) =>
-        invoices.sort(
+  /*sortClasseursByDateAsc() {
+    this.classeurs$.pipe(
+      map((classeurs) =>
+        classeurs.sort(
           (a, b) =>
             new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
         )
@@ -103,30 +97,30 @@ export class InvoicesListComponent implements OnInit {
     );
   }*/
 
-  deleteInvoice(id: number) {
-    const oldInvoices = [...this.invoices];
+  deleteClasseur(id: number) {
+    const oldClasseurs = [...this.classeurs];
 
-    this.invoices = this.invoices.filter((item) => item.id !== id);
+    this.classeurs = this.classeurs.filter((item) => item.id !== id);
 
-    this.deleteSub = this.invoiceService
+    this.deleteSub = this.classeurService
       .delete(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.getAllInvoices(); //I call back the getAllInvoices function so that the list is updated in the interface
+          this.getAllClasseurs(); //I call back the getAllClasseurs function so that the list is updated in the interface
         },
         error: () => {
           this.errorMessage =
-            'Il y a eu un problème lors de la suppression de la facture';
-          this.invoices = oldInvoices;
+            'Il y a eu un problème lors de la suppression du classeur';
+          this.classeurs = oldClasseurs;
         },
       });
 
-    console.log('Invoice n°', id, 'deleted.');
+    console.log('Classeur n°', id, 'deleted.');
   }
 
-  getAllInvoices() {
-    this.invoiceService
+  getAllClasseurs() {
+    this.classeurService
       .findAll()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -141,17 +135,17 @@ export class InvoicesListComponent implements OnInit {
         },
       });
 
+    this.findAllSub = this.classeurService
+      .findAll()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (classeurs) => (this.classeurs = classeurs),
+        error: () =>
+          (this.errorMessage =
+            'Il y a eu un problème lors de la récupération des classeurs'),
+      });
 
-         this.findAllSub = this.invoiceService
-           .findAll()
-           .pipe(takeUntil(this.destroy$))
-           .subscribe({
-             next: (invoices) => (this.invoices = invoices),
-             error: () =>
-               (this.errorMessage =
-                 'Il y a eu un problème lors de la récupération des factures'),
-           });
-
+      console.log('this.findAllSub:', this.findAllSub);
   }
 
   /*getUser(id: any) {
@@ -165,7 +159,7 @@ export class InvoicesListComponent implements OnInit {
   // getAllFoldersByUid() {
   //   this.sub = this.afAuth.authState.subscribe((user) => {
   //     //this.api.getFolders()
-  //     this.invoiceService.findAll().subscribe({
+  //     this.classeurService.findAll().subscribe({
   //       next: (res) => {
   //         this.dataSource = new MatTableDataSource(res);
   //         this.dataSource.paginator = this.paginator;

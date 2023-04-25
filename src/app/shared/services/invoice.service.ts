@@ -15,7 +15,7 @@ export class InvoiceService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   postInvoice(registerObj: any) {
-    return this.http.post<any>(`${this.API_URL}/invoiceList`, registerObj);
+    return this.http.post<Invoice[]>(`${this.API_URL}/invoiceList`, registerObj);
   }
 
   getRegisteredInvoice() {
@@ -37,7 +37,7 @@ export class InvoiceService {
 
   //////////////////////////////////////////////////////////
 
-  create(invoiceData: Invoice) {
+  /*create(invoiceData: Invoice) {
     return this.auth.authStatus$.pipe(
       tap((token) => {
         if (!token) {
@@ -52,7 +52,7 @@ export class InvoiceService {
         });
       })
     );
-  }
+  }*/
 
   update(invoiceData: Invoice) {
     return this.http.put<Invoice>(
@@ -62,7 +62,7 @@ export class InvoiceService {
   }
 
   delete(id: number) {
-    return this.http.delete(this.API_URL + '/invoiceList/' + id);
+    return this.http.delete<Invoice>(this.API_URL + '/invoiceList/' + id);
   }
 
   findAll(): Observable<Invoice[]> {

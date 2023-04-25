@@ -8,15 +8,14 @@ import { map, switchMap, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-invoice-edition',
   template: `
-    <h1>Modifier une facture</h1>
+    <!--<h1>Modifier une facture</h1>
     <p class="alert bg-info text-white">
       Remplissez les informations de la facture afin de la retrouver dans votre
       liste plus tard !
     </p>
     <p class="alert bg-warning text-white" *ngIf="errorMessage">
       {{ errorMessage }}
-    </p>
-
+    </p>-->
     <app-invoice-form
       *ngIf="invoice$ | async as invoice"
       [invoice]="invoice"

@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { InvoiceFormType } from './invoice-form-type';
+import { ClasseurFormType } from './classeur-form-type';
 
 @Component({
-  selector: 'app-invoice-form-details',
+  selector: 'app-classeur-form-details',
   template: `
     <ng-container [formGroup]="parent" *ngIf="parent && details">
-      <!--<h3>Détails de la facture</h3>-->
+      <!--<h3>Détails du classeur</h3>-->
       <div class="alert bg-warning text-white" *ngIf="details.length === 0">
-        <p>Vous devez ajouter des détails à votre facture</p>
+        <p>Vous devez ajouter des détails à votre classeur</p>
         <button
           type="button"
           class="btn btn-sm btn-outline-light"
@@ -19,62 +19,54 @@ import { InvoiceFormType } from './invoice-form-type';
         </button>
       </div>
       <section formArrayName="details">
+        <h5>Détails</h5>
+
         <div
           class="detail-row"
           [formGroup]="group"
           *ngFor="let group of details.controls; let i = index"
         >
           <div class="row mb-3">
-            <div class="col-7">
-              <label for="description">Description</label>
+            <div class="col-5">
+              <label>Nom du fichier</label>
               <input
-                formControlName="description"
+                formControlName="file_name"
                 [class.is-invalid]="
-                  group.controls.description.touched &&
-                  group.controls.description.invalid
+                  group.controls.file_name.touched &&
+                  group.controls.file_name.invalid
                 "
-                name="description_{{ i }}"
-                id="description_{{ i }}"
+                name="file_name_{{ i }}"
+                id="file_name_{{ i }}"
                 type="text"
-                placeholder="Description"
+                placeholder="Nom du fichier"
                 class="form-control"
               />
               <p class="invalid-feedback">
-                La description est obligatoire et doit faire au moins 5
-                caractères !
+                Le nom du fichier est obligatoire !
               </p>
             </div>
-            <div class="col-2">
-              <label for="amount">Montant</label>
+
+            <div class="col-5">
+              <label>Nom du dossier</label>
 
               <input
-                formControlName="amount"
+                formControlName="folder_name"
                 [class.is-invalid]="
-                  group.controls.amount.touched && group.controls.amount.invalid
+                  group.controls.folder_name.touched &&
+                  group.controls.folder_name.invalid
                 "
-                name="amount_{{ i }}"
-                id="amount_{{ i }}"
-                type="number"
-                placeholder="Montant"
+                name="folder_name{{ i }}"
+                id="folder_name{{ i }}"
+                type="text"
+                placeholder="Nom du dossier"
                 class="form-control"
               />
-              <p class="invalid-feedback">Le montant est obligatoire</p>
+              <p class="invalid-feedback">
+                Le nom du dossier est obligatoire !
+              </p>
             </div>
-            <div class="col-2">
-              <label for="quantity">Quantité</label>
+            
 
-              <input
-                formControlName="quantity"
-                [class.is-invalid]="
-                  group.controls.quantity.touched &&
-                  group.controls.quantity.invalid
-                "
-                type="number"
-                placeholder="Quantité"
-                class="form-control"
-              />
-              <p class="invalid-feedback">La quantité est obligatoire</p>
-            </div>
             <div class="col-1">
               <br>
               <button
@@ -102,8 +94,8 @@ import { InvoiceFormType } from './invoice-form-type';
   `,
   styles: [],
 })
-export class InvoiceFormDetailsComponent {
-  @Input('parent') parent?: InvoiceFormType;
+export class ClasseurFormDetailsComponent {
+  @Input('parent') parent?: ClasseurFormType;
 
   @Output('add-detail') detailsAddedEvent = new EventEmitter();
 

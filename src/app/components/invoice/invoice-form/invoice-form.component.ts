@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
       <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
         <div class="container-fluid page">
-          <div class="d-flex page__box p-3 mt-2">Facture</div>
+          <div class="d-flex page__box p-3 mt-2">Détails de la facture</div>
           <div class="page__content shadow p-3 position-relative">
             <div class="text-center">
               <form [formGroup]="invoiceForm" (submit)="onSubmit()">
@@ -43,9 +43,14 @@ import { Router } from '@angular/router';
 
                 <hr />
 
+                <app-invoice-form-totals
+                  [total]="total"
+                ></app-invoice-form-totals>
+
+
                 <div class="text-center">
                   <div class="d-flex">
-                    <button class="w-sm-auto btn btn-success " id="submit">
+                    <button class="w-sm-auto btn btn-primary" id="submit">
                       Enregistrer
                     </button>
 
@@ -110,7 +115,11 @@ export class InvoiceFormComponent implements OnInit {
     }
   );*/
 
-  constructor(private fb: FormBuilder, private invoiceService: InvoiceService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     if (!this.invoice) {
@@ -134,6 +143,7 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   get total() {
+    console.log('TOTAL ? OK ?');
     return this.details.value.reduce((itemTotal: number, item) => {
       return itemTotal + item.amount * item.quantity;
     }, 0);

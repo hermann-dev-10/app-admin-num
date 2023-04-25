@@ -18,9 +18,11 @@
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/invoices">
         <mat-icon>folder</mat-icon> Factures
     </a>
-    <!--<a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/admin-folder">
-        <mat-icon>folder</mat-icon> Admin Atelier Numérisation
-    </a>-->
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/classeurs">
+        <mat-icon>folder</mat-icon> Classeurs
+    </a>
+ 
+    
     <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/social">
         <mat-icon>supervised_user_circle</mat-icon>Département Social
     </a>
