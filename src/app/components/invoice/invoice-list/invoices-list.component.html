@@ -10,19 +10,68 @@
         <div class="page__content shadow p-3 position-relative">
             <div class=" text-center">
                 <div class="bg-light p-3 rounded">
-      <h1>Liste de vos factures</h1>
+                   <div class="row mt-5">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon green">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers actifs</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>10</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon blue">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers en attente</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>7</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon red">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Dossiers non actifs</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>5</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <!-- <button mat-raised-button color="warn" (click)="openDialogSocialFolder()"> -->
+                                 <button mat-raised-button color="warn" routerLink="/invoices/create">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Créer une facture
+                        </button>
+                            </div>
+                        </div>
 
       <div class="alert bg-danger" *ngIf="errorMessage">
         {{ errorMessage }}
       </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 text-right">
-                            <button mat-raised-button color="warn" routerLink="/invoices/create">
-                            <mat-icon inline=true>note_add</mat-icon>
-                            Créer une facture
-                        </button>
-                        </div>
-      </div>
+   
       <div class="row">
    
       <hr />
@@ -85,6 +134,65 @@
         </tbody>
       </table>
     </div>
+
+     <!-- <mat-form-field appearance="standard" style="width:100%">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Indiquer un nom de facture" #input>
+                    </mat-form-field>
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                            
+                          <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                                <td mat-cell *matCellDef="let row"> {{row.id }} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="customer_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom client </th>
+                                <td mat-cell *matCellDef="let row"> {{row.customer_name | uppercase }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+                                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="month-year">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mois et année</th>
+                                <td mat-cell *matCellDef="let row">{{row.month}} {{row.year}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="state">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+                                <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="createdAt">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le </th>
+                                <td mat-cell *matCellDef="let row"> {{row.createdAt.toDate() | date: 'dd/MM/yy'}} </td>
+                            </ng-container> 
+                           
+                          
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
+                                <td mat-cell *matCellDef="let row" style="width: 155px;">
+                                    <button mat-icon-button color="primary" (click)="viewFolder(row.id)">
+                                        <mat-icon>find_in_page</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="primary" (click)="editFolder(row)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" (click)="deleteFolder(row.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                    </div>  -->
             </div>
         </div>
     </div>

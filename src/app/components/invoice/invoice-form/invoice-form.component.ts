@@ -154,14 +154,13 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   onSubmit() {
-    //console.log('this.invoiceForm.value:', this.invoiceForm.value);
-    /*console.log('this.invoiceForm.value:', this.invoiceForm.value);
+    console.log('this.invoiceForm.value:', this.invoiceForm.value);
     if (this.invoiceForm.invalid) {
       return;
     }
-    this.invoiceSubmitEvent.emit(this.invoiceForm.value as Invoice);*/
+    this.invoiceSubmitEvent.emit(this.invoiceForm.value as Invoice);
 
-    if (this.invoiceForm.invalid) {
+    /*if (this.invoiceForm.invalid) {
       return;
     }
 
@@ -170,7 +169,7 @@ export class InvoiceFormComponent implements OnInit {
      this.invoiceService
      .postInvoice(this.invoiceForm.value)
      .pipe(tap(() => this.router.navigateByUrl('/invoices')))
-     .subscribe();
+     .subscribe();*/
   }
 
   sideBarOpen = true;

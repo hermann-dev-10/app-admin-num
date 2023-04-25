@@ -23,15 +23,15 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 })
 export class InvoicesListComponent implements OnInit {
   displayedColumns: string[] = [
-    'nomClasseur',
-    'directory',
-    'month-year',
-    'state',
-    'createdAt',
+    'id',
+    'customer_name',
+    'description',
+    'created_at',
+    'total',
+    'status',
     'action',
   ];
 
-    //  displayedColumns: string[] = ['nomClasseur', 'directory', 'folder', 'month-year', 'state', 'comment', 'createdAt', 'action'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -64,8 +64,7 @@ export class InvoicesListComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private dialog: MatDialog,
-    private folderService: FolderService,
-
+    private folderService: FolderService
   ) {}
 
   ngOnInit(): void {
@@ -129,7 +128,6 @@ export class InvoicesListComponent implements OnInit {
     return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
   }*/
 
-
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
@@ -149,6 +147,15 @@ export class InvoicesListComponent implements OnInit {
         },
       });
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngOnDestroy() {

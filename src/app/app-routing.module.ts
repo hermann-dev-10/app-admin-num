@@ -22,7 +22,7 @@ import { InvoiceEditionComponent } from './components/invoice/invoice-edition/in
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
-  { path: '', redirectTo: 'folder', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'admin-folder',
