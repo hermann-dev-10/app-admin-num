@@ -4,6 +4,7 @@ export type InvoiceFormType = FormGroup<{
   customer_name: FormControl;
   description: FormControl;
   status: FormControl;
+  created_at: FormControl;
   details: FormArray<
     FormGroup<{
       quantity: FormControl;

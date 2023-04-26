@@ -5,9 +5,8 @@ import { InvoiceFormType } from './invoice-form-type';
 @Component({
   selector: 'app-invoice-form-general',
   template: `
-  
     <div class="row" [formGroup]="parent" *ngIf="parent">
-      <div class="col">
+      <div class="col-4">
         <label for="description">Description de la facture</label>
         <input
           formControlName="description"
@@ -22,7 +21,7 @@ import { InvoiceFormType } from './invoice-form-type';
           La description est obligatoire et doit faire au moins 3 caractères !
         </p>
       </div>
-      <div class="col">
+      <div class="col-4">
         <label for="customer_name">Client</label>
         <input
           formControlName="customer_name"
@@ -37,7 +36,7 @@ import { InvoiceFormType } from './invoice-form-type';
           Le client est obligatoire et doit faire au moins 3 caractères !
         </p>
       </div>
-      <div class="col">
+      <div class="col-4">
         <label for="status">Statut</label>
         <select
           formControlName="status"
@@ -49,6 +48,29 @@ import { InvoiceFormType } from './invoice-form-type';
           <option value="PAID">Payée</option>
           <option value="CANCELED">Annulée</option>
         </select>
+      </div>
+      <div class="col-4">
+        <label for="customer_name">Date</label>
+
+      
+        <input type="date" class="form-control mb-3"
+         formControlName="created_at"> 
+        
+    
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="created_at"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
       </div>
     </div>
   `,

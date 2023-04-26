@@ -100,8 +100,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
       </div>
       <div class="row">
         <div class="text-center">
-          <div class="text-center"></div>
-          <button class="btn btn-primary" (click)="goBack()">
+          <button class="btn btn-primary mr-15" (click)="goBack()">
             Retour à la liste
           </button>
 
@@ -120,7 +119,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
     </ng-template>
   `,
   styles: [
-    '.text-left { text-align: left; } .text-right { text-align: right; } .container-invoice{margin-left:75px;margin-right:75px}',
+    '.text-left { text-align: left; } .text-right { text-align: right; } .container-invoice{margin-left:75px;margin-right:75px} .mr-15{margin-right:15px}',
   ],
 })
 export class InvoiceDetailComponent implements OnInit {
@@ -133,6 +132,7 @@ export class InvoiceDetailComponent implements OnInit {
   singleInvoice: any | undefined;
 
   invoiceId?: number;
+  invoiceForm: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -167,6 +167,25 @@ export class InvoiceDetailComponent implements OnInit {
 
   public goBack() {
     this.router.navigate(['/invoices']);
+  }
+
+  get total() {
+    console.log('this.details.value', this.details.value);
+    return this.details.value.reduce((itemTotal: number, item) => {
+      return itemTotal + item.amount * item.quantity;
+    }, 0);
+  }
+
+  get details() {
+    return this.invoiceForm.controls.details;
+  }
+
+  get totalTVA() {
+    return this.total * 0.2;
+  }
+
+  get totalTTC() {
+    return this.total + this.totalTVA;
   }
 
   public exportInvoice() {

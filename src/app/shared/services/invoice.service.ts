@@ -14,7 +14,7 @@ export class InvoiceService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  postInvoice(registerObj: any) {
+  postInvoice(registerObj: Invoice) {
     return this.http.post<Invoice[]>(`${this.API_URL}/invoiceList`, registerObj);
   }
 

@@ -80,9 +80,11 @@ export class ClasseurFormComponent implements OnInit {
   };
 
   classeurForm: ClasseurFormType = this.fb.group({
+    binder_name: ['', [Validators.required, Validators.minLength(3)]],
     customer_name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(3)]],
     status: ['NOT_STARTED'],
+    created_at: ['', [Validators.required]],
     details: this.fb.array<FormGroup>([]),
   });
 

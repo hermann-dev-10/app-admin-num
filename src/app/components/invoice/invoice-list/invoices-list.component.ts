@@ -71,7 +71,7 @@ export class InvoicesListComponent implements OnInit {
 
 
 
-    //this.invoices$ = this.invoiceService.findAll();
+    this.invoices$ = this.invoiceService.findAll();
 
  
 

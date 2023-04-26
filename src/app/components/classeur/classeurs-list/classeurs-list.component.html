@@ -50,13 +50,19 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
                                 <td mat-cell *matCellDef="let row"> {{row.id }} </td>
                             </ng-container>
+
+                            <ng-container matColumnDef="binder_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom classeur </th>
+                                <td mat-cell *matCellDef="let row"> {{row.binder_name | uppercase }} </td>
+                            </ng-container>
+                            
                             
                             <ng-container matColumnDef="customer_name">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom client </th>
                                 <td mat-cell *matCellDef="let row"> {{row.customer_name | uppercase }} </td>
                             </ng-container>
                             <ng-container matColumnDef="description">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
                                 <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                             </ng-container>
                             
@@ -68,10 +74,6 @@
                                   
                                   <p *ngIf="row.status === 'NOT_STARTED'">
                                     <span class="badge bg-dark">Pas commencé</span>
-                                  </p>
-
-                                  <p *ngIf="row.status === 'STARTED'">
-                                    <span class="badge bg-dark">Commencé</span>
                                   </p>
 
                                   <p *ngIf="row.status === 'PROGRESSING'">
@@ -88,7 +90,7 @@
 
 
                             <ng-container matColumnDef="created_at">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
                                 <td mat-cell *matCellDef="let row"> {{ row.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
                             </ng-container> 
                            

@@ -15,7 +15,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
 @Component({
   selector: 'app-classeur-detail',
   template: `
-    <div>
+    <div class="container">
       <div id="test-export-pdf" *ngIf="classeur; as: classeur; else: fallBack">
         <br />
         <div class="row container-classeur">
@@ -25,9 +25,11 @@ const htmlToPdfmake = require('html-to-pdfmake');
               width="100"
               alt="Sekoia Services SA"
             />
-            <p>HM-DEV</p>
+            <p>Sekoia Services SA</p>
           </div>
-          <div class="col-xs-12 col-md-6t text-right">Classeur</div>
+          <div class="col-xs-12 col-md-6t text-right">
+            Nom classeur: {{ classeur.binder_name }}
+          </div>
         </div>
         <br />
 
@@ -45,7 +47,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
         <div class="row container-classeur">
           <div class="col-xs-12 col-md-6 text-left"></div>
           <div class="col-xs-12 col-md-6 text-right">
-            Nom client : {{ classeur.customer_name }}
+            Nom client: {{ classeur.customer_name }}
           </div>
         </div>
 
@@ -90,8 +92,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
       </div>
       <div class="row">
         <div class="text-center">
-          <div class="text-center"></div>
-          <button class="btn btn-primary" (click)="goBack()">
+          <button class="btn btn-primary mr-15" (click)="goBack()">
             Retour à la liste
           </button>
 
@@ -109,9 +110,7 @@ const htmlToPdfmake = require('html-to-pdfmake');
       >
     </ng-template>
   `,
-  styles: [
-    '.text-left { text-align: left; } .text-right { text-align: right; } .container-classeur{margin-left:75px;margin-right:75px}',
-  ],
+  styleUrls: ['classeur-detail.component.scss'],
 })
 export class ClasseurDetailComponent implements OnInit {
   @ViewChild('pdfTable')

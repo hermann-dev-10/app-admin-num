@@ -13,6 +13,7 @@ import { InvoiceFormType } from './invoice-form-type';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   selector: 'app-invoice-form',
@@ -46,7 +47,6 @@ import { Router } from '@angular/router';
                 <app-invoice-form-totals
                   [total]="total"
                 ></app-invoice-form-totals>
-
 
                 <div class="text-center">
                   <div class="d-flex">
@@ -88,6 +88,7 @@ export class InvoiceFormComponent implements OnInit {
     customer_name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(3)]],
     status: ['SENT'],
+    created_at: ['', [Validators.required]],
     details: this.fb.array<FormGroup>([]),
   });
 
@@ -136,6 +137,8 @@ export class InvoiceFormComponent implements OnInit {
       'this.invoiceForm.controls.details.value ?: ',
       this.invoiceForm.controls.details.value
     );
+
+    console.log('TOTAL :', this.total);
   }
 
   get details() {
@@ -143,7 +146,7 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   get total() {
-    console.log('TOTAL ? OK ?');
+    console.log('this.details.value', this.details.value);
     return this.details.value.reduce((itemTotal: number, item) => {
       return itemTotal + item.amount * item.quantity;
     }, 0);
@@ -170,16 +173,12 @@ export class InvoiceFormComponent implements OnInit {
     }
     this.invoiceSubmitEvent.emit(this.invoiceForm.value as Invoice);
 
-    /*if (this.invoiceForm.invalid) {
-      return;
-    }
-
     console.log('Ok ADD Invoice:', this.invoiceForm.value);
 
-     this.invoiceService
-     .postInvoice(this.invoiceForm.value)
-     .pipe(tap(() => this.router.navigateByUrl('/invoices')))
-     .subscribe();*/
+    /*this.invoiceService
+      .postInvoice(this.invoiceForm.value as Invoice)
+      .pipe(tap(() => this.router.navigateByUrl('/invoices')))
+      .subscribe();*/
   }
 
   sideBarOpen = true;

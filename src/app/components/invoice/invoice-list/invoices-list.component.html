@@ -68,11 +68,11 @@
                             </div>
                         </div>
 
-      <!-- <div class="alert bg-danger" *ngIf="errorMessage">
+      <div class="alert bg-danger" *ngIf="errorMessage">
         {{ errorMessage }}
       </div>
    
-      <div class="row">
+      <!-- <div class="row">
    
       <hr />
       <table class="table table-hover">
@@ -133,7 +133,7 @@
           </tr>
         </tbody>
       </table>
-    </div> -->
+    </div>  -->
 
      <mat-form-field appearance="standard" style="width:100%">
                         <mat-label>Filter</mat-label>
@@ -181,8 +181,7 @@
 
                             <ng-container matColumnDef="total">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-                                <td mat-cell *matCellDef="let row"> {{row.total}} </td>
-                                
+                                <td mat-cell *matCellDef="let row"> {{row.total | currency : 'CHF' }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="created_at">

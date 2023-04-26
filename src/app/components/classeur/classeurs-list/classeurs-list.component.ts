@@ -24,6 +24,7 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 export class ClasseursListComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
+    'binder_name',
     'customer_name',
     'description',
     'status',

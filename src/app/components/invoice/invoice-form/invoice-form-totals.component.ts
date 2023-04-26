@@ -26,8 +26,7 @@ import { Component, Input } from '@angular/core';
   styles: [],
 })
 export class InvoiceFormTotalsComponent {
-  @Input()
-  total = 0;
+  @Input() total: number = 0;
 
   get totalTVA() {
     return this.total * 0.2;
