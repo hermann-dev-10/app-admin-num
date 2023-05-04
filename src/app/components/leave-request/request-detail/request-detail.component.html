@@ -1,0 +1,99 @@
+<div class="container" *ngIf="leaveRequest; as: leaveRequest; else: fallBack">
+      <div id="test-export-pdf" >
+        <br />
+        <div class="row container-leaveRequest">
+          <div class="col-xs-12 col-md-6 text-left">
+            <img
+              src="./../../../../assets/logo_sekoia.png"
+              width="150"
+              alt="Sekoia Services SA"
+            />
+          </div>
+          <div class="col-xs-12 col-md-6t text-right">Demande de congé</div>
+        </div>
+        <br />
+
+        <div class="row text-right container-leaveRequest">
+          <!--<div>Reférence:</div>-->
+          <div>
+            Date :
+            {{ leaveRequest.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }}
+          </div>
+          <!--<div>Numéro facture:</div>-->
+        </div>
+
+        <br /><br />
+
+        <div class="row container-leaveRequest">
+          <div class="col-xs-12 col-md-6 text-left"></div>
+          <div class="col-xs-12 col-md-6 text-right">
+            Type : {{ leaveRequest.type }}
+          </div>
+          <!--<div class="col-xs-12 col-md-6 text-left">Adresse Entreprise:</div>
+          <div class="col-xs-12 col-md-6 text-right">Adresse Client</div>
+          <div class="col-xs-12 col-md-6 text-left">NPA/Ville Entreprise:</div>
+          <div class="col-xs-12 col-md-6 text-right">NPA/Ville Client</div>
+          <div class="col-xs-12 col-md-6 text-left"></div>
+          <div class="col-xs-12 col-md-6 text-right">TVA</div>-->
+        </div>
+
+        <br /><br />
+        <br /><br />
+        <!-- <table class="table container-leaveRequest">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Description</th>
+              <th scope="col">Quantité (Nb d'heure)</th>
+              <th scope="col">Montant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of leaveRequest.details; let index = index">
+              <th scope="row">{{ index }}</th>
+              <td>{{ data.description }}</td>
+              <td>{{ data.quantity }}h</td>
+              <td>{{ data.amount }} CHF</td>
+            </tr>
+          </tbody>
+        </table> -->
+
+        <div class="row container-leaveRequest">
+          <div class="col-xs-12 col-md-6 text-left">
+            <h4 *ngIf="leaveRequest.status === 'SENT'">
+              État facture : <span class="badge bg-dark">Envoyé</span>
+            </h4>
+
+            <h4 *ngIf="leaveRequest.status === 'PAID'">
+              État facture : <span class="badge bg-success">Payé</span>
+            </h4>
+
+            <h4 *ngIf="leaveRequest.status === 'CANCELED'">
+              État facture : <span class="badge bg-danger">Annulé</span>
+            </h4>
+          </div>
+
+        
+        </div>
+        <br /><br />
+        <br /><br />
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <button class="btn btn-primary mr-15" (click)="goBack()">
+            Retour à la liste
+          </button>
+
+          <button class="btn btn-danger" (click)="openPDF(leaveRequest)">
+            Exporter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #fallBack>
+      <h3>Une erreur est survenue aucun document trouvé</h3>
+      <a [routerLink]="['../..']" class="btn btn-primary"
+        >Retourner à la liste</a
+      >
+    </ng-template>

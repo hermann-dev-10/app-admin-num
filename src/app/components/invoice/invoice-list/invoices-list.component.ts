@@ -26,7 +26,6 @@ export class InvoicesListComponent implements OnInit {
     'id',
     'customer_name',
     'description',
-    'total',
     'status',
     'created_at',
     'action',
@@ -68,40 +67,10 @@ export class InvoicesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-
-
     this.invoices$ = this.invoiceService.findAll();
 
- 
-
     this.getAllInvoices();
-
-    //this.sortInvoicesByDateDesc();
-
   }
-
-  /*sortInvoicesByDateDesc() {
-    this.invoices$.pipe(
-      map((invoices) =>
-        invoices.sort(
-          (a, b) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        )
-      )
-    );
-  }*/
-
-  /*sortInvoicesByDateAsc() {
-    this.invoices$.pipe(
-      map((invoices) =>
-        invoices.sort(
-          (a, b) =>
-            new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-        )
-      )
-    );
-  }*/
 
   deleteInvoice(id: number) {
     const oldInvoices = [...this.invoices];
@@ -141,17 +110,15 @@ export class InvoicesListComponent implements OnInit {
         },
       });
 
-
-         this.findAllSub = this.invoiceService
-           .findAll()
-           .pipe(takeUntil(this.destroy$))
-           .subscribe({
-             next: (invoices) => (this.invoices = invoices),
-             error: () =>
-               (this.errorMessage =
-                 'Il y a eu un problème lors de la récupération des factures'),
-           });
-
+    this.findAllSub = this.invoiceService
+      .findAll()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (invoices) => (this.invoices = invoices),
+        error: () =>
+          (this.errorMessage =
+            'Il y a eu un problème lors de la récupération des factures'),
+      });
   }
 
   /*getUser(id: any) {

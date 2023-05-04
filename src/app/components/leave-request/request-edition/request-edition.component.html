@@ -1,0 +1,13 @@
+<!--<h1>Modifier une facture</h1>
+    <p class="alert bg-info text-white">
+      Remplissez les informations de la facture afin de la retrouver dans votre
+      liste plus tard !
+    </p>
+    <p class="alert bg-warning text-white" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>-->
+    <app-request-form
+      *ngIf="leaveRequest$ | async as leaveRequest"
+      [leaveRequest]="leaveRequest"
+      (leave-request-submit)="onSubmit($event)"
+    ></app-request-form>

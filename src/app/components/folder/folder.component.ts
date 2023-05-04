@@ -182,8 +182,7 @@ export class FolderComponent implements OnInit {
         )
       )
     );*/
-    /*ngAfterViewInit() {
+  /*ngAfterViewInit() {
       this.dataSource.sort = this.sort;
     }*/
-  }
-
+}

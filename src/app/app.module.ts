@@ -86,7 +86,15 @@ import { ClasseursListComponent } from './components/classeur/classeurs-list/cla
 import { ClasseurFormGeneralComponent } from './components/classeur/classeur-form/classeur-form-general.components';
 import { ClasseurFormDetailsComponent } from './components/classeur/classeur-form/classeur-form-details.component';
 import { ClasseurService } from './shared/services/classeur.service';
-
+import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
+import { RequestCreationComponent } from './components/leave-request/request-creation/request-creation.component';
+import { RequestEditionComponent } from './components/leave-request/request-edition/request-edition.component';
+import { RequestFormComponent } from './components/leave-request/request-form/request-form.component';
+import { RequestDetailComponent } from './components/leave-request/request-detail/request-detail.component';
+import { RequestListComponent } from './components/leave-request/request-list/request-list.component';
+import { RequestFormGeneralComponent } from './components/leave-request/request-form-general/request-form-general.component';
+import { LeaveRequestService } from './shared/services/leave-request.service';
+import { TestsComponent } from './components/tests/tests.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +135,15 @@ import { ClasseurService } from './shared/services/classeur.service';
     ClasseurFormComponent,
     ClasseursListComponent,
     ClasseurFormGeneralComponent,
-    ClasseurFormDetailsComponent
+    ClasseurFormDetailsComponent,
+    LeaveRequestComponent,
+    RequestCreationComponent,
+    RequestEditionComponent,
+    RequestFormComponent,
+    RequestDetailComponent,
+    RequestListComponent,
+    RequestFormGeneralComponent,
+    TestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -165,7 +181,12 @@ import { ClasseurService } from './shared/services/classeur.service';
     BrowserAnimationsModule,
     NgChartsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, InvoiceService, ClasseurService],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    InvoiceService,
+    ClasseurService,
+    LeaveRequestService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

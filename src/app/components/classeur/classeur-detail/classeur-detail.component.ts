@@ -21,11 +21,9 @@ const htmlToPdfmake = require('html-to-pdfmake');
         <div class="row container-classeur">
           <div class="col-xs-12 col-md-6 text-left">
             <img
-              src="https://www.sekoia.ch/wp-content/uploads/2017/11/sekoia-logo.svg"
-              width="100"
-              alt="Sekoia Services SA"
+              src="./../../../../assets/logo_sekoia.png"
+              alt="Logo Sekoia Services SA"
             />
-            <p>Sekoia Services SA</p>
           </div>
           <div class="col-xs-12 col-md-6t text-right">
             Nom classeur: {{ classeur.binder_name }}
@@ -36,8 +34,16 @@ const htmlToPdfmake = require('html-to-pdfmake');
         <div class="row text-right container-classeur">
           <!--<div>Reférence:</div>-->
           <div>
-            Date :
-            {{ classeur.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }}
+            Année du classeur :
+            {{
+              classeur.date_binder_creation | date : 'yyyy' : undefined : 'fr'
+            }}
+            <!--
+              {{
+              classeur.date_binder_creation
+                | date : 'MMMM yyyy' : undefined : 'fr'
+            }}
+            -->
           </div>
           <!--<div>Numéro classeur:</div>-->
         </div>
@@ -75,10 +81,6 @@ const htmlToPdfmake = require('html-to-pdfmake');
             <h4 *ngIf="classeur.status === 'NOT_STARTED'">
               État classeur : <span class="badge bg-success">Pas commencé</span>
             </h4>
-            <h4 *ngIf="classeur.status === 'STARTED'">
-              État classeur : <span class="badge bg-dark">Commencé</span>
-            </h4>
-
             <h4 *ngIf="classeur.status === 'PROGRESSING'">
               État classeur : <span class="badge bg-dark">En cours</span>
             </h4>
@@ -101,8 +103,11 @@ const htmlToPdfmake = require('html-to-pdfmake');
           </button>
         </div>
       </div>
+      <p>
+        Ajouté le
+        {{ classeur.created_at | date : 'dd MMMM yyyy' : undefined : 'fr' }}
+      </p>
     </div>
-
     <ng-template #fallBack>
       <h3>Une erreur est survenue aucun document trouvé</h3>
       <a [routerLink]="['../..']" class="btn btn-primary"

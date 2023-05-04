@@ -1,0 +1,47 @@
+<mat-drawer-container>
+      <mat-drawer mode="side" [opened]="sideBarOpen">
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
+      </mat-drawer>
+      <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+        <div class="container-fluid page">
+          <div class="d-flex page__box p-3 mt-2">Détails de la demande de congé</div>
+          <div class="page__content shadow p-3 position-relative">
+            <div class="text-center">
+              <form [formGroup]="leaveRequestForm" (submit)="onSubmit()">
+                <app-request-form-general
+                  [parent]="leaveRequestForm"
+                ></app-request-form-general>
+
+                <hr />
+
+                <!-- <app-invoice-form-details
+                  [parent]="invoiceForm"
+                  (add-detail)="onAddDetail()"
+                  (remove-detail)="onRemoveDetail($event)"
+                ></app-invoice-form-details> -->
+
+                <hr />
+
+                <!-- <app-invoice-form-totals
+                  [total]="total"
+                ></app-invoice-form-totals> -->
+
+                <div class="text-center">
+                  <div class="d-flex">
+                    <button class="w-sm-auto btn btn-primary" id="submit">
+                      Enregistrer
+                    </button>
+
+                    <a class="btn btn-secondary" routerLink="/leave-requests"
+                      >Retour à la liste
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>

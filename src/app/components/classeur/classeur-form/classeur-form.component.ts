@@ -13,6 +13,10 @@ import { ClasseurFormType } from './classeur-form-type';
 import { ClasseurService } from 'src/app/shared/services/classeur.service';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-classeur-form',
@@ -25,7 +29,7 @@ import { Router } from '@angular/router';
       <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
         <div class="container-fluid page">
-          <div class="d-flex page__box p-3 mt-2">Détails du classeur</div>
+          <div class="d-flex page__box p-3 mt-2">Classeur</div>
           <div class="page__content shadow p-3 position-relative">
             <div class="text-center">
               <form [formGroup]="classeurForm" (submit)="onSubmit()">
@@ -45,7 +49,7 @@ import { Router } from '@angular/router';
 
                 <div class="text-center">
                   <div class="d-flex">
-                    <button class="w-sm-auto btn btn-primary" id="submit">
+                    <button class="w-sm-auto btn btn-primary mr-15" id="submit">
                       Enregistrer
                     </button>
 
@@ -68,6 +72,11 @@ export class ClasseurFormComponent implements OnInit {
   @Output('classeur-submit') classeurSubmitEvent = new EventEmitter<Classeur>();
 
   @Input() classeur?: Classeur;
+  user!: any;
+  users$: Observable<any>[] = []; //user$: Observable<IUser>[] = []
+  sub: any;
+  uniqueUser!: any;
+  displayNameObs!: any;
 
   detailsExistsValidator: ValidatorFn = (control: AbstractControl) => {
     const details = control.get('details') as FormArray;
@@ -84,17 +93,43 @@ export class ClasseurFormComponent implements OnInit {
     customer_name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(3)]],
     status: ['NOT_STARTED'],
-    created_at: ['', [Validators.required]],
+    date_binder_creation: ['', [Validators.required]],
+    directory: ['', [Validators.required, Validators.minLength(3)]],
+    created_at: new Date(), //Adding the current date
     details: this.fb.array<FormGroup>([]),
+    //added_by: this.user,
   });
 
   constructor(
     private fb: FormBuilder,
     private classeurService: ClasseurService,
-    private router: Router
+    private router: Router,
+    public authService: AuthService,
+    private afAuth: AngularFireAuth,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+
+      if (this.user) {
+        this.sub = this.userService.readUserWithUid(user.uid).subscribe(
+          (data) => {
+            this.user = data;
+            console.log('this.user :', this.user);
+          },
+          (err) => {
+            return console.error('readUserWithUID error', err);
+          }
+        );
+      }
+    });
+
+    //this.addedBy(this.user);
+
+    //console.log('this.addedBy(this.user): ', this.addedBy(this.user));
+
     if (!this.classeur) {
       return;
     }
@@ -119,7 +154,7 @@ export class ClasseurFormComponent implements OnInit {
     this.details.push(
       this.fb.group({
         file_name: ['', [Validators.required]],
-        folder_name: ['', [Validators.required]],
+        folder_name: [''],
       })
     );
   }
@@ -140,5 +175,24 @@ export class ClasseurFormComponent implements OnInit {
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  addedBy(user) {
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+
+      if (this.user) {
+        this.sub = this.userService.readUserWithUid(user.uid).subscribe(
+          (data) => {
+            this.user = data;
+            console.log('this.user :', this.user);
+          },
+          (err) => {
+            return console.error('readUserWithUID error', err);
+          }
+        );
+      }
+    });
+    return user;
   }
 }

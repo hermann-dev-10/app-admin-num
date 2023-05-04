@@ -140,7 +140,7 @@
                         <input matInput (keyup)="applyFilter($event)" placeholder="Indiquer un nom de facture" #input>
                     </mat-form-field>
                     <div class="mat-elevation-z8">
-                        <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                        <table mat-table [dataSource]="dataSource" matSort style="width:100%" matSortActive="created_at" matSortDirection="desc">
                             
                           <ng-container matColumnDef="id">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>

@@ -24,9 +24,10 @@ import { FolderService } from 'src/app/shared/services/folder.service';
 export class ClasseursListComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
-    'binder_name',
     'customer_name',
+    'binder_name',
     'description',
+    'date_binder_creation',
     'status',
     'created_at',
     'action',
@@ -48,8 +49,9 @@ export class ClasseursListComponent implements OnInit {
   cancelButtonText = 'Cancel';
 
   errorMessage = '';
-  classeurs$!: Observable<Classeur[]>;
+  classeurs$!: Observable<any[]>;
   classeurs: Classeur[] = [];
+  test: any;
   destroy$ = new Subject();
   deleteSub?: Subscription;
   findAllSub?: Subscription;
@@ -57,6 +59,8 @@ export class ClasseursListComponent implements OnInit {
   users!: Observable<any[]>;
   collectionName = 'table-users';
   result: any;
+  classeur$: Observable<Classeur[]>;
+  today = new Date();
 
   constructor(
     private classeurService: ClasseurService,
@@ -67,25 +71,71 @@ export class ClasseursListComponent implements OnInit {
     private folderService: FolderService
   ) {}
 
-  ngOnInit(): void {
-    //this.classeurs$ = this.classeurService.findAll();
+  /*ngOnInit(): void {
+    this.classeurs$ = this.classeurService.findAll();
 
-    this.getAllClasseurs();
-    console.log('Nombre: ', this.classeurs.length);
+    console.log('Nombre classeurs$: ', this.classeurs$);
+
+    this.test = this.getAllClasseurs();
+    console.log('Nombre: ', this.test);
 
     //this.sortClasseursByDateDesc();
+  }*/
+
+  ngOnInit() {
+     //this.sortClasseursByDateDesc();
+    console.log('Date du jour : ', this.today);
+
+    //this.usersCollection = await this.userService.getUsers();
+    //this.userService.getUsers(); // on déclence la fonction getUsers
+    this.classeur$ = this.classeurService.findAll();
+    console.log(
+      'this.classeurService.findAll() : ',
+      this.classeurService.findAll()
+    );
+    this.getAllClasseurs();
+
+    console.log('this.getAllClasseurs() : ', this.getAllClasseurs());
+
+    //this.classeur$ = this.getAllFolders();
+
+    //console.log('this.readAll(): ', this.folderServic);
+    //this.getAllUsers();
+    //console.log('this.getAllUsers()', this.getAllUsers());
+
+    // this.classeurCollection = await this.folderService.readAllFolders();
+    // this.sub = this.foldersCollection
+    //   .valueChanges({
+    //     idField: 'id',
+    //   })
+    //   .subscribe((data) => {
+    //     this.folders = data;
+    //     console.log('this.folders: ', this.folders);
+    //     console.log('this.folders.length: ', this.folders.length);
+    //   });
+
+    // this.userCollection = this.userService.readAllUser();
+    // this.sub = this.userCollection
+    //   .valueChanges({
+    //     idField: 'id',
+    //   })
+    //   .subscribe((data) => {
+    //     this.users = data;
+    //     console.log('this.user: ', this.users);
+    //     console.log('this.user.length: ', this.users.length);
+    //   });
   }
 
-  /*sortClasseursByDateDesc() {
-    this.classeurs$.pipe(
-      map((classeurs) =>
-        classeurs.sort(
-          (a, b) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        )
-      )
-    );
-  }*/
+  // sortClasseursByDateDesc() {
+  //   this.classeurs$.pipe(
+  //     map((classeurs) =>
+  //       classeurs.sort(
+  //         (a, b) =>
+  //           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  //       )
+  //     )
+  //   );
+  // }
 
   /*sortClasseursByDateAsc() {
     this.classeurs$.pipe(
@@ -129,6 +179,19 @@ export class ClasseursListComponent implements OnInit {
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          // this.dataSource.sortingDataAccessor = (item, property) => {
+          //   switch (property) {
+          //     case 'created_at': {
+          //       let newDate = new Date(item.created_at);
+          //       return newDate;
+          //     }
+          //     default: {
+          //       return item[property];
+          //     }
+          //   }
+          // }
+                      
+
         },
         error: (err) => {
           //alert("Erreur pendant la collection des éléments!!");
@@ -146,7 +209,7 @@ export class ClasseursListComponent implements OnInit {
             'Il y a eu un problème lors de la récupération des classeurs'),
       });
 
-      console.log('this.findAllSub:', this.findAllSub);
+    console.log('this.findAllSub:', this.findAllSub);
   }
 
   /*getUser(id: any) {

@@ -6,7 +6,6 @@ import { ClasseurFormType } from './classeur-form-type';
   selector: 'app-classeur-form-details',
   template: `
     <ng-container [formGroup]="parent" *ngIf="parent && details">
-      <!--<h3>Détails du classeur</h3>-->
       <div class="alert bg-warning text-white" *ngIf="details.length === 0">
         <p>Vous devez ajouter des détails à votre classeur</p>
         <button
@@ -19,56 +18,42 @@ import { ClasseurFormType } from './classeur-form-type';
         </button>
       </div>
       <section formArrayName="details">
-        <h5>Détails</h5>
-
         <div
           class="detail-row"
           [formGroup]="group"
           *ngFor="let group of details.controls; let i = index"
         >
+      
           <div class="row mb-3">
             <div class="col-5">
-              <label>Nom du fichier</label>
-              <input
-                formControlName="file_name"
-                [class.is-invalid]="
-                  group.controls.file_name.touched &&
-                  group.controls.file_name.invalid
-                "
-                name="file_name_{{ i }}"
-                id="file_name_{{ i }}"
-                type="text"
-                placeholder="Nom du fichier"
-                class="form-control"
-              />
-              <p class="invalid-feedback">
-                Le nom du fichier est obligatoire !
-              </p>
+              <mat-form-field class="example-full-width">
+                <mat-label>Nom du fichier</mat-label>
+                <input
+                  formControlName="file_name"
+                  name="file_name_{{ i }}"
+                  id="file_name_{{ i }}"
+                  type="text"
+                  matInput
+                />
+              </mat-form-field>
             </div>
 
             <div class="col-5">
-              <label>Nom du dossier</label>
+              <mat-form-field class="example-full-width">
+                <mat-label>Nom du dossier</mat-label>
 
-              <input
-                formControlName="folder_name"
-                [class.is-invalid]="
-                  group.controls.folder_name.touched &&
-                  group.controls.folder_name.invalid
-                "
-                name="folder_name{{ i }}"
-                id="folder_name{{ i }}"
-                type="text"
-                placeholder="Nom du dossier"
-                class="form-control"
-              />
-              <p class="invalid-feedback">
-                Le nom du dossier est obligatoire !
-              </p>
+                <input
+                  formControlName="folder_name"
+                  name="folder_name{{ i }}"
+                  id="folder_name{{ i }}"
+                  type="text"
+                  matInput
+                />
+              </mat-form-field>
             </div>
-            
 
             <div class="col-1">
-              <br>
+              <br />
               <button
                 type="button"
                 class="btn w-auto d-block btn-sm btn-danger"
@@ -92,7 +77,7 @@ import { ClasseurFormType } from './classeur-form-type';
       </section>
     </ng-container>
   `,
-  styles: [],
+  styleUrls: ['classeur-form-details.component.scss'],
 })
 export class ClasseurFormDetailsComponent {
   @Input('parent') parent?: ClasseurFormType;

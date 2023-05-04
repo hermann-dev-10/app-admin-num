@@ -6,7 +6,7 @@ import { ClasseurService } from '../../../shared/services/classeur.service';
 @Component({
   selector: 'app-classeur-creation',
   template: `
-    <div class="bg-light p-5 rounded">
+    <div>
       <!--<h1>Créer un nouveau classeur</h1>
       <p class="alert bg-info text-white">
         Remplissez les informations de du classeur afin de la retrouver dans

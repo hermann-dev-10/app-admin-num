@@ -6,11 +6,11 @@
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
         <div class="container-fluid page">
-                        
             <div class="d-flex page__box p-3 mt-2">Atelier Numérisation</div>
             <div class="page__content shadow p-3 position-relative">
                 <!--<div class="page__content-data position-absolute text-center">-->
-                <div class="container">
+                <!-- <div class="container"> -->
+                    <div>
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="icon-card mb-30">
@@ -50,7 +50,7 @@
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
                     </mat-form-field>
                     <div class="mat-elevation-z8">
-                        <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                        <table mat-table [dataSource]="dataSource" matSort style="width:100%" matSortActive="createdAt" matSortDirection="desc">
                             
                             
                             <ng-container matColumnDef="nomClasseur">

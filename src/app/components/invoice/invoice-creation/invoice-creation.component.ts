@@ -6,7 +6,7 @@ import { InvoiceService } from './../../../shared/services/invoice.service';
 @Component({
   selector: 'app-invoice-creation',
   template: `
-    <div class="bg-light p-5 rounded">
+    <div>
       <!--<h1>Créer une nouvelle facture</h1>
       <p class="alert bg-info text-white">
         Remplissez les informations de la facture afin de la retrouver dans

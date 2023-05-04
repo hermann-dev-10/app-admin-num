@@ -11,22 +11,22 @@
             <div class=" text-center">
                 <div class="bg-light p-3 rounded">
                    <div class="row mt-5">
-                            <div class="col-lg-3 col-md-6">
+                           <div class="col-lg-3 col-md-6">
                                 <div class="icon-card mb-30">
                                     <div class="icon green">
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Nombre de classeurs</h6>
+                                        <h6 class="mb-10">Nombre de classeurs</h6> 
                                         <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
-                                        <h3>10</h3>
+                                        <h3>{{ this.classeurs.length}}</h3> 
                                         <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
                                     </p>-->
-                                    </div>
+                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                     
                   
                             <div class="col-lg-3 col-md-6">
@@ -44,33 +44,33 @@
                         <input matInput (keyup)="applyFilter($event)" placeholder="Indiquer un nom du classeur" #input>
                     </mat-form-field>
                     <div class="mat-elevation-z8">
-                        <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                        <table mat-table [dataSource]="dataSource" matSort style="width:100%" matSort matSortActive="created_at" matSortDirection="desc">
                             
                           <ng-container matColumnDef="id">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-                                <td mat-cell *matCellDef="let row"> {{row.id }} </td>
+                                <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="customer_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom client </th>
+                                <td mat-cell *matCellDef="let row"> {{ row.customer_name | uppercase }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="binder_name">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom classeur </th>
-                                <td mat-cell *matCellDef="let row"> {{row.binder_name | uppercase }} </td>
+                                <td mat-cell *matCellDef="let row"> {{ row.binder_name | uppercase }} </td>
                             </ng-container>
                             
                             
-                            <ng-container matColumnDef="customer_name">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom client </th>
-                                <td mat-cell *matCellDef="let row"> {{row.customer_name | uppercase }} </td>
-                            </ng-container>
                             <ng-container matColumnDef="description">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                                <td mat-cell *matCellDef="let row"> {{ row.description}} </td>
                             </ng-container>
                             
                             
                             <ng-container matColumnDef="status">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
                                 <td mat-cell *matCellDef="let row"> 
-                                  
                                   
                                   <p *ngIf="row.status === 'NOT_STARTED'">
                                     <span class="badge bg-dark">Pas commencé</span>
@@ -84,21 +84,22 @@
                                     <span class="badge bg-success">Terminé</span>
                                   </p>
 
-
                                 </td>
                             </ng-container>
 
+                            <ng-container matColumnDef="date_binder_creation">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Année  </th>
+                                <td mat-cell *matCellDef="let row"> {{ row.date_binder_creation | date : 'yyyy' : undefined : 'fr' }} </td>
+                            </ng-container> 
 
                             <ng-container matColumnDef="created_at">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
-                                <td mat-cell *matCellDef="let row"> {{ row.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ajouté le </th>
+                                <td mat-cell *matCellDef="let row"> {{ row.created_at | date : 'dd MMMM yyyy' : undefined : 'fr' }} </td>
                             </ng-container> 
                            
-                          
                             <ng-container matColumnDef="action">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
-                                <td mat-cell *matCellDef="let row" style="width: 155px;">
-
+                                <td mat-cell *matCellDef="let row">
 
                                     <a
                                       routerLink="/classeurs/detail/{{ row.id }}"

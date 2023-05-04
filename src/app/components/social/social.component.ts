@@ -39,9 +39,6 @@ export class SocialComponent implements OnInit, OnDestroy {
   folders: any[] = [];
   users: any[] = [];
   private userCollection: AngularFirestoreCollection<any>;
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -60,11 +57,8 @@ export class SocialComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
-    console.log('this.companyService : ', this.companyService.readAllCompany())
     //this.usersCollection = await this.userService.getUsers();
     this.userService.getUsers(); // on déclence la fonction getUsers
-    console.log('this.userService.getUsers() : ', this.userService.getUsers());
-    console.log('Users: ', this.users$);
     this.folders$ = this.folderService.getFolders();
     this.getAllFolders();
     console.log('this.folderService.readAllFolders(): ', this.folderService.readAllFolders());
@@ -77,6 +71,8 @@ export class SocialComponent implements OnInit, OnDestroy {
 
     }).subscribe(data => {
       this.folders = data;
+      console.log('this.folders: ', this.folders);
+      console.log('this.folders.length: ', this.folders.length);
     })
 
     this.userCollection = this.userService.readAllUser();
@@ -86,6 +82,7 @@ export class SocialComponent implements OnInit, OnDestroy {
     }).subscribe(data => {
       this.users = data;
       console.log('this.user: ', this.users)
+      console.log('this.user.length: ', this.users.length);
     })
   }
 

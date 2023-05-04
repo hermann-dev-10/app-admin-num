@@ -23,6 +23,11 @@ import { ClasseursListComponent } from './components/classeur/classeurs-list/cla
 import { ClasseurCreationComponent } from './components/classeur/classeur-creation/classeur-creation.component';
 import { ClasseurDetailComponent } from './components/classeur/classeur-detail/classeur-detail.component';
 import { ClasseurEditionComponent } from './components/classeur/classeur-edition/invoice-edition.component';
+import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
+import { RequestListComponent } from './components/leave-request/request-list/request-list.component';
+import { RequestCreationComponent } from './components/leave-request/request-creation/request-creation.component';
+import { RequestDetailComponent } from './components/leave-request/request-detail/request-detail.component';
+import { RequestEditionComponent } from './components/leave-request/request-edition/request-edition.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -53,18 +58,63 @@ const routes: Routes = [
     component: InvoicesListComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'invoices/create', component: InvoiceCreationComponent },
-  { path: 'invoices/detail/:id', component: InvoiceDetailComponent },
-  { path: 'invoices/:id', component: InvoiceEditionComponent },
+  {
+    path: 'invoices/create',
+    component: InvoiceCreationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'invoices/detail/:id',
+    component: InvoiceDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'invoices/:id',
+    component: InvoiceEditionComponent,
+    canActivate: [AuthGuard],
+  },
 
   {
     path: 'classeurs',
     component: ClasseursListComponent,
-    /*canActivate: [AuthGuard],*/
+    canActivate: [AuthGuard],
   },
-  { path: 'classeurs/create', component: ClasseurCreationComponent },
-  { path: 'classeurs/detail/:id', component: ClasseurDetailComponent },
-  { path: 'classeurs/:id', component: ClasseurEditionComponent },
+  {
+    path: 'classeurs/create',
+    component: ClasseurCreationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'classeurs/detail/:id',
+    component: ClasseurDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'classeurs/:id',
+    component: ClasseurEditionComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'leave-requests',
+    component: RequestListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'leave-requests/create',
+    component: RequestCreationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'leave-requests/detail/:id',
+    component: ClasseurDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'leave-requests/:id',
+    component: RequestEditionComponent,
+    canActivate: [AuthGuard],
+  },
 
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
