@@ -28,6 +28,8 @@ import { RequestListComponent } from './components/leave-request/request-list/re
 import { RequestCreationComponent } from './components/leave-request/request-creation/request-creation.component';
 import { RequestDetailComponent } from './components/leave-request/request-detail/request-detail.component';
 import { RequestEditionComponent } from './components/leave-request/request-edition/request-edition.component';
+import { DemandeCongeComponent } from './components/demande-conge/demande-conge.component';
+import { DemandeCongeSingleComponent } from './components/demande-conge/demande-conge-single/demande-conge-single.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -92,6 +94,16 @@ const routes: Routes = [
   {
     path: 'classeurs/:id',
     component: ClasseurEditionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'demande-conge',
+    component: DemandeCongeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'demande-conge-single/:id',
+    component: DemandeCongeSingleComponent,
     canActivate: [AuthGuard],
   },
 

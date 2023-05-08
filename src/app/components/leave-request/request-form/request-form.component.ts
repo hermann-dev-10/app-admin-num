@@ -143,17 +143,17 @@ export class RequestFormComponent implements OnInit {
 
     console.log('Ok ADD Leave Request:', this.leaveRequestForm.value);
 
-    this.leaveRequestService.postLeaveRequest(
-      this.leaveRequestForm.value.displayName,
-      this.leaveRequestForm.value.type,
-      this.leaveRequestForm.value.description,
-      this.leaveRequestForm.value.status,
-      this.leaveRequestForm.value.start_date,
-      this.leaveRequestForm.value.end_date,
-      this.leaveRequestForm.value.created_at,
-      this.leaveRequestForm.value.responsable,
-      'uid'
-    );
+    //  this.leaveRequestService.postLeaveRequest(
+    //   this.leaveRequestForm.value.displayName,
+    //    this.leaveRequestForm.value.type,
+    //    this.leaveRequestForm.value.description,
+    //    this.leaveRequestForm.value.status,
+    //    this.leaveRequestForm.value.start_date,
+    //    this.leaveRequestForm.value.end_date,
+    //    this.leaveRequestForm.value.created_at,
+    //   this.leaveRequestForm.value.responsable,
+    //    'uid'
+    //  );
     //this.leaveRequestService.postLeaveRequest(this.leaveRequestForm.value as LeaveRequest);
     this.router.navigateByUrl('/leave-requests');
 

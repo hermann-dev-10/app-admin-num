@@ -29,10 +29,7 @@ export class RequestListComponent implements OnInit {
     'type',
     'description',
     'status',
-    'start_date',
-    'end_date',
     'responsable',
-    'created_at',
     'action',
   ];
 
@@ -43,8 +40,10 @@ export class RequestListComponent implements OnInit {
   currentUser!: any;
   user = this.afAuth.currentUser;
   sub: any;
+  subRequest: any;
   subTotalRequest: any;
   uniqueUser: any;
+  uniqueTest:any
   users$: Observable<any>[] = [];
   sideBarOpen = true;
 
@@ -76,7 +75,6 @@ export class RequestListComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private dialog: MatDialog,
     private folderService: FolderService,
-    private leaveService: LeaveRequestService,
     private userService: UserService
   ) {}
 
@@ -85,32 +83,31 @@ export class RequestListComponent implements OnInit {
 
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       this.user = user;
+      console.log('Squad');
       if (this.user) {
-        this.leavesByUid$ = this.leaveRequestService.readPersonalByUid(user.uid);
-        console.log('leavesByUid: ', this.leavesByUid$);
-        console.log(this.userService.readUserWithUid(user.uid));
-
         this.sub = this.userService
           .readUserWithUid(user.uid)
           .subscribe((data) => {
-            console.log('Dossier: ngOnInit readUserWithUid / data', data);
             this.uniqueUser = data;
-            console.log('user data : -> ', this.user);
-            console.log('mes users$ OBSERVABLE : -> ', this.users$);
+          });
+
+        //this.leavesByUid$
+
+        this.subRequest = this.leaveRequestService
+          .readPersonalByUid(user.uid)
+          .subscribe((data) => {
+            this.uniqueTest = data;
+            console.log('this.uniqueTest :', this.uniqueTest);
           });
       }
     });
-
 
     //this.leaveRequests$ = this.leaveRequestService.findAll();
 
     //this.getAllLeaveRequests();
 
-
-
-    this.subTotalRequest = this.leaveRequestService
-      .findAll()
-      /*.subscribe((data) => {
+    this.subTotalRequest = this.leaveRequestService.findAll();
+    /*.subscribe((data) => {
         this.dataTotalProgressingRequest = data;
 
         for (let i = 0; i < this.dataTotalProgressingRequest.length; i++) {
@@ -137,7 +134,7 @@ export class RequestListComponent implements OnInit {
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       this.user = user;
       if (this.user) {
-        this.leaveRequestByUid$ = this.leaveService.readPersonalByUid(user.uid);
+        this.leaveRequestByUid$ = this.leaveRequestService.readPersonalByUid(user.uid);
         console.log('leavesByUid$: ', this.leavesByUid$);
         console.log(this.userService.readUserWithUid(user.uid));
 
@@ -177,12 +174,16 @@ export class RequestListComponent implements OnInit {
 
   getAllLeaveRequestsByUid() {
     this.sub = this.afAuth.authState.subscribe((user) => {
+      console.log('this.sub :', this.sub);
       //this.api.getFolders()
+
       this.leaveRequestService.readPersonalByUid(user.uid).subscribe({
         next: (res) => {
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          console.log('res', res);
+           console.log('user.displayName', user.displayName);
         },
         error: (err) => {
           //alert("Erreur pendant la collection des éléments!!");
@@ -227,22 +228,6 @@ export class RequestListComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  // getAllFoldersByUid() {
-  //   this.sub = this.afAuth.authState.subscribe((user) => {
-  //     //this.api.getFolders()
-  //     this.invoiceService.findAll().subscribe({
-  //       next: (res) => {
-  //         this.dataSource = new MatTableDataSource(res);
-  //         this.dataSource.paginator = this.paginator;
-  //         this.dataSource.sort = this.sort;
-  //       },
-  //       error: (err) => {
-  //         //alert("Erreur pendant la collection des éléments!!");
-  //         console.log('Error While fetching the records');
-  //       },
-  //     });
-  //   });
-  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -254,8 +239,8 @@ export class RequestListComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.findAllSub?.unsubscribe();
-    this.deleteSub?.unsubscribe();
-    //this.subTotalRequest?.unsubscribe();
+    //this.findAllSub?.unsubscribe();
+    //this.deleteSub?.unsubscribe();
+    this.sub?.unsubscribe();
   }
 }

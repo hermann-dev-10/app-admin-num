@@ -1,0 +1,91 @@
+<h1 mat-dialog-title>{{titleModal}}</h1>
+<div mat-dialog-content>
+
+    <form [formGroup]="leaveRequestForm">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <mat-form-field appearance="outline">
+                <mat-label>Prénom et nom</mat-label>
+                <input formControlName="displayName" matInput value="{{ this.displayName }}">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                 <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option>Choississez un type</mat-option>
+                        <mat-option value="VACANCES">Vacances</mat-option>
+                        <mat-option value="MALADIE">Maladie</mat-option>
+                        <mat-option value="AUTRE">Autre</mat-option>
+                    </mat-select>
+            </mat-form-field>
+            </div>
+        </div>
+       
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select formControlName="responsable">
+                        <mat-option>Choississez un responsable</mat-option>
+                        <mat-option value="DELACHENAL">Virginie Delachenal</mat-option>
+                        <mat-option value="KOLLER">Laurence Koller</mat-option>
+                        <mat-option value="SOUCHET">Véronique Souchet</mat-option>
+                        <mat-option value="VALITON">Stéphane Valiton</mat-option>
+                        <mat-option value="MANUEL">Hermann Manuel</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-6">
+               
+                <mat-form-field appearance="outline">
+                    <mat-label>Description:</mat-label>
+                    <textarea formControlName="description" matInput ></textarea>
+                </mat-form-field>
+
+                
+            </div>
+        </div>
+
+        <!-- <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <mat-form-field appearance="outline">
+                            <mat-label>Date de début</mat-label>
+                            <input  formControlName="start_date" matInput [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date de fin</mat-label>
+                        <input  formControlName="end_date" matInput [matDatepicker]="picker2">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+        </div>  -->
+  
+        <div class="row mt-2">       
+             <div class="col-6">
+                    <mat-form-field appearance="outline">
+                    <mat-label>Statut de la demande :</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option>Choississez un statut</mat-option>
+                        <mat-option  *ngFor="let etat of status" [value]="etat" class="example-margin" (change)="onChangeState($event)">{{etat}}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+             </div>
+        </div>
+        
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <!-- <button class="ml-8" mat-raised-button color="primary" (click)="addLeaveRequestNext()">{{addNextBtn}}</button> -->
+    <button class="ml-8" mat-raised-button color="primary" (click)="addLeaveRequest()">{{actionBtn}}</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+</div>

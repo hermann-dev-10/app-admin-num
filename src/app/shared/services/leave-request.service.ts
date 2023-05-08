@@ -42,62 +42,38 @@ export class LeaveRequestService {
     );
   }*/
 
-  /*postLeaveRequest(
-    displayName: string,
-    type: string,
-    description: string,
-    status: string,
-    start_date: Date,
-    end_date: Date,
-    created_at: Date,
-    responsable: string,
-    uid: string
-  ) {
-    return this.afs.collection(`${this.collectionName}`).add({
-      displayName,
-      type,
-      description,
-      status,
-      start_date,
-      end_date,
-      created_at :new Date(),
-      responsable, 
-      uid,
+  createLeaveRequest(
+     displayName: string,
+     type: string,
+     description: string,
+     status: string,
+      //start_date: Date,
+      //end_date: Date,
+      //created_at: Date,
+     responsable: string,
+     uid: string
+   ) {
+     return this.afs.collection(`${this.collectionName}`).add({
+       displayName,
+       type,
+       description,
+       status,
+       //start_date,
+       //end_date,
+       //created_at,
+       responsable, 
+       uid,
     });
-  }*/
+ }
 
-  postLeaveRequest(
-    displayName: string,
-    type: string,
-    description: string,
-    status: string,
-    start_date: Date,
-    end_date: Date,
-    created_at: Date,
-    responsable: string,
-    uid: string
-  ) {
-    return this.afs.collection(`${this.collectionName}`).add({
-      displayName,
-      type,
-      description,
-      status,
-      start_date,
-      end_date,
-      created_at: new Date(),
-      responsable,
-      uid,
-    });
-  }
+  //  postLeaveRequest(registerObj: any) {
+  //  return this.afs.collection(`${this.collectionName}`).add({ registerObj })
 
-  //postLeaveRequest(registerObj: any) {
-  //return this.afs.collection(`${this.collectionName}`).add({ registerObj });
-
-  /*return this.http.post<LeaveRequest[]>(
-      `${this.API_URL}/classeurList`,
-      registerObj
-    );*/
-  //}
+  // // /*return this.http.post<LeaveRequest[]>(
+  // //     `${this.API_URL}/classeurList`,
+  // //     registerObj
+  // //   );*/
+  //  }
 
   /*
    postLeaveRequest(registerObj: any) {
@@ -145,9 +121,13 @@ export class LeaveRequestService {
   }*/
 
   readPersonalByUid(uid: string) {
-    return this.afs
-      .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
-      .valueChanges({ idField: 'id' });
+     return this.afs
+       .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
+       .valueChanges({ idField: 'id' });
+
+      //  return this.afs
+      // .collection(`${this.collectionName}`)
+      // .valueChanges({ idField: 'id' });
   }
 
   update(leaveRequestData: LeaveRequest) {

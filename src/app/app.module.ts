@@ -95,6 +95,9 @@ import { RequestListComponent } from './components/leave-request/request-list/re
 import { RequestFormGeneralComponent } from './components/leave-request/request-form-general/request-form-general.component';
 import { LeaveRequestService } from './shared/services/leave-request.service';
 import { TestsComponent } from './components/tests/tests.component';
+import { DemandeCongeComponent } from './components/demande-conge/demande-conge.component';
+import { AdminDemandeCongeComponent } from './components/admin-demande-conge/admin-demande-conge.component';
+import { DialogDemandeCongeComponent } from './components/dialog-demande-conge/dialog-demande-conge.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +147,9 @@ import { TestsComponent } from './components/tests/tests.component';
     RequestListComponent,
     RequestFormGeneralComponent,
     TestsComponent,
+    DemandeCongeComponent,
+    AdminDemandeCongeComponent,
+    DialogDemandeCongeComponent,
   ],
   imports: [
     BrowserModule,

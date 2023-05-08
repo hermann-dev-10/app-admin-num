@@ -13,7 +13,15 @@ import { LeaveRequestService } from './../../../shared/services/leave-request.se
 })
 export class RequestCreationComponent implements OnInit {
   errorMessage = '';
-  displayName: any;
+  displayName:any;
+  uid:any;
+  type:any;
+  description:any;
+  status:any;
+  start_date:any;
+  end_date:any;
+  created_at:any;
+  responsable:any;
   sub: any;
   user: any;
 
@@ -34,7 +42,9 @@ export class RequestCreationComponent implements OnInit {
 
             for (let i = 0; i < this.displayNameObs.length; i++) {
               this.displayName = this.displayNameObs[i].displayName;
+              this.uid = this.displayNameObs[i].uid;
               console.log('this.displayName', this.displayName);
+              console.log('this.uid', this.uid);
             }
           },
           (err) => {
@@ -46,20 +56,32 @@ export class RequestCreationComponent implements OnInit {
   }
 
   constructor(
-    private service: LeaveRequestService,
     private router: Router,
     private route: ActivatedRoute,
     public userService: UserService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private leaveRequestService: LeaveRequestService,
   ) {}
 
   onSubmit(leaveRequestData: LeaveRequest) {
     console.log('Submit leave request? : ', leaveRequestData);
     const insertedInvoice = {
       ...leaveRequestData,
+
+      /*this.type,
+      this.description,
+      this.status,
+      this.start_date,
+      this.end_date,
+      this.created_at: new Date(),
+      this.responsable,
+      */
+      //type: this.type,
       displayName: this.displayName,
+      uid: this.uid
     };
-    this.service.postLeaveRequest(insertedInvoice).subscribe({
+
+    /*this.service.postLeaveRequest(insertedInvoice).subscribe({
       //this.service.postLeaveRequest(leaveRequestData).subscribe({
       next: () =>
         this.router.navigate(['../'], {
@@ -69,6 +91,25 @@ export class RequestCreationComponent implements OnInit {
         (this.errorMessage =
           'Une erreur est survenue, merci de réessayer plus tard'),
     });
-    console.log('leaveRequestData : ', leaveRequestData);
+    console.log('leaveRequestData : ', leaveRequestData);*/
+    //const result = this.leaveRequestService.postLeaveRequest(insertedInvoice);
+    
+    // const result = this.leaveRequestService.postLeaveRequest(
+    //   //insertedInvoice,
+    //   this.displayName,
+    //   this.type,
+    //   this.description,
+    //   this.status,
+    //   this.start_date,
+    //   this.end_date,
+    //   this.created_at,
+    //   this.responsable,
+    //   this.uid,
+    //   );
+
+   //   console.log('result : ', result);
+
   }
+ 
 }
+
