@@ -11,6 +11,7 @@
             <div class="page__content shadow p-3 position-relative">
                 <!--<div class="page__content-data position-absolute text-center">-->
                 <div class="container">
+                    
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                                     <div class="icon-card mb-30">
@@ -148,6 +149,8 @@
                     </div>
 
                     <hr>
+                   <h2 class="text-center mt-5">Gestion des classeurs (Atelier NUM)</h2>
+
                      <div class="row">
                         <div class="col-lg-4 col-md-6">
                                     <div class="icon-card mb-30">
@@ -179,10 +182,10 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-5">
                          <mat-form-field appearance="standard" style="width:100%">
                         <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Recherche d'une demande de congé" #input>
                     </mat-form-field>
                     <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource" matSort style="width:100%" matSortActive="createdAt" matSortDirection="desc">
@@ -229,6 +232,121 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                             <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                    </div>
+                    </div>
+                <hr>
+                <h2 class="text-center mt-5">Gestion des demandes de congé</h2>
+                <div class="row">
+                         <mat-form-field appearance="standard" style="width:100%">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilterLeaveRequests($event)" placeholder="Ex. FOJ" #input>
+                    </mat-form-field>
+                    <div class="mat-elevation-z8">
+                         <table mat-table [dataSource]="dataSourceLeaveRequests" matSort style="width:100%" matSortActive="created_at" matSortDirection="desc">
+                            
+                          <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                                <td mat-cell *matCellDef="let row"> {{row.id }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="displayName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom et nom</th>
+                                <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type congé</th>
+                                <td mat-cell *matCellDef="let row"> {{row.type | uppercase }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                            </ng-container>
+                            
+                            
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+                                <td mat-cell *matCellDef="let row"> 
+                                  
+                                  
+                                  
+                                  <p *ngIf="row.status === 'PROGRESSING'">
+                                    <span class="badge bg-dark">En attente</span>
+                                  </p>
+
+                                  <p *ngIf="row.status === 'ACCEPTED'">
+                                    <span class="badge bg-success">Accepté</span>
+                                  </p>
+
+                                  <p *ngIf="row.status === 'CANCELED'">
+                                    <span class="badge bg-danger">Annulé</span>
+                                  </p>
+
+                                  <p *ngIf="row.status === 'REFUSED'">
+                                    <span class="badge bg-danger">Refusé</span>
+                                  </p>
+
+
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="start_date">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de début </th>
+                                <td mat-cell *matCellDef="let row"> {{row.start_date | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="end_date">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de fin </th>
+                                <td mat-cell *matCellDef="let row"> {{row.end_date | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="responsable">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsable </th>
+                                <td mat-cell *matCellDef="let row"> {{row.responsable }} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="created_at">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le </th>
+                                <td mat-cell *matCellDef="let row"> {{ row.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                            </ng-container> 
+                           
+                          
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action </th>
+                                <td mat-cell *matCellDef="let row" style="width: 155px;">
+
+
+                                    <!-- <a
+                                      routerLink="/invoices/detail/{{ row.id }}"
+                                    
+                                    >
+                                      <button mat-icon-button color="primary">
+                                          <mat-icon>find_in_page</mat-icon>
+                                      </button>
+                                    </a> -->
+
+                                    <a
+                                          routerLink="/leave-requests/{{ row.id }}"
+                                        >
+                                        <button mat-icon-button color="primary">
+                                        <mat-icon>edit</mat-icon>
+                                        </button>    
+                                    </a>
+
+
+                                    <button mat-icon-button color="warn"  (click)="deleteLeaveRequest(row.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+
+                                    
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedLeaveRequestsColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedLeaveRequestsColumns;"></tr>
+
                             <tr class="mat-row" *matNoDataRow>
                                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                             </tr>

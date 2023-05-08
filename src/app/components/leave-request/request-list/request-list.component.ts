@@ -15,6 +15,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FolderService } from 'src/app/shared/services/folder.service';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { UserService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-request-list',
   templateUrl: './request-list.component.html',
@@ -37,7 +39,7 @@ export class RequestListComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  foldersByUid$!: Observable<any[]>;
+  leavesByUid$!: Observable<any[]>;
   currentUser!: any;
   user = this.afAuth.currentUser;
   sub: any;
@@ -65,6 +67,7 @@ export class RequestListComponent implements OnInit {
   users!: Observable<any[]>;
   collectionName = 'table-users';
   result: any;
+  leaveRequestByUid$!: Observable<any[]>;
 
   constructor(
     private leaveRequestService: LeaveRequestService,
@@ -72,17 +75,42 @@ export class RequestListComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private dialog: MatDialog,
-    private folderService: FolderService
+    private folderService: FolderService,
+    private leaveService: LeaveRequestService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.leaveRequests$ = this.leaveRequestService.findAll();
+    this.getAllLeaveRequestsByUid();
 
-    this.getAllLeaveRequests();
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+      if (this.user) {
+        this.leavesByUid$ = this.leaveRequestService.readPersonalByUid(user.uid);
+        console.log('leavesByUid: ', this.leavesByUid$);
+        console.log(this.userService.readUserWithUid(user.uid));
+
+        this.sub = this.userService
+          .readUserWithUid(user.uid)
+          .subscribe((data) => {
+            console.log('Dossier: ngOnInit readUserWithUid / data', data);
+            this.uniqueUser = data;
+            console.log('user data : -> ', this.user);
+            console.log('mes users$ OBSERVABLE : -> ', this.users$);
+          });
+      }
+    });
+
+
+    //this.leaveRequests$ = this.leaveRequestService.findAll();
+
+    //this.getAllLeaveRequests();
+
+
 
     this.subTotalRequest = this.leaveRequestService
       .findAll()
-      .subscribe((data) => {
+      /*.subscribe((data) => {
         this.dataTotalProgressingRequest = data;
 
         for (let i = 0; i < this.dataTotalProgressingRequest.length; i++) {
@@ -104,10 +132,28 @@ export class RequestListComponent implements OnInit {
               break;
           }
         }
-      });
+      });*/
+
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+      if (this.user) {
+        this.leaveRequestByUid$ = this.leaveService.readPersonalByUid(user.uid);
+        console.log('leavesByUid$: ', this.leavesByUid$);
+        console.log(this.userService.readUserWithUid(user.uid));
+
+        this.sub = this.userService
+          .readUserWithUid(user.uid)
+          .subscribe((data) => {
+            console.log('Dossier: ngOnInit readUserWithUid / data', data);
+            this.uniqueUser = data;
+            console.log('user data : -> ', this.user);
+            console.log('mes users$ OBSERVABLE : -> ', this.users$);
+          });
+      }
+    });
   }
 
-  deleteLeaveRequest(id: number) {
+  /*deleteLeaveRequest(id: number) {
     const oldLeaveRequests = [...this.leaveRequests];
 
     this.leaveRequests = this.leaveRequests.filter((item) => item.id !== id);
@@ -127,9 +173,26 @@ export class RequestListComponent implements OnInit {
       });
 
     console.log('Demande de congé n°', id, 'deleted.');
+  }*/
+
+  getAllLeaveRequestsByUid() {
+    this.sub = this.afAuth.authState.subscribe((user) => {
+      //this.api.getFolders()
+      this.leaveRequestService.readPersonalByUid(user.uid).subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (err) => {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        },
+      });
+    });
   }
 
-  getAllLeaveRequests() {
+  /*getAllLeaveRequests() {
     this.leaveRequestService
       .findAll()
       .pipe(takeUntil(this.destroy$))
@@ -154,7 +217,7 @@ export class RequestListComponent implements OnInit {
           (this.errorMessage =
             'Il y a eu un problème lors de la récupération des demandes de congé'),
       });
-  }
+  }*/
 
   /*getUser(id: any) {
     return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
@@ -193,5 +256,6 @@ export class RequestListComponent implements OnInit {
   ngOnDestroy() {
     this.findAllSub?.unsubscribe();
     this.deleteSub?.unsubscribe();
+    //this.subTotalRequest?.unsubscribe();
   }
 }

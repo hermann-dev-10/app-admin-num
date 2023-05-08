@@ -13,6 +13,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { AdminDialogComponent } from '../admin-folder/admin-dialog/admin-dialog.component';
 import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { CompaniesService } from 'src/app/shared/services/companies.service';
+import { LeaveRequestService } from 'src/app/shared/services/leave-request.service';
 
 
 @Component({
@@ -29,27 +30,54 @@ export class DashboardComponent implements OnInit {
     'createdAt',
     'action',
   ];
+  displayedLeaveRequestsColumns: string[] = [
+    'id',
+    'displayName',
+    'type',
+    'description',
+    'status',
+    'start_date',
+    'end_date',
+    'responsable',
+    'created_at',
+    'action',
+  ];
+
   dataSource!: MatTableDataSource<any>;
+  dataSourceLeaveRequests!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   foldersByUid$!: Observable<any[]>;
+  leavesByUid$!: Observable<any[]>;
+
   currentUser!: any;
   user = this.afAuth.currentUser;
+
   sub: any;
+  subLeaveRequest: any;
+
   uniqueUser: any;
+
   users$: Observable<any>[] = [];
   users: any[] = [];
+
   private foldersCollection: AngularFirestoreCollection<any>;
+  private leaveRequestsCollection: AngularFirestoreCollection<any>;
+
   private userCollection: AngularFirestoreCollection<any>;
+
   folders$: Observable<any[]>;
   folders: any[] = [];
+
+  leaveRequests$: Observable<any[]>;
+  leaveRequests: any[] = [];
 
   sideBarOpen = true;
 
   message: string = 'Are you sure?';
   confirmButtonText = 'Yes';
   cancelButtonText = 'Cancel';
-
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -64,10 +92,35 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     private folderService: FolderService,
     private userService: UserService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private leaveRequestService: LeaveRequestService
   ) {}
 
   async ngOnInit() {
+    this.getAllLeaveRequests();
+
+    this.leaveRequestsCollection = await this.leaveRequestService.findAll();
+
+    this.sub = this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+      if (this.user) {
+        this.leavesByUid$ = this.leaveRequestService.readPersonalByUid(
+          user.uid
+        );
+        console.log('leavesByUid: ', this.leavesByUid$);
+        console.log(this.userService.readUserWithUid(user.uid));
+
+        this.sub = this.userService
+          .readUserWithUid(user.uid)
+          .subscribe((data) => {
+            console.log('Dossier: ngOnInit readUserWithUid / data', data);
+            this.uniqueUser = data;
+            console.log('user data : -> ', this.user);
+            console.log('mes users$ OBSERVABLE : -> ', this.users$);
+          });
+      }
+    });
+
     console.log('this.companyService : ', this.companyService.readAllCompany());
     //this.usersCollection = await this.userService.getUsers();
     this.userService.getUsers(); // on déclence la fonction getUsers
@@ -75,26 +128,33 @@ export class DashboardComponent implements OnInit {
     console.log('Users: ', this.users$);
     this.folders$ = this.folderService.getFolders();
     this.getAllFolders();
-    console.log(
-      'this.folderService.readAllFolders(): ',
-      this.folderService.readAllFolders()
-    );
+    console.log('this.folderService.readAllFolders(): ',this.folderService.readAllFolders());
     //console.log('this.readAll(): ', this.folderServic);
     //this.getAllUsers();
     //console.log('this.getAllUsers()', this.getAllUsers());
+
     this.foldersCollection = await this.folderService.readAllFolders();
+
     this.sub = this.foldersCollection
       .valueChanges({
         idField: 'id',
       })
       .subscribe((data) => {
         this.folders = data;
-         console.log('this.folders: ', this.folders);
-
+        console.log('this.folders: ', this.folders);
       });
 
+    this.leaveRequestsCollection = await this.leaveRequestService.findAll();
 
-      
+    this.subLeaveRequest = this.leaveRequestsCollection
+      .valueChanges({
+        idField: 'id',
+      })
+      .subscribe((data) => {
+        this.leaveRequests = data;
+        console.log('this.leaveRequest: ', this.leaveRequests);
+      });
+
     this.userCollection = this.userService.readAllUser();
 
     this.sub = this.userCollection
@@ -188,7 +248,34 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  getAllLeaveRequests() {
+    this.subLeaveRequest = this.afAuth.authState.subscribe((user) => {
+      this.leaveRequestService.getLeaveRequests()
+      .subscribe({
+        next: (res) => {
+          this.dataSourceLeaveRequests = new MatTableDataSource(res);
+          this.dataSourceLeaveRequests.paginator = this.paginator;
+          this.dataSourceLeaveRequests.sort = this.sort;
+        },
+        error: (err) => {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        },
+      });
+    });
+  }
+
+  applyFilterLeaveRequests(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceLeaveRequests.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceLeaveRequests.paginator) {
+      this.dataSourceLeaveRequests.paginator.firstPage();
+    }
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.subLeaveRequest.unsubscribe();
   }
 }

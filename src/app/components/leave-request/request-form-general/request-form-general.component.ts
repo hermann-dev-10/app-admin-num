@@ -17,7 +17,7 @@ export class RequestFormGeneralComponent implements OnInit {
   user: any;
   sub: any;
   displayNameObs: any;
-  userConnected: any;
+  displayName: any;
 
   constructor(
     private fb: FormBuilder,
@@ -40,8 +40,8 @@ export class RequestFormGeneralComponent implements OnInit {
             this.displayNameObs = data;
 
             for (let i = 0; i < this.displayNameObs.length; i++) {
-              this.userConnected = this.displayNameObs[i].displayName;
-              console.log('this.userConnected', this.userConnected);
+              this.displayName = this.displayNameObs[i].displayName;
+              console.log('this.displayName', this.displayName);
             }
           },
           (err) => {

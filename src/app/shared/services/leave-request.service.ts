@@ -17,33 +17,96 @@ export class LeaveRequestService {
 
   private personalLeaveRequestCollection!: AngularFirestoreCollection<any>;
   private leaveRequestCollection!: AngularFirestoreCollection<any>;
-  allLeaveRequest!: Observable<any[]>;//personalLeaveRequest!: Observable<any[]>;
+  allLeaveRequest!: Observable<any[]>; //personalLeaveRequest!: Observable<any[]>;
   //leaveRequests$!: Observable<any[]>;
   collectionName = 'table-leave-requests';
 
-  private  leaveRequests: any[] = []
+  private leaveRequests: any[] = [];
 
   leaveRequestsSubject: BehaviorSubject<any[]> = new BehaviorSubject(<any[]>[]);
 
-
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private auth: AuthService,
-    private db: AngularFireDatabase, 
+    private db: AngularFireDatabase,
     private storage: AngularFireStorage,
-    private afs: AngularFirestore,
+    private afs: AngularFirestore
+  ) {
+    this.getLeaveRequestsOn();
+  }
 
-    ) {
-            this.getLeaveRequestsOn();
+  /*postLeaveRequest(registerObj: LeaveRequest) {
+    return this.http.post<LeaveRequest[]>(
+      `${this.API_URL}/leaveRequestList`,
+      registerObj
+    );
+  }*/
 
-    }
+  /*postLeaveRequest(
+    displayName: string,
+    type: string,
+    description: string,
+    status: string,
+    start_date: Date,
+    end_date: Date,
+    created_at: Date,
+    responsable: string,
+    uid: string
+  ) {
+    return this.afs.collection(`${this.collectionName}`).add({
+      displayName,
+      type,
+      description,
+      status,
+      start_date,
+      end_date,
+      created_at :new Date(),
+      responsable, 
+      uid,
+    });
+  }*/
 
-   postLeaveRequest(registerObj: LeaveRequest) {
-     return this.http.post<LeaveRequest[]>(
-       `${this.API_URL}/leaveRequestList`,
-       registerObj
-     );
-   }
+  postLeaveRequest(
+    displayName: string,
+    type: string,
+    description: string,
+    status: string,
+    start_date: Date,
+    end_date: Date,
+    created_at: Date,
+    responsable: string,
+    uid: string
+  ) {
+    return this.afs.collection(`${this.collectionName}`).add({
+      displayName,
+      type,
+      description,
+      status,
+      start_date,
+      end_date,
+      created_at: new Date(),
+      responsable,
+      uid,
+    });
+  }
+
+  //postLeaveRequest(registerObj: any) {
+  //return this.afs.collection(`${this.collectionName}`).add({ registerObj });
+
+  /*return this.http.post<LeaveRequest[]>(
+      `${this.API_URL}/classeurList`,
+      registerObj
+    );*/
+  //}
+
+  /*
+   postLeaveRequest(registerObj: any) {
+    return this.http.post<LeaveRequest[]>(
+      `${this.API_URL}/classeurList`,
+      registerObj
+    );
+  } 
+  */
 
   // getRegisteredLeaveRequest() {
   //   return this.http.get<LeaveRequest[]>(`${this.API_URL}/leaveRequestList`);
@@ -81,12 +144,18 @@ export class LeaveRequestService {
     );
   }*/
 
- update(leaveRequestData: LeaveRequest) {
+  readPersonalByUid(uid: string) {
+    return this.afs
+      .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id' });
+  }
+
+  update(leaveRequestData: LeaveRequest) {
     return this.http.put<LeaveRequest>(
       this.API_URL + '/leaveRequestList/' + leaveRequestData.id,
       leaveRequestData
     );
-   }
+  }
 
   delete(id: number) {
     return this.http.delete<LeaveRequest>(
@@ -94,18 +163,21 @@ export class LeaveRequestService {
     );
   }
 
-  /*findAll() {
+  findAll() {
     return this.afs.collection<any>(`${this.collectionName}`, (ref) =>
       ref.orderBy('date', 'asc')
     );
-  }*/
-
-  findAll(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.API_URL + '/leaveRequestList');
   }
 
-  
+  getLeaveRequests() {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      .valueChanges({ idField: 'id' });
+  }
 
+  /*findAll(): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(this.API_URL + '/leaveRequestList');
+  }*/
 
   find(id: number) {
     return this.http.get<LeaveRequest>(
@@ -113,13 +185,19 @@ export class LeaveRequestService {
     );
   }
 
-   getLeaveRequestsOn(): void{
-    this.db.list(`${this.collectionName}`).query.limitToLast(10).on('value', snapshot => {
-      const foldersSnapshotValue = snapshot.val();
-      if (foldersSnapshotValue){
-        const folders = Object.keys(foldersSnapshotValue).map(id => ({id, ...foldersSnapshotValue[id] }));
-        console.log(folders);
-      }
-    })
+  getLeaveRequestsOn(): void {
+    this.db
+      .list(`${this.collectionName}`)
+      .query.limitToLast(10)
+      .on('value', (snapshot) => {
+        const foldersSnapshotValue = snapshot.val();
+        if (foldersSnapshotValue) {
+          const folders = Object.keys(foldersSnapshotValue).map((id) => ({
+            id,
+            ...foldersSnapshotValue[id],
+          }));
+          console.log(folders);
+        }
+      });
   }
 }

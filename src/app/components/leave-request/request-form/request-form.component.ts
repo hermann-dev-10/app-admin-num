@@ -51,7 +51,7 @@ export class RequestFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: LeaveRequestService,
+    private leaveRequestService: LeaveRequestService,
     private router: Router,
     public userService: UserService,
     private afAuth: AngularFireAuth
@@ -143,9 +143,21 @@ export class RequestFormComponent implements OnInit {
 
     console.log('Ok ADD Leave Request:', this.leaveRequestForm.value);
 
-    /*this.invoiceService
-      .postInvoice(this.invoiceForm.value as Invoice)
-      .pipe(tap(() => this.router.navigateByUrl('/invoices')))
-      .subscribe();*/
+    this.leaveRequestService.postLeaveRequest(
+      this.leaveRequestForm.value.displayName,
+      this.leaveRequestForm.value.type,
+      this.leaveRequestForm.value.description,
+      this.leaveRequestForm.value.status,
+      this.leaveRequestForm.value.start_date,
+      this.leaveRequestForm.value.end_date,
+      this.leaveRequestForm.value.created_at,
+      this.leaveRequestForm.value.responsable,
+      'uid'
+    );
+    //this.leaveRequestService.postLeaveRequest(this.leaveRequestForm.value as LeaveRequest);
+    this.router.navigateByUrl('/leave-requests');
+
+      //.pipe(tap(() => this.router.navigateByUrl('/invoices')))
+      //.subscribe();
   }
 }
