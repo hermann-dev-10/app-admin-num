@@ -80,7 +80,7 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(email, password) {
     //ASYNC ?
     console.log('In SignUp function');
     return this.afAuth
@@ -89,7 +89,8 @@ export class AuthService {
         console.log('before send verification');
         //Call the SendVerificaitonMail() function when new user sign
         //up and returns promise
-        this.SendVerificationMail();
+        //this.SendVerificationMail();
+        console.log(result.user);
         console.log('ok send verification');
         //this.SetUserData(result.user);
       })

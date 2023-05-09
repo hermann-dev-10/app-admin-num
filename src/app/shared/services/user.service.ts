@@ -90,8 +90,6 @@ export class UserService {
     );
   }
 
-
-
   getUser(id: any) {
     return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
   }

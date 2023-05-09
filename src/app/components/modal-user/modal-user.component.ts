@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-modal-user',
@@ -32,7 +33,7 @@ export class ModalUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editdata: any,
     private dialogRef: MatDialogRef<ModalUserComponent>,
     public afAuth: AngularFireAuth,
-
+    private authService: AuthService,
     private _snackBar: MatSnackBar,
   ) { }
 
@@ -78,7 +79,11 @@ export class ModalUserComponent implements OnInit {
         console.log('userForm.valid ? ?');
         try {
           // code that we will 'try' to run
-          this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.nameEmail,this.userForm.value.password); //this line is okay but defined equals something
+          this.result = this.authService.SignUp(
+            this.userForm.value.nameEmail,
+            this.userForm.value.password
+          );
+          //this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.nameEmail,this.userForm.value.password); //this line is okay but defined equals something
           console.log('1. this.result :', this.result);
 
           if(this.result) {
