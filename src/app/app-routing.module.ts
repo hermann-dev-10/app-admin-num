@@ -30,6 +30,7 @@ import { RequestDetailComponent } from './components/leave-request/request-detai
 import { RequestEditionComponent } from './components/leave-request/request-edition/request-edition.component';
 import { DemandeCongeComponent } from './components/demande-conge/demande-conge.component';
 import { DemandeCongeSingleComponent } from './components/demande-conge/demande-conge-single/demande-conge-single.component';
+import { DemandeCongeCreationComponent } from './components/demande-conge/demande-conge-creation/demande-conge-creation.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -99,6 +100,11 @@ const routes: Routes = [
   {
     path: 'demande-conge',
     component: DemandeCongeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'demande-conge/create',
+    component: DemandeCongeCreationComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -291,6 +291,17 @@
         }
       ],
       "id": 12
+    },
+    {
+      "binder_name": "Salaire2023",
+      "customer_name": "FOJ",
+      "description": "test2023",
+      "status": "NOT_STARTED",
+      "date_binder_creation": "2023-05-09T22:00:00.000Z",
+      "directory": "10 mai",
+      "created_at": "2023-05-09T08:16:26.507Z",
+      "details": [],
+      "id": 13
     }
   ],
   "leaveRequestList": [

@@ -131,7 +131,7 @@ export class DialogDemandeCongeComponent implements OnInit {
       if (this.leaveRequestForm.valid) {
 
         console.log('Etape 2 in condition');
-        const result = this.leaveRequestService.createLeaveRequest(
+        /*const result = this.leaveRequestService.createLeaveRequest(
           this.leaveRequestForm.value.displayName,
           this.leaveRequestForm.value.type,
           this.leaveRequestForm.value.responsable,
@@ -139,11 +139,11 @@ export class DialogDemandeCongeComponent implements OnInit {
           //this.leaveRequestForm.value.start_date,
           //this.leaveRequestForm.value.end_date,
           this.leaveRequestForm.value.status,
-          //this.created_at,
+          this.created_at,
           this.user.uid
         );
 
-        console.log('result:', result);
+        console.log('result:', result);*/
         // const result = this.leaveRequestService.postLeaveRequest(
         //   //insertedInvoice,
         //   this.displayName,
@@ -160,7 +160,8 @@ export class DialogDemandeCongeComponent implements OnInit {
 
 
         this._snackBar.open(
-          `${this.leaveRequestForm.value.nomClasseur} ajouté avec avec succès.`,
+          /*          `${this.leaveRequestForm.value.nomClasseur} ajouté avec avec succès.`,*/
+          `Ajouté avec avec succès.`,
           '',
           {
             duration: 3000,

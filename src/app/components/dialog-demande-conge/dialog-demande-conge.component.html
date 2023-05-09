@@ -6,7 +6,7 @@
             <div class="col-lg-6 col-md-6">
                 <mat-form-field appearance="outline">
                 <mat-label>Prénom et nom</mat-label>
-                <input formControlName="displayName" matInput value="{{ this.displayName }}">
+                <input formControlName="displayName" matInput value="{{this.displayName}}">
                 </mat-form-field>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -22,7 +22,6 @@
             </div>
         </div>
        
-
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <mat-form-field appearance="outline">
@@ -37,18 +36,16 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
             <div class="col-lg-4 col-md-6">
-               
                 <mat-form-field appearance="outline">
                     <mat-label>Description:</mat-label>
                     <textarea formControlName="description" matInput ></textarea>
-                </mat-form-field>
-
-                
+                </mat-form-field> 
             </div>
         </div>
 
-        <!-- <div class="row">
+        <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <mat-form-field appearance="outline">
                             <mat-label>Date de début</mat-label>
@@ -58,8 +55,7 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
-
-                <div class="col-lg-6 col-md-6">
+                <!-- <div class="col-lg-6 col-md-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Date de fin</mat-label>
                         <input  formControlName="end_date" matInput [matDatepicker]="picker2">
@@ -67,8 +63,8 @@
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
-                </div>
-        </div>  -->
+                </div> -->
+        </div>  
   
         <div class="row mt-2">       
              <div class="col-6">
@@ -76,7 +72,8 @@
                     <mat-label>Statut de la demande :</mat-label>
                     <mat-select formControlName="status">
                         <mat-option>Choississez un statut</mat-option>
-                        <mat-option  *ngFor="let etat of status" [value]="etat" class="example-margin" (change)="onChangeState($event)">{{etat}}</mat-option>
+                        <mat-option  *ngFor="let etat of status" [value]="etat" class="example-margin">{{etat}}</mat-option>
+                        <!-- <mat-option  *ngFor="let etat of status" [value]="etat" class="example-margin" (change)="onChangeState($event)">{{etat}}</mat-option> -->
                     </mat-select>
                     </mat-form-field>
              </div>

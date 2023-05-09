@@ -43,28 +43,28 @@ export class LeaveRequestService {
   }*/
 
   createLeaveRequest(
-     displayName: string,
-     type: string,
-     description: string,
-     status: string,
-      //start_date: Date,
-      //end_date: Date,
-      //created_at: Date,
-     responsable: string,
-     uid: string
-   ) {
-     return this.afs.collection(`${this.collectionName}`).add({
-       displayName,
-       type,
-       description,
-       status,
-       //start_date,
-       //end_date,
-       //created_at,
-       responsable, 
-       uid,
+    displayName: string,
+    type: string,
+    description: string,
+    start_date: Date,
+    end_date: Date,
+    status: string,
+    responsable: string,
+    created_at: Date,
+    uid: string
+  ) {
+    return this.afs.collection(`${this.collectionName}`).add({
+      displayName,
+      type,
+      description,
+      start_date,
+      end_date,
+      status,
+      responsable,
+      created_at,
+      uid,
     });
- }
+  }
 
   //  postLeaveRequest(registerObj: any) {
   //  return this.afs.collection(`${this.collectionName}`).add({ registerObj })
@@ -121,13 +121,13 @@ export class LeaveRequestService {
   }*/
 
   readPersonalByUid(uid: string) {
-     return this.afs
-       .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
-       .valueChanges({ idField: 'id' });
+    return this.afs
+      .collection(this.collectionName, (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id' });
 
-      //  return this.afs
-      // .collection(`${this.collectionName}`)
-      // .valueChanges({ idField: 'id' });
+    //  return this.afs
+    // .collection(`${this.collectionName}`)
+    // .valueChanges({ idField: 'id' });
   }
 
   update(leaveRequestData: LeaveRequest) {

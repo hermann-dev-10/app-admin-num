@@ -98,6 +98,7 @@ import { TestsComponent } from './components/tests/tests.component';
 import { DemandeCongeComponent } from './components/demande-conge/demande-conge.component';
 import { AdminDemandeCongeComponent } from './components/admin-demande-conge/admin-demande-conge.component';
 import { DialogDemandeCongeComponent } from './components/dialog-demande-conge/dialog-demande-conge.component';
+import { DemandeCongeCreationComponent } from './components/demande-conge/demande-conge-creation/demande-conge-creation.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +151,7 @@ import { DialogDemandeCongeComponent } from './components/dialog-demande-conge/d
     DemandeCongeComponent,
     AdminDemandeCongeComponent,
     DialogDemandeCongeComponent,
+    DemandeCongeCreationComponent,
   ],
   imports: [
     BrowserModule,

@@ -51,6 +51,7 @@ export class RequestFormGeneralComponent implements OnInit {
       }
     });
   }
+  
   get type() {
     return this.parent?.controls.type;
   }

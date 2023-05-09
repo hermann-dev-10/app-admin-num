@@ -29,7 +29,10 @@ export class RequestListComponent implements OnInit {
     'type',
     'description',
     'status',
+    'start_date',
+    'end_date',
     'responsable',
+    'created_at',
     'action',
   ];
 

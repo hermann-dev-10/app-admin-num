@@ -22,15 +22,16 @@ import { DialogDemandeCongeComponent } from '../dialog-demande-conge/dialog-dema
   styleUrls: ['./demande-conge.component.scss'],
 })
 export class DemandeCongeComponent implements OnInit {
-   displayedColumns: string[] = [
-     'displayName',
-     'type',
-     'responsable',
-     'description',
-    
-     'status',
-    
-     'action',
+  displayedColumns: string[] = [
+    'displayName',
+    'type',
+    'description',
+    'start_date',
+    'end_date',
+    'status',
+    'responsable',
+    'created_at',
+    'action',
   ];
   // displayedColumns: string[] = [
   //   'displayName',
@@ -52,7 +53,7 @@ export class DemandeCongeComponent implements OnInit {
   user = this.afAuth.currentUser;
   sub: any;
   subRequest: any;
-  subTotalRequest: any;
+  leavesRequest: any;
   uniqueUser: any;
   uniqueTest: any;
   users$: Observable<any>[] = [];
@@ -111,8 +112,8 @@ export class DemandeCongeComponent implements OnInit {
         this.subRequest = this.leaveRequestService
           .readPersonalByUid(user.uid)
           .subscribe((data) => {
-            this.uniqueTest = data;
-            console.log('this.uniqueTest :', this.uniqueTest);
+            this.leavesRequest = data;
+            console.log('this.leavesRequest :', this.leavesRequest);
           });
       }
     });
