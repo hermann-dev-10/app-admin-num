@@ -99,6 +99,7 @@ import { DemandeCongeComponent } from './components/demande-conge/demande-conge.
 import { AdminDemandeCongeComponent } from './components/admin-demande-conge/admin-demande-conge.component';
 import { DialogDemandeCongeComponent } from './components/dialog-demande-conge/dialog-demande-conge.component';
 import { DemandeCongeCreationComponent } from './components/demande-conge/demande-conge-creation/demande-conge-creation.component';
+import { CreationUserComponent } from './components/user/creation-user/creation-user.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { DemandeCongeCreationComponent } from './components/demande-conge/demand
     AdminDemandeCongeComponent,
     DialogDemandeCongeComponent,
     DemandeCongeCreationComponent,
+    CreationUserComponent,
   ],
   imports: [
     BrowserModule,

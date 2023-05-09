@@ -11,49 +11,9 @@
             <div class="page__content shadow p-3 position-relative">
                 <!--<div class="page__content-data position-absolute text-center">-->
                 <div class="container">
-                    
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                                    <div class="icon-card mb-30">
-                                        <div class="icon purple">
-                                            <mat-icon>folder</mat-icon>
-                                        </div>
-                                        <div class="content">
-                                            <h6 class="mb-10">Nombre de classeurs</h6>
-                                            <h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>
-                                            <h3></h3>
-                                            <!--<p class="text-sm text-success">
-                                            <i class="fas fa-address-book"></i> +2.00%
-                                            <span class="text-gray">(30 days)</span>
-                                        </p>-->
-                                        </div>
-                                    </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="icon-card mb-30">
-                            <div class="icon purple">
-                                <mat-icon>supervisor_account</mat-icon>
-                            </div>
-                            <div class="content">
-                                <h6 class="mb-10">Nombre d'administrateurs</h6>
-                                <h3 class="text-bold mb-10">...</h3>    
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="icon-card mb-30">
-                            <div class="icon purple">
-                                <mat-icon>perm_identity</mat-icon>
-                            </div>
-                            <div class="content">
-                                <h6 class="mb-10">Nombre d'utilisateurs</h6>
-                                <h3 class="text-bold mb-10">...</h3>    
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+               
                       
-                     <div class="row mt-5">
+                    <div class="row mt-5">
                           <div class="col-lg-4 col-md-6">
                             <a class="d-block text-decoration-none" routerLink="/folder">
                                 <div class="icon-card mb-30">
@@ -75,12 +35,12 @@
                                     </div>
                                     <div class="content">
                                         <h4 class="black-color">Département Social</h4>
-                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
-                                       
-                                        <!--<p class="text-sm text-success">
+                                        <!--<h3>...</h3>  
+                                                                             
+                                         <p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
-                                    </p>-->
+                                    </p> -->
                                     </div>
                                 </div>
                             </a>
@@ -95,7 +55,6 @@
                                 </div>
                                 <div class="content">
                                     <h4 class="black-color">Utilisateurs</h4>
-                                        <!--<h4 class="black-color">Gestion des congés</h4>--> 
                                 </div>
                             </div>
                             </a>
@@ -135,7 +94,7 @@
                             </a>
                         </div>   
                          <div class="col-lg-4 col-md-6">
-                            <a class="d-block text-decoration-none"  routerLink="/leave-requests">
+                            <a class="d-block text-decoration-none"  routerLink="/demandes-conge">
                             <div class="icon-card mb-30"> 
                                 <div class="icon blue">
                                         <mat-icon>store_mall_directory</mat-icon>
@@ -242,6 +201,37 @@
                 <hr>
                 <h2 class="text-center mt-5">Gestion des demandes de congé</h2>
                 <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="icon-card mb-30">
+                                <div class="icon purple">
+                                    <mat-icon>line_weight</mat-icon>
+                                </div>
+                                <div class="content">
+                                    <h6 class="mb-10">Nombre de demande de congé</h6>
+                                    <h3 *ngIf="leavesRequest" class="text-bold mb-10">{{leavesRequest.length}}</h3>
+                                    <!--<p class="text-sm text-success">
+                                    <i class="fas fa-address-book"></i> +2.00%
+                                    <span class="text-gray">(30 days)</span>
+                                </p>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                        
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <!-- <button mat-raised-button color="warn" (click)="openDialog()">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Ajouter une demande de congé
+                        </button> -->
+
+                         <button mat-raised-button color="warn" routerLink="/demande-conge/create">
+                            <mat-icon inline=true>note_add</mat-icon>
+                            Créer une demande de congé
+                        </button>
+                        </div>
+                    </div>
+                <div class="row">
                          <mat-form-field appearance="standard" style="width:100%">
                         <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilterLeaveRequests($event)" placeholder="Ex. FOJ" #input>
@@ -249,10 +239,7 @@
                     <div class="mat-elevation-z8">
                          <table mat-table [dataSource]="dataSourceLeaveRequests" matSort style="width:100%" matSortActive="created_at" matSortDirection="desc">
                             
-                          <ng-container matColumnDef="id">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-                                <td mat-cell *matCellDef="let row"> {{row.id }} </td>
-                            </ng-container>
+                         
                             <ng-container matColumnDef="displayName">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom et nom</th>
                                 <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
@@ -261,18 +248,10 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Type congé</th>
                                 <td mat-cell *matCellDef="let row"> {{row.type | uppercase }} </td>
                             </ng-container>
-                            <ng-container matColumnDef="description">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-                            </ng-container>
-                            
                             
                             <ng-container matColumnDef="status">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
-                                <td mat-cell *matCellDef="let row"> 
-                                  
-                                  
-                                  
+                                <td mat-cell *matCellDef="let row">  
                                   <p *ngIf="row.status === 'PROGRESSING'">
                                     <span class="badge bg-dark">En attente</span>
                                   </p>
@@ -295,12 +274,12 @@
 
                             <ng-container matColumnDef="start_date">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de début </th>
-                                <td mat-cell *matCellDef="let row"> {{row.start_date | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.start_date | date }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="end_date">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de fin </th>
-                                <td mat-cell *matCellDef="let row"> {{row.end_date | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.end_date | date }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="responsable">
@@ -310,7 +289,7 @@
 
                             <ng-container matColumnDef="created_at">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Créé le </th>
-                                <td mat-cell *matCellDef="let row"> {{ row.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }} </td>
+                                <td mat-cell *matCellDef="let row"> {{ row.created_at.toDate() | date }} </td>
                             </ng-container> 
                            
                           
@@ -355,6 +334,10 @@
                     </div>
                     </div>
                 </div>
+
+                <hr>
+                <h2 class="text-center mt-5">Gestion des utilisateurs des utilisateurs</h2>
+
             </div>
         </div>
 

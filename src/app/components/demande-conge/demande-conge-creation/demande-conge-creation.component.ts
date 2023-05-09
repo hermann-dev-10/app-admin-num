@@ -136,6 +136,7 @@ export class DemandeCongeCreationComponent implements OnInit {
       //   }
       // );
       this.leaveRequestForm.reset();
+      this.router.navigateByUrl('/demandes-conge')
       //this.dialogRef.close('save');
     }
   }

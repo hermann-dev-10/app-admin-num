@@ -51,10 +51,9 @@ export class UserService {
      
       //role: 0, //on assigne par défaut à 0 un utilisateur qui n'est pas admin
       createdAt: new Date(),
-      isAdmin: 0,
+      isAdmin: false,
       //tel: user.tel,
       //photoURL: string;
-      //createdAt: Date;
     }
     const usersCollection = this.afs.collection(`${this.collectionName}`);
     console.log('usersCollection : ', usersCollection);

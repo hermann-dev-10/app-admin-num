@@ -33,17 +33,6 @@ export class DemandeCongeComponent implements OnInit {
     'created_at',
     'action',
   ];
-  // displayedColumns: string[] = [
-  //   'displayName',
-  //   'type',
-  //   'responsable',
-  //   'description',
-  //   'start_date',
-  //   'end_date',
-  //   'status',
-  //   'created_at',
-  //   'action',
-  // ];
 
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

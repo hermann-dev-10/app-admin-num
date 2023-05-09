@@ -31,7 +31,7 @@ export class ModalUserComponent implements OnInit {
     private userService: UserService, 
     @Inject(MAT_DIALOG_DATA) public editdata: any,
     private dialogRef: MatDialogRef<ModalUserComponent>,
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
 
     private _snackBar: MatSnackBar,
   ) { }
@@ -41,10 +41,10 @@ export class ModalUserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       userName: ['', Validators.required],
       userEmail: ['', Validators.required],
-      typeAccount: ['', Validators.required],
       password: ['', Validators.required],
-      password2: ['', Validators.required],
+      //password2: ['', Validators.required],
       company: ['', Validators.required],
+      typeAccount: ['', Validators.required],
     });
 
     if(this.editdata){
@@ -65,6 +65,7 @@ export class ModalUserComponent implements OnInit {
 
   
   async addUser(){
+    console.log('OK ADD ?')
 
     this.submitted = true;
 
@@ -74,7 +75,7 @@ export class ModalUserComponent implements OnInit {
 
     if(!this.editdata){
       if(this.userForm.valid){
-      
+        console.log('userForm.valid ? ?');
         try {
           // code that we will 'try' to run
           this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.nameEmail,this.userForm.value.password); //this line is okay but defined equals something
@@ -86,6 +87,7 @@ export class ModalUserComponent implements OnInit {
       
             this.userUID = this.result.user.uid;
             console.log('this.userUID :', this.userUID);
+            console.log('...this.result.user :', ...this.result.user);
               //const userCreated = await this.userService.createUser({ //spread operator.. 
               const userCreated = await this.userService.createUserBis({
                 ...this.result.user,
@@ -96,7 +98,7 @@ export class ModalUserComponent implements OnInit {
                 //tel: this.registerForm.value.tel,   
                 createdAt: new Date(),              
               });
-              //console.log('userCreated', userCreated); //Why this value is undefined ?
+              console.log('userCreated', userCreated); //Why this value is undefined ?
               //this.authService.SendVerificationMail();
               
               console.log('this.result', this.result);

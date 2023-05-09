@@ -6,7 +6,7 @@
 
  export type LeaveRequestStatus = 'ACCEPTED' | 'PROGRESSING' | 'CANCELED' | 'REFUSED';
 
- export type Responsable = | 'DELACHENAL' | 'KOLLER' | 'SOUCHET' | 'VALITON' | 'MANUEL';
+ export type Responsable = 'DELACHENAL' | 'KOHLER' | 'SOUCHET' | 'VALITON' | 'MANUEL';
 
 // export type InvoiceDetails = InvoiceDetail[];
 

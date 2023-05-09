@@ -98,7 +98,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'demande-conge',
+    path: 'demandes-conge',
     component: DemandeCongeComponent,
     canActivate: [AuthGuard],
   },

@@ -31,10 +31,8 @@ export class DashboardComponent implements OnInit {
     'action',
   ];
   displayedLeaveRequestsColumns: string[] = [
-    'id',
     'displayName',
     'type',
-    'description',
     'status',
     'start_date',
     'end_date',
@@ -72,6 +70,9 @@ export class DashboardComponent implements OnInit {
 
   leaveRequests$: Observable<any[]>;
   leaveRequests: any[] = [];
+
+  subRequest: any;
+  leavesRequest: any;
 
   sideBarOpen = true;
 
@@ -118,6 +119,13 @@ export class DashboardComponent implements OnInit {
             console.log('user data : -> ', this.user);
             console.log('mes users$ OBSERVABLE : -> ', this.users$);
           });
+
+        this.subRequest = this.leaveRequestService
+          .readPersonalByUid(user.uid)
+          .subscribe((data) => {
+            this.leavesRequest = data;
+            console.log('this.leavesRequest :', this.leavesRequest);
+          });
       }
     });
 
@@ -128,7 +136,10 @@ export class DashboardComponent implements OnInit {
     console.log('Users: ', this.users$);
     this.folders$ = this.folderService.getFolders();
     this.getAllFolders();
-    console.log('this.folderService.readAllFolders(): ',this.folderService.readAllFolders());
+    console.log(
+      'this.folderService.readAllFolders(): ',
+      this.folderService.readAllFolders()
+    );
     //console.log('this.readAll(): ', this.folderServic);
     //this.getAllUsers();
     //console.log('this.getAllUsers()', this.getAllUsers());
@@ -250,8 +261,7 @@ export class DashboardComponent implements OnInit {
 
   getAllLeaveRequests() {
     this.subLeaveRequest = this.afAuth.authState.subscribe((user) => {
-      this.leaveRequestService.getLeaveRequests()
-      .subscribe({
+      this.leaveRequestService.getLeaveRequests().subscribe({
         next: (res) => {
           this.dataSourceLeaveRequests = new MatTableDataSource(res);
           this.dataSourceLeaveRequests.paginator = this.paginator;

@@ -9,7 +9,6 @@
         <div class="d-flex page__box p-3 mt-2">Utilisateurs</div>
         <div class="page__content shadow p-3 position-relative">
             <!--<div class="page__content-data position-absolute text-center">-->
-            <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="icon-card mb-30">
@@ -26,39 +25,35 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="icon-card mb-30">
                             <div class="icon purple">
                                 <mat-icon>supervisor_account</mat-icon>
                             </div>
                             <div class="content">
                                 <h6 class="mb-10">Nombre d'administrateurs</h6>
-                                <h3 *ngIf="users$ | async as folders" class="text-bold mb-10">{{folders.length}}</h3>
+                                <h3 class="text-bold mb-10">...</h3>
                             </div>
                         </div>
-                    </div>-->
-                    <!--<div class="col-lg-4 col-md-6">
+                    </div>
+                    <div class="col-lg-4 col-md-6">
                         <div class="icon-card mb-30">
-                            <div class="icon primary">
-                                <i class="fas fa-address-book"></i>
+                            <div class="icon purple">
+                                <mat-icon>supervisor_account</mat-icon>
                             </div>
                             <div class="content">
-                                <h6 class="mb-10">Total Expense</h6>
-                                <h3 class="text-bold mb-10">$24,567</h3>
-                                <p class="text-sm text-danger">
-                                    <i class="lni lni-arrow-down"></i> -2.00%
-                                    <span class="text-gray">Expense</span>
-                                </p>
+                                <h6 class="mb-10">Nombre d'utilisateurs normal</h6>
+                                <h3 class="text-bold mb-10">...</h3>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
-                <!--<div class="text-right">
+                <div class="text-right">
                     <button mat-raised-button color="warn" (click)="openDialog()">
                         <mat-icon inline=true>note_add</mat-icon>
                         Ajouter un utilisateur
                     </button>
-                </div>-->
+                </div>
                 <mat-form-field appearance="standard" style="width:100%">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
@@ -122,7 +117,6 @@
                     <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
                 </div>
                 <!--</div>-->
-            </div>
         </div>
     </div>
   </mat-drawer-content>
