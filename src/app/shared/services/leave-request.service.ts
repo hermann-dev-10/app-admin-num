@@ -137,10 +137,17 @@ export class LeaveRequestService {
     );
   }
 
-  delete(id: number) {
-    return this.http.delete<LeaveRequest>(
-      this.API_URL + '/leaveRequestList/' + id
-    );
+  // delete(id: number) {
+  //   return this.http.delete<LeaveRequest>(
+  //     this.API_URL + '/leaveRequestList/' + id
+  //   );
+  // }
+
+   delete(id:number){
+    //return this.http.delete<any>("http://localhost:3001/folderList/"+id);
+    return this.afs
+    .doc<any>(`${this.collectionName}/${id}`)
+    .delete();
   }
 
   findAll() {

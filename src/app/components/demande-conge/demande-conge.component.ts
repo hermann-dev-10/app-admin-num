@@ -182,4 +182,31 @@ export class DemandeCongeComponent implements OnInit {
       },
     });
   }
+
+  delete(id: number) {
+    this.leaveRequestService.delete(id);
+
+    console.log('Demande deleted : ', id);
+
+    /*this.api.deleteFolder(id)
+    .subscribe({
+      next:(res)=>{
+        this._snackBar.open('Dossier supprimé avec succès', '', {
+                duration: 2000,
+                
+        });
+      
+        this.getAllFoldersByUid();
+      },
+      error:()=>{
+        alert("Error while deleting the Folder!!");
+      }
+    })*/
+
+    //this._snackBar.open(`${id}} supprimé avec succès`, '', {
+    //this._snackBar.open('Demande supprimé avec succès', '', {
+      //duration: 3000,
+    //});
+  }
+
 }
