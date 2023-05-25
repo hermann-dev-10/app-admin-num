@@ -46,7 +46,7 @@ export class RequestListComponent implements OnInit {
   subRequest: any;
   subTotalRequest: any;
   uniqueUser: any;
-  uniqueTest:any
+  uniqueTest: any;
   users$: Observable<any>[] = [];
   sideBarOpen = true;
 
@@ -137,7 +137,9 @@ export class RequestListComponent implements OnInit {
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       this.user = user;
       if (this.user) {
-        this.leaveRequestByUid$ = this.leaveRequestService.readPersonalByUid(user.uid);
+        this.leaveRequestByUid$ = this.leaveRequestService.readPersonalByUid(
+          user.uid
+        );
         console.log('leavesByUid$: ', this.leavesByUid$);
         console.log(this.userService.readUserWithUid(user.uid));
 
@@ -186,7 +188,7 @@ export class RequestListComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           console.log('res', res);
-           console.log('user.displayName', user.displayName);
+          console.log('user.displayName', user.displayName);
         },
         error: (err) => {
           //alert("Erreur pendant la collection des éléments!!");
@@ -195,6 +197,13 @@ export class RequestListComponent implements OnInit {
       });
     });
   }
+
+  // getAgoraspaces(): void {
+  //   this.leaveRequestService
+  //     .findAll()
+  //     .subscribe((leaveRequest) => (this.leaveRequest = leaveRequest));
+  // }
+
 
   /*getAllLeaveRequests() {
     this.leaveRequestService
@@ -230,7 +239,6 @@ export class RequestListComponent implements OnInit {
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

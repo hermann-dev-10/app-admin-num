@@ -13,7 +13,17 @@ export type ClasseurFormType = FormGroup<{
     FormGroup<{
       file_name: FormControl;
       folder_name: FormControl;
+      author: FormControl;
+      date: FormControl;
     }>
   >;
+
+  // historic: FormArray<
+  //   FormGroup<{
+  //     name: FormControl;
+  //     content: FormControl;
+  //     date: FormControl;
+  //   }>
+  // >;
   //added_by: any;
 }>;

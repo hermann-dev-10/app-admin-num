@@ -9,6 +9,8 @@ export type ClasseurStatus = 'NOT_STARTED' | 'PROGRESSING' | 'DONE';
 
 export type ClasseurDetails = ClasseurDetail[];
 
+//export type ClasseurHistoric = ClasseurHistoric[];
+
 export type Classeur = {
   id?: number;
   customer_name: string;
@@ -19,5 +21,6 @@ export type Classeur = {
   month: string;
   year: string;
   details: ClasseurDetails;
+  //historic: ClasseurHistoric;
   //added_by: string;
 };

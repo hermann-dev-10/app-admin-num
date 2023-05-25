@@ -19,6 +19,8 @@
                                         <h3>Hello : <strong>{{u.displayName}}</strong></h3>
                                         <br>
                                         <h4>Email: <strong>{{user.email}}</strong></h4>
+                                        
+                                        <h4 *ngIf="u.isSuperAdmin">Type de compte : <strong>Super Administrateur</strong></h4>
                                         <h4 *ngIf="u.isAdmin">Type de compte : <strong>Administrateur</strong></h4>
                                         <h4 *ngIf="!u.isAdmin">Type de compte : <strong>Normal</strong></h4>
                                         <h4>Entreprise : <strong>{{u.company}}</strong></h4>

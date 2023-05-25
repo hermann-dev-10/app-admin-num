@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -15,6 +15,12 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { LeaveRequestService } from 'src/app/shared/services/leave-request.service';
 import { LeaveRequest } from '../leave-request/leave-request';
 import { DialogDemandeCongeComponent } from '../dialog-demande-conge/dialog-demande-conge.component';
+import * as firebase from 'firebase/app';
+import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { DialogGestionDemandeCongeComponent } from '../dialog-gestion-demande-conge/dialog-gestion-demande-conge.component';
+//import { AngularFirestore } from '@angular/fire/firestore';
+//Now import this
+//import 'firebase/firestore';
 
 @Component({
   selector: 'app-demande-conge',
@@ -37,6 +43,7 @@ export class DemandeCongeComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   leavesByUid$!: Observable<any[]>;
   currentUser!: any;
   user = this.afAuth.currentUser;
@@ -44,7 +51,6 @@ export class DemandeCongeComponent implements OnInit {
   subRequest: any;
   leavesRequest: any;
   uniqueUser: any;
-  uniqueTest: any;
   users$: Observable<any>[] = [];
   sideBarOpen = true;
 
@@ -60,6 +66,8 @@ export class DemandeCongeComponent implements OnInit {
   compteurProgressingRequest: any = 0;
   compteurAcceptedRequest: any = 0;
   compteurRefusedRequest: any = 0;
+  subTotalRequest: any;
+
   destroy$ = new Subject();
   deleteSub?: Subscription;
   findAllSub?: Subscription;
@@ -68,6 +76,14 @@ export class DemandeCongeComponent implements OnInit {
   collectionName = 'table-demande-conge';
   result: any;
   leaveRequestByUid$!: Observable<any[]>;
+  leaveRequest$!: Observable<any[]>;
+  leaveRequest: LeaveRequest;
+
+  displayDataUser: any;
+  isAdmin: any;
+
+  private leaveRequestsCollection: AngularFirestoreCollection<LeaveRequest>;
+  private leavePersonalRequestsCollection: AngularFirestoreCollection<LeaveRequest>;
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -79,13 +95,24 @@ export class DemandeCongeComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+
     private folderService: FolderService,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute //public firestore: AngularFirestore
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.leaveRequestsCollection = await this.leaveRequestService.findAll();
+    this.sub = this.leaveRequestsCollection
+      .valueChanges({
+        idField: 'id',
+      })
+      .subscribe((data) => {
+        this.leaveRequests = data;
+      });
+
     this.getAllLeaveRequestsByUid();
-    //this.users$ = this.userService.getUsers();
 
     this.getAllUsers;
     this.sub = this.afAuth.authState.subscribe((user: any) => {
@@ -96,13 +123,16 @@ export class DemandeCongeComponent implements OnInit {
           .readUserWithUid(user.uid)
           .subscribe((data) => {
             this.uniqueUser = data;
+
+            for (var i = 0; i < this.uniqueUser.length; i++) {
+              this.isAdmin = this.uniqueUser[i].isAdmin;
+            }
           });
 
         this.subRequest = this.leaveRequestService
           .readPersonalByUid(user.uid)
           .subscribe((data) => {
             this.leavesRequest = data;
-            console.log('this.leavesRequest :', this.leavesRequest);
           });
       }
     });
@@ -113,19 +143,43 @@ export class DemandeCongeComponent implements OnInit {
         this.leaveRequestByUid$ = this.leaveRequestService.readPersonalByUid(
           user.uid
         );
-        console.log('leaveRequestByUid$: ', this.leaveRequestByUid$);
-        console.log(this.userService.readUserWithUid(user.uid));
 
         this.sub = this.userService
           .readUserWithUid(user.uid)
           .subscribe((data) => {
-            console.log('Dossier: ngOnInit readUserWithUid / data', data);
             this.uniqueUser = data;
-            console.log('user data : -> ', this.user);
-            console.log('mes users$ OBSERVABLE : -> ', this.users$);
           });
       }
     });
+
+    this.leaveRequestService.getLeaveRequests().subscribe((data: any) => {
+      this.dataTotalProgressingRequest = data;
+
+      for (let i = 0; i < this.dataTotalProgressingRequest.length; i++) {
+        switch (this.dataTotalProgressingRequest[i].status) {
+          case 'PROGRESSING':
+            // statement progressing
+            this.compteurProgressingRequest++;
+            break;
+          case 'ACCEPTED':
+            // statement accepted
+            this.compteurAcceptedRequest++;
+            break;
+          case 'REFUSED':
+            // statement refused
+            this.compteurRefusedRequest++;
+            break;
+          default:
+            //
+            break;
+        }
+      }
+    });
+
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this.leaveRequestService
+      .find(id)
+      .subscribe((leaveRequest: any) => (this.leaveRequest = leaveRequest));
   }
 
   openDialog() {
@@ -150,7 +204,6 @@ export class DemandeCongeComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           console.log('res', res);
-          console.log('user.displayName', user.displayName);
         },
         error: (err) => {
           //alert("Erreur pendant la collection des éléments!!");
@@ -188,6 +241,11 @@ export class DemandeCongeComponent implements OnInit {
 
     console.log('Demande deleted : ', id);
 
+    this._snackBar.open(`Demande de congé ${id} supprimé avec succès`, '', {
+      duration: 3000,
+    });
+      
+
     /*this.api.deleteFolder(id)
     .subscribe({
       next:(res)=>{
@@ -205,8 +263,26 @@ export class DemandeCongeComponent implements OnInit {
 
     //this._snackBar.open(`${id}} supprimé avec succès`, '', {
     //this._snackBar.open('Demande supprimé avec succès', '', {
-      //duration: 3000,
+    //duration: 3000,
     //});
   }
 
+  view(row: any) {
+    this.router.navigate([`/demande-conge/${row}`]);
+    console.log('View demande-conge-single:', row);
+  }
+
+  editLeaveRequest(row: any) {
+    this.dialog
+      .open(DialogGestionDemandeCongeComponent, {
+        width: '30%',
+        data: row,
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'update') {
+          this.getAllLeaveRequestsByUid();
+        }
+      });
+  }
 }

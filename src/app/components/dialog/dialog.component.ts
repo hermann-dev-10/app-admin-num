@@ -352,18 +352,18 @@ export class DialogComponent implements OnInit {
       this.addNextBtn = '';
 
       //this.sheetForm.controls['directory'].patchValue('TEST');
-      this.sheetForm.patchValue({
-        nomClasseur: 'TEST-NOM-CLASSEUR',
-        directory: 'TEST-NOM-DIRECTORY',
-      });
+      // this.sheetForm.patchValue({
+      //   nomClasseur: 'TEST-NOM-CLASSEUR',
+      //   directory: 'TEST-NOM-DIRECTORY',
+      // });
       this.fillFormTuUpdate();
       /*this.sheetForm.patchValue({
         nom: 'TEST',
       });*/
 
-      this.sheetForm.patchValue([
-        {folder: 'TEST'}
-      ]);
+      // this.sheetForm.patchValue([
+      //   {folder: 'TEST'}
+      // ]);
     }
   }
 
@@ -379,20 +379,20 @@ export class DialogComponent implements OnInit {
     this.sheetForm.controls['specificite'].setValue(this.editdata.specificite);
     this.sheetForm.controls['year'].setValue(this.editdata.year);
     this.sheetForm.controls['month'].setValue(this.editdata.month);
-    this.sheetForm.controls['folder'].patchValue(this.editdata.folder);
-    console.log('this.sheetForm.controls[folder].patchValue(this.editdata.folder);:', this.sheetForm.controls['folder'].patchValue(this.editdata.folder));
+    //this.sheetForm.controls['folder'].setValue(this.editdata.folder);
+    //console.log('this.sheetForm.controls[folder].patchValue(this.editdata.folder);:', this.sheetForm.controls['folder'].patchValue(this.editdata.folder));
     //this.sheetForm.value.selling_folders,
     this.sheetForm.controls['state'].setValue(this.editdata.state);
     this.sheetForm.controls['comment'].setValue(this.editdata.comment);
     //this.sheetForm.controls['listMonthLetter'].patchValue(this.editdata.folder.map(x => Object.keys(this.editdata.folder)));
     //this.sheetForm.controls['listMonthLetter'].patchValue(this.editdata.folder); //Bonne piste
     //this.sheetForm.setControl('listMonthLetter', this.fb.array(this.editdata.folder));
-    console.log('Object.keys(this.editdata.folderCustom.key)');
-    console.log(Object.keys(this.editdata.folderCustom));
-    console.log(
-      'folderCustom (this.editdata.folderCustom.key) : ',
-      this.editdata.folderCustom.key
-    );
+    // console.log('Object.keys(this.editdata.folderCustom.key)');
+    // console.log(Object.keys(this.editdata.folderCustom));
+    // console.log(
+    //   'folderCustom (this.editdata.folderCustom.key) : ',
+    //   this.editdata.folderCustom.key
+    // );
   }
 
   addFolder() {
@@ -550,10 +550,9 @@ export class DialogComponent implements OnInit {
       alert('Error while updating the record')
     }
     })*/
-    //          this.sheetForm.value.nomClasseur,
+    //this.sheetForm.value.nomClasseur,
 
     this._snackBar.open(`${this.sheetForm.value.nomClasseur} mis à jour avec succès.`, '', {
-
       duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'right',

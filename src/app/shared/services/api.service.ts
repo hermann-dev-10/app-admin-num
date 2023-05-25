@@ -61,8 +61,8 @@ export class ApiService {
     //return this.http.put<any>("http://localhost:3001/folderList/"+id, data);
     return this.afs.doc<any>(`${this.collectionName}/${id}`)
     .update(data);
-
   }
+  
   deleteFolder(id:number){
     //return this.http.delete<any>("http://localhost:3001/folderList/"+id);
     return this.afs

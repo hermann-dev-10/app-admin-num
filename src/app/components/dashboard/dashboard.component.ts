@@ -14,6 +14,7 @@ import { AdminDialogComponent } from '../admin-folder/admin-dialog/admin-dialog.
 import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { CompaniesService } from 'src/app/shared/services/companies.service';
 import { LeaveRequestService } from 'src/app/shared/services/leave-request.service';
+import { LeaveRequest } from '../leave-request/leave-request';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
     'createdAt',
     'action',
   ];
+
   displayedLeaveRequestsColumns: string[] = [
     'displayName',
     'type',
@@ -42,9 +44,12 @@ export class DashboardComponent implements OnInit {
   ];
 
   dataSource!: MatTableDataSource<any>;
-  dataSourceLeaveRequests!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  dataSourceLeaveRequests!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginatorLeaveRequest!: MatPaginator;
+  @ViewChild(MatSort) sortLeaveRequest!: MatSort;
 
   foldersByUid$!: Observable<any[]>;
   leavesByUid$!: Observable<any[]>;
@@ -56,6 +61,7 @@ export class DashboardComponent implements OnInit {
   subLeaveRequest: any;
 
   uniqueUser: any;
+  dataUniqueUser: any;
 
   users$: Observable<any>[] = [];
   users: any[] = [];
@@ -68,17 +74,26 @@ export class DashboardComponent implements OnInit {
   folders$: Observable<any[]>;
   folders: any[] = [];
 
-  leaveRequests$: Observable<any[]>;
-  leaveRequests: any[] = [];
+  leaveRequests$: Observable<LeaveRequest[]>;
+  leaveRequests: LeaveRequest[] = [];
+  leavesRequest: any;
+
+  leavesPersonalRequest: LeaveRequest[] = [];
+  dataTotalProgressingRequest: any;
+  compteurProgressingRequest: any = 0;
+  compteurAcceptedRequest: any = 0;
+  compteurRefusedRequest: any = 0;
 
   subRequest: any;
-  leavesRequest: any;
 
   sideBarOpen = true;
 
   message: string = 'Are you sure?';
   confirmButtonText = 'Yes';
   cancelButtonText = 'Cancel';
+
+  isSuperAdmin: any;
+  isAdmin: any;
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -98,9 +113,40 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.getAllLeaveRequests();
-
     this.leaveRequestsCollection = await this.leaveRequestService.findAll();
+    this.sub = this.leaveRequestsCollection
+      .valueChanges({
+        idField: 'id',
+      })
+      .subscribe((data) => {
+        this.leaveRequests = data;
+      });
+
+    this.leaveRequestService.getLeaveRequests().subscribe((data: any) => {
+      this.dataTotalProgressingRequest = data;
+
+      for (let i = 0; i < this.dataTotalProgressingRequest.length; i++) {
+        switch (this.dataTotalProgressingRequest[i].status) {
+          case 'PROGRESSING':
+            // statement progressing
+            this.compteurProgressingRequest++;
+            break;
+          case 'ACCEPTED':
+            // statement accepted
+            this.compteurAcceptedRequest++;
+            break;
+          case 'REFUSED':
+            // statement refused
+            this.compteurRefusedRequest++;
+            break;
+          default:
+            //
+            break;
+        }
+      }
+    });
+
+    this.getAllLeaveRequests();
 
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       this.user = user;
@@ -114,17 +160,32 @@ export class DashboardComponent implements OnInit {
         this.sub = this.userService
           .readUserWithUid(user.uid)
           .subscribe((data) => {
+            this.dataUniqueUser = data;
+
+            for (let i = 0; i < this.dataUniqueUser.length; i++) {
+              //   this.company = this.dataUniqueUser[i].company;
+              //   this.createdAt = this.dataUniqueUser[i].createdAt;
+              //   this.displayName = this.dataUniqueUser[i].displayName;
+              //   this.email = this.dataUniqueUser[i].email;
+              this.isAdmin = this.dataUniqueUser[i].isAdmin;
+              this.isSuperAdmin = this.dataUniqueUser[i].isSuperAdmin;
+            }
+
             console.log('Dossier: ngOnInit readUserWithUid / data', data);
             this.uniqueUser = data;
             console.log('user data : -> ', this.user);
             console.log('mes users$ OBSERVABLE : -> ', this.users$);
+            console.log('uniqueUser: ', this.uniqueUser.isAdmin);
           });
 
         this.subRequest = this.leaveRequestService
           .readPersonalByUid(user.uid)
           .subscribe((data) => {
             this.leavesRequest = data;
-            console.log('this.leavesRequest :', this.leavesRequest);
+            console.log(
+              'this.leavesPersonalRequest :',
+              this.leavesPersonalRequest
+            );
           });
       }
     });
@@ -259,13 +320,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  applyFilterLeaveRequest(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceLeaveRequests.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceLeaveRequests.paginator) {
+      this.dataSourceLeaveRequests.paginator.firstPage();
+    }
+  }
+
   getAllLeaveRequests() {
     this.subLeaveRequest = this.afAuth.authState.subscribe((user) => {
       this.leaveRequestService.getLeaveRequests().subscribe({
         next: (res) => {
           this.dataSourceLeaveRequests = new MatTableDataSource(res);
-          this.dataSourceLeaveRequests.paginator = this.paginator;
-          this.dataSourceLeaveRequests.sort = this.sort;
+          this.dataSourceLeaveRequests.paginator = this.paginatorLeaveRequest;
+          this.dataSourceLeaveRequests.sort = this.sortLeaveRequest;
         },
         error: (err) => {
           //alert("Erreur pendant la collection des éléments!!");

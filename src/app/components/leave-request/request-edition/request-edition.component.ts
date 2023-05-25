@@ -45,21 +45,21 @@ export class RequestEditionComponent implements OnInit {
     console.log('this.leaveRequest$ :', this.leaveRequest$);
   }
 
-  onSubmit(leaveRequest: LeaveRequest) {
-    // On récupère les informations de la facture et on y ajoute l'identifiant
-    console.log('UPDATE leaveRequest');
-    const uptatedInvoice = {
-      ...leaveRequest,
-      id: this.leaveRequestId,
-    };
+  // onSubmit(leaveRequest: LeaveRequest) {
+  //   // On récupère les informations de la facture et on y ajoute l'identifiant
+  //   console.log('UPDATE leaveRequest');
+  //   const uptatedInvoice = {
+  //     ...leaveRequest,
+  //     id: this.leaveRequestId,
+  //   };
 
-    this.leaveRequestService.update(uptatedInvoice).subscribe({
-      next: () => this.router.navigate(['../leave-requests']),
-      error: () =>
-        (this.errorMessage =
-          "Une erreur est survenue lors de l'enregistrement de la facture, veuillez réessayer plus tard :)"),
-    });
-  }
+  //   this.leaveRequestService.update(uptatedInvoice).subscribe({
+  //     next: () => this.router.navigate(['../leave-requests']),
+  //     error: () =>
+  //       (this.errorMessage =
+  //         "Une erreur est survenue lors de l'enregistrement de la facture, veuillez réessayer plus tard :)"),
+  //   });
+  // }
 
   sideBarOpen = true;
 

@@ -1,20 +1,6 @@
 {
   "invoiceList": [
     {
-      "customer_name": "test33333333333",
-      "description": "test3333333333333",
-      "status": "PAID",
-      "created_at": "2023-04-27",
-      "details": [
-        {
-          "description": "test2025",
-          "amount": 149,
-          "quantity": 12
-        }
-      ],
-      "id": 1
-    },
-    {
       "customer_name": "test2025",
       "description": "test2025",
       "status": "PAID",
@@ -55,20 +41,6 @@
         }
       ],
       "id": 4
-    },
-    {
-      "customer_name": "testf",
-      "description": "test2023",
-      "status": "SENT",
-      "created_at": "2023-04-26",
-      "details": [
-        {
-          "description": "fdfd",
-          "amount": 12,
-          "quantity": 12
-        }
-      ],
-      "id": 5
     },
     {
       "customer_name": "test2025",
@@ -267,41 +239,22 @@
       "id": 10
     },
     {
-      "binder_name": "test1",
-      "customer_name": "FOJ",
-      "description": "test2",
-      "status": "PROGRESSING",
-      "date_binder_creation": "2023-04-01T22:00:00.000Z",
-      "created_at": "2023-04-27T07:17:52.462Z",
-      "details": [],
-      "id": 11
-    },
-    {
       "binder_name": "test",
-      "customer_name": "FOJ",
+      "customer_name": "Autres",
       "description": "test",
       "status": "PROGRESSING",
-      "date_binder_creation": "2023-05-17T22:00:00.000Z",
-      "directory": "tet",
-      "created_at": "2023-05-04T09:43:27.210Z",
+      "date_binder_creation": "2023-05-21T22:00:00.000Z",
+      "directory": "trtrtr",
+      "created_at": "2023-05-23T14:39:40.575Z",
       "details": [
         {
-          "file_name": "trt",
-          "folder_name": "rtrt"
+          "file_name": "test",
+          "folder_name": "test",
+          "author": "Hermann",
+          "date": "2023-05-12"
         }
       ],
-      "id": 12
-    },
-    {
-      "binder_name": "Salaire2023",
-      "customer_name": "FOJ",
-      "description": "test2023",
-      "status": "NOT_STARTED",
-      "date_binder_creation": "2023-05-09T22:00:00.000Z",
-      "directory": "10 mai",
-      "created_at": "2023-05-09T08:16:26.507Z",
-      "details": [],
-      "id": 13
+      "id": 14
     }
   ],
   "leaveRequestList": [

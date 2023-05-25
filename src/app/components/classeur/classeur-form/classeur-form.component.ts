@@ -97,6 +97,7 @@ export class ClasseurFormComponent implements OnInit {
     directory: ['', [Validators.required, Validators.minLength(3)]],
     created_at: new Date(), //Adding the current date
     details: this.fb.array<FormGroup>([]),
+    //historic: this.fb.array<FormGroup>([]),
     //added_by: this.user,
   });
 
@@ -155,6 +156,8 @@ export class ClasseurFormComponent implements OnInit {
       this.fb.group({
         file_name: ['', [Validators.required]],
         folder_name: [''],
+        author: [''],
+        date: [''],
       })
     );
   }

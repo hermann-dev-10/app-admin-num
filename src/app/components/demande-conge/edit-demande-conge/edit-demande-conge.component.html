@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Modifier</h1>
+<div mat-dialog-content>
+    <form [formGroup]="leaveRequestForm">
+        <div class="row mt-4">
+            <div class="col-lg-6 col-md-6 mb-3">
+                <h6>Nom : {{this.displayName}}</h6>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-3">
+                 <h6>Type : {{this.type}}</h6> 
+            </div>   
+        </div>  
+        <div class="row mt-4">
+            <div class="col-lg-6 col-md-6">
+               <h6>Description : {{this.description}}</h6> 
+           </div>
+            <div class="col-lg-6 col-md-6">
+                <h6>Responsable : {{this.responsable}}</h6> 
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-6 col-md-6">
+                <h6>Début : {{this.start_date | date : 'dd/MM/yyyy' : undefined : 'fr'}}</h6> 
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h6>Fin : {{this.end_date | date : 'dd/MM/yyyy' : undefined : 'fr'}}</h6> 
+            </div>
+        </div>
+        <div class="row mt-4">        
+            <div  class="col-lg-6 col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Statut de la demande :</mat-label>
+                        <mat-select formControlName="status">
+                            <mat-option value="">Sélectionner un statut</mat-option>
+                            <mat-option value="ACCEPTED">Accepté</mat-option>
+                            <mat-option value="PROGRESSING">En attente</mat-option>
+                            <mat-option value="CANCELED">Annulé</mat-option>
+                            <mat-option value="REFUSED">Refusé</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+             </div>
+        </div>   
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button class="ml-8" mat-raised-button color="primary" (click)="updateLeaveRequestDecision()">Enregistrer</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+</div>

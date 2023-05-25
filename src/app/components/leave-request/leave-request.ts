@@ -19,6 +19,8 @@ export type LeaveRequest = {
   start_date: Date;
   end_date: Date;
   created_at: Date;
+  managed_by: string;
+  managed_date: string;
   responsable: Responsable;
   //   details: InvoiceDetails;
 };

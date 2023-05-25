@@ -46,10 +46,6 @@ export class HeaderComponent implements OnInit {
 
             for (var i = 0; i < this.displayNameObs.length; i++) {
               this.userConnected = this.displayNameObs[i].displayName;
-              console.log(
-                'this.displayNameObs[i]',
-                this.displayNameObs[i].displayName
-              );
             }
 
             //console.log('this.displayNameObs :', this.displayNameObs)

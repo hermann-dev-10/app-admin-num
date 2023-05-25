@@ -100,7 +100,15 @@ import { AdminDemandeCongeComponent } from './components/admin-demande-conge/adm
 import { DialogDemandeCongeComponent } from './components/dialog-demande-conge/dialog-demande-conge.component';
 import { DemandeCongeCreationComponent } from './components/demande-conge/demande-conge-creation/demande-conge-creation.component';
 import { CreationUserComponent } from './components/user/creation-user/creation-user.component';
-
+import { AuthService } from './shared/services/auth.service';
+import { ApiService } from './shared/services/api.service';
+import { CompaniesService } from './shared/services/companies.service';
+import { FolderService } from './shared/services/folder.service';
+import { MesureService } from './shared/services/mesure.service';
+import { UserService } from './shared/services/user.service';
+import { EditDemandeCongeComponent } from './components/demande-conge/edit-demande-conge/edit-demande-conge.component'
+import { DemandeCongeSingleComponent } from './components/demande-conge/demande-conge-single/demande-conge-single.component';
+import { DialogGestionDemandeCongeComponent } from './components/dialog-gestion-demande-conge/dialog-gestion-demande-conge.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +162,9 @@ import { CreationUserComponent } from './components/user/creation-user/creation-
     DialogDemandeCongeComponent,
     DemandeCongeCreationComponent,
     CreationUserComponent,
+    EditDemandeCongeComponent,
+    DemandeCongeSingleComponent,
+    DialogGestionDemandeCongeComponent,
   ],
   imports: [
     BrowserModule,
@@ -196,6 +207,12 @@ import { CreationUserComponent } from './components/user/creation-user/creation-
     InvoiceService,
     ClasseurService,
     LeaveRequestService,
+    AuthService,
+    ApiService,
+    CompaniesService,
+    FolderService,
+    MesureService,
+    UserService,
   ],
   bootstrap: [AppComponent],
 })

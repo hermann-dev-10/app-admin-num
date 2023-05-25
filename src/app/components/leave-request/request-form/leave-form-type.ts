@@ -8,6 +8,7 @@ export type LeaveFormType = FormGroup<{
   start_date: FormControl;
   end_date: FormControl;
   created_at;
+  managed_by;
   responsable: FormControl;
   //   details: FormArray<
   //     FormGroup<{

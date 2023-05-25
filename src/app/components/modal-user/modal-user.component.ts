@@ -77,38 +77,40 @@ export class ModalUserComponent implements OnInit {
     if(!this.editdata){
       if(this.userForm.valid){
         console.log('userForm.valid ? ?');
+        console.log('userForm.value: ', this.userForm.value);
         try {
           // code that we will 'try' to run
-          this.result = this.authService.SignUp(
-            this.userForm.value.nameEmail,
-            this.userForm.value.password
-          );
-          //this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.nameEmail,this.userForm.value.password); //this line is okay but defined equals something
+        
+          this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.nameEmail,this.userForm.value.password); //this line is okay but defined equals something
           console.log('1. this.result :', this.result);
 
           if(this.result) {
+            
+            // jwtToken is a JWT token that wasn't generated through Firebase Admin
+            //await signInWithCustomToken(auth, jwtToken);
+            
             console.log('register / result ', this.result);
             console.log('result.user : ', this.result.user);
-      
+
             this.userUID = this.result.user.uid;
             console.log('this.userUID :', this.userUID);
             console.log('...this.result.user :', ...this.result.user);
-              //const userCreated = await this.userService.createUser({ //spread operator.. 
-              const userCreated = await this.userService.createUserBis({
-                ...this.result.user,
-                uid: this.userUID,
-                displayName: this.userForm.value.nameUser,
-                //lastname: this.registerForm.value.lastname,
-                email: this.userForm.value.nameEmail,
-                //tel: this.registerForm.value.tel,   
-                createdAt: new Date(),              
-              });
-              console.log('userCreated', userCreated); //Why this value is undefined ?
-              //this.authService.SendVerificationMail();
-              
-              console.log('this.result', this.result);
-              this.result = null;
-              this.userForm.reset();
+            //const userCreated = await this.userService.createUser({ //spread operator..
+            const userCreated = await this.userService.createUserBis({
+              ...this.result.user,
+              uid: this.userUID,
+              displayName: this.userForm.value.nameUser,
+              //lastname: this.registerForm.value.lastname,
+              email: this.userForm.value.nameEmail,
+              //tel: this.registerForm.value.tel,
+              createdAt: new Date(),
+            });
+            console.log('userCreated', userCreated); //Why this value is undefined ?
+            //this.authService.SendVerificationMail();
+
+            console.log('this.result', this.result);
+            this.result = null;
+            this.userForm.reset();
           }
       
            } catch(error) {

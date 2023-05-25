@@ -1,1 +1,64 @@
-<p>demande-conge-single works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <!-- <mat-drawer mode="side" opened="true"> -->
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+        <div class="container-fluid page">
+            <div class="d-flex page__box p-3 mt-2 text-white">Demande de congé en détail</div>
+            <!--<div id="content" #content class="page__content shadow p-3 position-relative">-->
+            <div id="content" #content class="page__content p-3 position-relative mt-5 ml-5" style="font-size: 23px;">
+                <img src="./../../../../assets/logo_sekoia.png" alt="Logo Sekoia Services SA">
+                <h2 class="mt-5 text-center" style="font-size: 45px!important;">Demande de congé</h2>
+                <!--<div class="page__content-data position-absolute">-->
+                <div class="row mt-5">
+                    <div class="col-lg-6 col-md-6">
+                        <h4>Nom : {{this.displayName}}</h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h4>Type : {{this.type}}</h4> 
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6 col-md-6">
+                        <h4>Début : {{this.start_date | date : 'dd/MM/yyyy' : undefined : 'fr'}}</h4> 
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h4>Fin : {{this.end_date | date : 'dd/MM/yyyy' : undefined : 'fr'}}</h4> 
+                    </div>
+                </div>
+
+                 <div class="row mt-5">
+                    <div class="col-lg-6 col-md-6">
+                         <h4>Description : {{this.description}}</h4> 
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h4>Responsable : {{this.responsable}}</h4> 
+                    </div>
+                </div>
+               
+                <div class="border mt-5"></div>
+                <p *ngIf="managed_by" class="mt-5">Validé par {{this.managed_by }} </p>
+                <p *ngIf="managed_date" class="mt-5">Mis à jour le {{this.managed_date.toDate() | date}}</p>
+            
+                
+                <!-- <p>Créé par:   <span *ngFor="let u of displayNameObs"><strong> 
+              {{u.displayName}}
+            </strong></span></p>-->
+            </div>
+            <div class="p-3">
+                <div class="text-center">
+                    <div class="mt-100 text-center">
+                     
+                        <button class="btn btn-primary mr-10" type="button" (click)="goBack()">Retour</button>
+                        <button class="btn btn-primary" type="button" (click)="openPDF()">Exporter en PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-drawer-content>
+</mat-drawer-container>

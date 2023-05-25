@@ -106,6 +106,7 @@ export class RequestFormComponent implements OnInit {
     start_date: ['', [Validators.required]],
     end_date: ['', [Validators.required]],
     created_at: new Date(),
+    managed_by: [this.displayName], //name of the user ADMIN connected
     responsable: ['', [Validators.required]],
 
     // details: this.fb.array<FormGroup>([]),
@@ -157,7 +158,7 @@ export class RequestFormComponent implements OnInit {
     //this.leaveRequestService.postLeaveRequest(this.leaveRequestForm.value as LeaveRequest);
     this.router.navigateByUrl('/leave-requests');
 
-      //.pipe(tap(() => this.router.navigateByUrl('/invoices')))
-      //.subscribe();
+    //.pipe(tap(() => this.router.navigateByUrl('/invoices')))
+    //.subscribe();
   }
 }

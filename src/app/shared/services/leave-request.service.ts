@@ -51,6 +51,8 @@ export class LeaveRequestService {
     status: string,
     responsable: string,
     created_at: Date,
+    managed_by: String,
+    managed_date: Date,
     uid: string
   ) {
     return this.afs.collection(`${this.collectionName}`).add({
@@ -62,6 +64,8 @@ export class LeaveRequestService {
       status,
       responsable,
       created_at,
+      managed_by,
+      managed_date,
       uid,
     });
   }
@@ -130,11 +134,15 @@ export class LeaveRequestService {
     // .valueChanges({ idField: 'id' });
   }
 
-  update(leaveRequestData: LeaveRequest) {
-    return this.http.put<LeaveRequest>(
-      this.API_URL + '/leaveRequestList/' + leaveRequestData.id,
-      leaveRequestData
-    );
+  // update(leaveRequestData: LeaveRequest) {
+  //   return this.http.put<LeaveRequest>(
+  //     this.API_URL + '/leaveRequestList/' + leaveRequestData.id,
+  //     leaveRequestData
+  //   );
+  // }
+
+  update(data: any, id: number) {
+    return this.afs.doc<any>(`${this.collectionName}/${id}`).update(data);
   }
 
   // delete(id: number) {
@@ -143,11 +151,9 @@ export class LeaveRequestService {
   //   );
   // }
 
-   delete(id:number){
+  delete(id: number) {
     //return this.http.delete<any>("http://localhost:3001/folderList/"+id);
-    return this.afs
-    .doc<any>(`${this.collectionName}/${id}`)
-    .delete();
+    return this.afs.doc<any>(`${this.collectionName}/${id}`).delete();
   }
 
   findAll() {
@@ -156,7 +162,7 @@ export class LeaveRequestService {
     );
   }
 
-  getLeaveRequests() {
+  getLeaveRequests(): Observable<any[]> {
     return this.afs
       .collection(`${this.collectionName}`)
       .valueChanges({ idField: 'id' });

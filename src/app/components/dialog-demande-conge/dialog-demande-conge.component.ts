@@ -7,7 +7,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRadioChange } from '@angular/material/radio';
@@ -49,12 +49,17 @@ export class DialogDemandeCongeComponent implements OnInit {
   demandesConge: any[];
 
   subscription: Subscription;
-  created_at:any;
+  created_at: any;
+  managed_by: any;
+  managed_date: any;
   status = ['En attente', 'Acceptée', 'Annulée', 'Refusée'];
   selectedValue: number;
   selectedValueState: number;
 
+  displayNameFinal: any;
+
   constructor(
+    private dialog: MatDialog,
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public editdata: any,
@@ -95,13 +100,13 @@ export class DialogDemandeCongeComponent implements OnInit {
     //})
 
     this.leaveRequestForm = this.fb.group({
-      displayName: [''], //name of the user connected
+      //displayName: [''], //name of the user connected
       type: ['', [Validators.required]], //[('', [Validators.required, Validators.minLength(3)])],
       description: ['', [Validators.required, Validators.minLength(2)]],
-      status: ['', [Validators.required]],
       start_date: ['', [Validators.required]],
       end_date: ['', [Validators.required]],
-      created_at: new Date(),
+      status: ['PROGRESSING', [Validators.required]],
+      //created_at: new Date(),
       responsable: ['', [Validators.required]],
     });
 
@@ -113,37 +118,33 @@ export class DialogDemandeCongeComponent implements OnInit {
     });
     if (this.editdata) {
       this.actionBtn = 'Modifier';
-      this.titleModal = 'Modifier un classeur';
+      this.titleModal = 'Modifier une demande de congé';
       this.addNextBtn = '';
-
-      this.leaveRequestForm.patchValue({
-        nomClasseur: 'TEST-NOM-CLASSEUR',
-        directory: 'TEST-NOM-DIRECTORY',
-      });
-
-      this.leaveRequestForm.patchValue([{ LeaveRequest: 'TEST' }]);
     }
+
+    this.fillFormToUpdate();
   }
 
   addLeaveRequest() {
     if (!this.editdata) {
       console.log('Etape 1 Form');
       if (this.leaveRequestForm.valid) {
-
         console.log('Etape 2 in condition');
-        /*const result = this.leaveRequestService.createLeaveRequest(
-          this.leaveRequestForm.value.displayName,
+        const result = this.leaveRequestService.createLeaveRequest(
+          this.displayName, //this.leaveRequestForm.value.displayName,
+          this.leaveRequestForm.value.description,
+          this.leaveRequestForm.value.start_date,
+          this.leaveRequestForm.value.end_date,
           this.leaveRequestForm.value.type,
           this.leaveRequestForm.value.responsable,
-          this.leaveRequestForm.value.description,
-          //this.leaveRequestForm.value.start_date,
-          //this.leaveRequestForm.value.end_date,
           this.leaveRequestForm.value.status,
           this.created_at,
+          this.managed_by,
+          this.managed_date,
           this.user.uid
         );
 
-        console.log('result:', result);*/
+        console.log('result:', result);
         // const result = this.leaveRequestService.postLeaveRequest(
         //   //insertedInvoice,
         //   this.displayName,
@@ -156,8 +157,6 @@ export class DialogDemandeCongeComponent implements OnInit {
         //   this.responsable,
         //   this.uid,
         //   );
-
-
 
         this._snackBar.open(
           /*          `${this.leaveRequestForm.value.nomClasseur} ajouté avec avec succès.`,*/
@@ -231,6 +230,22 @@ export class DialogDemandeCongeComponent implements OnInit {
     this._snackBar.open('');
   }
 
+  fillFormToUpdate() {
+    //this.leaveRequestForm.patchValue(this.editdata.folder.value);
+    this.leaveRequestForm.controls['type'].setValue(this.editdata.type);
+    this.leaveRequestForm.controls['responsable'].setValue(
+      this.editdata.responsable
+    );
+    this.leaveRequestForm.controls['description'].setValue(
+      this.editdata.description
+    );
+    this.leaveRequestForm.controls['start_date'].setValue(
+      this.editdata.start_date
+    );
+    this.leaveRequestForm.controls['end_date'].setValue(this.editdata.end_date);
+    this.leaveRequestForm.controls['status'].setValue(this.editdata.status);
+  }
+
   get getCompanyData() {
     const company = this.displayNameObs.find((x) => x).company;
     return company;
@@ -257,5 +272,36 @@ export class DialogDemandeCongeComponent implements OnInit {
   onChangeState(event: MatRadioChange) {
     this.selectedValueState = event.value;
     console.log('this.selectedValue', this.selectedValue);
+  }
+
+  editLeaveRequest(row: any) {
+    this.dialog
+      .open(DialogDemandeCongeComponent, {
+        width: '30%',
+        data: row,
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'update') {
+          this.getAllLeaveRequestsByUid();
+        }
+      });
+  }
+
+  getAllLeaveRequestsByUid() {
+    this.sub = this.afAuth.authState.subscribe((user) => {
+      //this.api.getFolders()
+      this.leaveRequestService.readPersonalByUid(user.uid).subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (err) => {
+          //alert("Erreur pendant la collection des éléments!!");
+          console.log('Error While fetching the records');
+        },
+      });
+    });
   }
 }

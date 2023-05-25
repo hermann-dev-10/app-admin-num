@@ -65,6 +65,8 @@ const htmlToPdfmake = require('html-to-pdfmake');
               <th scope="col">#</th>
               <th scope="col">Nom Fichier</th>
               <th scope="col">Nom dossier</th>
+              <th scope="col">Auteur</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +74,10 @@ const htmlToPdfmake = require('html-to-pdfmake');
               <th scope="row">{{ index }}</th>
               <td>{{ data.file_name }}</td>
               <td>{{ data.folder_name }}h</td>
+              <td>{{ data.author }}</td>
+              <td>
+                {{ data.date | date : 'dd MMMM yyyy' : undefined : 'fr' }}
+              </td>
             </tr>
           </tbody>
         </table>

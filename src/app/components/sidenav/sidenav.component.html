@@ -9,7 +9,7 @@
         <mat-icon>home</mat-icon> Accueil
     </a>-->
     <div *ngFor="let u of displayNameObs">
-    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
         <mat-icon>dashboard</mat-icon>Dashboard
     </a>
      <a mat-list-item routerLinkActive="list-item-active" routerLink="/folder">
@@ -31,10 +31,10 @@
     </a>
  
     
-    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/social">
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/social">
         <mat-icon>supervised_user_circle</mat-icon>Département Social
     </a>
-    <a *ngIf="u.isAdmin" mat-list-item routerLinkActive="list-item-active" routerLink="/user">
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/user">
         <mat-icon>perm_identity</mat-icon>
         Utilisateurs
     </a>

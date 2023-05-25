@@ -23,9 +23,8 @@ import { ClasseurFormType } from './classeur-form-type';
           [formGroup]="group"
           *ngFor="let group of details.controls; let i = index"
         >
-      
           <div class="row mb-3">
-            <div class="col-5">
+            <div class="col-3">
               <mat-form-field class="example-full-width">
                 <mat-label>Nom du fichier</mat-label>
                 <input
@@ -38,7 +37,7 @@ import { ClasseurFormType } from './classeur-form-type';
               </mat-form-field>
             </div>
 
-            <div class="col-5">
+            <div class="col-3">
               <mat-form-field class="example-full-width">
                 <mat-label>Nom du dossier</mat-label>
 
@@ -47,6 +46,34 @@ import { ClasseurFormType } from './classeur-form-type';
                   name="folder_name{{ i }}"
                   id="folder_name{{ i }}"
                   type="text"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-3">
+              <mat-form-field class="example-full-width">
+                <mat-label>Auteur</mat-label>
+
+                <input
+                  formControlName="author"
+                  name="author{{ i }}"
+                  id="author{{ i }}"
+                  type="text"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-2">
+              <mat-form-field class="example-full-width">
+                <mat-label>Date</mat-label>
+
+                <input
+                  formControlName="date"
+                  name="date{{ i }}"
+                  id="date{{ i }}"
+                  type="date"
                   matInput
                 />
               </mat-form-field>

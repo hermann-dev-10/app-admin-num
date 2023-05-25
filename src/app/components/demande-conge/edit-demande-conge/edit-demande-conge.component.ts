@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LeaveRequestService } from 'src/app/shared/services/leave-request.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { LeaveRequest } from '../../leave-request/leave-request';
+import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
-  selector: 'app-demande-conge-creation',
-  templateUrl: './demande-conge-creation.component.html',
-  styleUrls: ['./demande-conge-creation.component.scss'],
+  selector: 'app-edit-demande-conge',
+  templateUrl: './edit-demande-conge.component.html',
+  styleUrls: ['./edit-demande-conge.component.scss'],
 })
-export class DemandeCongeCreationComponent implements OnInit {
+export class EditDemandeCongeComponent implements OnInit {
   leaveRequestForm!: FormGroup;
+  leaveRequest$?: Observable<LeaveRequest>;
+  leaveRequestId?: number;
+
   user: any;
   sub: any;
   displayNameObs: any;
   //displayName: any;
   displayNameFinal: any;
-  managed_by: any;
-  created_at: any;
-  managed_date: any;
-  minDate: Date;
-  maxDate: Date;
-  today = new Date();
 
+  created_at;
   sideBarOpen = true;
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -34,20 +40,15 @@ export class DemandeCongeCreationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    @Inject(MAT_DIALOG_DATA) public editdata: any,
+    private _snackBar: MatSnackBar,
     public userService: UserService,
     private afAuth: AngularFireAuth,
-    private _snackBar: MatSnackBar,
-    private leaveRequestService: LeaveRequestService
+    private leaveRequestService: LeaveRequestService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-      const currentYear = new Date().getFullYear();
-      this.minDate = new Date(currentYear - 20, 0, 1);
-      this.maxDate = new Date(currentYear + 1, 11, 31);
-      console.log('today', this.today);
-      console.log('minDate: ',this.minDate);
-      console.log('maxDate: ', this.maxDate);
-
     this.sub = this.afAuth.authState.subscribe((user: any) => {
       console.log('USER-UID', this.userService.readUserWithUid(user.uid));
       this.user = user;
@@ -80,6 +81,14 @@ export class DemandeCongeCreationComponent implements OnInit {
       status: ['PROGRESSING', Validators.required],
       responsable: ['', Validators.required],
     });
+
+    this.leaveRequest$ = this.activatedRoute.paramMap.pipe(
+      map((paramMap) => paramMap.get('id')),
+      tap((id) => (this.leaveRequestId = +id!)),
+      switchMap((id) => this.leaveRequestService.find(+id!))
+    );
+
+    console.log('this.leaveRequest$:', this.leaveRequest$);
   }
 
   get displayName() {
@@ -114,57 +123,22 @@ export class DemandeCongeCreationComponent implements OnInit {
     console.log(this.leaveRequestForm.value);
   }
 
-  addLeaveRequest() {
-    console.log('Step 1 AddLeaveRequest');
-    console.log(this.leaveRequestForm.value);
-    console.log('this.user.uid', this.user.uid);
-    console.log('this.displayNameFinal: ', this.displayNameFinal);
+  updateLeaveRequestDecision() {
+    this.leaveRequestService.update(
+      this.leaveRequestForm.value,
+      this.editdata.id
+    );
 
-    if (this.leaveRequestForm.valid) {
-      console.log('Step 2 inside condition valid');
-
-      console.log(
-        ' this.leaveRequestForm.value.start_date',
-        this.leaveRequestForm.value.start_date
-      );
-      const result = this.leaveRequestService.createLeaveRequest(
-        this.displayNameFinal,
-        this.leaveRequestForm.value.type,
-        this.leaveRequestForm.value.description,
-        this.leaveRequestForm.value.start_date,
-        this.leaveRequestForm.value.end_date,
-        this.leaveRequestForm.value.status,
-        this.leaveRequestForm.value.responsable,
-        (this.created_at = new Date()), //new Date(), //this.created_at
-        (this.managed_by = null), //null by default
-        (this.managed_date = null), //null by default
-        this.user.uid
-      );
-
-      console.log('result: ', result);
-      this._snackBar.open(
-        `Demande de congé de ${this.displayNameFinal} ajouté avec avec succès.`,
-        '',
-        {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-          panelClass: 'snackbar-position-custom',
-        }
-      );
-      this.leaveRequestForm.reset();
-      this.router.navigateByUrl('/demandes-conge');
-      //this.dialogRef.close('save');
-    }
+    // this._snackBar.open(
+    //   `Demande de congé de ${this.displayName} a été mis à jour avec avec succès.`,
+    //   '',
+    //   {
+    //     duration: 3000,
+    //     verticalPosition: 'top',
+    //     horizontalPosition: 'right',
+    //     panelClass: 'snackbar-position-custom',
+    //   }
+    // );
+    //this.leaveRequestForm.reset();
   }
 }
-
-
-
-
-
-
-  
-
-
-  
