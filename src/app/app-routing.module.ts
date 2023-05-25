@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './components/about/about.component';
 import { InvoiceFormComponent } from './components/invoice/invoice-form/invoice-form.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AdminFolderComponent } from './components/admin-folder/admin-folder.component';
@@ -140,7 +139,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
   { path: '**', component: DashboardComponent, canActivate: [AuthGuard] },
 ];

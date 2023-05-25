@@ -47,7 +47,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdminFolderComponent } from './components/admin-folder/admin-folder.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FolderComponent } from './components/folder/folder.component';
 import { SingleFolderComponent } from './components/folder/single-folder/single-folder.component';
@@ -116,7 +115,6 @@ import { DialogGestionDemandeCongeComponent } from './components/dialog-gestion-
     AdminFolderComponent,
     SidenavComponent,
     DialogComponent,
-    AboutComponent,
     ContactComponent,
     FolderComponent,
     SingleFolderComponent,
