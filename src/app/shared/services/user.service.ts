@@ -36,6 +36,9 @@ export class UserService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      isAdmin: false,
+      //isSuperAdmin: false,
+      //company: 'NoComparny',
       createdAt: new Date(),
     });
   }
@@ -45,13 +48,11 @@ export class UserService {
     const  newUser = {
   
       uid: user.uid, //user.uid, //Je prends ici l'id de l'utilisateur
-      //firstname: user.firstname,
-      displayName: user.displayName,
       email: user.email,
-     
+      displayName: user.displayName,
+      isAdmin: false,
       //role: 0, //on assigne par défaut à 0 un utilisateur qui n'est pas admin
       createdAt: new Date(),
-      isAdmin: false,
       //tel: user.tel,
       //photoURL: string;
     }

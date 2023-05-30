@@ -3,7 +3,7 @@
     <form [formGroup]="userForm">
         <mat-form-field appearance="outline">
             <mat-label>Nom d'utilisateur</mat-label>
-            <input formControlName="userName" matInput>
+            <input formControlName="displayName" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -21,16 +21,16 @@
             <input formControlName="password2" matInput>
         </mat-form-field>-->
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
             <mat-label>L'entreprise</mat-label>
             <input formControlName="company" matInput>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field appearance="outline">
             <mat-label>Type de compte</mat-label>
             <mat-select formControlName="typeAccount">
-                <mat-option value="normal">Normal</mat-option>
-                <mat-option value="admin">Admin</mat-option>
+                <mat-option value="false">Normal</mat-option>
+                <mat-option value="true">Admin</mat-option>
             </mat-select>
         </mat-form-field>
 

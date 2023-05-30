@@ -39,25 +39,27 @@ export class ModalUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      displayName: ['', Validators.required],
       userEmail: ['', Validators.required],
       password: ['', Validators.required],
       //password2: ['', Validators.required],
-      company: ['', Validators.required],
+      //company: ['', Validators.required],
       typeAccount: ['', Validators.required],
     });
 
     if (this.editdata) {
       this.actionBtn = 'Modifier';
       this.titleModal = 'Modifier un utilisateur';
-      this.userForm.controls['userName'].setValue(this.editdata.nomUtilisateur);
+      this.userForm.controls['displayName'].setValue(
+        this.editdata.nomUtilisateur
+      );
       //this.userForm.controls['date'].setValue(this.editdata.email);
       //this.userForm.controls['comment'].setValue(this.editdata.comment);
     }
   }
 
-  get userName() {
-    return this.userForm.get('userName');
+  get displayName() {
+    return this.userForm.get('displayName');
   }
   get userEmail() {
     return this.userForm.get('userEmail');
@@ -66,16 +68,14 @@ export class ModalUserComponent implements OnInit {
     return this.userForm.get('password');
   }
   //get confirmPassword() { return this.userForm.get('confirmPassword'); }
-  get company() {
-    return this.userForm.get('company');
-  }
+  // get company() {
+  //   return this.userForm.get('company');
+  // }
   get typeAccount() {
     return this.userForm.get('typeAccount');
   }
 
   async addUser() {
-    
-
     this.submitted = true;
 
     if (!this.userForm.valid) {
@@ -104,13 +104,17 @@ export class ModalUserComponent implements OnInit {
 
             this.userUID = this.result.user.uid;
             console.log('this.userUID :', this.userUID);
-            //const userCreated = await this.userService.createUser({ //spread operator..
-            const userCreated = await this.userService.createUserBis({
+            const userCreated = await this.userService.createUser({
+            //spread operator..
+            //const userCreated = await this.userService.createUserBis({
               //...this.result.user,
               uid: this.userUID,
-              displayName: this.userForm.value.nameUser,
-              //lastname: this.registerForm.value.lastname,
               email: this.userForm.value.userEmail,
+              displayName: this.userForm.value.displayName,
+              isAdmin: false,
+              //isSuperAdmin: false,
+              //company: 'NoCompany',
+              //lastname: this.registerForm.value.lastname,
               //tel: this.registerForm.value.tel,
               createdAt: new Date(),
             });
