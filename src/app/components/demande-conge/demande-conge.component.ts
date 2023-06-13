@@ -154,7 +154,6 @@ export class DemandeCongeComponent implements OnInit {
 
     this.leaveRequestService.getLeaveRequests().subscribe((data: any) => {
       this.dataTotalProgressingRequest = data;
-
       for (let i = 0; i < this.dataTotalProgressingRequest.length; i++) {
         switch (this.dataTotalProgressingRequest[i].status) {
           case 'PROGRESSING':
@@ -238,10 +237,9 @@ export class DemandeCongeComponent implements OnInit {
 
   delete(id: number) {
     this.leaveRequestService.delete(id);
-
     console.log('Demande deleted : ', id);
 
-    this._snackBar.open(`Demande de congé ${id} supprimé avec succès`, '', {
+    this._snackBar.open(`Mesure  ${id} supprimé avec succès`, '', {
       duration: 3000,
     });
       
@@ -268,7 +266,7 @@ export class DemandeCongeComponent implements OnInit {
   }
 
   view(row: any) {
-    this.router.navigate([`/demande-conge/${row}`]);
+    this.router.navigate([`/mesure/${row}`]);
     console.log('View demande-conge-single:', row);
   }
 

@@ -44,14 +44,14 @@ export class ModalUserComponent implements OnInit {
       password: ['', Validators.required],
       //password2: ['', Validators.required],
       //company: ['', Validators.required],
-      typeAccount: ['', Validators.required],
+      isAdmin: ['', Validators.required],
     });
 
     if (this.editdata) {
       this.actionBtn = 'Modifier';
       this.titleModal = 'Modifier un utilisateur';
       this.userForm.controls['displayName'].setValue(
-        this.editdata.nomUtilisateur
+        this.editdata.displayName
       );
       //this.userForm.controls['date'].setValue(this.editdata.email);
       //this.userForm.controls['comment'].setValue(this.editdata.comment);
@@ -71,8 +71,8 @@ export class ModalUserComponent implements OnInit {
   // get company() {
   //   return this.userForm.get('company');
   // }
-  get typeAccount() {
-    return this.userForm.get('typeAccount');
+  get isAdmin() {
+    return this.userForm.get('isAdmin');
   }
 
   async addUser() {
@@ -86,6 +86,8 @@ export class ModalUserComponent implements OnInit {
       if (this.userForm.valid) {
         console.log('userForm.valid ? ?');
         console.log('userForm.value: ', this.userForm.value);
+
+        console.log('OK userForm.value.isAdmin: ', this.userForm.value.isAdmin);
         try {
           // code that we will 'try' to run
 
@@ -105,19 +107,22 @@ export class ModalUserComponent implements OnInit {
             this.userUID = this.result.user.uid;
             console.log('this.userUID :', this.userUID);
             const userCreated = await this.userService.createUser({
-            //spread operator..
-            //const userCreated = await this.userService.createUserBis({
+              //spread operator..
+              //const userCreated = await this.userService.createUserBis({
               //...this.result.user,
               uid: this.userUID,
               email: this.userForm.value.userEmail,
               displayName: this.userForm.value.displayName,
-              isAdmin: false,
+              isAdmin: this.userForm.value.isAdmin,
               //isSuperAdmin: false,
               //company: 'NoCompany',
-              //lastname: this.registerForm.value.lastname,
               //tel: this.registerForm.value.tel,
               createdAt: new Date(),
             });
+            console.log(
+              'this.userForm.value.isAdmin:',
+              this.userForm.value.isAdmin
+            );
             console.log('userCreated', userCreated); //Why this value is undefined ?
             //this.authService.SendVerificationMail();
 
@@ -150,7 +155,7 @@ export class ModalUserComponent implements OnInit {
 
         console.log('Result: ', this.result);
         this._snackBar.open(
-          `${this.userForm.value.nomClasseur} ajouté avec succès.`,
+          `${this.userForm.value.displayName} ajouté avec succès.`,
           '',
           {
             duration: 3000,

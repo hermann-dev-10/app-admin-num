@@ -90,7 +90,6 @@ export class InvoicesListComponent implements OnInit {
           this.invoices = oldInvoices;
         },
       });
-
     console.log('Invoice n°', id, 'deleted.');
   }
 

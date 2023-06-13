@@ -20,7 +20,7 @@
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Nombre de demande de congé</h6>
+                                        <h6 class="mb-10">Nombre de mesure</h6>
                                         <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
                                         <!-- <h3>{{ this.leaveRequests.length }}</h3> -->
                                         <h3 *ngIf="leavesByUid$ | async as leaves" class="text-bold mb-10">{{leaves.length}}</h3>
@@ -64,7 +64,7 @@
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Total de congé acceptée</h6>
+                                        <h6 class="mb-10">Total de mesure confirmée</h6>
                                         <!-- row.status === 'PROGRESSING' -->
                                 <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
                                         <h3>{{ compteurAcceptedRequest }}</h3>
@@ -98,7 +98,7 @@
                                 <!-- <button mat-raised-button color="warn" (click)="openDialogSocialFolder()"> -->
                                  <button mat-raised-button color="warn" routerLink="/leave-requests/create">
                             <mat-icon inline=true>note_add</mat-icon>
-                            Créer une demande de congé
+                            Créer une mesure
                         </button>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.registerObj.displayName }} </td>
                             </ng-container>
                             <ng-container matColumnDef="type">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type congé</th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type mesure</th>
                                 <td mat-cell *matCellDef="let row"> {{row.registerObj.type | uppercase }} </td>
                             </ng-container>
                             <ng-container matColumnDef="description">
@@ -217,7 +217,7 @@
                                         <mat-icon>subject</mat-icon>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Nombre de demande de congé</h6>
+                                        <h6 class="mb-10">Nombre de mesure</h6>
                                         <h3>{{ this.leaveRequests.length }}</h3>
                                 
                                     </div>
@@ -293,7 +293,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
                             </ng-container>
                             <ng-container matColumnDef="type">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type congé</th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type mesure</th>
                                 <td mat-cell *matCellDef="let row"> {{row.type | uppercase }} </td>
                             </ng-container>
                             <ng-container matColumnDef="description">

@@ -118,7 +118,7 @@ export class DialogDemandeCongeComponent implements OnInit {
     });
     if (this.editdata) {
       this.actionBtn = 'Modifier';
-      this.titleModal = 'Modifier une demande de congé';
+      this.titleModal = 'Modifier une mesure';
       this.addNextBtn = '';
     }
 

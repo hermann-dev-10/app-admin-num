@@ -100,7 +100,7 @@
                                         <mat-icon>store_mall_directory</mat-icon>
                                 </div>
                                 <div class="content">
-                                    <h4 class="black-color">Demande de congé</h4>
+                                    <h4 class="black-color">Mesures de stage</h4>
                                 </div>
                             </div>
                             </a>
@@ -198,7 +198,7 @@
                     </div>
                     </div>
                 <hr>
-                <h2 class="text-center mt-5">Gestion des demandes de congé</h2>
+                <h2 class="text-center mt-5">Gestion des mesures de stage</h2>
                 <div class="row mt-5">
                      <div class="col-lg-12 col-md-6 text-right">
                         <!-- <button mat-raised-button color="warn" (click)="openDialog()">
@@ -206,9 +206,9 @@
                             Ajouter une demande de congé
                         </button> -->
 
-                         <button mat-raised-button color="warn" routerLink="/demande-conge/create">
+                         <button mat-raised-button color="warn" routerLink="/mesure/create">
                             <mat-icon inline=true>note_add</mat-icon>
-                            Créer une demande de congé
+                            Créer une mesure
                         </button>
                         </div>
                 </div>
@@ -219,7 +219,7 @@
                                     <mat-icon>line_weight</mat-icon>
                                 </div>
                                 <div class="content">
-                                    <h6 class="mb-10">Nombre de demande de congé</h6>
+                                    <h6 class="mb-10">Nombre de mesure</h6>
                                     <h3 *ngIf="leavesRequest" class="text-bold mb-10">{{dataTotalProgressingRequest.length}}</h3>
                                     <!--<p class="text-sm text-success">
                                     <i class="fas fa-address-book"></i> +2.00%
@@ -235,7 +235,7 @@
                                 <mat-icon>supervisor_account</mat-icon>
                             </div>
                             <div class="content">
-                                <h6 class="mb-10">Demande de congé en attente</h6>
+                                <h6 class="mb-10">Demande de mesure en attente</h6>
                                 <h3 *ngIf="compteurProgressingRequest" class="text-bold mb-10">{{ compteurProgressingRequest }}</h3> 
                             </div>
                             </div>
@@ -279,7 +279,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
                             </ng-container>
                             <ng-container matColumnDef="type">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type congé</th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type mesure</th>
                                 <td mat-cell *matCellDef="let row"> {{row.type | uppercase }} </td>
                             </ng-container>
                             
@@ -291,7 +291,7 @@
                                   </p>
 
                                   <p *ngIf="row.status === 'ACCEPTED'">
-                                    <span class="badge bg-success">Accepté</span>
+                                    <span class="badge bg-success">Confirmée</span>
                                   </p>
 
                                   <p *ngIf="row.status === 'CANCELED'">

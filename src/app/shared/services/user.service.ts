@@ -43,14 +43,14 @@ export class UserService {
     });
   }
 
-  createUser (user : { uid: any; /*firstname: any;*/ displayName: any; email: any; /*role: number;*/  createdAt: Date;  /*tel: any;*/ isAdmin: Boolean }) { //créer l'utilisateur dans une collection
+  createUser (user : { uid: any; /*firstname: any;*/ displayName: any; email: any; /*role: number;*/  createdAt: Date;  /*tel: any;*/ isAdmin: any }) { //créer l'utilisateur dans une collection
     
     const  newUser = {
   
       uid: user.uid, //user.uid, //Je prends ici l'id de l'utilisateur
       email: user.email,
       displayName: user.displayName,
-      isAdmin: false,
+      isAdmin: user.isAdmin,
       //role: 0, //on assigne par défaut à 0 un utilisateur qui n'est pas admin
       createdAt: new Date(),
       //tel: user.tel,

@@ -142,7 +142,7 @@ export class DialogGestionDemandeCongeComponent implements OnInit {
     });
     if (this.editdata) {
       this.actionBtn = 'Modifier';
-      this.titleModal = 'Modifier une demande de congé';
+      this.titleModal = 'Modifier une mesure';
       this.addNextBtn = '';
     }
     console.log('just before FUNCTION INIT:', this.displayNameTest);
@@ -177,7 +177,7 @@ export class DialogGestionDemandeCongeComponent implements OnInit {
     );
 
     this._snackBar.open(
-      `Demande de congé de ${this.displayNameTest} a été mis à jour avec avec succès.`,
+      `Mesure de ${this.displayNameTest} a été mis à jour avec avec succès.`,
       '',
       {
         duration: 3000,

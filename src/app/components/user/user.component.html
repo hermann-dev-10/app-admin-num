@@ -59,7 +59,7 @@
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. FOJ" #input>
                 </mat-form-field>
                 <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+                    <table mat-table [dataSource]="dataSource" matSort style="width:100%"  matSortActive="createdAt" matSortDirection="desc">
                         <!-- Progress Column -->
                         <!--<ng-container matColumnDef="nomClient">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
@@ -67,7 +67,7 @@
                         </ng-container>-->
                         <!-- nomClasseur Column -->
                         <ng-container matColumnDef="userName">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'utilisateur </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'affichage </th>
                             <td mat-cell *matCellDef="let row"> {{row.displayName }} </td>
                         </ng-container>
                          <!-- Directory Column -->
@@ -76,10 +76,10 @@
                             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                           </ng-container>
                         <!-- comment Column -->
-                        <ng-container matColumnDef="company">
+                        <!-- <ng-container matColumnDef="company">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Entreprise </th>
                             <td mat-cell *matCellDef="let row"> {{row.company | uppercase}} </td>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- comment Column -->
                         <ng-container matColumnDef="isAdmin">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Type de compte </th>

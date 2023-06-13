@@ -1,6 +1,6 @@
 <div class="row" [formGroup]="parent" *ngIf="parent">
      
-    <div class="col-4">
+       <div class="col-4">
            <label for="name">Prénom et nom</label>
             <input type="name" class="form-control mb-3"
             formControlName="name" value="{{ this.displayName }}" disabled> 
@@ -8,7 +8,7 @@
    
       <div class="col-4">
         <label for="status">Type</label>
-        <select
+        <mat-select
          formControlName="type"
           type="text"
           id="type"
@@ -16,10 +16,11 @@
           placeholder="type"
           class="form-control mb-3"
         >
-          <option value="VACANCES">Vacances</option>
-          <option value="MALADIE">Maladie</option>
-          <option value="AUTRE">Autre</option>
-        </select>
+          <mat-option>Choississez un type</mat-option>
+                        <mat-option value="OCE">OCE</mat-option>
+                        <mat-option value="AI">AI</mat-option>
+                        <mat-option value="AUTRE">Autre</mat-option>
+        </mat-select>
       </div>
 
       <div class="col-4">
@@ -58,7 +59,7 @@
            type="text"
            id="description"
            name="description"
-           placeholder="Description de la demande de congé"
+           placeholder="Description de la mesure"
            class="form-control mb-3"
            rows="1" 
            cols="50">
