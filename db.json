@@ -81,15 +81,25 @@
       "id": 7
     },
     {
-      "customer_name": "test",
-      "description": "test",
+      "customer_name": "Migros",
+      "description": "Peinture, nettoyage et déménagement",
       "status": "SENT",
       "created_at": "2023-06-14",
       "details": [
         {
-          "description": "test",
-          "amount": 12,
-          "quantity": 12
+          "description": "Peinture exterieur",
+          "amount": 50,
+          "quantity": 6
+        },
+        {
+          "description": "Nettoyage de l'intérieur du magasin",
+          "amount": 50,
+          "quantity": 8
+        },
+        {
+          "description": "Déménagement",
+          "amount": 50,
+          "quantity": 4
         }
       ],
       "id": 8
