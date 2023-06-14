@@ -23,23 +23,6 @@
             <p>1200 Genève</p>
           </div>
         </div>
-        <br />
-
-        <br /><br />
-
-        <div class="row container-invoice">
-          <div class="col-xs-12 col-md-6 text-left"></div>
-          <div class="col-xs-12 col-md-6 text-right">
-            
-          </div>
-          <!--<div class="col-xs-12 col-md-6 text-left">Adresse Entreprise:</div>
-          <div class="col-xs-12 col-md-6 text-right">Adresse Client</div>
-          <div class="col-xs-12 col-md-6 text-left">NPA/Ville Entreprise:</div>
-          <div class="col-xs-12 col-md-6 text-right">NPA/Ville Client</div>
-          <div class="col-xs-12 col-md-6 text-left"></div>
-          <div class="col-xs-12 col-md-6 text-right">TVA</div>-->
-        </div>
-
         <br /><br />
         <br /><br />
         <table class="table container-invoice">
@@ -48,7 +31,8 @@
               <th scope="col">#</th>
               <th scope="col">Description</th>
               <th scope="col">Quantité (Nb d'heure)</th>
-              <th scope="col">Montant</th>
+              <th scope="col">Montant par heure</th>
+              <th scope="col">Totaux</th>
             </tr>
           </thead>
           <tbody>
@@ -56,11 +40,17 @@
               <th scope="row">{{ index }}</th>
               <td>{{ data.description }}</td>
               <td>{{ data.quantity }}h</td>
-              <td>{{ data.amount }} CHF</td>
+              <td>{{ data.amount | currency : 'CHF' : 'symbol' : undefined : 'fr' }}</td>
+              <td>{{ data.quantity*data.amount | currency : 'CHF' : 'symbol' : undefined : 'fr' }}</td>
             </tr>
           </tbody>
         </table>
-
+        <div class="text-right">
+          <h5>Total HT: {{this.totalAmount | currency : 'CHF' : 'symbol' : undefined : 'fr'}} </h5>
+        </div>
+         <div class="text-right">
+          <h3>Total TTC: {{this.totalTTC | currency : 'CHF' : 'symbol' : undefined : 'fr'}} </h3>
+        </div>
         <div class="row container-invoice">
           <div class="col-xs-12 col-md-6 text-left">
             <h4 *ngIf="invoice.status === 'SENT'">
@@ -76,10 +66,16 @@
             </h4>
           </div>
 
-          <h4 class="col-xs-12 col-md-6 text-right">
-            Total : {{ invoice.total | currency : 'CHF' }}
-          </h4>
+          <!-- <h4 class="col-xs-12 col-md-6 text-right">
+            
+          </h4>  -->
+
+           <!-- <app-invoice-form-totals
+                  [total]="total"
+                ></app-invoice-form-totals>  -->
+
         </div>
+        <!-- <p> {{ totalTTC | currency : 'CHF' : 'symbol' : undefined : 'fr' }}</p> -->
         <br /><br />
         <br /><br />
       </div>

@@ -31,6 +31,7 @@ import { DemandeCongeComponent } from './components/demande-conge/demande-conge.
 import { DemandeCongeSingleComponent } from './components/demande-conge/demande-conge-single/demande-conge-single.component';
 import { DemandeCongeCreationComponent } from './components/demande-conge/demande-conge-creation/demande-conge-creation.component';
 import { EditDemandeCongeComponent } from './components/demande-conge/edit-demande-conge/edit-demande-conge.component';
+import { InvoiceTestComponent } from './components/invoice/invoice-test/invoice-test.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full'}, //Adding a default route
@@ -74,6 +75,11 @@ const routes: Routes = [
   {
     path: 'invoices/:id',
     component: InvoiceEditionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'invoices-test/:id',
+    component: InvoiceTestComponent,
     canActivate: [AuthGuard],
   },
 

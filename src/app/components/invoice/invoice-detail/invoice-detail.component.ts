@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { AbstractControl, FormArray, ValidatorFn } from '@angular/forms';
 const htmlToPdfmake = require('html-to-pdfmake');
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -25,11 +26,33 @@ export class InvoiceDetailComponent implements OnInit {
 
   @ViewChild('htmlData') htmlData!: ElementRef;
   invoice!: Invoice;
+  //@Input() invoice?: Invoice;
 
   singleInvoice: any | undefined;
 
   invoiceId?: number;
   invoiceForm: any;
+  // L'observable qui contiendra dans le futur la facture récupérée sur Xano
+  invoice$?: Observable<Invoice>;
+
+  dataTotalInvoice: any;
+  compteurInvoice: any = 0;
+
+  totalAmount: any = 0;
+  amount:any = 0;
+  quantity:any = 0;
+  TVA: any = 0.2;
+  totalTTC: any = 0;
+
+  // detailsExistsValidator: ValidatorFn = (control: AbstractControl) => {
+  //   const details = control.get('details') as FormArray;
+
+  //   return details.length > 0
+  //     ? null
+  //     : {
+  //         noDetails: true,
+  //       };
+  // };
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +66,60 @@ export class InvoiceDetailComponent implements OnInit {
       .find(id)
       .subscribe((invoice: any) => (this.invoice = invoice));
 
+    //this.invoice.details.forEach((item) => this.onAddDetail());
+
+    //this.invoiceForm.patchValue(this.invoice);
+
+    //console.log('details ?: ', this.details.value);
+
+    // console.log(
+    //   'this.invoiceForm.controls.details.value ?: ',
+    //   this.invoiceForm.controls.details.value
+    // );
+
     console.log('id:', id);
+
+    //console.log('details:', this.details());
+    //console.log('total:', this.total());
+
+    //console.log('TOTAL :', this.total);
+    //console.log('totalTVA :', this.totalTVA);
+    //console.log('totalTTC :', this.totalTTC);
+    console.log('before');
+    this.invoiceService.find(id).subscribe((invoice: any) => {
+      console.log('invoice.details', invoice.details);
+      this.dataTotalInvoice = invoice;
+     console.log('after inside');
+      for (let i = 0; i < this.invoice.details.length; i++) {
+        console.log('test', this.invoice.details[i].amount);
+        this.amount = this.invoice.details[i].amount;
+        this.quantity = this.invoice.details[i].quantity;
+        this.totalAmount = this.totalAmount + (this.amount*this.quantity);
+        console.log('this.totalAmount:', this.totalAmount);
+        this.totalTTC = this.totalAmount + (this.totalAmount * this.TVA);
+
+         //for (let i = 0; i < this.invoice.details.length; i++) {}
+        // switch (this.dataTotalInvoice[i].amount) {
+        //   case 'PROGRESSING':
+        //     // statement progressing
+        //     this.compteurInvoice++;
+        //     break;
+        //   // case 'ACCEPTED':
+        //   //   // statement accepted
+        //   //   this.compteurAcceptedRequest++;
+        //   //   break;
+        //   // case 'REFUSED':
+        //   //   // statement refused
+        //   //   this.compteurRefusedRequest++;
+        //   //   break;
+        //   default:
+        //     //
+        //     break;
+        // }
+      }
+    });
+
+    console.log('after');
   }
 
   public openPDF(invoice: Invoice): void {
@@ -81,9 +157,9 @@ export class InvoiceDetailComponent implements OnInit {
     return this.total * 0.2;
   }
 
-  get totalTTC() {
-    return this.total + this.totalTVA;
-  }
+  // get totalTTC() {
+  //   return this.total + this.totalTVA;
+  // }
 
   public exportInvoice() {
     const doc = new jsPDF();

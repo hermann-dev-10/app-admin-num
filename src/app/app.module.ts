@@ -69,6 +69,7 @@ import { AlertDialogComponent } from './components/dialog/alert-dialog/alert-dia
 import { InvoiceCreationComponent } from './components/invoice/invoice-creation/invoice-creation.component';
 import { InvoiceDetailComponent } from './components/invoice/invoice-detail/invoice-detail.component';
 import { InvoiceEditionComponent } from './components/invoice/invoice-edition/invoice-edition.component';
+import { InvoiceTestComponent } from './components/invoice/invoice-test/invoice-test.component'
 import { InvoiceFormComponent } from './components/invoice/invoice-form/invoice-form.component';
 import { InvoicesListComponent } from './components/invoice/invoice-list/invoices-list.component';
 import { InvoiceFormGeneralComponent } from './components/invoice/invoice-form/invoice-form-general.components';
@@ -163,6 +164,7 @@ import { DialogGestionDemandeCongeComponent } from './components/dialog-gestion-
     EditDemandeCongeComponent,
     DemandeCongeSingleComponent,
     DialogGestionDemandeCongeComponent,
+    InvoiceTestComponent,
   ],
   imports: [
     BrowserModule,

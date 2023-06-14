@@ -83,7 +83,7 @@
     {
       "customer_name": "Migros",
       "description": "Peinture, nettoyage et déménagement",
-      "status": "SENT",
+      "status": "CANCELED",
       "created_at": "2023-06-14",
       "details": [
         {
