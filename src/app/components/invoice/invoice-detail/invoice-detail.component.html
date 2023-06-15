@@ -14,13 +14,22 @@
             <p>Contact@lmservices-sarl.com</p>
             <p>TVA: CHE-470.914.806</p>
           </div>
-          <div class="col-xs-12 col-md-6t text-right">
-            <p>Facture</p>
-            <p>Date : {{ invoice.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }}</p>
-            <p>Reférence : 062023</p>
-            <p>Nom client : {{ invoice.customer_name }}</p>
-            <p>Rue de la gare 10</p>
-            <p>1200 Genève</p>
+        </div>
+         <div class="row container-invoice">
+   
+          <div class="col-3 col-md-6t">
+          </div>
+          <div class="col-3 col-md-6t">
+          </div>
+          <div class="col-3 col-md-6t">
+          </div>
+           <div class="col-3 col-md-6t">
+            <p>Numéro {{ invoice.type }}</p>
+            <p>Date: {{ invoice.created_at | date : 'dd/MM/yyyy' : undefined : 'fr' }}</p>
+            <p>Reférence: {{ invoice.id }}</p>
+            <p>{{ invoice.customer_name }}</p>
+            <p>ADRESSE</p>
+            <p>NPA VILLE</p>
           </div>
         </div>
         <br /><br />
@@ -45,11 +54,13 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-right">
+        <div class="text-right mt-5">
           <h5>Total HT: {{this.totalAmount | currency : 'CHF' : 'symbol' : undefined : 'fr'}} </h5>
         </div>
+        <br />
          <div class="text-right">
-          <h3>Total TTC: {{this.totalTTC | currency : 'CHF' : 'symbol' : undefined : 'fr'}} </h3>
+           <h4 class="bold">TVA: {{this.TVA }} % </h4>
+          <h4 class="bold">Total TTC: {{this.totalTTC | currency : 'CHF' : 'symbol' : undefined : 'fr'}} </h4>
         </div>
         <div class="row container-invoice">
           <div class="col-xs-12 col-md-6 text-left">

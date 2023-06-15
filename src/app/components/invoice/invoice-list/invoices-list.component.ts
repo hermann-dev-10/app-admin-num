@@ -25,6 +25,7 @@ export class InvoicesListComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'customer_name',
+    'type',
     'description',
     'status',
     'created_at',

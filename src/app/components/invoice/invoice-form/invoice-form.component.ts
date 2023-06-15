@@ -50,7 +50,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 
                 <div class="text-center">
                   <div class="d-flex">
-                    <button class="w-sm-auto btn btn-primary" id="submit">
+                    <button class="w-sm-auto btn btn-primary mr-15" id="submit">
                       Enregistrer
                     </button>
 
@@ -85,10 +85,12 @@ export class InvoiceFormComponent implements OnInit {
   };
 
   invoiceForm: InvoiceFormType = this.fb.group({
-    customer_name: ['', [Validators.required, Validators.minLength(3)]],
-    description: ['', [Validators.required, Validators.minLength(3)]],
+    customer_name: ['', [Validators.required, Validators.minLength(2)]],
+    type: ['Facture'],
+    description: ['', [Validators.required, Validators.minLength(2)]],
     status: ['SENT'],
-    created_at: ['', [Validators.required]],
+    commentaire: ['', [Validators.required, Validators.minLength(2)]],
+    created_at: new Date(), //['', [Validators.required]],
     details: this.fb.array<FormGroup>([]),
   });
 

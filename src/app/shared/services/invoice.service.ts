@@ -18,9 +18,9 @@ export class InvoiceService {
     return this.http.post<Invoice[]>(`${this.API_URL}/invoiceList`, registerObj);
   }
 
-  getRegisteredInvoice() {
-    return this.http.get<Invoice[]>(`${this.API_URL}/invoiceList`);
-  }
+  // getRegisteredInvoice() {
+  //   return this.http.get<Invoice[]>(`${this.API_URL}/invoiceList`);
+  // }
 
   /*
   updateRegisterUser(registerObj: Invoice, id: number) {
@@ -61,15 +61,16 @@ export class InvoiceService {
     );
   }
 
-  delete(id: number) {
-    return this.http.delete<Invoice>(this.API_URL + '/invoiceList/' + id);
-  }
-
+  
   findAll(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.API_URL + '/invoiceList');
   }
-
+  
   find(id: number) {
     return this.http.get<Invoice>(this.API_URL + '/invoiceList/' + id);
+  }
+
+  delete(id: number) {
+    return this.http.delete<Invoice>(this.API_URL + '/invoiceList/' + id);
   }
 }

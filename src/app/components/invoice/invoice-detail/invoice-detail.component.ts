@@ -35,13 +35,12 @@ export class InvoiceDetailComponent implements OnInit {
   // L'observable qui contiendra dans le futur la facture récupérée sur Xano
   invoice$?: Observable<Invoice>;
 
-  dataTotalInvoice: any;
   compteurInvoice: any = 0;
 
-  totalAmount: any = 0;
-  amount:any = 0;
-  quantity:any = 0;
-  TVA: any = 0.2;
+  totalAmount: number = 0;
+  amount: any = 0;
+  quantity: any = 0;
+  TVA: any = 7.70;
   totalTTC: any = 0;
 
   // detailsExistsValidator: ValidatorFn = (control: AbstractControl) => {
@@ -66,62 +65,26 @@ export class InvoiceDetailComponent implements OnInit {
       .find(id)
       .subscribe((invoice: any) => (this.invoice = invoice));
 
-    //this.invoice.details.forEach((item) => this.onAddDetail());
-
-    //this.invoiceForm.patchValue(this.invoice);
-
-    //console.log('details ?: ', this.details.value);
-
-    // console.log(
-    //   'this.invoiceForm.controls.details.value ?: ',
-    //   this.invoiceForm.controls.details.value
-    // );
-
-    console.log('id:', id);
-
-    //console.log('details:', this.details());
-    //console.log('total:', this.total());
-
-    //console.log('TOTAL :', this.total);
-    //console.log('totalTVA :', this.totalTVA);
-    //console.log('totalTTC :', this.totalTTC);
-    console.log('before');
     this.invoiceService.find(id).subscribe((invoice: any) => {
       console.log('invoice.details', invoice.details);
-      this.dataTotalInvoice = invoice;
-     console.log('after inside');
       for (let i = 0; i < this.invoice.details.length; i++) {
-        console.log('test', this.invoice.details[i].amount);
         this.amount = this.invoice.details[i].amount;
         this.quantity = this.invoice.details[i].quantity;
-        this.totalAmount = this.totalAmount + (this.amount*this.quantity);
+        this.totalAmount = this.totalAmount + this.amount * this.quantity;
         console.log('this.totalAmount:', this.totalAmount);
-        this.totalTTC = this.totalAmount + (this.totalAmount * this.TVA);
-
-         //for (let i = 0; i < this.invoice.details.length; i++) {}
-        // switch (this.dataTotalInvoice[i].amount) {
-        //   case 'PROGRESSING':
-        //     // statement progressing
-        //     this.compteurInvoice++;
-        //     break;
-        //   // case 'ACCEPTED':
-        //   //   // statement accepted
-        //   //   this.compteurAcceptedRequest++;
-        //   //   break;
-        //   // case 'REFUSED':
-        //   //   // statement refused
-        //   //   this.compteurRefusedRequest++;
-        //   //   break;
-        //   default:
-        //     //
-        //     break;
-        // }
+        console.log(
+          'this.totalAmount + (this.totalAmount * this.TVA)',
+          this.totalAmount + this.totalAmount * this.TVA
+        );
+        this.totalTTC = this.totalAmount + (this.totalAmount / this.TVA);
       }
     });
-
-    console.log('after');
   }
 
+  public goBack() {
+    this.router.navigate(['/invoices']);
+  }
+  
   public openPDF(invoice: Invoice): void {
     // On récupère les informations de la facture et on y ajoute l'identifiant
     const uptatedInvoice = { ...invoice, id: this.invoiceId };
@@ -137,29 +100,6 @@ export class InvoiceDetailComponent implements OnInit {
       PDF.save('Facture_' + `${this.invoice.customer_name}` + '.pdf');
     });
   }
-
-  public goBack() {
-    this.router.navigate(['/invoices']);
-  }
-
-  get total() {
-    console.log('this.details.value', this.details.value);
-    return this.details.value.reduce((itemTotal: number, item) => {
-      return itemTotal + item.amount * item.quantity;
-    }, 0);
-  }
-
-  get details() {
-    return this.invoiceForm.controls.details;
-  }
-
-  get totalTVA() {
-    return this.total * 0.2;
-  }
-
-  // get totalTTC() {
-  //   return this.total + this.totalTVA;
-  // }
 
   public exportInvoice() {
     const doc = new jsPDF();

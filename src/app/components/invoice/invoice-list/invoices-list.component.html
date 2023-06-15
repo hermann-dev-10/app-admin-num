@@ -11,6 +11,22 @@
             <div class=" text-center">
                 <div class="bg-light p-3 rounded">
                    <div class="row mt-5">
+                     <div class="col-lg-3 col-md-6">
+                                <div class="icon-card mb-30">
+                                    <div class="icon green">
+                                        <mat-icon>subject</mat-icon>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="mb-10">Nombre de factures</h6>
+                                        <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
+                                        <h3>?</h3>
+                                        <!--<p class="text-sm text-success">
+                                        <i class="fas fa-address-book"></i> +2.00%
+                                        <span class="text-gray">(30 days)</span>
+                                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="icon-card mb-30">
                                     <div class="icon green">
@@ -19,7 +35,7 @@
                                     <div class="content">
                                         <h6 class="mb-10">Factures envoyées</h6>
                                         <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
-                                        <h3>10</h3>
+                                        <h3>?</h3>
                                         <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
@@ -35,7 +51,7 @@
                                     <div class="content">
                                         <h6 class="mb-10">Factures payées</h6>
                                         <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
-                                        <h3>7</h3>
+                                        <h3>?</h3>
                                         <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
@@ -51,7 +67,7 @@
                                     <div class="content">
                                         <h6 class="mb-10">Factures annulées</h6>
                                         <!--<h3 *ngIf="this.folders$ | async as folders" class="text-bold mb-10 ">{{ folders.length }}</h3>-->
-                                        <h3>5</h3>
+                                        <h3>?</h3>
                                         <!--<p class="text-sm text-success">
                                         <i class="fas fa-address-book"></i> +2.00%
                                         <span class="text-gray">(30 days)</span>
@@ -143,7 +159,7 @@
                         <table mat-table [dataSource]="dataSource" matSort style="width:100%" matSortActive="created_at" matSortDirection="desc">
                             
                           <ng-container matColumnDef="id">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro facture </th>
                                 <td mat-cell *matCellDef="let row"> {{row.id }} </td>
                             </ng-container>
                             
@@ -151,8 +167,12 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom client </th>
                                 <td mat-cell *matCellDef="let row"> {{row.customer_name | uppercase }} </td>
                             </ng-container>
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                            </ng-container>
                             <ng-container matColumnDef="description">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
                                 <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                             </ng-container>
                             
@@ -160,9 +180,7 @@
                             <ng-container matColumnDef="status">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
                                 <td mat-cell *matCellDef="let row"> 
-                                  
-                                  
-                                  
+                                                                   
                                   <p *ngIf="row.status === 'SENT'">
                                     <span class="badge bg-dark">Envoyé</span>
                                   </p>
@@ -174,7 +192,6 @@
                                   <p *ngIf="row.status === 'CANCELED'">
                                     <span class="badge bg-danger">ANNULÉ</span>
                                   </p>
-
 
                                 </td>
                             </ng-container>
